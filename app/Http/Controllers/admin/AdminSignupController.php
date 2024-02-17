@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Log;
 
 class AdminSignupController extends Controller
 {
+    public function index(Request $request) {
+    if ($request->is('api/*')) {
+        $user = User::get();
+
+        return response()->json(["message" => $user]);
+
+        }
+    }
+    
+
     public function store(Request $request) {
         if ($request->is('api/*')) {
             $validator = Validator::make($request->all(), [

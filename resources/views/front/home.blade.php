@@ -1,4 +1,4 @@
-secure_<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" lang="en_AU"/>
 <head>
 <header class="bg-dark">
