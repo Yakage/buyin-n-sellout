@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\Log;
 class AdminSignupController extends Controller
 {
     public function index(Request $request) {
-    if ($request->is('api/*')) {
-        $user = User::get();
+        if ($request->is('api/*')) {
+            $users = User::get();
 
-        return response()->json(["message" => $user]);
-
+            return response()->json(['users' => $users]);
         }
     }
     
@@ -38,7 +37,7 @@ class AdminSignupController extends Controller
 
         try {
             Log::info('Before creating user record');
-            $user = User::create($requestData);
+            $users = User::create($requestData);
             Log::info('After creating user record');
         } catch (\Exception $e) {
             Log::error('Error creating user record: ' . $e -> getMessage());
