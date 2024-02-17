@@ -7,15 +7,15 @@
 		<!-- Google Font: Source Sans Pro -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 		<!-- Font Awesome -->
-		<link rel="stylesheet" href="{{ asset('admin_assets/plugins/fontawesome-free/css/all.min.css') }}">
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/plugins/fontawesome-free/css/all.min.css') }}">
 		<!-- Theme style -->
-		<link rel="stylesheet" href="{{ asset('admin_assets/css/adminlte.min.css') }}">
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/css/adminlte.min.css') }}">
 
-		<link rel="stylesheet" href="{{ asset('admin_assets/plugins/dropzone/min/dropzone.min.css') }}">
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/plugins/dropzone/min/dropzone.min.css') }}">
 
-		<link rel="stylesheet" href="{{ asset('admin_assets/plugins/summernote/summernote.min.css') }}">
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/plugins/summernote/summernote.min.css') }}">
 
-		<link rel="stylesheet" href="{{ asset('admin_assets/css/custom.css') }}">
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/css/custom.css') }}">
 		
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 	</head>
@@ -82,18 +82,18 @@
 		</div>
 		<!-- ./wrapper -->
 		<!-- jQuery -->
-		<script src="{{ asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
 		<!-- Bootstrap 4 -->
-		<script src="{{ asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 		<!-- AdminLTE App -->
-		<script src="{{ asset('admin_assets/js/adminlte.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/js/adminlte.min.js') }}"></script>
 
-		<script src="{{ asset('admin_assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
         
-		<script src="{{ asset('admin_assets/plugins/summernote/summernote.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/plugins/summernote/summernote.min.js') }}"></script>
 
 		<!-- AdminLTE for demo purposes -->
-		<script src="{{ asset('admin_assets/js/demo.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/js/demo.js') }}"></script>
 
 		<script type="text/javascript">
 			$.ajaxSetup({
