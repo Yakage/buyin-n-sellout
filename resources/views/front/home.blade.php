@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+secure_<!DOCTYPE html>
 <html class="no-js" lang="en_AU"/>
 <head>
 <header class="bg-dark">
@@ -136,9 +136,9 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	
 
-	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick-theme.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/style.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
