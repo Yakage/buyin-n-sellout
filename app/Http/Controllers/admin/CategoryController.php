@@ -40,6 +40,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->slug = $request->slug;
             $category->status = $request->status;
+            $category->showHone = $request->showHome;
             $category->save();
 
 
@@ -119,6 +120,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->slug = $request->slug;
             $category->status = $request->status;
+            $category->showHone = $request->showHome;
             $category->save();
 
             $oldImage = $category->image;
