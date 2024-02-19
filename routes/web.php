@@ -34,6 +34,7 @@ Route::get('/', function () {
 return view('front.home');
 });
 Route::get('/shop{categorySlug?}/{subCategorySlug?}', [ShopController::class, 'index'])->name('front.shop');
+Route::get('/product//{slug}', [ShopController::class,'product'])->name('front.product');
 
 Route::group(['prefix' => 'admin'],function() { 
 

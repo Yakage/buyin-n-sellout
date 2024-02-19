@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route:: get('/',[FrontController::class, 'index']);
 Route:: get('/shop',[ShopController::class, 'index']);
+Route::get('/product//{slug}', [ShopController::class,'product']);
 
 Route::group(['prefix' => 'admin'],function() { 
 
