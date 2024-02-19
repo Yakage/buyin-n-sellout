@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -11,8 +12,7 @@ class FrontController extends Controller
         $products = Product::where('is_featured','Yes')
                         ->orderBy('id','DESC')
                         ->take(8)
-                        ->where('status',1)
-                        ->get();
+                        ->where('status',1)->get();
         $data['featuredProducts'] = $products;
 
         $latestProducts = Product::orderBy('id','DESC')
@@ -20,6 +20,7 @@ class FrontController extends Controller
                         ->take(8)
                         ->get();
         $data['latestProducts'] = $latestProducts;
+        
         return view('front.home',$data);
     }
 }

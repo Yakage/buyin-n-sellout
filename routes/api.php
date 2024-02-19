@@ -10,6 +10,8 @@ use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route:: get('/',[FrontController::class, 'index']);
+Route:: get('/shop',[ShopController::class, 'index']);
 
 Route::group(['prefix' => 'admin'],function() { 
 
