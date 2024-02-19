@@ -82,7 +82,7 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
         Route::put('/products/{product}', [ProductController::class, 'update']);
         Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-
+        Route::get('/get-products', [ProductController::class, 'getProducts']);
 
 
         Route::get('/product-subcategories', [ProductSubCategoryController::class, 'index']);
