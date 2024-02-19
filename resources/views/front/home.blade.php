@@ -25,7 +25,7 @@
 						</button>
                         @if($category->sub_category->isNotEmpty())
                         <ul class="dropdown-menu dropdown-menu-dark">
-                        @foreach(as->sub_category as $subCategory)
+                        @foreach($sub_category as $subCategory)
                             <li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
                         @endforeach
                         </ul>
