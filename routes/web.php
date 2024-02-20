@@ -58,6 +58,8 @@ Route::group(['prefix' => 'account'],function() {
 
     Route::group(['middleware' => 'auth'],function() {
         Route::get('/profile', [AuthController::class, 'profile'])->name('account.profile');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('account.logout');
+
     });
 });
 
