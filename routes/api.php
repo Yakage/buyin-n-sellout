@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
+use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 use App\Http\Controllers\AuthController;
@@ -120,7 +121,12 @@ Route::group(['prefix' => 'admin'],function() {
         Route::post('/product-images/update', [ProductImageController::class, 'update']);
         Route::delete('/product-images', [ProductImageController::class, 'destroy']);
 
-
+        //shipping routes
+        Route::get('/shipping/create', [ShippingController::class, 'create']);
+        Route::post('/shipping', [ShippingController::class, 'store']);
+        Route::get('/shipping/{id}', [ShippingController::class, 'edit']);
+        Route::put('/shipping/{id}', [ShippingController::class, 'update']);
+        Route::delete('/shipping/{id}', [ShippingController::class, 'destroy']);
 
         //temp-images.create
         Route::post('/upload-temp-image', [TempImagesController::class, 'create']);
