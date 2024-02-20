@@ -149,6 +149,7 @@ class CartController extends Controller
         session()->forget('url.intended');
 
         $countries = Country::orderBy('name', 'ASC')->get();
+        
         return view('front.checkout', [
             'countries' => $countries
         ]);
