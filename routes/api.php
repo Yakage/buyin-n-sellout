@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\AdminSignupController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DiscountCodeController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductImageController;
@@ -127,6 +128,15 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/shipping/{id}', [ShippingController::class, 'edit']);
         Route::put('/shipping/{id}', [ShippingController::class, 'update']);
         Route::delete('/shipping/{id}', [ShippingController::class, 'destroy']);
+
+        Route::get('/coupons', [DiscountCodeController::class, 'index']);
+        Route::get('/coupons/create', [DiscountCodeController::class, 'create']);
+        Route::post('/coupons', [DiscountCodeController::class, 'store']);
+        // Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
+        // Route::put('/products/{product}', [ProductController::class, 'update']);
+        // Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+        // Route::get('/get-products', [ProductController::class, 'getProducts']);
+
 
         //temp-images.create
         Route::post('/upload-temp-image', [TempImagesController::class, 'create']);
