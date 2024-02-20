@@ -37,10 +37,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route:: get('/',[FrontController::class, 'index']);
 Route:: get('/shop',[ShopController::class, 'index']);
 Route::get('/product//{slug}', [ShopController::class,'product']);
-Route::get('/cart', [CartController::class, 'cart'])->name('front.cart');
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('front.addToCart');
-Route::post('/update-cart', [CartController::class, 'updateCart'])->name('front.updateCart');
-Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.deleteItem.cart');
+Route::get('/cart', [CartController::class, 'cart']);
+Route::post('/add-to-cart', [CartController::class, 'addToCart']);
+Route::post('/update-cart', [CartController::class, 'updateCart']);
+Route::post('/delete-item', [CartController::class, 'deleteItem']);
+Route::get('/checkout', [CartController::class, 'checkout']);
+Route::get('/process-checkout', [CartController::class, 'processCheckout']);
+Route::get('/thanks/{orderId}', [CartController::class, 'thankyou']);
+
+
 
 
 Route::group(['prefix' => 'account'],function() { 
