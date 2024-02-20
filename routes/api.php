@@ -55,6 +55,8 @@ Route::group(['prefix' => 'account'],function() {
     });
 
     Route::group(['middleware' => 'auth'],function() {
+        Route::get('/profile', [AuthController::class, 'profile']);
+        Route::get('/logout', [AuthController::class, 'logout']);
 
     });
 });
