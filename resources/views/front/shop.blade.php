@@ -137,9 +137,9 @@
                     @endforeach
                     @endif
  
+
                         <div class="col-md-12 pt-5">
-                            {{ $products->withQueryString()->links() }}
-                            <!--<nav aria-label="Page navigation example">
+                            <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end">
                                     <li class="page-item disabled">
                                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -152,7 +152,7 @@
                                     </li>
                                 </ul>
                             </nav>
-                        </div>!-->
+                        </div>
                     </div>
                 </div>
             </div>
