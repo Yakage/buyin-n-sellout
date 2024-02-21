@@ -254,8 +254,8 @@ class CartController extends Controller
         
         if($request->payment_method == 'cod') {
 
-            $discountCodeId = '';
-            $promoCode = '';
+            $discountCodeId = NULL;
+            $promoCode   = '';
             $shipping = 0;
             $discount = 0;
             $subTotal = Cart::subtotal(2,'.','');
@@ -301,6 +301,8 @@ class CartController extends Controller
             $order->discount = $discount;
             $order->coupon_code_id = $discountCodeId;
             $order->coupon_code = $promoCode;
+            $order->payment_status = 'not paid';
+            $order->status = 'pending';
             $order->user_id = $user->id;
             $order->first_name = $request->first_name;
             $order->last_name = $request->last_name;
@@ -393,7 +395,7 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'grandTotal' => number_format($grandTotal,2),
-                    'discount' => $discount,
+                    'discount' => number_format($discount,2),
                     'discountString' => $discountString,
                     'shippingCharge' => number_format($shippingCharge,2),
                 ]);
@@ -406,7 +408,7 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'grandTotal' => number_format($grandTotal,2),
-                    'discount' => $discount,
+                    'discount' => number_format($discount,2),
                     'discountString' => $discountString,
                     'shippingCharge' => number_format($shippingCharge,2),
                 ]);
@@ -417,7 +419,7 @@ class CartController extends Controller
             return response()->json([
                 'status' => true,
                 'grandTotal' => number_format(($subTotal - $discount),2),
-                'discount' => $discount,
+                'discount' => number_format($discount,2),
                 'discountString' => $discountString,
                 'shippingCharge' => number_format(0,2),
             ]);
@@ -463,6 +465,45 @@ class CartController extends Controller
                 ]);
             }
         }
+
+        // Max Uses Check
+        if($code->max_uses > 0){
+            $couponUsed = Order::where('coupon_code_id', $code->id)->count();
+
+        if($couponUsed >= $code->max_uses) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid discount coupon',
+            ]);
+        }
+    }
+
+        //Max Uses User Check
+        if($code->max_uses_user > 0){
+            $couponUsedByUser = Order::where(['coupon_code_id'=> $code->id, 'user_id' => Auth::user()->id])->count();
+
+            if($couponUsedByUser >= $code->max_uses_user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'You already used this coupon.',
+                ]);
+            }
+        }
+
+        $subTotal = Cart::subtotal(2,'.','');
+
+        //Min Amount Condition Check
+
+        if ($code->min_amount > 0) {
+            if ($subTotal < $code->min_amount) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Your min amount must be $' .$code->min_amount.'.',
+                ]);
+            }
+
+        }
+
 
         session()->put('code', $code); 
 
