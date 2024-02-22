@@ -53,6 +53,7 @@ Route::get('/thanks/{orderId}', [CartController::class, 'thankyou'])->name('fron
 Route::get('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
 Route::get('/apply-discount', [CartController::class, 'applyDiscount'])->name('front.applyDiscount');
 Route::get('/remove-discount', [CartController::class, 'removeCoupon'])->name('front.removeCoupon');
+Route::get('/add-to-wishlist', [FrontController::class, 'addToWishList'])->name('front.addToWishList');
 
 
 
@@ -70,6 +71,8 @@ Route::group(['prefix' => 'account'],function() {
     Route::group(['middleware' => 'auth'],function() {
         Route::get('/profile', [AuthController::class, 'profile'])->name('account.profile');
         Route::get('/my-orders', [AuthController::class, 'orders'])->name('account.orders');
+        Route::get('/my-wishlist', [AuthController::class, 'wishlist'])->name('account.wishlist');
+        Route::post('/remove-product-from-wishlist', [AuthController::class, 'removeProductFromWishList'])->name('account.removeProductFromWishList');
         Route::get('/order-detail/{orderId}', [AuthController::class, 'orderDetail'])->name('account.orderDetail');
         Route::get('/logout', [AuthController::class, 'logout'])->name('account.logout');
 
@@ -149,6 +152,7 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/orders',[OrderController::class,'index'])->name('orders.index');
         Route::get('/orders/{id}',[OrderController::class,'detail'])->name('orders.detail');
         Route::post('/orders/change-status/{id}',[OrderController::class,'changeOrderStatus'])->name('orders.changeOrderStatus');
+        Route::post('/orders/send-email/{id}',[OrderController::class,'sendInvoiceEmail'])->name('orders.sendInvoiceEmail');
 
 
 
