@@ -25,7 +25,7 @@
             <form action="{{ route('admin.store') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" value="{{ new('name') }}" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Name">
+                    <input type="text"  name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Name">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -36,7 +36,7 @@
                     @enderror
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" value="{{ new('email') }}" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                    <input type="email"  name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
