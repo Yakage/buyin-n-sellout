@@ -89,7 +89,7 @@ Route::group(['prefix' => 'admin'],function() {
 
     });
 
-    Route::post('/register', [AdminSignupController::class, 'store'])->name('admin.store');
+    Route::post('/register', [AdminSignupController::class, 'store'])->name('admin.store'); 
     Route::get('/index', [AdminSignupController::class, 'index'])->name('admin.index');
 
     Route::group(['middleware' => 'admin.auth'],function() {
