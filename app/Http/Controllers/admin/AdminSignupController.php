@@ -18,7 +18,7 @@ class AdminSignupController extends Controller
             return response()->json(['users' => $users]);
         }
     }
-    
+
 
     public function store(Request $request) {
         if ($request->is('api/*')) {
