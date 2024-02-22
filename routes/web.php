@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\PageController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\ProductSubCategoryController;
+use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
@@ -56,6 +57,8 @@ Route::get('/get-order-summary', [CartController::class, 'getOrderSummary'])->na
 Route::get('/apply-discount', [CartController::class, 'applyDiscount'])->name('front.applyDiscount');
 Route::get('/remove-discount', [CartController::class, 'removeCoupon'])->name('front.removeCoupon');
 Route::get('/add-to-wishlist', [FrontController::class, 'addToWishList'])->name('front.addToWishList');
+Route::get('/page/{slug}', [FrontController::class, 'page'])->name('front.page');
+Route::get('/send-contact-email', [FrontController::class, 'sendContactEmail'])->name('front.sendContactEmail');
 
 
 Route::post('/save-rating/{productId}',[ShopController::class,'saveRating'])->name('front.saveRating');
@@ -76,6 +79,9 @@ Route::group(['prefix' => 'account'],function() {
         Route::get('/profile', [AuthController::class, 'profile'])->name('account.profile');
         Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('account.updateProfile');
         Route::post('/update-address', [AuthController::class, 'updateAddress'])->name('account.updateAddress');
+        Route::get('/change-password', [AuthController::class, 'showchangePasswordForm'])->name('account.changePassword');
+        Route::post('/process-change-password', [AuthController::class, 'changePassword'])->name('account.processChangePassword');
+
         Route::get('/my-orders', [AuthController::class, 'orders'])->name('account.orders');
         Route::get('/my-wishlist', [AuthController::class, 'wishlist'])->name('account.wishlist');
         Route::post('/remove-product-from-wishlist', [AuthController::class, 'removeProductFromWishList'])->name('account.removeProductFromWishList');
@@ -179,9 +185,9 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
         Route::get('/pages/create', [PageController::class, 'create'])->name('pages.create');
         Route::post('/pages', [PageController::class, 'store'])->name('pages.store');
-        //Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        //Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-        //Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.delete');
+        Route::get('/pages/{page}/edit', [PageController::class, 'edit'])->name('pages.edit');
+        Route::put('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
+        Route::delete('/pages/{page}', [PageController::class, 'destroy'])->name('pages.delete');
 
 
 
@@ -189,7 +195,11 @@ Route::group(['prefix' => 'admin'],function() {
         //temp-images.create
         Route::post('/upload-temp-image', [TempImagesController::class, 'create'])->name('temp-images.create');
 
+        // settings routes
+        Route::get('/change-password', [SettingController::class, 'showChangePasswordForm'])->name('admin.showChangePasswordForm');
+        Route::post('/process-change-password', [SettingController::class, 'processChangePassword'])->name('admin.processChangePassword');
 
+        
         Route::get('/getSlug', function(Request $request) {
             $slug = '';
             if(!empty($request->title)) {
