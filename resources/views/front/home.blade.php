@@ -160,7 +160,7 @@
                                 <span class="h5"><strong>{{$product->price}}</strong></span>
                                 @if($product->compare_price > 0)
                                 <span class="h6 text-underline"><del>{{$product->compare_price}}</del></span>
-                                @endforeach
+                                @endif
                             </div>
                         </div>                        
                     </div>                                               
@@ -205,7 +205,7 @@
                                 <span class="h5"><strong>{{$product->price}}</strong></span>
                                 @if($product->compare_price > 0)
                                 <span class="h6 text-underline"><del>{{$product->compare_price}}</del></span>
-                                @endforeach
+                                @endif
                             </div>
                         </div>                        
                     </div>                                               
