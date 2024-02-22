@@ -43,7 +43,27 @@ class HomeController extends Controller
         ->whereDate('created_at','<=',$currentDate)
         ->sum('grand_total');
 
+        $dayBeforeToday = Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
 
+        $tempImages = TempImage::where('created_at','<=',$dayBeforeToday)->get();
+
+        foreach (tempImages as $tempImages) {
+
+            $path = public_path('/temp/'.$tempImage->name);
+            $thumbPath = public_path('/temp/thumb/'.$tempImages->name);
+
+            //delete main image
+            if (File::exists($path)){
+                File::delete($path);
+            }
+
+            //delete thumb image
+            if (File::exists($thumbPath)){
+                File::delete($thumbPath);
+            }
+
+            TempImage::where('id',$tempImage->id)->delete();
+        }
 
         return view('admin.dashboard',[
             'totalOrders' => $totalOrders,
