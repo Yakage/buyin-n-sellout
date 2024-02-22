@@ -99,8 +99,8 @@
         <div class="container">
             <div class="section-title">
                 <h2>Categories</h2>
-                @if (getCategories()->isNotEmpty())
-                @foreach (getCategories()as $category)
+                @if ($getCategories->isNotEmpty())
+                @foreach ($getCategories as $category)
                 <div class="row pb-3">
                     <div class="col-lg-3">
                         <div class="cat-card">
