@@ -176,7 +176,7 @@
                 <h2>Latest Products</h2>
             </div>    
             <div class="row pb-3">
-            @if ($latestProductsProducts->isNotEmpty())
+            @if ($latestProducts->isNotEmpty())
                     @foreach($latestProducts as $product)
                     @php
                         $productImage = $product->product_images->first();
