@@ -98,6 +98,47 @@ class ShopController extends Controller
         $data['product'] = $product;
         $data['relatedProducts'] = $relatedProducts;
         return view('front.product', $data);
+    }
 
+    public function saveRating($id, Request $request){
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|min:5',
+            'email' => 'required|email',
+            'comment' => 'required|min:10',
+            'rating' => 'required'
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        $count = ProductRating::where('email',$request->email)->count();
+        if ($count > 0 ){
+            session()->flash('error','You already rated this product.');
+            return response()->json([
+                'status' => true,
+            ]);
+        }
+
+
+
+        $productRating = new ProductRating;
+        $productRating->product_id = $id;
+        $productRating->username = $request->name;
+        $productRating->email = $request->email;
+        $productRating->comment = $request->comment;
+        $productRating->rating = $request->rating;
+        $productRating->status = 0;
+        $productRating->save();
+        
+        session()->flash('success','Thanks for your rating.');
+
+        return response()->json([
+            'status' => true,
+            'errors' => 'Thanks for your rating.'
+        ]);
     }
 }

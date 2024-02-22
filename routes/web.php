@@ -58,6 +58,8 @@ Route::get('/remove-discount', [CartController::class, 'removeCoupon'])->name('f
 Route::get('/add-to-wishlist', [FrontController::class, 'addToWishList'])->name('front.addToWishList');
 
 
+Route::post('/save-rating/{productId}',[ShopController::class,'saveRating'])->name('front.saveRating');
+
 
 Route::group(['prefix' => 'account'],function() { 
     Route::group(['middleware' => 'guest'],function() {
