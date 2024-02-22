@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 
 class ApiShopController extends Controller
 {
-    public function index(Request $request, $categorySlug = null, $subCategorySlug = null) {
-
+    public function index(Request $request, $categorySlug = null, $subCategorySlug = null)
+    {
         $categorySelected = '';
         $subCategorySelected = '';
         $brandsArray = [];
@@ -22,39 +22,39 @@ class ApiShopController extends Controller
 
         //filter
 
-        if(!empty($categorySlug)){
+        if (!empty($categorySlug)) {
             $category = Category::where('slug', $categorySlug)->first();
             $products = $products->where('category_id', $category->id);
             $categorySelected = $category->id;
         }
 
-        if(!empty($subCategorySlug)){
+        if (!empty($subCategorySlug)) {
             $subCategory = SubCategory::where('slug', $subCategorySlug)->first();
             $products = $products->where('sub_category_id', $subCategory->id);
             $subCategorySelected = $subCategory->id;
-
         }
 
-        if(!empty($request->get('brand'))) {
+        if (!empty($request->get('brand'))) {
             $brandsArray = explode(',', $request->get('brand'));
             $products = $products->whereIn('brand_id', $brandsArray);
         }
 
-        if($request->get('price_max') != '' && $request->get('price_min') != '') {
-            if($request->get('price_max') == 1000) {
-                $products = $products->whereBetween('price',[intval($request->get('price_min')),1000000]);
-
+        if ($request->get('price_max') != '' && $request->get('price_min') != '') {
+            if ($request->get('price_max') == 1000) {
+                $products = $products->whereBetween('price', [intval($request->get('price_min')), 1000000]);
             } else {
-                $products = $products->whereBetween('price',[intval($request->get('price_min')),intval($request->get('price_max'))]);
-
+                $products = $products->whereBetween('price', [intval($request->get('price_min')), intval($request->get('price_max'))]);
             }
-
         }
 
-        if($request->get('sort')) {
+        if (!empty($request->get('search'))) {
+            $products = $products->where('title', 'like', '%' . $request->get('search') . '%');
+        }
+
+        if ($request->get('sort')) {
             if ($request->get('sort') == 'latest') {
                 $products = $products->orderBy('id', 'DESC');
-            } else if ($request->get('sort') == 'price_asc'){ 
+            } else if ($request->get('sort') == 'price_asc') {
                 $products = $products->orderBy('price', 'ASC');
             } else {
                 $products = $products->orderBy('price', 'DESC');
@@ -62,10 +62,10 @@ class ApiShopController extends Controller
         } else {
             $products = $products->orderBy('id', 'DESC');
         }
-        
+
         $products = $products->paginate(6);
 
-        $responseData = [
+        return response()->json([
             'categories' => $categories,
             'brands' => $brands,
             'products' => $products,
@@ -74,30 +74,27 @@ class ApiShopController extends Controller
             'brandsArray' => $brandsArray,
             'priceMax' => (intval($request->get('price_max')) == 0) ? 1000 : $request->get('price_max'),
             'priceMin' => intval($request->get('price_min')),
-            'sort' => $request->get('sort'),
-        ];
-
-        return response()->json($responseData);
+            'sort' => $request->get('sort')
+        ]);
     }
 
-    public function product($slug) {
+    public function product($slug)
+    {
         $product = Product::where('slug', $slug)->with('product_images')->first();
-        if($product == null) {
-            abort(404);
+        if ($product == null) {
+            return response()->json(['error' => 'Product not found'], 404);
         }
 
         $relatedProducts = [];
         // fetch related products
-        if($product->related_products != '') {
+        if ($product->related_products != '') {
             $productArray = explode(',', $product->related_products);
-            $relatedProducts = Product::whereIn('id', $productArray)->with('product_images')->get();
+            $relatedProducts = Product::whereIn('id', $productArray)->where('status', 1)->get();
         }
 
-        $responseData = [
+        return response()->json([
             'product' => $product,
-            'relatedProducts' => $relatedProducts,
-        ];
-
-        return response()->json($responseData);
+            'relatedProducts' => $relatedProducts
+        ]);
     }
 }

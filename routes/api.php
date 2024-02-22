@@ -2,6 +2,14 @@
 
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\AdminSignupController;
+use App\Http\Controllers\admin\ApiAdminLoginController;
+use App\Http\Controllers\admin\ApiBrandController;
+use App\Http\Controllers\admin\ApiCategoryController;
+use App\Http\Controllers\Admin\ApiDiscountCodeController;
+use App\Http\Controllers\admin\ApiProductController;
+use App\Http\Controllers\admin\ApiProductImageController;
+use App\Http\Controllers\admin\ApiProductSubCategoryController;
+use App\Http\Controllers\admin\ApiShippingController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DiscountCodeController;
@@ -12,6 +20,10 @@ use App\Http\Controllers\admin\ProductSubCategoryController;
 use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
+use App\Http\Controllers\Api\ApiCartController;
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiFrontController;
+use App\Http\Controllers\ApiShopController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
@@ -35,6 +47,116 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+//API routes
+
+Route::get('/',[ApiFrontController::class, 'index']);
+Route::get('/shop',[ApiShopController::class, 'index']);
+Route::get('/product//{slug}', [ApiShopController::class,'product']);
+
+Route::post('/admin/login', [ApiAdminLoginController::class, 'authenticate']);
+Route::post('/admin/logout', [ApiAdminLoginController::class, 'logout']);
+
+Route::post('/register', [ApiAuthController::class, 'register']);
+Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/logout', [ApiAuthController::class, 'logout']);
+
+Route::get('/brands', [ApiBrandController::class, 'index']);
+Route::post('/brands', [ApiBrandController::class, 'store']);
+Route::get('/brands/{id}/edit', [ApiBrandController::class, 'edit']);
+Route::put('/brands/{id}', [ApiBrandController::class, 'update']);
+
+Route::post('/cart/add', [ApiCartController::class, 'addToCart']);
+Route::get('/cart', [ApiCartController::class, 'cart']);
+Route::put('/cart/update', [ApiCartController::class, 'updateCart']);
+Route::delete('/cart/delete', [ApiCartController::class, 'deleteItem']);
+
+Route::post('login', [ApiAuthController::class, 'login']);
+Route::post('register', [ApiAuthController::class, 'register']);
+Route::post('register/process', [ApiAuthController::class, 'processRegister']);
+Route::post('authenticate', [ApiAuthController::class, 'authenticate']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('profile', [ApiAuthController::class, 'profile']);
+    Route::post('logout', [ApiAuthController::class, 'logout']);
+    Route::get('orders', [ApiAuthController::class, 'orders']);
+    Route::get('orders/{id}', [ApiAuthController::class, 'orderDetail']);
+    Route::get('wishlist', [ApiAuthController::class, 'wishlist']);
+    Route::delete('wishlist/{id}', [ApiAuthController::class, 'removeProductFromWishList']);
+});
+
+Route::get('/products', [ApiFrontController::class, 'index']);
+Route::post('/wishlist/add', [ApiFrontController::class, 'addToWishList']);
+
+Route::get('/discount-coupons', [ApiDiscountCodeController::class, 'index']);
+Route::post('/discount-coupons', [ApiDiscountCodeController::class, 'store']);
+Route::get('/discount-coupons/{id}/edit', [ApiDiscountCodeController::class, 'edit']);
+Route::put('/discount-coupons/{id}', [ApiDiscountCodeController::class, 'update']);
+Route::delete('/discount-coupons/{id}', [ApiDiscountCodeController::class, 'destroy']);
+
+Route::get('/shop/{categorySlug?}/{subCategorySlug?}', [ApiShopController::class, 'index'])->name('api.shop.index');
+Route::get('/shop/product/{slug}', [ApiShopController::class, 'product'])->name('api.shop.product');
+
+Route::post('/cart/add', [ApiCartController::class, 'addToCart']);
+Route::get('/cart', [ApiCartController::class, 'cart']);
+Route::put('/cart/update', [ApiCartController::class, 'updateCart']);
+Route::delete('/cart/delete', [ApiCartController::class, 'deleteItem']);
+
+// Route for applying discount coupon
+Route::post('/cart/discount/apply', [ApiCartController::class, 'applyDiscount']);
+
+// Route for removing discount coupon
+Route::delete('/cart/discount/remove', [ApiCartController::class, 'removeCoupon']);
+
+
+Route::get('/categories', [ApiCategoryController::class, 'index']);
+Route::get('/categories/create', [ApiCategoryController::class, 'create']);
+Route::post('/categories', [ApiCategoryController::class, 'store']);
+Route::get('/categories/{category}/edit', [ApiCategoryController::class, 'edit']);
+Route::put('/categories/{category}', [ApiCategoryController::class, 'update']);
+Route::delete('/categories/{category}', [ApiCategoryController::class, 'destroy']);
+
+
+//product routes
+Route::get('/products', [ApiProductController::class, 'index']);
+Route::get('/products/create', [ApiProductController::class, 'create']);
+Route::post('/products', [ApiProductController::class, 'store']);
+Route::get('/products/{product}/edit', [ApiProductController::class, 'edit']);
+Route::put('/products/{product}', [ApiProductController::class, 'update']);
+Route::delete('/products/{product}', [ApiProductController::class, 'destroy']);
+Route::get('/get-products', [ApiProductController::class, 'getProducts']);
+
+
+Route::get('/product-subcategories', [ApiProductSubCategoryController::class, 'index']);
+
+Route::post('/product-images/update', [ApiProductImageController::class, 'update']);
+Route::delete('/product-images', [ApiProductImageController::class, 'destroy']);
+
+
+//shipping routes
+Route::get('/shipping/create', [ApiShippingController::class, 'create']);
+Route::post('/shipping', [ApiShippingController::class, 'store']);
+Route::get('/shipping/{id}', [ApiShippingController::class, 'edit']);
+Route::put('/shipping/{id}', [ApiShippingController::class, 'update']);
+Route::delete('/shipping/{id}', [ApiShippingController::class, 'destroy']);
+
+
+//temp images
+
+Route::post('/upload-temp-image', [TempImagesController::class, 'create']);
+
+
+        Route::get('/getSlug', function(Request $request) {
+            $slug = '';
+            if(!empty($request->title)) {
+                $slug = Str::slug($request->title);
+            }
+            return response()->json([
+                'status' => true,
+                'slug' => $slug
+            ]);
+        })->name('getSlug');
+
+        
 
 Route:: get('/',[FrontController::class, 'index']);
 Route:: get('/shop',[ShopController::class, 'index']);
@@ -129,9 +251,9 @@ Route::group(['prefix' => 'admin'],function() {
         Route::put('/shipping/{id}', [ShippingController::class, 'update']);
         Route::delete('/shipping/{id}', [ShippingController::class, 'destroy']);
 
-        Route::get('/coupons', [DiscountCodeController::class, 'index']);
-        Route::get('/coupons/create', [DiscountCodeController::class, 'create']);
-        Route::post('/coupons', [DiscountCodeController::class, 'store']);
+        // Route::get('/coupons', [DiscountCodeController::class, 'index']);
+        // Route::get('/coupons/create', [DiscountCodeController::class, 'create']);
+        // Route::post('/coupons', [DiscountCodeController::class, 'store']);
         // Route::get('/products/{product}/edit', [ProductController::class, 'edit']);
         // Route::put('/products/{product}', [ProductController::class, 'update']);
         // Route::delete('/products/{product}', [ProductController::class, 'destroy']);
@@ -153,6 +275,6 @@ Route::group(['prefix' => 'admin'],function() {
             ]);
         })->name('getSlug');
     });
-
-
 });
+
+

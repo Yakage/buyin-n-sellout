@@ -5,8 +5,8 @@
         <div class="container">
             <div class="light-font">
                 <ol class="breadcrumb primary-color mb-0">
-                    <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.home) }}">Home</a></li>
-                    <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.shop) }}">Shop</a></li>
+                    <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.shop') }}">Shop</a></li>
                     <li class="breadcrumb-item">{{ $product->title }}</li>
                 </ol>
             </div>
@@ -21,7 +21,7 @@
                     <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner bg-light">
                             
-                        @if ($product->product_images)]
+                        @if ($product->product_images)
                             @foreach ($product->product_images as $key => $productImage)
                             <div class="carousel-item {{ ($key == 0) ? 'active' : ''}}">
                                 <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage)->image)}}" alt="Image">
