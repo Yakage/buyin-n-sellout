@@ -1,4 +1,4 @@
-@extends('front.layout.app')
+@extends('front.layouts.app')
 
 @section('content')
 <section class="section-1">
@@ -100,7 +100,7 @@
             <div class="section-title">
                 <h2>Categories</h2>
                 @if (getCategories()->isNotEmpty())
-                @foreach (getCategories()as $category)
+                @foreach (getCategories() as $category)
                 <div class="row pb-3">
                     <div class="col-lg-3">
                         <div class="cat-card">
@@ -160,7 +160,7 @@
                                 <span class="h5"><strong>{{$product->price}}</strong></span>
                                 @if($product->compare_price > 0)
                                 <span class="h6 text-underline"><del>{{$product->compare_price}}</del></span>
-                                @endforeach
+                                @endif
                             </div>
                         </div>                        
                     </div>                                               
@@ -176,7 +176,7 @@
                 <h2>Latest Products</h2>
             </div>    
             <div class="row pb-3">
-            @if ($latestProductsProducts->isNotEmpty())
+            @if ($latestProducts->isNotEmpty())
                     @foreach($latestProducts as $product)
                     @php
                         $productImage = $product->product_images->first();
@@ -205,7 +205,7 @@
                                 <span class="h5"><strong>{{$product->price}}</strong></span>
                                 @if($product->compare_price > 0)
                                 <span class="h6 text-underline"><del>{{$product->compare_price}}</del></span>
-                                @endforeach
+                                @endif
                             </div>
                         </div>                        
                     </div>                                               

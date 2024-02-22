@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 
@@ -17,7 +18,7 @@ class AdminSignupController extends Controller
             return response()->json(['users' => $users]);
         }
     }
-    
+
 
     public function store(Request $request) {
         if ($request->is('api/*')) {
