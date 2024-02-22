@@ -22,7 +22,7 @@
         </div>
         <div class="card-body">
             <p class="login-box-msg">Create a new admin account</p>
-            <form action="{{ route('admin.store') }}" method="post">
+            <form action="{{ route('admin.index') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="text"  name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Name">
