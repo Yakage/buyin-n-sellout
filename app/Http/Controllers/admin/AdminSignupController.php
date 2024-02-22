@@ -19,6 +19,12 @@ class AdminSignupController extends Controller
 
     public function store(Request $request)
     {
+        // If the request is a GET request, render the registration form
+        if ($request->isMethod('get')) {
+            return view('admin.register');
+        }
+
+        // If the request is a POST request, handle form submission
         $validator = Validator::make($request->all(), [
             'name' => 'required|name',
             'email' => 'required|email',
