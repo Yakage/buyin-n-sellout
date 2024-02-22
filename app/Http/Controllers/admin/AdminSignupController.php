@@ -10,39 +10,40 @@ use Illuminate\Support\Facades\Log;
 
 class AdminSignupController extends Controller
 {
-    public function index(Request $request) {
-        if ($request->is('api/*')) {
-            $users = User::get();
+    public function index(Request $request)
+    {
+        $users = User::get();
 
-            return response()->json(['users' => $users]);
-        }
+        return view('admin.index', ['users' => $users]);
     }
-    
 
-    public function store(Request $request) {
-        if ($request->is('api/*')) {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|name',
-                'email' => 'required|email',
-                'password' => 'required'
-            ]);
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|name',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-            $requestData = 
-            [
-                'name' => $request -> name,
-                'email' => $request -> email,
-                'password' => $request -> password
-            ];
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        $requestData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
         try {
             Log::info('Before creating user record');
-            $users = User::create($requestData);
+            $user = User::create($requestData);
             Log::info('After creating user record');
         } catch (\Exception $e) {
-            Log::error('Error creating user record: ' . $e -> getMessage());
+            Log::error('Error creating user record: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to create user record.');
         }
 
-        return response()->json(["message" => "Successfully created the user's data"]);
+        return redirect()->route('admin.index')->with('success', "Successfully created the user's data");
     }
 }
