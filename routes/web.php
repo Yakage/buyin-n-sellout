@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminLoginController;
+use App\Http\Controllers\admin\AdminSignupController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DiscountCodeController;
@@ -87,6 +88,9 @@ Route::group(['prefix' => 'admin'],function() {
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
 
     });
+
+    Route::post('/register', [AdminSignupController::class, 'store'])->name('admin.store');
+    Route::get('/index', [AdminSignupController::class, 'index'])->name('admin.index');
 
     Route::group(['middleware' => 'admin.auth'],function() {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
