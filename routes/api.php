@@ -99,8 +99,8 @@ Route::group(['prefix' => 'admin'],function() {
 
     Route::group(['middleware' => 'admin.guest'],function() {
 
-        Route::get('/login', [AdminLoginController::class, 'index']);
-        Route::post('/authenticate', [AdminLoginController::class, 'authenticate']);
+        Route::get('/login', [ApiAdminLoginController::class, 'index']);
+        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate']);
     });
     Route::post('/register', [AdminSignupController::class, 'store']);
     Route::get('/index', [AdminSignupController::class, 'index']);
