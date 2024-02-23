@@ -64,7 +64,7 @@
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        <a href="cart.php" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
+                        <a href="javascript:void(0);" oonclick="addToCart({{ $product->id }})" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
                     </div>
                 </div>
                 <div class="col-md-12 mt-5">
@@ -263,62 +263,80 @@
 @endsection
 
 @section('customJs')
-<script type="text/javascript">
-$("#productRatingForm").submit(function(event){
-    event.preventDefault();
+    <script type="text/javascript">
+        $("#productRatingForm").submit(function(event){
+            event.preventDefault();
 
-    $.ajax({
-        url: '{{ route("front.saveRating",$product->id) }}',
-        type: 'post',
-        data: $(this).serializeArray(),
-        dataType: 'json',
-        success: function(response){
-            var errors = response.errors;
+            $.ajax({
+                url: '{{ route("front.saveRating",$product->id) }}',
+                type: 'post',
+                data: $(this).serializeArray(),
+                dataType: 'json',
+                success: function(response){
+                    var errors = response.errors;
 
-            if(response.status == false) {
-                    if(errors.name) {
-                    $("#name").addClass('is-invalid')
-                    .siblings("p")
-                    .addClass('invalid-feedback')
-                    .html(errors.name);
-                } else {
-                    $("#name").removeClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(''); 
-                }  
-                if(errors.email) {
-                    $("#email").addClass('is-invalid')
-                    .siblings("p")
-                    .addClass('invalid-feedback')
-                    .html(errors.email);
-                } else {
-                    $("#email").removeClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(''); 
+                    if(response.status == false) {
+                            if(errors.name) {
+                            $("#name").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.name);
+                        } else {
+                            $("#name").removeClass('is-invalid')
+                                .siblings("p")
+                                .addClass('invalid-feedback')
+                                .html(''); 
+                        }  
+                        if(errors.email) {
+                            $("#email").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.email);
+                        } else {
+                            $("#email").removeClass('is-invalid')
+                                .siblings("p")
+                                .addClass('invalid-feedback')
+                                .html(''); 
+                        }
+                        if(errors.comment) {
+                            $("#comment").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.comment);
+                        } else {
+                            $("#comment").removeClass('is-invalid')
+                                .siblings("p")
+                                .addClass('invalid-feedback')
+                                .html(''); 
+                        }
+                        if(errors.rating) {
+                            $(".product-rating-error").html(errors.rating);
+                        } else {
+                            $(".product-rating-error").html('');
+                        }  
+                    } else{
+                        window.location.href = "{{ route('front.product',$product->slug) }}" 
+                    }
                 }
-                if(errors.comment) {
-                    $("#comment").addClass('is-invalid')
-                    .siblings("p")
-                    .addClass('invalid-feedback')
-                    .html(errors.comment);
-                } else {
-                    $("#comment").removeClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(''); 
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function addToCart(id) {
+            $.ajax({
+                url: '{{ route("front.addToCart") }}',
+                type: 'post',
+                data: {id:id},
+                dataType: 'json',
+                success: function(response) {
+                    if(response.status == true) {
+                        window.location.href="{{ route('front.addToCart') }}";
+                    } else {
+                        alert(response.message);
+
+                    }
                 }
-                if(errors.rating) {
-                    $(".product-rating-error").html(errors.rating);
-                } else {
-                    $(".product-rating-error").html('');
-                }  
-            } else{
-                window.location.href = "{{ route('front.product',$product->slug) }}" 
-            }
+            })
         }
-    });
-});
-</script>
+    </script>
 @endsection 
