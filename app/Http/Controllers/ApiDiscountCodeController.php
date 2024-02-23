@@ -16,12 +16,12 @@ class ApiDiscountCodeController extends Controller
 
         if (!empty($request->get('keyword'))) {
             $discountCoupons = $discountCoupons->where('name', 'like', '%' . $request->get('keyword') . '%')
-                ->orWhere('code', 'like', '%' . $request->get('keyword') . '%');
+                            ->orWhere('code', 'like', '%' . $request->get('keyword') . '%');
         }
 
         $discountCoupons = $discountCoupons->paginate(10);
 
-        return response()->json($discountCoupons);
+        return response()->json(['discountCoupons' => $discountCoupons]);
     }
 
     public function store(Request $request)
@@ -31,60 +31,27 @@ class ApiDiscountCodeController extends Controller
             'type' => 'required',
             'discount_amount' => 'required|numeric',
             'status' => 'required',
+            // Add other validation rules here
         ]);
 
-        if ($validator->passes()) {
-            // Check if the start date is greater than the current date
-            if (!empty($request->starts_at)) {
-                $now = Carbon::now();
-                $startAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->starts_at);
-
-                if ($startAt->lte($now)) {
-                    return response()->json([
-                        'status' => false,
-                        'errors' => ['starts_at' => 'Start date cannot be less than current time.']
-                    ]);
-                }
-            }
-
-            // Check if the expiry date is greater than the start date
-            if (!empty($request->starts_at) && !empty($request->expires_at)) {
-                $expiresAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->expires_at);
-                $startAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->starts_at);
-
-                if (!$expiresAt->gt($startAt)) {
-                    return response()->json([
-                        'status' => false,
-                        'errors' => ['expires_at' => 'Expiry date must be greater than start date.']
-                    ]);
-                }
-            }
-
-            $discountCode = new DiscountCoupon();
-            $discountCode->code = $request->code;
-            $discountCode->name = $request->name;
-            $discountCode->description = $request->description;
-            $discountCode->max_users = $request->max_users;
-            $discountCode->max_uses_user = $request->max_uses_user;
-            $discountCode->type = $request->type;
-            $discountCode->discount_amount = $request->discount_amount;
-            $discountCode->min_amount = $request->min_amount;
-            $discountCode->status = $request->status;
-            $discountCode->starts_at = $request->starts_at;
-            $discountCode->expires_at = $request->expires_at;
-            $discountCode->save();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Discount coupon added successfully.'
-            ]);
-
-        } else {
-            return response()->json([
-                'status' => false,
-                'errors' => $validator->errors()
-            ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
+
+        // Your store logic goes here
+
+        return response()->json(['message' => 'Discount coupon added successfully.']);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $coupon = DiscountCoupon::find($id);
+
+        if ($coupon == null) {
+            return response()->json(['error' => 'Record not found'], 404);
+        }
+
+        return response()->json(['coupon' => $coupon]);
     }
 
     public function update(Request $request, $id)
@@ -92,10 +59,7 @@ class ApiDiscountCodeController extends Controller
         $discountCode = DiscountCoupon::find($id);
 
         if ($discountCode == null) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Record not found.'
-            ]);
+            return response()->json(['error' => 'Record not found'], 404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -103,64 +67,41 @@ class ApiDiscountCodeController extends Controller
             'type' => 'required',
             'discount_amount' => 'required|numeric',
             'status' => 'required',
+            // Add other validation rules here
         ]);
 
-        if ($validator->passes()) {
-            // Check if the expiry date is greater than the start date
-            if (!empty($request->starts_at) && !empty($request->expires_at)) {
-                $expiresAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->expires_at);
-                $startAt = Carbon::createFromFormat('Y-m-d H:i:s', $request->starts_at);
-
-                if (!$expiresAt->gt($startAt)) {
-                    return response()->json([
-                        'status' => false,
-                        'errors' => ['expires_at' => 'Expiry date must be greater than start date.']
-                    ]);
-                }
-            }
-
-            $discountCode->code = $request->code;
-            $discountCode->name = $request->name;
-            $discountCode->description = $request->description;
-            $discountCode->max_users = $request->max_users;
-            $discountCode->max_uses_user = $request->max_uses_user;
-            $discountCode->type = $request->type;
-            $discountCode->discount_amount = $request->discount_amount;
-            $discountCode->min_amount = $request->min_amount;
-            $discountCode->status = $request->status;
-            $discountCode->starts_at = $request->starts_at;
-            $discountCode->expires_at = $request->expires_at;
-            $discountCode->save();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Discount coupon updated successfully.'
-            ]);
-
-        } else {
-            return response()->json([
-                'status' => false,
-                'errors' => $validator->errors()
-            ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
-    }
 
+        // Update the discount coupon properties
+        $discountCode->code = $request->code;
+        $discountCode->name = $request->name;
+        $discountCode->description = $request->description;
+        $discountCode->max_users = $request->max_users;
+        $discountCode->max_uses_user = $request->max_uses_user;
+        $discountCode->type = $request->type;
+        $discountCode->discount_amount = $request->discount_amount;
+        $discountCode->min_amount = $request->min_amount;
+        $discountCode->status = $request->status;
+        $discountCode->starts_at = $request->starts_at;
+        $discountCode->expires_at = $request->expires_at;
+        
+        // Save the updated discount coupon
+        $discountCode->save();
+
+        return response()->json(['message' => 'Discount coupon updated successfully.']);
+    }
     public function destroy(Request $request, $id)
     {
         $discountCode = DiscountCoupon::find($id);
 
         if ($discountCode == null) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Record not found.'
-            ]);
+            return response()->json(['error' => 'Record not found'], 404);
         }
 
         $discountCode->delete();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Discount coupon deleted successfully.'
-        ]);
+        return response()->json(['message' => 'Discount coupon deleted successfully.']);
     }
 }

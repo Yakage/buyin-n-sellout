@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\TempImage;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -47,7 +53,7 @@ class HomeController extends Controller
 
         $tempImages = TempImage::where('created_at','<=',$dayBeforeToday)->get();
 
-        foreach (tempImages as $tempImages) {
+        foreach ($tempImages as $tempImage) {
 
             $path = public_path('/temp/'.$tempImage->name);
             $thumbPath = public_path('/temp/thumb/'.$tempImages->name);
@@ -71,7 +77,7 @@ class HomeController extends Controller
             'totalCustomers' => $totalCustomers,
             'totalRevenue' => $totalRevenue,
             'revenueThisMonth' => $revenueThisMonth,
-            'revenueThisMonth' => $revenueLastMonth,
+            'revenueLastMonth' => $revenueLastMonth,
             'revenueLastThirtyDays' => $revenueLastThirtyDays,
             'lastMonthName' =>  $lastMonthName,
 
@@ -84,4 +90,6 @@ class HomeController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }
+
+    
 }

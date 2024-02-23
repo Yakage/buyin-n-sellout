@@ -176,7 +176,7 @@ class DiscountCodeController extends Controller
         }
     }
 
-    public function detroy(Request $request, $id) {
+    public function destroy(Request $request, $id) {
         $discountCode = DiscountCoupon::find($id);
 
         if ($discountCode == null) {

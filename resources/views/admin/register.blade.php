@@ -22,11 +22,11 @@
 					<a href="#" class="h3">Administrative Panel</a>
 			  	</div>
 			  	<div class="card-body">
-					<p class="login-box-msg">Sign in to start your session</p>
-					<form action="{{ route('admin.login.authenticate') }}" method="post">
+					<p class="login-box-msg">Sign up to start your session</p>
+					<form action="{{ route('admin.authenticate') }}" method="post">
                         @csrf
 				  		<div class="input-group mb-3">
-							<input type="email" value="{{ old('email') }}" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+							<input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
 							<div class="input-group-append">
 					  			<div class="input-group-text">
 									<span class="fas fa-envelope"></span>
@@ -62,14 +62,11 @@
 							</div> -->
 							<!-- /.col -->
 							<div class="col-4">
-					  			<button type="submit" class="btn btn-primary btn-block">Login</button>
+					  			<button type="submit" class="btn btn-primary btn-block">Register</button>
 							</div>
 							<!-- /.col -->
 				  		</div>
-					</form>
-		  			<p class="mb-1 mt-3">
-				  		<a href="forgot-password.html">I forgot my password</a>
-					</p>					
+					</form>				
 			  	</div>
 			  	<!-- /.card-body -->
 			</div>

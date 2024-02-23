@@ -13,8 +13,7 @@ use Carbon\Carbon;
 
 class ApiCartController extends Controller
 {
-    public function addToCart(Request $request)
-    {
+    public function addToCart(Request $request) {
         $product = Product::with('product_images')->find($request->id);
 
         if ($product == null) {
@@ -29,80 +28,63 @@ class ApiCartController extends Controller
             $productAlreadyExist = false;
 
             foreach ($cartContent as $item) {
-                if ($item->id == $product->id) {
+                if ($item->id == $product->id)  {
                     $productAlreadyExist = true;
                 }
             }
 
-            if (!$productAlreadyExist) {
-                Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty
-                ($product->product_images)) ? $product->product_images->first() : '']);
+            if ($productAlreadyExist == false) {
+                Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
 
-                return response()->json([
-                    'status' => true,
-                    'message' => '<strong>'.$product->title.'</strong> added to cart successfully'
-                ]);
+                $status = true;
+                $message = '<strong>'.$product->title.'</strong> added to cart successfully';
+                session()->flash('success', $message);
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => $product->title.'Already added to cart'
-                ]);
+                $status = false;
+                $message = $product->title.'Already added to cart';
             }
         } else { 
             Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
-            return response()->json([
-                'status' => true,
-                'message' => '<strong>'.$product->title.'</strong> added to cart successfully'
-            ]);
+            $status = true;
+            $message = '<strong>'.$product->title.'</strong> added to cart successfully';
+            session()->flash('success', $message);
         }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message
+        ]);
     }
 
-    public function updateCart(Request $request)
-    {
+    public function cart() {
+        $cartContent = Cart::content();
+        return response()->json(['cartContent' => $cartContent]);
+    }
+
+    public function updateCart(Request $request) {
         $rowId = $request->rowId;
         $qty = $request->qty;
 
-        $itemInfo = Cart::get($rowId);
-        $product = Product::find($itemInfo->id);
+        Cart::update($rowId, $qty);
 
-        if ($product->track_qty == 'Yes') {
-            if ($qty <= $product->qty) {
-                Cart::update($rowId, $qty);
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Cart updated successfully.'
-                ]);
-            } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Requested qty('.$qty.') not available in stock.'
-                ]);
-            }
-        } else {
-            Cart::update($rowId, $qty);
-            return response()->json([
-                'status' => true,
-                'message' => 'Cart updated successfully.'
-            ]);
-        }
+        $message = 'Cart updated successfully.';
+        $status = true;
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message
+        ]);
     }
 
-    public function deleteItem(Request $request)
-    {
+    public function deleteItem(Request $request) {
         $rowId = $request->rowId;
-        $itemInfo = Cart::get($rowId);
+        Cart::remove($rowId);
 
-        if ($itemInfo == null) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Item not found in cart.'
-            ]);
-        }
+        $message = 'Item removed from cart successfully';
 
-        Cart::remove($request->rowId);
         return response()->json([
             'status' => true,
-            'message' => 'Item removed from cart successfully'
+            'message' => $message
         ]);
     }
 }
