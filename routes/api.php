@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\admin\AdminLoginController;
-use App\Http\Controllers\admin\AdminSignupController;
 use App\Http\Controllers\admin\ApiAdminLoginController;
+use App\Http\Controllers\admin\ApiAdminSignupController;
 use App\Http\Controllers\admin\ApiBrandController;
 use App\Http\Controllers\admin\ApiCategoryController;
 use App\Http\Controllers\Admin\ApiDiscountCodeController;
@@ -99,12 +98,16 @@ Route::group(['prefix' => 'admin'],function() {
 
     Route::group(['middleware' => 'admin.guest'],function() {
 
-        Route::get('/login', [AdminLoginController::class, 'index']);
-        Route::post('/authenticate', [AdminLoginController::class, 'authenticate']);
+        Route::get('/login', [ApiAdminLoginController::class, 'index']);
+        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate']);
     });
-    Route::post('/register', [AdminSignupController::class, 'store']);
-    Route::get('/index', [AdminSignupController::class, 'index']);
+    // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
+    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth:admin');
+    // Route::post('/register', [AdminSignupController::class, 'store']);
+    Route::get('/index', [ApiAdminSignupController::class, 'index']);
 
+    Route::post('/authenticate', [ApiAdminSignupController::class, 'authenticate']);
+    Route::post('/register', [ApiAdminSignupController::class, 'register']);
     
 
     Route::group(['middleware' => 'admin.auth'],function() {

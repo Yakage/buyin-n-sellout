@@ -14,67 +14,42 @@ class AdminLoginController extends Controller
     }
 
     public function authenticate(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-        if ($request->is('api/*')) {
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email',
-                'password' => 'required'
-            ]);
-    
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 422);
-            }
-    
-            if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-                $admin = Auth::guard('admin')->user();
-    
-                if ($admin->role == 2) {
-                    // Generate and return token if needed
-                    $token = $admin->createToken('Admin Access Token')->plainTextToken;
-    
-                    return response()->json(['token' => $token, 'admin' => $admin]);
-                } else {
-                    Auth::guard('admin')->logout();
-                    return response()->json(['error' => 'You are not authorized to access admin panel.'], 401);
-                }
-            } else {
-                return response()->json(['error' => 'Either Email/Password is incorrect'], 401);
-            }
-            
-        }else{
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email',
-                'password' => 'required'
-            ]);
-    
-            if ($validator->passes()) {
-    
-                if (Auth::guard('admin')->attempt(['email' => $request->email,'password' => 
-                $request->password], $request->get('remember'))) {
-    
-                    $admin = Auth::guard('admin')->user();
-    
-                    if ($admin->role == 2) {
-                        return redirect()->route('admin.dashboard');
-                    } else {
-    
-                        Auth::guard('admin')->logout();
-                        return redirect()->route('admin.login')->with('error', 'You are not authorized to access
-                        admin panel.');
-                    }
-    
-                } else {
-                    return redirect()->route('admin.login')->with('error', 'Either Email/Password is 
-                    incorrect');
-    
-                }
-            }else {
-                return redirect()->route('admin.login')
+        if ($validator->fails()) {
+            // Handle validation failure for both API and non-API scenarios
+            return redirect()->route('admin.login')
                 ->withErrors($validator)
                 ->withInput($request->only('email'));
+        }
+
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            $admin = Auth::guard('admin')->user();
+
+            if ($admin->role == 2) {
+                // Check if it's an API request
+                if ($request->is('api/admin/login')) {
+                    $token = $admin->createToken('Admin Access Token')->plainTextToken;
+                    return response()->json(['token' => $token, 'admin' => $admin]);
+                } else {
+                    return redirect()->route('admin.dashboard');
+                }
+            } else {
+                Auth::guard('admin')->logout();
+                return redirect()->route('admin.login')->with('error', 'You are not authorized to access admin panel.');
+            }
+        } else {
+            // Handle authentication failure for both API and non-API scenarios
+            $errorMessage = 'Either Email/Password is incorrect';
+            if ($request->is('api/admin/login')) {
+                return response()->json(['error' => $errorMessage], 401);
+            } else {
+                return redirect()->route('admin.login')->with('error', $errorMessage);
             }
         }
-        
     }
 
     public function logout() {
