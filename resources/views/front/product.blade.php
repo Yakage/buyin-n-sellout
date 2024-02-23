@@ -273,6 +273,11 @@ $("#productRatingForm").submit(function(event){
         data: $(this).serializeArray(),
         dataType: 'json',
         success: function(response){
+            if (response.status == true) {
+                window.location.href="{{ route('front.cart')}}";
+            }else {
+                alert(response.meassage);
+            }
             var errors = response.errors;
 
             if(response.status == false) {
