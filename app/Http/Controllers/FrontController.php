@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
 
+
 class FrontController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
 
         $products = Product::where('is_featured','Yes')
                         ->orderBy('id','DESC')
