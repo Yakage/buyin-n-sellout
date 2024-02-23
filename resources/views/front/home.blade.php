@@ -31,9 +31,9 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	
 
-	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick.theme')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/style.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.theme')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,14 +56,6 @@
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
 				<a href="account.php" class="nav-link text-dark">My Account</a>
-				<form action="">					
-					<div class="input-group">
-						<input type="text" placeholder="Search For Products" class="form-control" aria-label="Amount (to the nearest dollar)">
-						<span class="input-group-text">
-							<i class="fa fa-search"></i>
-					  	</span>
-					</div>
-				</form>
 			</div>		
 		</div>
 	</div>
@@ -738,9 +730,6 @@
 					<ul>
 						<li><a href="about-us.php" title="About">About</a></li>
 						<li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>						
-						<li><a href="#" title="Privacy">Privacy</a></li>
-						<li><a href="#" title="Privacy">Terms & Conditions</a></li>
-						<li><a href="#" title="Privacy">Refund Policy</a></li>
 					</ul>
 				</div>
 			</div>
@@ -768,12 +757,12 @@
 		</div>
 	</div>
 </footer>
-<script src="{{ asset('front-assets/js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{ asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
-<script src="{{ asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
-<script src="{{ asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
-<script src="{{ asset('front-assets/js/slick.min.js')}}"></script>
-<script src="{{ asset('front-assets/js/custom.js')}}"></script>
+<script src="{{ secure_asset('front-assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{ secure_asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
+<script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
+<script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
+<script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
+<script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
 
 <script>
 window.onscroll = function() {myFunction()};
