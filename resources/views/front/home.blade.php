@@ -150,9 +150,9 @@
                     <!-- <img src="images/carousel-1.jpg" class="d-block w-100" alt=""> -->
 
                     <picture>
-                        <source media="(max-width: 799px)" srcset="{{ asset ('front-assets/images/carousel-1-m.jpg')}}" />
-                        <source media="(min-width: 800px)" srcset="{{ asset ('front-assets/images/carousel-1.jpg')}}"/>           
-                        <img src= "{{ asset ('front-assets/images/carousel-1.jpg')}}"  alt="" />
+                        <source media="(max-width: 799px)" srcset="{{ asset ('front-assets/images/carousel-1-m.jpg') }}" />
+                        <source media="(min-width: 800px)" srcset="{{ asset ('front-assets/images/carousel-1.jpg') }}"/>           
+                        <img src= "{{ asset ('front-assets/images/carousel-1.jpg') }}"  alt="" />
                     </picture>
 
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -166,9 +166,9 @@
                 <div class="carousel-item">
                     
                     <picture>
-                        <source media="(max-width: 799px)" srcset="{{ asset ('font-assets/images/carousel-2-m.jpg')}}" />
-                        <source media="(min-width: 800px)" srcset="{{ asset ('font-assets/images/carousel-2.jpg')}}"/>           
-                        <img src= "{{ asset ('font-assets/images/carousel-2.jpg')}}"  alt="" />
+                        <source media="(max-width: 799px)" srcset="{{ asset ('front-assets/images/carousel-2-m.jpg') }}" />
+                        <source media="(min-width: 800px)" srcset="{{ asset ('front-assets/images/carousel-2-m.jpg') }}"/>           
+                        <img src= "{{ asset ('front-assets/images/carousel-2-m.jpg') }}"  alt="" />
                     </picture>
 
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
