@@ -167,7 +167,7 @@
                     
                     <picture>
                         <source media="(max-width: 799px)" srcset="{{ asset ('front-assets/images/carousel-2-m.jpg') }}" />
-                        <source media="(min-width: 800px)" srcset="{{ asset ('front-assets/images/carousel-2-m.jpg') }}"/>           
+                        <source media="(min-width: 800px)" srcset="{{ asset ('front-assets/images/carousel-2.jpg') }}"/>           
                         <img src= "{{ asset ('front-assets/images/carousel-2-m.jpg') }}"  alt="" />
                     </picture>
 
