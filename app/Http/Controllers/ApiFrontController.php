@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEmail;
+use App\Models\Page;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class ApiFrontController extends Controller
 {
@@ -58,5 +63,44 @@ class ApiFrontController extends Controller
             'status' => true,
             'message' => '"' . $product->title . '" added to your wishlist.'
         ]);
+    }
+
+    public function page($slug)
+    {
+        $page = Page::where('slug', $slug)->first();
+        if ($page == null) {
+            return response()->json(['error' => 'Page not found.'], 404);
+        }
+        return response()->json(['page' => $page]);
+    }
+
+    public function sendContactEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required|min:10',
+            'message' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        // Send email here
+
+        $mailData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'mail_subject' => 'You have received a contact email',
+        ];
+
+        $admin = User::find(1); // Assuming the admin user's ID is 1
+
+        Mail::to($admin->email)->send(new ContactEmail($mailData));
+
+        return response()->json(['status' => true, 'message' => 'Thanks for contacting us, we will get back to you soon.']);
     }
 }

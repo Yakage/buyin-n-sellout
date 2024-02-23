@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductRating;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApiShopController extends Controller
 {
@@ -80,21 +82,73 @@ class ApiShopController extends Controller
 
     public function product($slug)
     {
-        $product = Product::where('slug', $slug)->with('product_images')->first();
-        if ($product == null) {
+        $product = Product::where('slug', $slug)
+            ->withCount('product_ratings')
+            ->withSum('product_ratings', 'rating')
+            ->with(['product_images', 'product_ratings'])
+            ->first();
+
+        if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
         }
 
         $relatedProducts = [];
-        // fetch related products
         if ($product->related_products != '') {
             $productArray = explode(',', $product->related_products);
             $relatedProducts = Product::whereIn('id', $productArray)->where('status', 1)->get();
         }
 
+        $avgRating = '0.00';
+        $avgRatingPer = '0';
+        if ($product->product_ratings_count > 0) {
+            $avgRating = number_format(($product->product_ratings_sum_rating / $product->product_ratings_count), 2);
+            $avgRatingPer = ($avgRating * 100) / 5;
+        }
+
         return response()->json([
             'product' => $product,
-            'relatedProducts' => $relatedProducts
+            'relatedProducts' => $relatedProducts,
+            'avgRating' => $avgRating,
+            'avgRatingPer' => $avgRatingPer,
         ]);
+    }
+    
+    public function saveRating($id, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:5',
+            'email' => 'required|email',
+            'comment' => 'required|min:10',
+            'rating' => 'required|numeric|between:1,5'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $count = ProductRating::where('email', $request->email)->count();
+        if ($count > 0) {
+            return response()->json([
+                'status' => false,
+                'message' => 'You have already rated this product.'
+            ], 400);
+        }
+
+        $productRating = new ProductRating;
+        $productRating->product_id = $id;
+        $productRating->username = $request->name;
+        $productRating->email = $request->email;
+        $productRating->comment = $request->comment;
+        $productRating->rating = $request->rating;
+        $productRating->status = 0;
+        $productRating->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Thank you for your rating.'
+        ], 200);
     }
 }

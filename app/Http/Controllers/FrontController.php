@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContactEmail;
+use App\Mail\ContactEmail;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\User;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\Request;
-use Illuminate\Http\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class PageController extends Controller
 {
@@ -45,7 +45,7 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->slug = $request->slug;
         $page->content = $request->content;
-        $page->name = save();
+        $page->save();
 
         $message = 'Page added successfully.';
 
@@ -72,7 +72,7 @@ class PageController extends Controller
         ]);
     } 
 
-    public function update (Request $request){
+    public function update ($id, Request $request){
 
         $page = Page::find($id);
 
@@ -98,7 +98,7 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->slug = $request->slug;
         $page->content = $request->content;
-        $page->name = save();
+        $page->save();
 
         $message = 'Page updated successfully.';
 

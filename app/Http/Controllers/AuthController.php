@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\resetPasswordEmail;
+use App\Mail\ResetPasswordEmail;
 use App\Models\Country;
-use\App\Models\CustomerAddress;
+use App\Models\CustomerAddress;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -286,6 +287,7 @@ class AuthController extends Controller
     }
 
     public function processForgotPassword(Request $request) {
+
         $validator = Validator::make($request->all(),[
             'email' => 'required|email|exists::users,email'
         ]);
@@ -296,9 +298,9 @@ class AuthController extends Controller
 
         $token = Str::random(60);
 
-        \DB::table('password_reset_tokens')->where('email',$request->email)->delete();
+        DB::table('password_reset_tokens')->where('email',$request->email)->delete();
 
-        \DB::table('password_reset_tokens')->insert([
+        DB::table('password_reset_tokens')->insert([
             'email' => $request->email,
             'token' => $token,
             'created_at' => now()
@@ -315,13 +317,13 @@ class AuthController extends Controller
 
         ];
 
-        Mail::to($request->email)->send(new ResetPasswordEmail());
+        Mail::to($request->email)->send(new ResetPasswordEmail($formData));
 
         return redirect()->route('front.forgotPassword')->with('success','Please check your inbox to reset your password');
     }
-    public function resetPassword(){
+    public function resetPassword($token){
 
-        $tokenExist = \DB::table('password_reset_tokens')->where('token',$token)->first();
+        $tokenExist = DB::table('password_reset_tokens')->where('token',$token)->first();
         
         if ($tokenExist == null){
             return redirect()->route('front.forgotPassword')->with('error','Invalid Request');
@@ -336,7 +338,7 @@ class AuthController extends Controller
     public function processResetPassword(Request $request) {
         $token = $request->token;
         
-        $tokenObj = \DB::table('password_reset_tokens')->where('token',$token)->first();
+        $tokenObj = DB::table('password_reset_tokens')->where('token',$token)->first();
         
         if ($tokenObj == null){
             return redirect()->route('front.forgotPassword')->with('error','Invalid Request');

@@ -53,12 +53,12 @@ Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.
 Route::get('/checkout', [CartController::class, 'checkout'])->name('front.checkout');
 Route::get('/process-checkout', [CartController::class, 'processCheckout'])->name('front.processCheckout');
 Route::get('/thanks/{orderId}', [CartController::class, 'thankyou'])->name('front.thankyou');
-Route::get('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
-Route::get('/apply-discount', [CartController::class, 'applyDiscount'])->name('front.applyDiscount');
-Route::get('/remove-discount', [CartController::class, 'removeCoupon'])->name('front.removeCoupon');
-Route::get('/add-to-wishlist', [FrontController::class, 'addToWishList'])->name('front.addToWishList');
+Route::post('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
+Route::post('/apply-discount', [CartController::class, 'applyDiscount'])->name('front.applyDiscount');
+Route::post('/remove-discount', [CartController::class, 'removeCoupon'])->name('front.removeCoupon');
+Route::post('/add-to-wishlist', [FrontController::class, 'addToWishList'])->name('front.addToWishList');
 Route::get('/page/{slug}', [FrontController::class, 'page'])->name('front.page');
-Route::get('/send-contact-email', [FrontController::class, 'sendContactEmail'])->name('front.sendContactEmail');
+Route::post('/send-contact-email', [FrontController::class, 'sendContactEmail'])->name('front.sendContactEmail');
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('front.pageforgotPassword');
 Route::post('/process-forgot-password', [AuthController::class, 'processForgotPassword'])->name('front.processForgotPassword');
@@ -72,8 +72,7 @@ Route::group(['prefix' => 'account'],function() {
     Route::group(['middleware' => 'guest'],function() {
         Route::get('/login', [AuthController::class, 'login'])->name('account.login');
         Route::post('/login', [AuthController::class, 'authenticate'])->name('account.authenticate');
-
-
+        
         Route::get('/register', [AuthController::class, 'register'])->name('account.register');
         Route::post('/process-register', [AuthController::class, 'processRegister'])->name('account.processRegister');
 
