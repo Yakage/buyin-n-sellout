@@ -81,7 +81,7 @@
 		<!-- Bootstrap 4 -->
 		<script src="{{ secure_asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 		<!-- AdminLTE App -->
-		<script src="{{ secure_asset('/admin_assets/js/adminlte.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/js/adminlte.min.js') }}"></script>
 		<!-- AdminLTE for demo purposes -->
 		{{-- <script src="js/demo.js"></script> --}}
 	</body>
