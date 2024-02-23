@@ -12,20 +12,7 @@ use App\Http\Controllers\admin\ApiProductImageController;
 use App\Http\Controllers\admin\ApiProductSubCategoryController;
 use App\Http\Controllers\admin\ApiShippingController;
 use App\Http\Controllers\admin\ApiSubCategoryController;
-use App\Http\Controllers\admin\BrandController;
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\DiscountCodeController;
-use App\Http\Controllers\admin\HomeController;
-use App\Http\Controllers\admin\OrderController;
-use App\Http\Controllers\admin\PageController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\ProductImageController;
-use App\Http\Controllers\admin\ProductSubCategoryController;
-use App\Http\Controllers\admin\SettingController;
-use App\Http\Controllers\admin\ShippingController;
-use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\TempImagesController;
-use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\Api\ApiCartController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiFrontController;
@@ -34,10 +21,6 @@ use App\Http\Controllers\ApiPageController;
 use App\Http\Controllers\ApiSettingController;
 use App\Http\Controllers\ApiShopController;
 use App\Http\Controllers\ApiUserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FrontController;
-use App\Http\Controllers\ShopController;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -116,8 +99,8 @@ Route::group(['prefix' => 'admin'],function() {
 
     Route::group(['middleware' => 'admin.guest'],function() {
 
-        Route::get('/login', [ApiAdminLoginController::class, 'index']);
-        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate']);
+        Route::get('/login', [AdminLoginController::class, 'index']);
+        Route::post('/authenticate', [AdminLoginController::class, 'authenticate']);
     });
     Route::post('/register', [AdminSignupController::class, 'store']);
     Route::get('/index', [AdminSignupController::class, 'index']);
