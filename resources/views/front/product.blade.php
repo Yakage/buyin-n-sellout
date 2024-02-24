@@ -267,13 +267,18 @@
         $("#productRatingForm").submit(function(event){
             event.preventDefault();
 
-            $.ajax({
-                url: '{{ route("front.saveRating",$product->id) }}',
-                type: 'post',
-                data: $(this).serializeArray(),
-                dataType: 'json',
-                success: function(response){
-                    var errors = response.errors;
+    $.ajax({
+        url: '{{ route("front.saveRating",$product->id) }}',
+        type: 'post',
+        data: $(this).serializeArray(),
+        dataType: 'json',
+        success: function(response){
+            if (response.status == true) {
+                window.location.href="{{ route('front.cart')}}";
+            }else {
+                alert(response.message);
+            }
+            var errors = response.errors;
 
                     if(response.status == false) {
                             if(errors.name) {
