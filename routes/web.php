@@ -100,6 +100,7 @@ Route::group(['prefix' => 'admin'],function() {
 
     Route::group(['middleware' => 'admin.guest'],function() {
 
+        Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.login.authenticate');
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
         // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
@@ -108,9 +109,8 @@ Route::group(['prefix' => 'admin'],function() {
         // Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     
     });
-    Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.login.authenticate');
     Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-    Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.register.authenticate');
+    Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.login.authenticate');
     Route::post('/register', [AdminSignupController::class, 'register']);
     Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
     // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
