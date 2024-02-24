@@ -16,6 +16,28 @@ class AdminSignupController extends Controller
         return view('admin.register');
     }
 
+    public function register(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:admins',
+            'password' => 'required|min:5',
+            // Add more validation rules as needed
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.register')
+                ->withErrors($validator)
+                ->withInput($request->only('email'));
+        }
+
+        $admin = new User();
+        $admin->email = $request->email;
+        $admin->password = bcrypt($request->password);
+        // Add more fields as needed for admin registration
+
+        $admin->save();
+
+        return redirect()->route('admin.login')->with('success', 'Admin registered successfully. You can now log in.');
+    }
     public function authenticate(Request $request) {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -41,29 +63,6 @@ class AdminSignupController extends Controller
             $errorMessage = 'Either Email/Password is incorrect';
             return redirect()->route('admin.login')->with('error', $errorMessage);
         }
-    }
-
-    public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:admins',
-            'password' => 'required|min:5',
-            // Add more validation rules as needed
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('admin.register')
-                ->withErrors($validator)
-                ->withInput($request->only('email'));
-        }
-
-        $admin = new User();
-        $admin->email = $request->email;
-        $admin->password = bcrypt($request->password);
-        // Add more fields as needed for admin registration
-
-        $admin->save();
-
-        return redirect()->route('admin.login')->with('success', 'Admin registered successfully. You can now log in.');
     }
 
     public function logout() {
