@@ -63,7 +63,7 @@ class AdminLoginController extends Controller
             Session::put('beforeregister',  redirect()->intended(RouteServiceProvider::HOME));
         }
 
-        return view('admin.dashboard');
+        return view('admin.login');
     }
     public function logout() {
         Auth::guard('admin')->logout();
