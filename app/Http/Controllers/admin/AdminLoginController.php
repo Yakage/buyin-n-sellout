@@ -67,7 +67,7 @@ class AdminLoginController extends Controller
                 return redirect()->route('admin.dashboard');
             } else {
                 Auth::guard('admin')->logout();
-                return redirect()->route('admin.login')->with('error', 'You are not authorized to access admin panel.');
+                return redirect()->route('admin.dashboard')->with('error', 'You are not authorized to access admin panel.');
             }
         } else {
             $errorMessage = 'Either Email/Password is incorrect';
@@ -80,14 +80,14 @@ class AdminLoginController extends Controller
     {
         if (url()->previous() != url()->current()){
 
-            Session::put('register', url()->previous());
+            Session::post('register', url()->previous());
 
             // Redirect::setIntendedUrl(url()->previous());
 
             }
         elseif(url()->previous() == url()->current()){
 
-            Session::put('register',  redirect()->intended(RouteServiceProvider::HOME));
+            Session::post('register',  redirect()->intended(RouteServiceProvider::HOME));
         }
 
         return view('admin.dashboard');
