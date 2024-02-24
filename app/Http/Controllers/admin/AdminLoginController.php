@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminLoginController extends Controller
 {
@@ -46,6 +48,23 @@ class AdminLoginController extends Controller
         }
     }
 
+
+    public function create()
+    {
+        if (url()->previous() != url()->current()){
+
+            Session::put('beforeregister', url()->previous());
+
+            // Redirect::setIntendedUrl(url()->previous());
+
+            }
+        elseif(url()->previous() == url()->current()){
+
+            Session::put('beforeregister',  redirect()->intended(RouteServiceProvider::HOME));
+        }
+
+        return view('admin.dashboard');
+    }
     public function logout() {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');

@@ -110,7 +110,7 @@ Route::group(['prefix' => 'admin'],function() {
     
     });
     Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-    Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.login.authenticate');
+    Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.register.authenticate');
     Route::post('/register', [AdminSignupController::class, 'register']);
     Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
     // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
