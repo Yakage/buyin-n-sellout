@@ -80,17 +80,17 @@ class AdminLoginController extends Controller
     {
         if (url()->previous() != url()->current()){
 
-            Session::put('beforeregister', url()->previous());
+            Session::put('register', url()->previous());
 
             // Redirect::setIntendedUrl(url()->previous());
 
             }
         elseif(url()->previous() == url()->current()){
 
-            Session::put('beforeregister',  redirect()->intended(RouteServiceProvider::HOME));
+            Session::put('register',  redirect()->intended(RouteServiceProvider::HOME));
         }
 
-        return view('admin.login');
+        return view('admin.dashboard');
     }
     public function logout() {
         Auth::guard('admin')->logout();
