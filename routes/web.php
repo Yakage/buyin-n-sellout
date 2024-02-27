@@ -104,6 +104,9 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+
+        Route::get('/register', [AdminAuthController::class, 'register'])->name('admin.register');
+        Route::post('/process-register', [AdminAuthController::class, 'processRegister'])->name('admin.processRegister');
         
         //Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
         //Route::post('/register', [AdminSignupController::class, 'register']);
