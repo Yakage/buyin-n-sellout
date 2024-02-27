@@ -64,7 +64,7 @@
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        <a href="javascript:void(0);" oonclick="addToCart({{ $product->id }})" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
+                        <a href="javascript:void(0);" onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
                     </div>
                 </div>
                 <div class="col-md-12 mt-5">
@@ -211,7 +211,6 @@
             </div>           
         </div>
     </section>
-
     @if(!empty($relatedProducts))
     <section class="pt-5 section-8">
         <div class="container">
@@ -239,7 +238,7 @@
                             <a class="whishlist" href="222"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
-                                <a class="btn btn-dark" href="#">
+                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                 </a>                            
                             </div>
@@ -325,23 +324,5 @@
                 }
             });
         });
-    </script>
-    <script type="text/javascript">
-        function addToCart(id) {
-            $.ajax({
-                url: '{{ route("front.addToCart") }}',
-                type: 'post',
-                data: {id:id},
-                dataType: 'json',
-                success: function(response) {
-                    if(response.status == true) {
-                        window.location.href="{{ route('front.addToCart') }}";
-                    } else {
-                        alert(response.message);
-
-                    }
-                }
-            })
-        }
     </script>
 @endsection 
