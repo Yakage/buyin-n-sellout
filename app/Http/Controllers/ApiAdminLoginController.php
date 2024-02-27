@@ -9,30 +9,28 @@ use Illuminate\Support\Facades\Validator;
 class ApiAdminLoginController extends Controller
 {
     public function authenticate(Request $request) {
-
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
+        if ($validator->passes()) {
+            if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+                $admin = Auth::guard('admin')->user();
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            $admin = Auth::guard('admin')->user();
+                if ($admin->role == 1) {
+                    $token = $admin->createToken('admin-token')->plainTextToken;
 
-            if ($admin->role == 1) {
-                // Generate and return token if needed
-                $token = $admin->createToken('Admin Access Token')->plainTextToken;
-
-                return response()->json(['token' => $token, 'admin' => $admin]);
+                    return response()->json(['message' => 'Login successful', 'admin' => $admin, 'token' => $token], 200);
+                } else {
+                    Auth::guard('admin')->logout();
+                    return response()->json(['error' => 'You are not authorized to access the admin panel.'], 403);
+                }
             } else {
-                Auth::guard('admin')->logout();
-                return response()->json(['error' => 'You are not authorized to access admin panel.'], 401);
+                return response()->json(['error' => 'Either email or password is incorrect.'], 401);
             }
         } else {
-            return response()->json(['error' => 'Either Email/Password is incorrect'], 401);
+            return response()->json(['error' => $validator->errors()], 422);
         }
     }
 
