@@ -58,19 +58,19 @@
                         @if ($discountCoupons->isNotEmpty())
                             @foreach ($discountCoupons as $discountCoupon)
                                 <tr>
-                                    <td>{{ $discountCoupon->type }}</td>
+                                    <td>{{ $discountCoupon->id }}</td>
                                     <td>{{ $discountCoupon->code }}</td>
                                     <td>{{ $discountCoupon->name }}</td>
                                     <td>
-                                        @if ($discountCoupon->name == 'percent')
+                                        @if ($discountCoupon->type == 'percent')
                                             {{$discountCoupon->discount_amount}}%     
                                         @else
                                             ${{$discountCoupon->discount_amount}}l    
                                             
                                         @endif
                                     </td>
-                                    <td>{{(!@empty($discountCoupon->starts_at)) ? \Carbon\Carbon::parse($discountCoupon->starts_at)->format('Y/m/d H:i:s') : ''}}</td>
-                                    <td>{{(!@empty($discountCoupon->expires_at)) ? \Carbon\Carbon::parse($discountCoupon->expires_at)->format('Y/m/d H:i:s') : ''}}</td>
+                                    <td>{{(!empty($discountCoupon->starts_at)) ? \Carbon\Carbon::parse($discountCoupon->starts_at)->format('Y/m/d H:i:s') : ''}}</td>
+                                    <td>{{(!empty($discountCoupon->expires_at)) ? \Carbon\Carbon::parse($discountCoupon->expires_at)->format('Y/m/d H:i:s') : ''}}</td>
                                     <td>
                                         @if ($discountCoupons->status == 1)
                                         <svg class="text-success-500 h-6 w-6 text-success" xmlns="http://www.

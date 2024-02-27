@@ -238,8 +238,10 @@
                             $("#grandTotal").html('$'+response.grandTotal);
                             $("#discount_value").html('$'+response.discount);
                             $("#discount-response-wrapper").html(response.discountString)
-                        } else {
-                            $("#discount")
+                        }  else {
+                            $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
+
+                        }
                     }
                 });
             });
