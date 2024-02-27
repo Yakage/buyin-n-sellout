@@ -118,11 +118,11 @@
                             </div>
                             <div class="d-flex justify-content-between mt-2">
                                 <div class="h6"><strong>Shipping</strong></div>
-                                <div class="h6"><strong>${{ number_format($totalShippingCharge,2)}}</strong></div>
+                                <div class="h6"><strong id="shippingAmount">${{ number_format($totalShippingCharge,2)}}</strong></div>
                             </div>
                             <div class="d-flex justify-content-between mt-2 summery-end">
                                 <div class="h5"><strong>Total</strong></div>
-                                <div class="h5"><strong>${{number_format($grandTotal,2)}}</strong></div>
+                                <div class="h5"><strong id="grandTotal">${{number_format($grandTotal,2)}}</strong></div>
                             </div>                            
                         </div>
                     </div>   
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
                             <div class="pt-4">
-                                <a href="#" class="btn-dark btn btn-block w-100">Pay Now</a>
+                                <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button>
                             </div>
                         </div>                        
                     </div>
@@ -157,5 +157,59 @@
             </div>
         </div>
     </section>
+    @endsection
+    @section('customJs')
+        <script>
+            $("payment_method_one").click(function(){
+                if($(this).is("checked")==true) {
+                    $("#card-payment-form").addClass('d-none');
+                }
+            });
+            
+            $("payment_method_two").click(function(){
+                if($(this).is("checked")==true) {
+                    $("#card-payment-form").removeClass('d-none');
+                }
+            });
+            $("OrderForm").submit(function(event){
+                event.preventDefault();
+                $('button[type="submit"]').prop('disabled',true);
+
+                $.ajax({
+                    url: '{{route("front.processCheckout")}}',
+                    type: 'post',
+                    data: $(this).serializeArray(),
+                    dataType: 'json',
+                    sucvcess: function(response){
+                        var errors = responsee.errors;
+                        $('button[type="submit"]').prop('disabled',false);
+
+                        if(response.status == false) {
+                        }else{
+                            window.location.href ="{{url('/thanks/')}}" +response.orderId;
+                        }
+                    }
+                });
+            });
+
+            $("#country").change(function(){
+                $.ajax({
+                    url: '{{route ("front.getOrderSummery")}}',
+                    type: post,
+                    data: {country_id: $(this).val ()},
+                    dataType: 'json',
+                    success: function(response){
+                        if(response.status == true){
+                            $(#shippingAmount).html('$'+response.shippingAmount);
+                            $(#grandTotal).html('$' + response.grandTotal);
+
+                        }
+                    }
+                });
+            });
+        </script>
+        @endsection
+
+
 </main>
 <?php include('includes/footer.php');?>
