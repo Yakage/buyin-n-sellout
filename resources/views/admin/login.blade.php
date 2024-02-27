@@ -15,16 +15,11 @@
 	<body class="hold-transition login-page">
 		<div class="login-box">
 			<!-- /.login-logo -->
+			@include('admin.message')
 			<div class="card card-outline card-primary">
 			  	<div class="card-header text-center">
 					<a href="#" class="h3">Administrative Panel</a>
 			  	</div>
-				  @if(session()->has('error'))
-					<div class="alert alert-danger">{{ session('error') }}</div>
-				@endif
-				@if(session()->has('success'))
-					<div class="alert alert-success">{{ session('success') }}</div>
-				@endif
 			  	<div class="card-body">
 					<p class="login-box-msg">Sign in to start your session</p>
 					<form action="{{ route('admin.authenticate') }}" method="post">
