@@ -16,11 +16,11 @@ class ShopController extends Controller
 
         $categorySelected = '';
         $subCategorySelected = '';
-        $brandsArray = [];
+        $brandsArray = [ ];
 
         $categories = Category::orderBy('name', 'ASC')->with('sub_category')->where('status', 1)->get();
         $brands = Brand::orderBy('name', 'ASC')->where('status', 1)->get();
-        $products = Product::where('status', 1);
+        $products = Product::orderBy('id','DESC')->where('status', 1)->get();
 
         //filter
 
@@ -53,23 +53,8 @@ class ShopController extends Controller
 
         }
 
-        if (!empty($request->get('search'))){
-            $products = $products->where('title', 'like','%'.$request->get('search').'%');
-        }
 
-        if($request->get('sort')) {
-            if ($request->get('sort') == 'latest') {
-                $products = $products->orderBy('id', 'DESC');
-            } else if ($request->get('sort') == 'price_asc'){ 
-                $products = $products->orderBy('price', 'ASC');
-            } else {
-                $products = $products->orderBy('price', 'DESC');
-            }
-        } else {
-            $products = $products->orderBy('id', 'DESC');
-        }
         
-        $products = $products->paginate(6);
 
         $data['categories'] = $categories;
         $data['brands'] = $brands;

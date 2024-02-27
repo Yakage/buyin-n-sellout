@@ -276,7 +276,7 @@ $("#productRatingForm").submit(function(event){
             if (response.status == true) {
                 window.location.href="{{ route('front.cart')}}";
             }else {
-                alert(response.meassage);
+                alert(response.meassage);a
             }
             var errors = response.errors;
 

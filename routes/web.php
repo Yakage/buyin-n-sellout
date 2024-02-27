@@ -45,8 +45,8 @@ use Illuminate\Support\Str;
 //});
 
 Route::get('/', [FrontController::class,'index']) ->name('front.home');
-Route::get('/shop{categorySlug?}/{subCategorySlug?}', [ShopController::class, 'index'])->name('front.shop');
-Route::get('/product//{slug}', [ShopController::class,'product'])->name('front.product');
+Route::get('/shop', [ShopController::class, 'index'])->name('front.shop');
+Route::get('/product/{slug}', [ShopController::class,'product'])->name('front.product');
 Route::get('/cart', [CartController::class, 'cart'])->name('front.cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('front.addToCart');
 Route::post('/update-cart', [CartController::class, 'updateCart'])->name('front.updateCart');
@@ -101,7 +101,7 @@ Route::group(['prefix' => 'admin'],function() {
     Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
-        Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.login.authenticate');
+        Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
         // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
         // Route::post('/register', [AdminAuthController::class, 'authenticateOrRegister'])->name('admin.register');
@@ -110,7 +110,7 @@ Route::group(['prefix' => 'admin'],function() {
     
     });
     Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-    Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.register.authenticate');
+    Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/register', [AdminSignupController::class, 'register']);
     Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
     // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');

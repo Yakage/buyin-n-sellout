@@ -14,36 +14,42 @@ class AdminLoginController extends Controller
         return view('admin.login');
     }
 
-    public function authenticate(Request $request)
-    {
+    public function authenticate(Request $request) {
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->route('admin.login')
-                ->withErrors($validator)
-                ->withInput($request->only('email'));
-        }
+        if ($validator->passes()) {
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            $admin = Auth::guard('admin')->user();
+            if (Auth::guard('admin')->attempt(['email' => $request->email,'password' => 
+            $request->password], $request->get('remember'))) {
 
-            if ($admin->role == 2) {
-                return redirect()->route('admin.dashboard');
+                $admin = Auth::guard('admin')->user();
+
+                if ($admin->role == 2) {
+                    return redirect()->route('admin.dashboard');
+                } else {
+
+                    Auth::guard('admin')->logout();
+                    return redirect()->route('admin.login')->with('error', 'You are not authorized to access
+                    admin panel.');
+                }
+
             } else {
-                Auth::guard('admin')->logout();
-                return redirect()->route('admin.login')->with('error', 'You are not authorized to access the admin panel.');
+                return redirect()->route('admin.login')->with('error', 'Either Email/Password is 
+                incorrect');
+
             }
-        } else {
-            $errorMessage = 'Either Email/Password is incorrect';
-            return redirect()->route('admin.login')->with('error', $errorMessage);
+        }else {
+            return redirect()->route('admin.login')
+            ->withErrors($validator)
+            ->withInput($request->only('email'));
         }
     }
 
-    public function logout()
-    {
+    public function logout() {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }

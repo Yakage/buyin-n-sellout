@@ -2,16 +2,16 @@
 
 @section('content')
 <section class="section-5 pt-3 pb-3 mb-3 bg-white">
-        <div class="container">
-            <div class="light-font">
-                <ol class="breadcrumb primary-color mb-0">
-                    <li class="breadcrumb-item"><a class="white-text" href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Shop</li>
-                </ol>
-            </div>
+    <div class="container">
+        <div class="light-font">
+            <ol class="breadcrumb primary-color mb-0">
+                <li class="breadcrumb-item"><a class="white-text" href="#">Home</a></li>
+                <li class="breadcrumb-item active">Shop</li>
+            </ol>
         </div>
+    </div>
 </section>
-<section class="section-6 pt-5">
+
         <div class="container">
             <div class="row">            
                 <div class="col-md-3 sidebar">
@@ -110,7 +110,7 @@
                                     @if (!empty($productImage->image))
                                         <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                     @else
-                                        <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                        <img class="card-img-top" src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                     @endif
                                     </a>
                                     
@@ -139,10 +139,7 @@
  
 
                     
-                        <div class="col-md-12 pt-5">
-                            {{ $products->withQueryString()->links() }}
-                        </div>
-                    </div>
+    
                 </div>
             </div>
         </div>
