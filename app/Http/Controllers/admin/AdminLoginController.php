@@ -37,7 +37,7 @@ class AdminLoginController extends Controller
                 }
 
             } else {
-                return redirect()->route('admin.dasboard')->with('error', 'Either Email/Password is 
+                return redirect()->route('admin.login')->with('error', 'Either Email/Password is 
                 incorrect');
 
             }
