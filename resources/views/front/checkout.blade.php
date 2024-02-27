@@ -238,7 +238,8 @@
                             $("#grandTotal").html('$'+response.grandTotal);
                             $("#discount_value").html('$'+response.discount);
                             $("#discount-response-wrapper").html(response.discountString)
-                        }
+                        } else {
+                            $("#discount")
                     }
                 });
             });
@@ -256,7 +257,7 @@
                             $("#discount_value").html('$'+response.discount);
                             $("discount-response").html('');
                             $("discount_code").val('');
-                        }
+                        } 
                     }
                 });
             });
