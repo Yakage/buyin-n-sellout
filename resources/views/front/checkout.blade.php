@@ -116,6 +116,10 @@
                                 <div class="h6"><strong>Subtotal</strong></div>
                                 <div class="h6"><strong>${{ Cart::subtotal()}}</strong></div>
                             </div>
+                            <div class="d-flex justify-content-between summery-end">
+                                <div class="h6"><strong>Discount</strong></div>
+                                <div class="h6"><strong id="discount_value">${{ $discount}}</strong></div>
+                            </div>
                             <div class="d-flex justify-content-between mt-2">
                                 <div class="h6"><strong>Shipping</strong></div>
                                 <div class="h6"><strong id="shippingAmount">${{ number_format($totalShippingCharge,2)}}</strong></div>
@@ -126,6 +130,20 @@
                             </div>                            
                         </div>
                     </div>   
+
+                    <div class="input-group apply-coupan mt-4">
+                        <input type="text" placeholder="Coupon Code" class="form-control" name="discount_code" id="discount_code">
+                        <button class="btn btn-dark" type="button" id="apply-discount">Apply Coupon</button>
+                    </div> 
+
+                    <div id="discount-response-wrapper">
+                        @if (Session::has('code'))
+                        <div class=" mt-4" id="discount-response">
+                            <strong>{{Session::get('code')->code}}</strong>
+                            <a class="btn btn-sm btn-danger" id="remove-discount"><i class="fa fa-times"></i></a>
+                        </div>
+                        @endif
+                    </div>
                     
                     <div class="card payment-form ">                        
                         <h3 class="card-title h5 mb-3">Payment Details</h3>
@@ -207,6 +225,44 @@
                     }
                 });
             });
+
+            $("#apply-discount").click(function(){
+                $.ajax({
+                    url: '{{route ("front.getOrderSummery")}}',
+                    type: post,
+                    data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
+                    dataType: 'json',
+                    success: function(response){
+                        if (response.status == true) {
+                            $("#shippingAmount").html('$'+response.shippingCharge);
+                            $("#grandTotal").html('$'+response.grandTotal);
+                            $("#discount_value").html('$'+response.discount);
+                            $("#discount-response-wrapper").html(response.discountString)
+                        }
+                    }
+                });
+            });
+
+            $('body').on('click',"#remove-discount", function(){
+                $.ajax({
+                    url: '{{route ("front.removeCoupon")}}',
+                    type: post,
+                    data: {country_id: $("#country").val()},
+                    dataType: 'json',
+                    success: function(response){
+                        if (response.status == true) {
+                            $("#shippingAmount").html('$'+response.shippingCharge);
+                            $("#grandTotal").html('$'+response.grandTotal);
+                            $("#discount_value").html('$'+response.discount);
+                            $("discount-response").html('');
+                            $("discount_code").val('');
+                        }
+                    }
+                });
+            });
+            //$("#remove-discount").click(function(){
+                
+            //});
         </script>
         @endsection
 
