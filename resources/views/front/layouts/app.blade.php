@@ -201,7 +201,7 @@
 <script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>3
+<script src="{{ secure_asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
 
 
