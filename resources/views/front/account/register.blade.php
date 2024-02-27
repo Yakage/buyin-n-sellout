@@ -53,7 +53,7 @@
     $("$registrationForm").submit(function(event) {
         event.preventDefault();
 
-        $("button[ttype='submit']").prop('disabled',true);
+        $("button[type='submit']").prop('disabled',true);
 
         $.ajax({
             url: '{{ route("account.processRegister") }}',
