@@ -100,19 +100,34 @@ Route::group(['prefix' => 'admin'],function() {
 
     Route::group(['middleware' => 'admin.guest'],function() {
 
+<<<<<<< HEAD
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+=======
+        Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.login.authenticate');
+        Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
+>>>>>>> d6843f7371b17b9e08cb2be43190062fb029a1bc
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+        
+        //Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
+        Route::post('/register', [AdminSignupController::class, 'register']);
+        Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
+
         // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
         // Route::post('/register', [AdminAuthController::class, 'authenticateOrRegister'])->name('admin.register');
         // Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         // Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     
     });
+<<<<<<< HEAD
     Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
     Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.authenticate');
     Route::post('/register', [AdminSignupController::class, 'register']);
     Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
+=======
+    //Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.login.authenticate');
+
+>>>>>>> d6843f7371b17b9e08cb2be43190062fb029a1bc
     // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
     // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth:admin');
 

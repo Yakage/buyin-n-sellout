@@ -43,6 +43,9 @@
 
 	<!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
+
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
 <header class="bg-dark">
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
@@ -123,7 +126,8 @@
 			</div> 		
       	</nav>
   	</div>
-      <body data-instant-intensity="mousedown">
+
+<body data-instant-intensity="mousedown">
 
 <div class="bg-light top-header">        
 	<div class="container">
@@ -216,6 +220,12 @@ function myFunction() {
     navbar.classList.remove("sticky");
   }
 }
+
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
+});
 </script>
 
 @yield('customJs')

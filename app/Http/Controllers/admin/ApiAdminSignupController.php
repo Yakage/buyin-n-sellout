@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +46,7 @@ class ApiAdminSignupController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:admins',
+            'email' => 'required|email|unique:user',
             'password' => 'required|min:6',
             // Add more validation rules as needed
         ]);
