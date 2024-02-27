@@ -101,9 +101,9 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/login', [ApiAdminLoginController::class, 'index']);
         Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate'])->name('admin.authenticate');
         
-        Route::get('/index', [ApiAdminSignupController::class, 'index']);
-        // Route::post('/authenticate', [ApiAdminSignupController::class, 'authenticate']);
-        Route::post('/register', [ApiAdminSignupController::class, 'register']);
+        // Route::get('/index', [ApiAdminSignupController::class, 'index']);
+        // // Route::post('/authenticate', [ApiAdminSignupController::class, 'authenticate']);
+        // Route::post('/register', [ApiAdminSignupController::class, 'register']);
     });
     // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
     // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth:admin');
