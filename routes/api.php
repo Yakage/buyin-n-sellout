@@ -99,7 +99,7 @@ Route::group(['prefix' => 'admin'],function() {
     Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [ApiAdminLoginController::class, 'index']);
-        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate']);
+        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate'])->name('admin.authenticate');
         
         Route::get('/index', [ApiAdminSignupController::class, 'index']);
         // Route::post('/authenticate', [ApiAdminSignupController::class, 'authenticate']);
