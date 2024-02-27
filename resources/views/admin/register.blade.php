@@ -7,37 +7,33 @@
 		<!-- Google Font: Source Sans Pro -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 		<!-- Font Awesome -->
-		<link rel="stylesheet" href=" {{ secure_asset('admin_assets/plugins/fontawesome-free/css/all.min.css') }}">
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/plugins/fontawesome-free/css/all.min.css') }}">
 		<!-- Theme style -->
-		<link rel="stylesheet" href=" {{ secure_asset('admin_assets/css/adminlte.min.css') }}">
-
+		<link rel="stylesheet" href="{{ secure_asset('admin_assets/css/adminlte.min.css') }}">
 		<link rel="stylesheet" href="{{ secure_asset('admin_assets/css/custom.css') }}">
 	</head>
 	<body class="hold-transition login-page">
 		<div class="login-box">
 			<!-- /.login-logo -->
-            @include('admin.message')
 			<div class="card card-outline card-primary">
 			  	<div class="card-header text-center">
 					<a href="#" class="h3">Administrative Panel</a>
 			  	</div>
 			  	<div class="card-body">
 					<p class="login-box-msg">Sign up to start your session</p>
-					<form action="{{ route('admin.authenticate') }}" method="post">
-                        @csrf
+					<form action="{{ route('admin.processRegister') }}" method="post">
+						@csrf
 				  		<div class="input-group mb-3">
-							<input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+							<input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control @error('email') is-invalid @enderror " placeholder="Email">
 							<div class="input-group-append">
 					  			<div class="input-group-text">
 									<span class="fas fa-envelope"></span>
 					  			</div>
 							</div>
-
-                            @error('email')
-                                <p class="invalid-feedback">{{ $message }}</p>
-                            @enderror
-
 				  		</div>
+						@error('email')
+							<p class="invalid-feedback">{{ $message }}</p>
+						@enderror
 				  		<div class="input-group mb-3">
 							<input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
 							<div class="input-group-append">
@@ -45,12 +41,10 @@
 									<span class="fas fa-lock"></span>
 					  			</div>
 							</div>
-
-                            @error('password')
-                                <p class="invalid-feedback">{{ $message }}</p>
-                            @enderror
-
 				  		</div>
+						  @error('password')
+						  <p class="invalid-feedback">{{ $message }}</p>
+					  @enderror
 				  		<div class="row">
 							<!-- <div class="col-8">
 					  			<div class="icheck-primary">
@@ -62,11 +56,14 @@
 							</div> -->
 							<!-- /.col -->
 							<div class="col-4">
-					  			<button type="submit" class="btn btn-primary btn-block">Register</button>
+					  			<button type="submit" class="btn btn-primary btn-block">Login</button>
 							</div>
 							<!-- /.col -->
 				  		</div>
-					</form>				
+					</form>
+		  			{{-- <p class="mb-1 mt-3">
+				  		<a href="forgot-password.html">I forgot my password</a>
+					</p>					 --}}
 			  	</div>
 			  	<!-- /.card-body -->
 			</div>
@@ -80,6 +77,6 @@
 		<!-- AdminLTE App -->
 		<script src="{{ secure_asset('admin_assets/js/adminlte.min.js') }}"></script>
 		<!-- AdminLTE for demo purposes -->
-		{{-- <script src="js/demo.js"></script> --}}
+		{{-- <script src="{{ asset('admin_assets/js/demo.js') }}"></script> --}}
 	</body>
 </html>
