@@ -22,29 +22,45 @@ class AdminLoginController extends Controller
         ]);
 
         if ($validator->passes()) {
-
-            if (Auth::guard('admin')->attempt(['email' => $request->email,'password' => $request-> password,'role'=>$request->role], $request->get('remember'))) {
-
+            if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
                 $admin = Auth::guard('admin')->user();
 
-                if ($admin->role == 1) {
+                if($admin->role == 1) {
                     return redirect()->route('admin.dashboard');
                 } else {
+
                     Auth::guard('admin')->logout();
-                    return redirect()->route('admin.login')->with('error', 'You are not authorized to access
-                    admin panel.');
+                    return redirect()->route('admin.login')->with('error', 'You are not authorized to access login panel.');
                 }
-
             } else {
-                return redirect()->route('admin.login')->with('error', 'Either Email/Password is 
-                incorrect');
-
+                return redirect()->route('admin.login')->with('error, "Either email/passwordd is incorrect.');
             }
-        }else {
-            return redirect()->route('admin.dashboard')
-            ->withErrors($validator)
-            ->withInput($request->only('email'));
+        } else {
+            return redirect()->route('admin.login')->withErrors($validator)->withInput($request->only('email'));
         }
+
+        //     if (Auth::guard('admin')->attempt(['email' => $request->email,'password' => $request-> password,'role'=>$request->role], $request->get('remember'))) {
+
+        //         $admin = Auth::guard('admin')->user();
+
+        //         if ($admin->role == 1) {
+        //             return redirect()->route('admin.dashboard');
+        //         } else {
+        //             Auth::guard('admin')->logout();
+        //             return redirect()->route('admin.login')->with('error', 'You are not authorized to access
+        //             admin panel.');
+        //         }
+
+        //     } else {
+        //         return redirect()->route('admin.login')->with('error', 'Either Email/Password is 
+        //         incorrect');
+
+        //     }
+        // }else {
+        //     return redirect()->route('admin.dashboard')
+        //     ->withErrors($validator)
+        //     ->withInput($request->only('email'));
+        // }
     }
 
     // public function authenticate(Request $request) {

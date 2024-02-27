@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\ApiAdminLoginController;
+use App\Http\Controllers\ApiAdminLoginController;
 use App\Http\Controllers\admin\ApiAdminSignupController;
 use App\Http\Controllers\admin\ApiBrandController;
 use App\Http\Controllers\admin\ApiCategoryController;
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'admin'],function() {
     Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [ApiAdminLoginController::class, 'index']);
-        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate'])->withoutMiddleware('admin.guest');
+        Route::post('/authenticate', [ApiAdminLoginController::class, 'authenticate']);
         
         Route::get('/index', [ApiAdminSignupController::class, 'index']);
         // Route::post('/authenticate', [ApiAdminSignupController::class, 'authenticate']);
