@@ -95,6 +95,7 @@ Route::group(['prefix' => 'account'],function() {
     });
 });
 
+//ADMIN
 
 Route::group(['prefix' => 'admin'],function() { 
 
@@ -105,8 +106,8 @@ Route::group(['prefix' => 'admin'],function() {
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
         
         //Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-        Route::post('/register', [AdminSignupController::class, 'register']);
-        Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
+        //Route::post('/register', [AdminSignupController::class, 'register']);
+        //Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
 
         // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
         // Route::post('/register', [AdminAuthController::class, 'authenticateOrRegister'])->name('admin.register');
@@ -120,8 +121,6 @@ Route::group(['prefix' => 'admin'],function() {
     // Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
     // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
     // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth:admin');
-
-    
 
     Route::group(['middleware' => 'admin.auth'],function() {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
