@@ -30,9 +30,9 @@
                                     <option value="">Select a country</option>
                                 @if ($country->isNotEmpty())
                                     @foreach ($countries as $country)
-                                    <option {{ ($shippingCharge->country_id == $country->id)? 'selected': '' }}value="{{$country->id}}">{{$country->name}}</option>
+                                    <option {{ ($shippingCharge->country_id == $country->id) ? 'selected' : '' }}value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
-                                    <option {{ ($shippingCharge->country_id ==  'rest_of_world')'selected': ''  }}value="rest_of_world">Rest of the world</option>
+                                    <option {{ ($shippingCharge->country_id ==  'rest_of_world') ? 'selected' : ''  }}value="rest_of_world">Rest of the world</option>
                                 @endif
                                 </select>
 
