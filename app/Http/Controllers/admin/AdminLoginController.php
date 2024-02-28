@@ -13,22 +13,6 @@ class AdminLoginController extends Controller
         return view('admin.login');
     }
 
-    // public function login(Request $request) {
-    //     $credentials = $request->only('email', 'password');
-    //     if (Auth::attempt($credentials)) {
-    //         $user = Auth::user();
-
-    //         // Check if the user is an admin
-    //         if ($user->role === 'admin') {
-    //             return redirect()->route('admin.home'); // Redirect to admin dashboard
-    //         }
-    //          // Check if not already active and update
-                
-    //         return redirect()->route('user.home'); // Redirect to user dashboard
-    //     }
-
-    //     return redirect()->route('login')->with("error", "Invalid Credentials");
-    // }
     public function login(Request $request) {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
@@ -42,7 +26,7 @@ class AdminLoginController extends Controller
             return redirect()->route('front.home'); // Redirect to user dashboard
         }
 
-        return redirect()->route('admin.dashboard')->with("error", "Invalid Credentials");
+        return redirect()->route('admin.login')->with("error", "Invalid Credentials");
     }
 
     public function logout() {
