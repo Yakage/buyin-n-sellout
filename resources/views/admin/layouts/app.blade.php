@@ -107,7 +107,7 @@
 
 
 		<!-- AdminLTE for demo purposes -->
-		<script src="{{ asset('admin_assets/js/demo.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/js/demo.js') }}"></script>
 
 		<script type="text/javascript">
 			$.ajaxSetup({
