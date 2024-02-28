@@ -12,21 +12,21 @@ class TempImagesController extends Controller
     public function create(Request $request) {
 
         if ($request->image) {
-            $uploadedImage = $request->image;
-            $extension = $uploadedImage->getClientOriginalExtension();
+            $image = $request->image;
+            $extension = $image->getClientOriginalExtension();
             $newFileName = time().'.'.$extension;
-        
+
             $tempImage = new TempImage();
             $tempImage->name = $newFileName;
             $tempImage->save();
-        
-            $uploadedImage->move(public_path('uploads/temp'), $newFileName);
-        
+
+            $image->move(public_path('uploads/temp'),$newFileName);
+
             return response()->json([
                 'status' => true,
                 'name' => $newFileName,
                 'id' => $tempImage->id,
-                //'image_id' => $tempImage->id,
+                'image_id' => $tempImage->id,
                 'ImagePath' => asset('/temp/thumb/'.$newFileName),
                 'message' => 'Image uploaded successfully'
             ]);
