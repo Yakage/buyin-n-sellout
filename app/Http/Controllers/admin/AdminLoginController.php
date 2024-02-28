@@ -16,11 +16,11 @@ class AdminLoginController extends Controller
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            $user = Auth::User();
 
             // Check if the user is an admin
             if ($user->role === 2) {
-                return redirect()->route('admin.home'); // Redirect to admin dashboard
+                return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
             }
 
             return redirect()->route('front.home'); // Redirect to user dashboard
