@@ -92,7 +92,7 @@
 		</div>
 		<!-- ./wrapper -->
 		<!-- jQuery -->
-		<script src="{{ secure_asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
 		<!-- Bootstrap 4 -->
 		<script src="{{ secure_asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 		<!-- AdminLTE App -->
@@ -105,9 +105,6 @@
 		<script src="{{ secure_asset('admin_assets/plugins/select2/js/select2.min.js') }}"></script>
 
 		<script src="{{ secure_asset('admin_assets/js/datetimepicker.js') }}"></script>
-
-		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
-
 
 
 		<!-- AdminLTE for demo purposes -->
