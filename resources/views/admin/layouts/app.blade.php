@@ -106,6 +106,8 @@
 
 		<script src="{{ asset('admin_assets/js/datetimepicker.js') }}"></script>
 
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
 
 		<!-- AdminLTE for demo purposes -->
 		<script src="{{ asset('admin_assets/js/demo.js') }}"></script>
