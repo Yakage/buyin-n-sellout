@@ -225,8 +225,25 @@ $.ajaxSetup({
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	}
 });
-</script>
 
+function addToCart(id) {
+            $.ajax({
+                url: '{{ route("front.addToCart") }}',
+                type: 'post',
+                data: {id:id},
+                dataType: 'json',
+                success: function(response) {
+                    if(response.status == true) {
+                        window.location.href="{{ route('front.addToCart') }}";
+                    } else {
+                        alert(response.message);
+
+                    }
+                }
+            })
+        }
+
+</script>
 @yield('customJs')
 </body>
 </html>
