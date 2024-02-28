@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
+use Nette\Utils\Image;
 
 
 class ProductImageController extends Controller
