@@ -8,34 +8,32 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiAdminLoginController extends Controller
 {
-    public function authenticate(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if ($validator->passes()) {
-            if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-                $admin = Auth::guard('admin')->user();
-
-                if ($admin->role == 1) {
-                    $token = $admin->createToken('admin-token')->plainTextToken;
-
-                    return response()->json(['message' => 'Login successful', 'admin' => $admin, 'token' => $token], 200);
-                } else {
-                    Auth::guard('admin')->logout();
-                    return response()->json(['error' => 'You are not authorized to access the admin panel.'], 403);
-                }
-            } else {
-                return response()->json(['error' => 'Either email or password is incorrect.'], 401);
-            }
-        } else {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
+    public function index()
+    {
+        return response()->json(['message' => 'Welcome to the admin login.'], 200);
     }
 
-    public function logout() {
-        Auth::guard('admin')->logout();
-        return response()->json(['message' => 'Logout successful']);
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            // Check if the user is an admin
+            if ($user->role == 2) {
+                return response()->json(['message' => 'Login successful', 'redirect' => route('admin.dashboard')], 200);
+            }
+
+            return response()->json(['message' => 'Login successful', 'redirect' => route('front.home')], 200);
+        }
+
+        return response()->json(['error' => 'Invalid Credentials'], 401);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return response()->json(['message' => 'Logout successful'], 200);
     }
 }
