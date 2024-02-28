@@ -36,6 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/ion.rangeSlider.min.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,8 +51,8 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="index.php" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">Online</span>
-				<span class="h2 text-uppercase text-white px-2">SHOP</span>
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
+				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -63,21 +64,21 @@
           				<a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
         			</li> -->
                     @if(getCategories()->isNotEmpty())
-                    @foreach(getCategories() as $category)
-                    <li class="nav-item dropdown">
-						<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-							{{ $category->name}}
-						</button>
-                        @if($category->sub_category->isNotEmpty())
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                        @foreach($sub_category as $subCategory)
-                            <li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
-                        @endforeach
-                        </ul>
-                        @endif
-                        </li>
-                    @endforeach
-                    @endif
+						@foreach(getCategories() as $category)
+							<li class="nav-item dropdown">
+								<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									{{ $category->name}}
+								</button>
+								@if($category->sub_category->isNotEmpty())
+									<ul class="dropdown-menu dropdown-menu-dark">
+										@foreach($sub_category as $subCategory)
+											<li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
+										@endforeach
+									</ul>
+								@endif
+							</li>
+						@endforeach
+					@endif
 					<!--<li class="nav-item dropdown">
 						<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Men's Fashion
@@ -134,15 +135,15 @@
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-4 logo">
 				<a href="{{route("front.home")}}" class="text-decoration-none">
-					<span class="h1 text-uppercase text-primary bg-dark px-2">Online</span>
-					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SHOP</span>
+					<span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn</span>
+					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
 				@if (Auth::check())
-				<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
+					<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
 				@else
-				<a href="{{route('account.login')}}" class="nav-link text-dark">Login/Register</a>
+					<a href="{{route('account.login')}}" class="nav-link text-dark">Login/Register</a>
 				@endif
 			</div>		
 		</div>
@@ -224,6 +225,7 @@
 <script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
 
 

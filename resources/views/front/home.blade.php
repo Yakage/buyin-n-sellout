@@ -43,8 +43,8 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="index.php" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">Online</span>
-				<span class="h2 text-uppercase text-white px-2">SHOP</span>
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
+				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -56,20 +56,20 @@
           				<a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
         			</li> -->
                     @if(getCategories()->isNotEmpty())
-                    @foreach(getCategories()as $category)
-                    <li class="nav-item dropdown">
-						<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-							{{ $category->name}}
-						</button>
-                        @if($category->sub_category->isNotEmpty())
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                        @foreach($sub_category as $subCategory)
-                            <li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
+                        @foreach(getCategories() as $category)
+                            <li class="nav-item dropdown">
+                                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $category->name}}
+                                </button>
+                                @if($category->sub_category->isNotEmpty())
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        @foreach($category->sub_category as $subCategory)
+                                            <li><a class="dropdown-item nav-link" href="#">{{ $subCategory->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
                         @endforeach
-                        </ul>
-                        @endif
-                        </li>
-                    @endforeach
                     @endif
 			<div class="right-nav py-0">
 				<a href="cart.php" class="ml-3 d-flex pt-2">
@@ -199,25 +199,26 @@
             <div class="section-title">
                 <h2>Categories</h2>
                 @if (getCategories()->isNotEmpty())
-                @foreach (getCategories()as $category)
-                <div class="row pb-3">
-                    <div class="col-lg-3">
-                        <div class="cat-card">
-                            <div class="left">
-                                @if($category->image != "")
-                                     <img src="{{asset('uploads/category/thumb/'.$category->image) }}" alt="" class="img-fluid">
-                                @endif
-                                <!--<img src="{{asset('front-assets/images/cat-1.jpg')}}" alt="" class="img-fluid">!-->
-                            </div>
-                            <div class="right">
-                                <div class="cat-data">
-                                    <h2>{{$category->name}}</h2>
-                                    <!-- <p>100 Products</p> !-->
+                    @foreach (getCategories() as $category)
+                        <div class="row pb-3">
+                            <div class="col-lg-3">
+                                <div class="cat-card">
+                                    <div class="left">
+                                        @if ($category->image != "")
+                                            <img src="{{ asset('uploads/category/thumb/' . $category->image) }}" alt="" class="img-fluid">
+                                        @endif
+                                        <!--<img src="{{ asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">!-->
+                                    </div>
+                                    <div class="right">
+                                        <div class="cat-data">
+                                            <h2>{{ $category->name }}</h2>
+                                            <!-- <p>100 Products</p> !-->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach 
+                    @endforeach
                 @endif
             </div>
         </div>
@@ -229,41 +230,38 @@
             </div>    
             <div class="row pb-3">
                 @if ($featuredProducts->isNotEmpty())
-                    @foreach($featuredProducts as $product)
-                    @php
-                        $productImage = $product->product_images->first();
-                    @endphp
-                <div class="col-md-3">
-                    <div class="card product-card">
-                        <div class="product-image position-relative">
-                            <a href="" class="product-img">
-                            
-                            @if (!empty($productImage->image))
-                                <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
-                                @else
-                                <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
-                            @endif
-                        </a>
-                            
-                            <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
-
-                            <div class="product-action">
-                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
-                                    <i class="fa fa-shopping-cart"></i> Add To Cart
-                                </a>                            
+                    @foreach ($featuredProducts as $product)
+                        @php
+                            $productImage = $product->product_images->first();
+                        @endphp
+                        <div class="col-md-3">
+                            <div class="card product-card">
+                                <div class="product-image position-relative">
+                                    <a href="" class="product-img">
+                                        @if (!empty($productImage->image))
+                                            <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
+                                        @else
+                                            <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                        @endif
+                                    </a>
+                                    <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                                    <div class="product-action">
+                                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                            <i class="fa fa-shopping-cart"></i> Add To Cart
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center mt-3">
+                                    <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                    <div class="price mt-2">
+                                        <span class="h5"><strong>{{ $product->price }}</strong></span>
+                                        @if ($product->compare_price > 0)
+                                            <span class="h6 text-underline"><del>{{ $product->compare_price }}</del></span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                        </div>                        
-                        <div class="card-body text-center mt-3">
-                            <a class="h6 link" href="product.php">{{ $product->title}}</a>
-                            <div class="price mt-2">
-                                <span class="h5"><strong>{{$product->price}}</strong></span>
-                                @if($product->compare_price > 0)
-                                <span class="h6 text-underline"><del>{{$product->compare_price}}</del></span>
-                                @endforeach
-                            </div>
-                        </div>                        
-                    </div>                                               
-                </div>                    
+                        </div>
                     @endforeach
                 @endif
             </div>
@@ -275,43 +273,41 @@
                 <h2>Latest Products</h2>
             </div>    
             <div class="row pb-3">
-            @if ($latestProductsProducts->isNotEmpty())
-                    @foreach($latestProducts as $product)
-                    @php
-                        $productImage = $product->product_images->first();
-                    @endphp
-                <div class="col-md-3">
-                    <div class="card product-card">
-                        <div class="product-image position-relative">
-                            <a href="" class="product-img">
-                            
-                            @if (!empty($productImage->image))
-                                <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
-                                @else
-                                <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
-                            @endif
-                        </a>
-                        <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
-                        <div class="product-action">
-                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
-                                    <i class="fa fa-shopping-cart"></i> Add To Cart
-                                </a>                            
+                @if ($latestProducts->isNotEmpty())
+                    @foreach ($latestProducts as $product)
+                        @php
+                            $productImage = $product->product_images->first();
+                        @endphp
+                        <div class="col-md-3">
+                            <div class="card product-card">
+                                <div class="product-image position-relative">
+                                    <a href="" class="product-img">
+                                        @if (!empty($productImage->image))
+                                            <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
+                                        @else
+                                            <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                        @endif
+                                    </a>
+                                    <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
+                                    <div class="product-action">
+                                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                            <i class="fa fa-shopping-cart"></i> Add To Cart
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center mt-3">
+                                    <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                    <div class="price mt-2">
+                                        <span class="h5"><strong>{{ $product->price }}</strong></span>
+                                        @if ($product->compare_price > 0)
+                                            <span class="h6 text-underline"><del>{{ $product->compare_price }}</del></span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                        </div>                        
-                        <div class="card-body text-center mt-3">
-                            <a class="h6 link" href="product.php">{{ $product->title}}</a>
-                            <div class="price mt-2">
-
-                                <span class="h5"><strong>{{$product->price}}</strong></span>
-                                @if($product->compare_price > 0)
-                                <span class="h6 text-underline"><del>{{$product->compare_price}}</del></span>
-                                @endif
-                            </div>
-                        </div>                        
-                    </div>                                               
-                </div>                    
+                        </div>
                     @endforeach
-                @endif                            
+                @endif                           
             </div>
         </div>
     </section>
