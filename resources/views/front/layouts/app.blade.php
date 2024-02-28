@@ -36,6 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/ion.rangeSlider.min.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,6 +208,7 @@
 <script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
 
 
