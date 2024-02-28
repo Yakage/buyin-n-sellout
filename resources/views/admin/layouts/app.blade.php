@@ -92,7 +92,7 @@
 		</div>
 		<!-- ./wrapper -->
 		<!-- jQuery -->
-		<script src="{{ asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
+		<script src="{{ secure_asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
 		<!-- Bootstrap 4 -->
 		<script src="{{ secure_asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 		<!-- AdminLTE App -->
