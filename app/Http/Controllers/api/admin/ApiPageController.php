@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\admin;
 
-use App\Models\Page;
+use App\Http\Controllers\Controller;use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 class ApiPageController extends Controller
 {
     public function index(Request $request)

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
+use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordEmail;
 use App\Models\Country;
 use App\Models\CustomerAddress;
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
 
 class AuthController extends Controller
 {

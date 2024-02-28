@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -87,9 +87,7 @@ class HomeController extends Controller
     }
 
     public function logout() {
-        Auth::guard('admin')->logout();
+        Auth::logout();
         return redirect()->route('admin.login');
     }
-
-    
 }

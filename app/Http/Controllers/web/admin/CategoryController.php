@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +10,7 @@ use App\Models\TempImage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+
 class CategoryController extends Controller
 {
     public function index(Request $request) {
@@ -199,5 +200,4 @@ class CategoryController extends Controller
             'message' => 'Category deleted successfully'
         ]);
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-
     public function index(Request $request) {
         $products = Product::latest('id')->with('product_images');
 

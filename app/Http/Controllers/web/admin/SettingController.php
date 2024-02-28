@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -22,7 +22,7 @@ class SettingController extends Controller
             'confirm_password' => 'required|same:new_password'
         ]);
 
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::user()->id;
 
         $admin = User::where('id', $id )->first();
 

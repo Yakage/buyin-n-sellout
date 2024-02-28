@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -75,5 +76,4 @@ class ApiOrderController extends Controller
             'message' => $message
         ]);
     }
-
 }

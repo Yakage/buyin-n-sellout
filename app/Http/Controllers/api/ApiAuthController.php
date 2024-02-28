@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordEmail;
 use App\Models\Country;
 use App\Models\CustomerAddress;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+
 class TempImagesController extends Controller
 {
     public function create(Request $request) {

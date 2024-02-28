@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\TempImage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+
 
 class ApiCategoryController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\web\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -152,5 +152,4 @@ class UserController extends Controller
             'message' =>  $message
         ]);
     }
-    
 }

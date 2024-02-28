@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\web;
 
+use App\Http\Controllers\Controller;
 use App\Mail\ContactEmail;
 use App\Models\Page;
 use App\Models\Product;
@@ -11,8 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-
-
 
 class FrontController extends Controller
 {

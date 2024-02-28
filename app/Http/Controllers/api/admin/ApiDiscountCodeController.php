@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\api\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DiscountCoupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
-
 class ApiDiscountCodeController extends Controller
 {
     public function index(Request $request)
