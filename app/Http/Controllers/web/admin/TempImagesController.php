@@ -12,16 +12,16 @@ class TempImagesController extends Controller
     public function create(Request $request) {
 
         if ($request->image) {
-            $image = $request->image;
-            $extension = $image->getClientOriginalExtension();
+            $uploadedImage = $request->image;
+            $extension = $uploadedImage->getClientOriginalExtension();
             $newFileName = time().'.'.$extension;
-
+        
             $tempImage = new TempImage();
             $tempImage->name = $newFileName;
             $tempImage->save();
-
-            $image->move(public_path('uploads/temp'),$newFileName);
-
+        
+            $uploadedImage->move(public_path('uploads/temp'), $newFileName);
+        
             return response()->json([
                 'status' => true,
                 'name' => $newFileName,

@@ -301,7 +301,7 @@
 
         Dropzone.autoDiscover = false;    
         const dropzone = $("#image").dropzone({ 
-            url:  '{{ route("temp-images.create") }}',
+            url: "{{ route('temp-images.create') }}",,
             maxFiles: 10,
             paramName: 'image',
             addRemoveLinks: true,
@@ -312,11 +312,11 @@
                 //$("#image_id").val(response.image_id);
                 //console.log(response.ImagePath)
 
-                var html = `<div class="col-md-3" id="image-row-${response.id}"><div class="card">
-                    <input type="hidden" name="image_array[]" value="${response.id}">
+                var html = `<div class="col-md-3" id="image-row-${response.image_id}"><div class="card">
+                    <input type="hidden" name="image_array[]" value="${response.image_id}">
                     <img src="${response.ImagePath}" class="card-img-top" alt="">
                     <div class="card-body">
-                        <a href="javascript:void(0)" onclick="deleteImage(${response.id})" class="btn btn-danger">Delete</a>
+                        <a href="javascript:void(0)" onclick="deleteImage(${response.image_id})" class="btn btn-danger">Delete</a>
                     </div>
                 </div></div>`;
 
