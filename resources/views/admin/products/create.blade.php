@@ -247,7 +247,7 @@
 
             $.ajax({
                 url: '{{ route("products.store") }}',
-                type: 'put',
+                type: 'post',
                 data: formArray,
                 dataType: 'json',
                 success: function(response) {
@@ -309,7 +309,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }, success: function(file, response){
-                //$("#image_id").val(response.image_id);
+                $("#image_id").val(response.image_id);
                 //console.log(response)
 
                 var html = `<div class="col-md-3" id="image-row-${response.image_id}"><div class="card">
