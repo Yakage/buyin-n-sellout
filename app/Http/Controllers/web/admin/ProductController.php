@@ -75,7 +75,7 @@ class ProductController extends Controller
             $product->sub_category_id = $request->sub_category;
             $product->brand_id = $request->brand;
             $product->is_featured = $request->is_featured;
-            $product->shipping_returns = $request->shipping_returns;
+            $product->shipping_return = $request->shipping_return;
             $product->short_description = $request->short_description;
             $product->related_products = (!empty($request->related_products)) ? implode(',',$request->related_products) : '';
             $product->save();
@@ -203,7 +203,7 @@ class ProductController extends Controller
             $product->sub_category_id = $request->sub_category;
             $product->brand_id = $request->brand;
             $product->is_featured = $request->is_featured;
-            $product->shipping_returns = $request->shipping_returns;
+            $product->shipping_return = $request->shipping_return;
             $product->short_description = $request->short_description;
             $product->related_products = (!empty($request->related_products)) ? implode(',',$request->related_products) : '';
             $product->save();
