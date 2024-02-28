@@ -214,7 +214,7 @@ Route::group(['prefix' => 'admin'],function() {
                 'status' => true,
                 'slug' => $slug
             ]);
-        })->name('getSlug');
+        })->name('getSlug')->middleware('https');
     //});
 
 
