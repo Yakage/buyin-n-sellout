@@ -30,34 +30,19 @@ class AdminLoginController extends Controller
     //     return redirect()->route('login')->with("error", "Invalid Credentials");
     // }
     public function login(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-    
-        if ($validator->passes()) {
-            $credentials = [
-                'email' => $request->email,
-                'password' => $request->password
-            ];
-    
-            if (Auth::guard('admin')->attempt($credentials, $request->get('remember'))) {
-                $admin = Auth::guard('admin')->user();
-    
-                if ($admin->role == 1) {
-                    return redirect()->route('admin.dashboard');
-                } else {
-                    Auth::guard('admin')->logout();
-                    return redirect()->route('admin.login')->with('error', 'You are not authorized to access admin panel.');
-                }
-            } else {
-                return redirect()->route('admin.login')->with('error', 'Either Email/Password is incorrect');
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            // Check if the user is an admin
+            if ($user->role === '1') {
+                return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
             }
-        } else {
-            return redirect()->route('admin.login')
-                ->withErrors($validator)
-                ->withInput($request->only('email'));
+                
+            return redirect()->route('front.home'); // Redirect to user dashboard
         }
+
+        return redirect()->route('admin.login')->with("error", "Invalid Credentials");
     }
 
     public function logout() {

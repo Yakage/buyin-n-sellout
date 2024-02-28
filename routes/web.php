@@ -99,33 +99,15 @@ Route::group(['prefix' => 'account'],function() {
 
 Route::group(['prefix' => 'admin'],function() { 
 
-    Route::group(['middleware' => 'admin.guest'],function() {
+    //Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/login', [AdminLoginController::class, 'login'])->name('admin.login.auth');
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+ 
+    //});
 
-        // Route::get('/register', [AdminAuthController::class, 'register'])->name('admin.register');
-        // Route::post('/process-register', [AdminAuthController::class, 'processRegister'])->name('admin.processRegister');
-        
-        //Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-        //Route::post('/register', [AdminSignupController::class, 'register']);
-        //Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
-
-        // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-        // Route::post('/register', [AdminAuthController::class, 'authenticateOrRegister'])->name('admin.register');
-        // Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
-        // Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
-    
-    });
-    // Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-    // Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.authenticate');
-    // Route::post('/register', [AdminSignupController::class, 'register']);
-    // Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
-    // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
-    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth:admin');
-
-    Route::group(['middleware' => 'admin.auth'],function() {
+    // Route::group(['middleware' => 'admin.auth'],function() {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
         Route::get('/logout', [HomeController::class, 'logout'])->name('admin.logout');
 
@@ -233,7 +215,7 @@ Route::group(['prefix' => 'admin'],function() {
                 'slug' => $slug
             ]);
         })->name('getSlug');
-    });
+    //});
 
 
 });
