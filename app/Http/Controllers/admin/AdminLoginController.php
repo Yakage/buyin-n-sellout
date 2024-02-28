@@ -42,7 +42,7 @@ class AdminLoginController extends Controller
             return redirect()->route('front.home'); // Redirect to user dashboard
         }
 
-        return redirect()->route('admin.login')->with("error", "Invalid Credentials");
+        return redirect()->route('admin.dashboard')->with("error", "Invalid Credentials");
     }
 
     public function logout() {
