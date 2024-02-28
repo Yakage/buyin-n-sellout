@@ -87,7 +87,7 @@ $("#categoryForm").submit(function(event){
             $("button[type=submit]").prop('disabled', false);
 
             if(response["status"] == true) {
-                window.location.href="{{ route('categories.index') }}"
+                window.location.href="{{ route('categories.index') }}";
 
                 $("#name").removeClass('is-invalid')
                 .siblings('p')
@@ -151,7 +151,7 @@ $("#categoryForm").submit(function(event){
                 }
             });
         },
-        url:  "{{ route('temp-images.create') }}",
+        url:  '{{ route("temp-images.create") }}',
         maxFiles: 1,
         paramName: 'image',
         addRemoveLinks: true,
