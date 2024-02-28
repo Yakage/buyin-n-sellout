@@ -129,7 +129,7 @@ $("#categoryForm").submit(function(event){
         element = $(this);
         $("button[type=submit]").prop('disabled', true);
         $.ajax({
-            url: '{{ secure_url("/getSlug") }}',
+            url: '{{ route("getSlug") }}',
             type: 'get',
             data: {title: element.val()},
             dataType: 'json',
