@@ -43,7 +43,7 @@ class AuthController extends Controller
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->password = Hash::make($request->password);
-            $user->role = 'user';
+            $user->role = '1';
             $user->save(); 
 
             session()->flash('success', 'You have been registered successfully.');
