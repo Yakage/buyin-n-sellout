@@ -18,7 +18,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
-        <form action="{{ route('products.store') }}" method="post" name="productForm" id="productForm">
+        <form action="" method="post" name="productForm" id="productForm">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
@@ -247,7 +247,7 @@
 
             $.ajax({
                 url: '{{ route("products.store") }}',
-                type: 'post',
+                type: 'put',
                 data: formArray,
                 dataType: 'json',
                 success: function(response) {
