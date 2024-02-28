@@ -84,21 +84,21 @@
                                 @endforeach
                                 <tr>
                                     <th colspan="3" class="text-right">Subtotal:</th>
-                                    <td>${{number_format($item->subtotal,2)}}</td>
+                                    <td>${{number_format($order->subtotal,2)}}</td>
                                 </tr>
 
                                 <tr>
                                     <th colspan="3" class="text-right">Discount:{{ (!empty($order->coupon_code)) ? '('.$order->coupon_code.')': '' }}</th>
-                                    <td>${{number_format($item->discount,2)}}</td>
+                                    <td>${{number_format($order->discount,2)}}</td>
                                 </tr>
                                 
                                 <tr>
                                     <th colspan="3" class="text-right">Shipping:</th>
-                                    <td>${{number_format($item->shipping,2)}}</td>
+                                    <td>${{number_format($order->shipping,2)}}</td>
                                 </tr>
                                 <tr>
                                     <th colspan="3" class="text-right">Grand Total:</th>
-                                    <td>${{number_format($item->grand_total,2)}}</td>
+                                    <td>${{number_format($order->grand_total,2)}}</td>
                                 </tr>
                             </tbody>
                         </table>								
