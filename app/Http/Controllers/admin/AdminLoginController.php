@@ -26,7 +26,7 @@ class AdminLoginController extends Controller
 
                 $admin = Auth::user();
 
-                if ($admin->role == '1') {
+                if ($admin->role == 2) {
                     return redirect()->route('admin.dashboard');
                 } else {
 
