@@ -164,7 +164,7 @@
             </button>
         </div>
     </section>
-    <section class="section-2">
+    {{-- <section class="section-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -193,7 +193,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="section-3">
         <div class="container">
             <div class="section-title">
@@ -205,9 +205,9 @@
                                 <div class="cat-card">
                                     <div class="left">
                                         @if ($category->image != "")
-                                            <img src="{{ asset('uploads/category/thumb/' . $category->image) }}" alt="" class="img-fluid">
+                                            <img src="{{ secure_asset('uploads/category/thumb/' . $category->image) }}" alt="" class="img-fluid">
                                         @endif
-                                        <!--<img src="{{ asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">!-->
+                                        <!--<img src="{{ secure_asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">!-->
                                     </div>
                                     <div class="right">
                                         <div class="cat-data">
@@ -239,9 +239,9 @@
                                 <div class="product-image position-relative">
                                     <a href="" class="product-img">
                                         @if (!empty($productImage->image))
-                                            <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
+                                            <img class="card-img-top" src="{{ secure_asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
-                                            <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                            <img src="{{ secure_asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
                                     <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
@@ -295,9 +295,9 @@
                                 <div class="product-image position-relative">
                                     <a href="" class="product-img">
                                         @if (!empty($productImage->image))
-                                            <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
+                                            <img class="card-img-top" src="{{ secure_asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
-                                            <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                            <img src="{{ secure_asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
                                     <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
