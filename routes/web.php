@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminAuthController;
 use App\Http\Controllers\admin\AdminLoginController;
-use App\Http\Controllers\admin\AdminSignupController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DiscountCodeController;
