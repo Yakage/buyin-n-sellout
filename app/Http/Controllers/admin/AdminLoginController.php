@@ -19,7 +19,7 @@ class AdminLoginController extends Controller
             $user = Auth::user();
 
             // Check if the user is an admin
-            if ($user->role === 'admin') {
+            if ($user->role == '1') {
                 return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
             }
                 
