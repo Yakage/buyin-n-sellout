@@ -157,7 +157,7 @@
                                     <p></p>
                                     </div>
                                     <div>
-                                        <button class="btn btn-dark">Submit</button>
+                                        <button type="submit" class="btn btn-dark">Submit</button>
                                     </div>
                                 </form>   
                                     
