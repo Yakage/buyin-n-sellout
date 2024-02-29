@@ -20,7 +20,7 @@ class TempImagesController extends Controller
             $tempImage->name = $newFileName;
             $tempImage->save();
 
-            $image->move(public_path('uploads/temp'),$newFileName);
+            $image->move(public_path('uploads/temp/'),$newFileName);
 
             return response()->json([
                 'status' => true,

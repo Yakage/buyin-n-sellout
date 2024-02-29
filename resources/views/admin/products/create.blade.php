@@ -207,7 +207,7 @@
 @endsection
 
 @section('customJs')
-    <script>
+    <script type="text/javascript">
         $('.related-product').select({
             ajax: {
                 url: '{{ route("products.getProducts") }}',

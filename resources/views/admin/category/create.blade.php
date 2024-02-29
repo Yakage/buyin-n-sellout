@@ -57,7 +57,7 @@
                                 </select>
                             </div>
                         </div>	
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="email">Show on Home</label>
                                 <select name="showHome" id="showHome" class="form-control">
@@ -66,7 +66,7 @@
                                 </select>
                                 </select>
                             </div>
-                        </div>							
+                        </div>							 --}}
                     </div>
                 </div>							
             </div>
