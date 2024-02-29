@@ -294,13 +294,12 @@
 
 @section('customJs')
     <script type="text/javascript">
-        $("#productRatingForm").submit(function(event){
-            event.preventDefault();
+        function addToCart(id){
 
     $.ajax({
-        url: '{{ route("front.saveRating",$product->id) }}',
+        url: '{{ route("front.addToCart) }}',
         type: 'post',
-        data: $(this).serializeArray(),
+        data: {id:id},
         dataType: 'json',
         success: function(response){
             if (response.status == true) {
