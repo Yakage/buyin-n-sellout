@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Validator;
 class CartController extends Controller 
 {
     public function addToCart(Request $request) {
-        //Cart::add('293ad', 'Product 1', 1, 9.99);
 
         $product = Product::with('product_images')->find($request->id);
 
@@ -60,7 +59,6 @@ class CartController extends Controller
             }
 
         } else { 
-            echo"Cart is empty now adding a product in cart";
             //Cart is empty
             
             Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
