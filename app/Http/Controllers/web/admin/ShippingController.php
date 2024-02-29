@@ -14,7 +14,7 @@ class ShippingController extends Controller
         $countries = Country::get();
         $data['countries'] = $countries;
 
-        $shippingCharges = ShippingCharge::select('shipping_charges.*','countries.name')->leftJoin('countries', 'countries.id', 'shipping_charges.country_id')->get();
+        $shippingCharges = ShippingCharge::select('shipping_charges.*', 'countries.name')->leftJoin('countries', 'countries.id', '=', 'shipping_charges.country_id')->get();
 
 
         $data['shippingCharges'] = $shippingCharges;
