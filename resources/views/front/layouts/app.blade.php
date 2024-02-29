@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en_AU"/>
+<html class="no-js" lang="en_AU" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>BuyIn & SellOut</title>
@@ -50,9 +50,15 @@
 <header class="bg-dark">
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
+<<<<<<< HEAD
+			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
+				<span class="h2 text-uppercase text-primary bg-dark">Online</span>
+				<span class="h2 text-uppercase text-white px-2">SHOP</span>
+=======
 			<a href="index.php" class="text-decoration-none mobile-logo">
 				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
+>>>>>>> c817fae6f26b5991774316f1e45a89d1bd812b27
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -117,16 +123,20 @@
 							<li><a class="dropdown-item" href="#">Fans</a></li>
 							<li><a class="dropdown-item" href="#">Air Coolers</a></li>
 						</ul>
-					</li>
+					</li>!-->
+
+
       			</ul>      			
-      		</div>  !-->
+      		</div> 
 			<div class="right-nav py-0">
-				<a href="cart.php" class="ml-3 d-flex pt-2">
+				<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
 					<i class="fas fa-shopping-cart text-primary"></i>					
 				</a>
 			</div> 		
       	</nav>
   	</div>
+<<<<<<< HEAD
+=======
 
 <body data-instant-intensity="mousedown">
 
@@ -134,7 +144,7 @@
 	<div class="container">
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-4 logo">
-				<a href="{{route("front.home")}}" class="text-decoration-none">
+				<a href="{{route('front.home')}}" class="text-decoration-none">
 					<span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn</span>
 					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
 				</a>
@@ -149,6 +159,7 @@
 		</div>
 	</div>
 </div>
+>>>>>>> c817fae6f26b5991774316f1e45a89d1bd812b27
 </header>
 <main>
     @yield('content')

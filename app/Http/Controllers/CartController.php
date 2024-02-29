@@ -96,7 +96,6 @@ class CartController extends Controller
                 $message = 'Requested qty('.$qty.') not available in stock.';
                 $status = false;
                 session()->flash('error', $message);
-
             }
         }else {
             Cart::update($rowId, $qty);
@@ -112,12 +111,11 @@ class CartController extends Controller
     }
 
     public function deleteItem(Request $request) {
-        $rowId = $request->rowId;
 
-        $itemInfo = Cart::get($rowId);
+        $itemInfo = Cart::get($request->rowId);
 
         if ($itemInfo == null) {
-            $errorMessage = 'Item not found in cart.';
+            $errorMessage = 'Item not found in cart.'; 
             session()->flash('error', $errorMessage);
 
             return response()->json([
@@ -128,9 +126,8 @@ class CartController extends Controller
 
         Cart::remove($request->rowId);
 
-        $message = 'Item removed from cart successfully';
-
-        session()->flash('error', $message);
+        $message = 'Item removed from cart successfully.';
+        session()->flash('sucess', $message);
 
         return response()->json([
             'status' => true,
