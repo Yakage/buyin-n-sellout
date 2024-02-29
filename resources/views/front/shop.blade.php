@@ -18,7 +18,6 @@
                     <div class="sub-title">
                         <h2>Categories</h3>
                     </div>
-
                     <div class="card">
                         <div class="card-body">
                             <div class="accordion accordion-flush" id="accordionExample">

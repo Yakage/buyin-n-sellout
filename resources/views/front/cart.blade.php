@@ -36,9 +36,9 @@ secure_@extends('front.layouts.app')
                                     <div class="d-flex align-items-center">
                                         
                                 @if (!empty($item->options->productImage->image))
-                                <img src="{{ secure_asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
+                                <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
                                 @else
-                                <img src="{{ secure_asset('admin_assets/img/default-150x150.png') }}"/>
+                                <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                 @endif
                                         <h2>{{ $item->name}}</h2>
                                     </div>
