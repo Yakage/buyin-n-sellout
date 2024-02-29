@@ -20,6 +20,8 @@
 		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/css/datetimepicker.css') }}">
 
 		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/css/custom.css') }}">
+
+		
 		
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 	</head>
@@ -51,14 +53,18 @@
 							<img src="{{ asset('admin_assets/img/avatar5.png')}}" class='img-circle elevation-2' width="40" height="40" alt="">
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
-							<h4 class="h4 mb-0"><strong>{{ Auth::guard('admin')->user()->name }}</strong></h4>
-							<div class="mb-3">{{ Auth::guard('admin')->user()->email }}</div>
+							@if(Auth::check())
+								<h4 class="h4 mb-0"><strong>{{ Auth::user()->name }}</strong></h4>
+								<div class="mb-3">{{ Auth::user()->email }}</div>
+							@endif
+							{{-- <h4 class="h4 mb-0"><strong> {{ Auth::user()->name }} </strong></h4>
+							<div class="mb-3">{{ Auth::user()->email }} </div> --}}
 							<div class="dropdown-divider"></div>
 							<a href="#" class="dropdown-item">
 								<i class="fas fa-user-cog mr-2"></i> Settings								
 							</a>
 							<div class="dropdown-divider"></div>
-							<a href="#" class="dropdown-item">
+							<a href="{{route('admin.showChangePasswordForm')}}" class="dropdown-item">
 								<i class="fas fa-lock mr-2"></i> Change Password
 							</a>
 							<div class="dropdown-divider"></div>
@@ -80,7 +86,7 @@
 			<!-- /.content-wrapper -->
 			<footer class="main-footer">
 				
-				<strong>Copyright &copy; 2014-2022 AmazingShop All rights reserved.
+				<strong>Copyright &copy; 2024 BuyIn & SellOut All rights reserved.
 			</footer>
 			
 		</div>
@@ -100,6 +106,7 @@
 
 		<script src="{{ secure_asset('admin_assets/js/datetimepicker.js') }}"></script>
 
+		{{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
 
 
 		<!-- AdminLTE for demo purposes -->

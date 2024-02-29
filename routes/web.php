@@ -1,26 +1,24 @@
 <?php
 
-use App\Http\Controllers\admin\AdminAuthController;
-use App\Http\Controllers\admin\AdminLoginController;
-use App\Http\Controllers\admin\AdminSignupController;
-use App\Http\Controllers\admin\BrandController;
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\DiscountCodeController;
-use App\Http\Controllers\admin\HomeController;
-use App\Http\Controllers\admin\OrderController;
-use App\Http\Controllers\admin\PageController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\ProductImageController;
-use App\Http\Controllers\admin\ProductSubCategoryController;
-use App\Http\Controllers\admin\SettingController;
-use App\Http\Controllers\admin\ShippingController;
-use App\Http\Controllers\admin\SubCategoryController;
-use App\Http\Controllers\admin\TempImagesController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FrontController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\web\admin\AdminLoginController;
+use App\Http\Controllers\web\admin\BrandController;
+use App\Http\Controllers\web\admin\CategoryController;
+use App\Http\Controllers\web\admin\DiscountCodeController;
+use App\Http\Controllers\web\admin\HomeController;
+use App\Http\Controllers\web\admin\OrderController;
+use App\Http\Controllers\web\admin\PageController;
+use App\Http\Controllers\web\admin\ProductController;
+use App\Http\Controllers\web\admin\ProductImageController;
+use App\Http\Controllers\web\admin\ProductSubCategoryController;
+use App\Http\Controllers\web\admin\SettingController;
+use App\Http\Controllers\web\admin\ShippingController;
+use App\Http\Controllers\web\admin\SubCategoryController;
+use App\Http\Controllers\web\admin\TempImagesController;
+use App\Http\Controllers\web\admin\UserController;
+use App\Http\Controllers\web\AuthController;
+use App\Http\Controllers\web\CartController;
+use App\Http\Controllers\web\FrontController;
+use App\Http\Controllers\web\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -99,33 +97,15 @@ Route::group(['prefix' => 'account'],function() {
 
 Route::group(['prefix' => 'admin'],function() { 
 
-    Route::group(['middleware' => 'admin.guest'],function() {
+    //Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
-        Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+        Route::post('/login', [AdminLoginController::class, 'login'])->name('admin.login.auth');
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+ 
+    //});
 
-        Route::get('/register', [AdminAuthController::class, 'register'])->name('admin.register');
-        Route::post('/process-register', [AdminAuthController::class, 'processRegister'])->name('admin.processRegister');
-        
-        //Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-        //Route::post('/register', [AdminSignupController::class, 'register']);
-        //Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
-
-        // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-        // Route::post('/register', [AdminAuthController::class, 'authenticateOrRegister'])->name('admin.register');
-        // Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
-        // Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
-    
-    });
-    // Route::get('/register', [AdminSignupController::class, 'index'])->name('admin.register');
-    // Route::post('/authenticate', [AdminSignupController::class, 'authenticate'])->name('admin.authenticate');
-    // Route::post('/register', [AdminSignupController::class, 'register']);
-    // Route::get('/logout', [AdminSignupController::class, 'logout'])->name('admin.logout');
-    // Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
-    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout')->middleware('auth:admin');
-
-    Route::group(['middleware' => 'admin.auth'],function() {
+    // Route::group(['middleware' => 'admin.auth'],function() {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
         Route::get('/logout', [HomeController::class, 'logout'])->name('admin.logout');
 
@@ -233,7 +213,7 @@ Route::group(['prefix' => 'admin'],function() {
                 'slug' => $slug
             ]);
         })->name('getSlug');
-    });
+    //});
 
 
 });

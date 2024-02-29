@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en_AU"/>
+<html class="no-js" lang="en_AU" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>BuyIn & SellOut</title>
@@ -36,6 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/ion.rangeSlider.min.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
 
+	{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css"> --}}
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,9 +50,15 @@
 <header class="bg-dark">
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
-			<a href="{{ route("front.home") }}" class="text-decoration-none mobile-logo">
+<<<<<<< HEAD
+			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
 				<span class="h2 text-uppercase text-primary bg-dark">Online</span>
 				<span class="h2 text-uppercase text-white px-2">SHOP</span>
+=======
+			<a href="index.php" class="text-decoration-none mobile-logo">
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
+				<span class="h2 text-uppercase text-white px-2">SellOut</span>
+>>>>>>> c817fae6f26b5991774316f1e45a89d1bd812b27
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -63,21 +70,21 @@
           				<a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
         			</li> -->
                     @if(getCategories()->isNotEmpty())
-                    @foreach(getCategories() as $category)
-                    <li class="nav-item dropdown">
-						<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-							{{ $category->name}}
-						</button>
-                        @if($category->sub_category->isNotEmpty())
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                        @foreach($sub_category as $subCategory)
-                            <li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
-                        @endforeach
-                        </ul>
-                        @endif
-                        </li>
-                    @endforeach
-                    @endif
+						@foreach(getCategories() as $category)
+							<li class="nav-item dropdown">
+								<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									{{ $category->name}}
+								</button>
+								@if($category->sub_category->isNotEmpty())
+									<ul class="dropdown-menu dropdown-menu-dark">
+										@foreach($sub_category as $subCategory)
+											<li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
+										@endforeach
+									</ul>
+								@endif
+							</li>
+						@endforeach
+					@endif
 					<!--<li class="nav-item dropdown">
 						<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Men's Fashion
@@ -122,12 +129,37 @@
       			</ul>      			
       		</div> 
 			<div class="right-nav py-0">
-				<a href="{{ route("front.cart") }}" class="ml-3 d-flex pt-2">
+				<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
 					<i class="fas fa-shopping-cart text-primary"></i>					
 				</a>
 			</div> 		
       	</nav>
   	</div>
+<<<<<<< HEAD
+=======
+
+<body data-instant-intensity="mousedown">
+
+<div class="bg-light top-header">        
+	<div class="container">
+		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
+			<div class="col-lg-4 logo">
+				<a href="{{route('front.home')}}" class="text-decoration-none">
+					<span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn</span>
+					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
+				</a>
+			</div>
+			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
+				@if (Auth::check())
+					<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
+				@else
+					<a href="{{route('account.login')}}" class="nav-link text-dark">Login/Register</a>
+				@endif
+			</div>		
+		</div>
+	</div>
+</div>
+>>>>>>> c817fae6f26b5991774316f1e45a89d1bd812b27
 </header>
 <main>
     @yield('content')
@@ -160,9 +192,14 @@
 				<div class="footer-card">
 					<h3>My Account</h3>
 					<ul>
-						<li><a href="#" title="Sell">Login</a></li>
+						@if (staticPages()->isNotEmpty())
+							@foreach (staticPages() as $page)
+							<li><a href="{{route('front.page',$page->slug)}}" title="{{$page->name}}">{{$page->name}}</a></li>
+							@endforeach
+						@endif
+						{{--<li><a href="#" title="Sell">Login</a></li>
 						<li><a href="#" title="Advertise">Register</a></li>
-						<li><a href="#" title="Contact Us">My Orders</a></li>						
+						<li><a href="#" title="Contact Us">My Orders</a></li>--}}						
 					</ul>
 				</div>
 			</div>			
@@ -181,12 +218,30 @@
 	</div>
 </footer>
 
+<!-- Wishlist Modal -->
+<div class="modal fade" id="wishlistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Success</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="{{ secure_asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
 <script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script> --}}
 
 
 
@@ -211,21 +266,41 @@ $.ajaxSetup({
 });
 
 function addToCart(id) {
-            $.ajax({
-                url: '{{ route("front.addToCart") }}',
-                type: 'post',
-                data: {id:id},
-                dataType: 'json',
-                success: function(response) {
-                    if(response.status == true) {
-                        window.location.href="{{ route('front.addToCart') }}";
-                    } else {
-                        alert(response.message);
+	$.ajax({
+		url: '{{ route("front.addToCart") }}',
+		type: 'post',
+		data: {id:id},
+		dataType: 'json',
+		success: function(response) {
+			if(response.status == true) {
+				window.location.href="{{ route('front.cart') }}";
+			} else {
+				alert(response.message);
 
-                    }
-                }
-            })
-        }
+			}
+		}
+	})
+}
+
+function addToWishList(id) {
+	$.ajax({
+		url: '{{ route("front.addToWishlist") }}',
+		type: 'post',
+		data: {id:id},
+		dataType: 'json',
+		success: function(response) {
+			if(response.status == true) {
+
+				$("#wishlistModal" .modal-body).html(response.message);
+				$("#wishlistModal").modal('show');
+ 
+			} else {
+				window.location.href="{{ route('account.login') }}";
+				//alert(response.message);
+			}
+		}
+	})
+}
 
 </script>
 @yield('customJs')

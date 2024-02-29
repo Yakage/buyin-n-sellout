@@ -57,15 +57,6 @@
                                 </select>
                             </div>
                         </div>							
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="email">Show on Home</label>
-                                <select name="showHome" id="showHome" class="form-control">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </select>
-                            </div>
-                        </div>			
                     </div>
                 </div>							
             </div>
@@ -96,7 +87,7 @@ $("#categoryForm").submit(function(event){
             $("button[type=submit]").prop('disabled', false);
 
             if(response["status"] == true) {
-                window.location.href="{{ route('categories.index') }}"
+                window.location.href="{{ route('categories.index') }}";
 
                 $("#name").removeClass('is-invalid')
                 .siblings('p')
@@ -134,43 +125,43 @@ $("#categoryForm").submit(function(event){
         }
     })
 });
-    $("#name").change(function(){
-        element = $(this);
-        $("button[type=submit]").prop('disabled', true);
-        $.ajax({
-            url: '{{ route("getSlug") }}',
-            type: 'get',
-            data: {title: element.val()},
-            dataType: 'json',
-            success: function(response) {
-                $("button[type=submit]").prop('disabled', false);
-                if(response["status"] == true) {
-                    $("#slug").val(response["slug"]);
-                }
+$("#name").change(function(){
+    element = $(this);
+    $("button[type=submit]").prop('disabled', true);
+    $.ajax({
+        url: '{{ route("getSlug") }}',
+        type: 'get',
+        data: {title: element.val()},
+        dataType: 'json',
+        success: function(response) {
+            $("button[type=submit]").prop('disabled', false);
+            if(response["status"] == true) {
+                $("#slug").val(response["slug"]);
             }
-        })
-    });
-
-    Dropzone.autoDiscover = false;    
-    const dropzone = $("#image").dropzone({ 
-        init: function() {
-            this.on('addedfile', function(file) {
-                if (this.files.length > 1) {
-                    this.removeFile(this.files[0]);
-                }
-            });
-        },
-        url:  "{{ route('temp-images.create') }}",
-        maxFiles: 1,
-        paramName: 'image',
-        addRemoveLinks: true,
-        acceptedFiles: "image/jpeg,image/png,image/gif",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }, success: function(file, response){
-            $("#image_id").val(response.image_id);
-            //console.log(response)
         }
-    });
+    })
+});
+
+Dropzone.autoDiscover = false;    
+const dropzone = $("#image").dropzone({ 
+    init: function() {
+        this.on('addedfile', function(file) {
+            if (this.files.length > 1) {
+                this.removeFile(this.files[0]);
+            }
+        });
+    },
+    url:  '{{ route("temp-images.create") }}',
+    maxFiles: 1,
+    paramName: 'image',
+    addRemoveLinks: true,
+    acceptedFiles: "image/jpeg,image/png,image/gif",
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }, success: function(file, response){
+        $("#image_id").val(response.image_id);
+        //console.log(response)
+    }
+});
 </script>
 @endsection

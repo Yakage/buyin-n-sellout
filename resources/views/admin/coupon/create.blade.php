@@ -9,7 +9,7 @@
                 <h1>Create Coupon Code</h1>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('categories.index') }}" class="btn btn-primary">Back</a>
+                <a href="{{ route('coupons.index') }}" class="btn btn-primary">Back</a>
             </div>
         </div>
     </div>
@@ -95,7 +95,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="slug">Starts At</label>
-                                <input type="text" name="starts_at" id="starts_at" class="form-control" placeholder="Starts At">	
+                                <input autocomplete="off" type="text" name="starts_at" id="starts_at" class="form-control" placeholder="Starts At">	
                                 <p></p>
                             </div>
                         </div>	
@@ -103,7 +103,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="slug">Expires At</label>
-                                <input type="text" name="expires_at" id="expires_at" class="form-control" placeholder="Expires At">	
+                                <input  autocomplete="off" type="text" name="expires_at" id="expires_at" class="form-control" placeholder="Expires At">	
                                 <p></p>
                             </div>
                         </div>	
@@ -120,7 +120,7 @@
             </div>
             <div class="pb-5 pt-3">
                 <button type="submit" class="btn btn-primary">Create</button>
-                <a href="{{ route('categories.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
+                <a href="{{ route('coupons.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
             </div>
         </form>
     </div>

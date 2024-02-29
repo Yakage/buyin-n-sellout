@@ -18,39 +18,37 @@
                     <div class="sub-title">
                         <h2>Categories</h3>
                     </div>
-
                     <div class="card">
                         <div class="card-body">
                             <div class="accordion accordion-flush" id="accordionExample">
-                            @if($categories->isNotEmpty())
-                            @foreach($categories as $key => $categories)
-                            <div class="accordion-item">
-                            @if($category->sub_category->isNotEmpty())
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{ $key }}" aria-expanded="false" aria-controls="collapseOne-{{ $key }}">
-                                            {{ $category->name }}
-                                        </button>
-                                    </h2>
-                            @else
-                            <a href="{{route('front.shop' ,$category->slug) }}" class="nav-item nav-link {{ ($categorySelected == $category->id) ? 'text-primary' : ''}}">{{$category->name}}</a>
-                            @endif
-
-                                    @if($category->sub_category->isNotEmpty())
-                                    <div id="collapseOne-{{ $key }}" class="accordion-collapse collapse {{($categorySelected == $category->id) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
-                                        <div class="accordion-body">
-                                            <div class="navbar-nav">
-                                                @foreach($category->sub_category as $sub_category)
-                                                <a href="{{route('front.shop' ,[$category->slug, $subCatergory->slug]) }}" class="nav-item nav-link {{ ($subCategorySelected == $subCategory->id) ? 'text-primary' : ''}}">{{$sub_category->name}}</a>
-                                                @endforeach                                         
+                                @if($categories->isNotEmpty())
+                                @foreach($categories as $key => $category)
+                                    <div class="accordion-item">
+                                        @if($category->sub_category->isNotEmpty())
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{ $key }}" aria-expanded="false" aria-controls="collapseOne-{{ $key }}">
+                                                    {{ $category->name }}
+                                                </button>
+                                            </h2>
+                                        @else
+                                            <a href="{{ route('front.shop', $category->slug) }}" class="nav-item nav-link {{ ($categorySelected == $category->id) ? 'text-primary' : '' }}">{{ $category->name }}</a>
+                                        @endif
+                            
+                                        @if($category->sub_category->isNotEmpty())
+                                            <div id="collapseOne-{{ $key }}" class="accordion-collapse collapse {{ ($categorySelected == $category->id) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                                                <div class="accordion-body">
+                                                    <div class="navbar-nav">
+                                                        @foreach($category->sub_category as $sub_category)
+                                                            <a href="{{ route('front.shop', [$category->slug, $sub_category->slug]) }}" class="nav-item nav-link {{ ($subCategorySelected == $sub_category->id) ? 'text-primary' : '' }}">{{ $sub_category->name }}</a>
+                                                        @endforeach                                         
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
-                                    @endif
-                                </div>
                                 @endforeach
                             @endif
-            
-                                                    
+                                                              
                             </div>
                         </div>
                     </div>
@@ -115,12 +113,24 @@
                                     </a>
                                     
                                     
-                                    <a class="whishlist" href="222"><i class="far fa-heart"></i></a>                            
+                                    <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
 
                                     <div class="product-action">
-                                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
-                                            <i class="fa fa-shopping-cart"></i> Add To Cart
-                                        </a>                            
+                                        @if($product->track_qty == 'Yes')
+                                            @if($product->qty > 0)
+                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                                            </a>
+                                            @else
+                                            <a class="btn btn-dark" href="javascript:void(0);">
+                                                Out of Stock
+                                            </a>
+                                                @endif
+                                            @else
+                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>                        
                                 <div class="card-body text-center mt-3">

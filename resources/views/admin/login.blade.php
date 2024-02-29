@@ -22,7 +22,7 @@
 			  	</div>
 			  	<div class="card-body">
 					<p class="login-box-msg">Sign in to start your session</p>
-					<form action="{{ route('admin.authenticate') }}" method="post">
+					<form action="{{ route('admin.login.auth') }}" method="post">
 						@csrf
 				  		<div class="input-group mb-3">
 							<input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control @error('email') is-invalid @enderror " placeholder="Email">
