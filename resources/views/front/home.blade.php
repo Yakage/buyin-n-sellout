@@ -84,8 +84,8 @@
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-4 logo">
 				<a href="index.php" class="text-decoration-none">
-					<span class="h1 text-uppercase text-primary bg-dark px-2">Online</span>
-					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SHOP</span>
+					<span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn</span>
+					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
@@ -164,7 +164,7 @@
             </button>
         </div>
     </section>
-    <section class="section-2">
+    {{-- <section class="section-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -193,7 +193,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="section-3">
         <div class="container">
             <div class="section-title">
@@ -237,7 +237,7 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="" class="product-img">
+                                    <a href="{{ route('front.product') }}" class="product-img">
                                         @if (!empty($productImage->image))
                                             <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
@@ -293,7 +293,7 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="" class="product-img">
+                                    <a href="{{ route('front.product') }}" class="product-img">
                                         @if (!empty($productImage->image))
                                             <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
