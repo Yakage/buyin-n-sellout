@@ -117,3 +117,48 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+.rating input {
+    display: none;
+}
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked + label,
+.rating input:checked + label ~ label{
+    color: #ffc107;
+    font-size: 8px;
+}
+
+
+.front-stars, back-stars, .star-rating {
+    display: flex;
+}
+
+.star-rating {
+    align-items: left;
+    font-size: 1.5em;
+    justify-content: left;
+    margin-left: -5px;
+}
+.back-stars {
+    color: #ccc;
+    position: relative;
+}
+
+.front-stars {
+    color: #ffbc0b;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: all 0.5s;
+}
+
+.percent {
+    color: #bb5252;
+    font-size: 1.5em;
+}
+
+.star-rating.product{
+    font-size: 1em;
+    
+
+}

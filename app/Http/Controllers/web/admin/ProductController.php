@@ -278,7 +278,7 @@ class ProductController extends Controller
     }
 
     public function productRatings(Request $request){
-        $ratings = productRating::select('product_ratings.*','products.title as productTitle')->orderBy('product_ratings.created_at','DESC');
+        $ratings = ProductRating::select('product_ratings.*','products.title as productTitle')->orderBy('product_ratings.created_at','DESC');
         $ratings = $ratings->leftJoin('products','products.id','product_ratings.product_id');
         
         if($request->get('keyword') != "") {
