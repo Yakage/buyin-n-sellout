@@ -143,7 +143,7 @@
                         </div> 
                         <div class="card">
                             <div class="card-body">	
-                                <h2 class="h4  mb-3">Product category</h2>
+                                <h2 class="h4  mb-3">Product Category</h2>
                                 <div class="mb-3">
                                     <label for="category">Category</label>
                                     <select name="category" id="category" class="form-control">
@@ -309,7 +309,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }, success: function(file, response){
-                $("#image_id").val(response.image_id);
+                //$("#image_id").val(response.image_id);
                 //console.log(response.ImagePath)
 
                 var html = `<div class="col-md-3" id="image-row-${response.image_id}"><div class="card">

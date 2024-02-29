@@ -147,6 +147,7 @@ Route::group(['prefix' => 'admin'],function() {
 
         Route::get('/product-subcategories', [ApiProductSubCategoryController::class, 'index']);
 
+        Route::get('/product-images/{id}', [ApiProductImageController::class, 'getImage']);
         Route::post('/product-images/update', [ApiProductImageController::class, 'update']);
         Route::delete('/product-images', [ApiProductImageController::class, 'destroy']);
 

@@ -5,11 +5,39 @@ namespace App\Http\Controllers\api\admin;
 use App\Http\Controllers\Controller;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class ApiProductImageController extends Controller
 {
+    public function getImage($id)
+    {
+        $productImage = ProductImage::find($id);
+
+        if (empty($productImage)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Image not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $imagePath = public_path('/uploads/product/small/' . $productImage->image);
+
+        // Check if the image file exists
+        if (File::exists($imagePath)) {
+            $imageContents = file_get_contents($imagePath);
+
+            // Return the image response
+            return response($imageContents, Response::HTTP_OK)
+                ->header('Content-Type', 'image/*');
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Image file not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+    }
     public function update(Request $request) {
 
         $image = $request->file('image');
