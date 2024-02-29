@@ -49,6 +49,7 @@ class HomeController extends Controller
         ->whereDate('created_at','<=',$currentDate)
         ->sum('grand_total');
 
+        //Delete temp images here
         $dayBeforeToday = Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
 
         $tempImages = TempImage::where('created_at','<=',$dayBeforeToday)->get();
