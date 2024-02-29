@@ -1,4 +1,4 @@
-@extends('front.layouts.app')
+secure_@extends('front.layouts.app')
 
 @section('content')
 <section class="section-5 pt-3 pb-3 mb-3 bg-white">
@@ -36,9 +36,9 @@
                                     <div class="d-flex align-items-center">
                                         
                                 @if (!empty($item->options->productImage->image))
-                                <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
+                                <img src="{{ secure_asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
                                 @else
-                                <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                <img src="{{ secure_asset('admin_assets/img/default-150x150.png') }}"/>
                                 @endif
                                         <h2>{{ $item->name}}</h2>
                                     </div>
