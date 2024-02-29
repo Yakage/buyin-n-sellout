@@ -49,15 +49,16 @@
                         </thead>
                         <tbody>
                             
-                            @foreach ( $cartContoller as $item)
+                            @if(!empty($cartContent))
+                            @foreach ( $cartContent as $item)
                             <tr>
-                                <td class="text-start">
-                                    <div class="d-flex align-items-center">
+                                <td>
+                                    <div class="d-flex align-items-start">
 
                                 @if (!empty($item->options->productImage->image))
-                                <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
+                                    <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
                                 @else
-                                <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                    <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                 @endif
                                         <h2>{{ $item->name}}</h2>
                                     </div>
@@ -79,13 +80,14 @@
                                     </div>
                                 </td>
                                 <td>
-                                ${{ $item->price*$item->qty}}
+                                PHP{{ $item->price*$item->qty}}
                                 </td>
                                 <td>
                                     <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' );"><i class="fa fa-times"></i></button>
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                                                        
                         </tbody>
                     </table>
@@ -99,15 +101,15 @@
                         </div> 
                         <div class="d-flex justify-content-between pb-2">
                             <div>Subtotal</div>
-                            <div>${{Cart::subtotal()}}</div>
+                            <div>PHP{{Cart::subtotal()}}</div>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <div>Shipping</div>
-                            <div>$0</div>
+                            <div>PHP</div>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <div>Total</div>
-                            <div>${{Cart::subtotal()}}</div>
+                            <div>PHP{{Cart::subtotal()}}</div>
                         </div>
                         <div class="pt-5">
                             <a href="{{route('front.checkout')}}" class="btn-dark btn btn-block w-100">Proceed to Checkout</a>
@@ -115,7 +117,6 @@
                     </div>
                 </div>     
             </div>
-
             @else
             <div class="col-md-12">
                 <div class="card">

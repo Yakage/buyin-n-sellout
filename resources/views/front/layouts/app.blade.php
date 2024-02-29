@@ -50,15 +50,9 @@
 <header class="bg-dark">
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
-<<<<<<< HEAD
-			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">Online</span>
-				<span class="h2 text-uppercase text-white px-2">SHOP</span>
-=======
 			<a href="index.php" class="text-decoration-none mobile-logo">
 				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
->>>>>>> c817fae6f26b5991774316f1e45a89d1bd812b27
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -77,8 +71,8 @@
 								</button>
 								@if($category->sub_category->isNotEmpty())
 									<ul class="dropdown-menu dropdown-menu-dark">
-										@foreach($sub_category as $subCategory)
-											<li><a class="dropdown-item nav-link" href="#">{{$subCategory->name}}</a></li>
+										@foreach($category->sub_category as $subCategory)
+											<li><a class="dropdown-item nav-link" href="{{ route('front.shop', [$category->slug, $subCategory->name]) }}">{{$subCategory->name}}</a></li>
 										@endforeach
 									</ul>
 								@endif
