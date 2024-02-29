@@ -28,7 +28,7 @@ class TempImagesController extends Controller
                 'id' => $tempImage->id,
                 //'image_id' => $tempImage->id,
                 // 'ImagePath' => asset('/temp/thumb/'.$newFileName),
-                // 'message' => 'Image uploaded successfully'
+                'message' => 'Image uploaded successfully'
             ]);
         }
 

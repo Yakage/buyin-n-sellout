@@ -301,7 +301,7 @@
 
         Dropzone.autoDiscover = false;    
         const dropzone = $("#image").dropzone({ 
-            url: "{{ route('temp-images.create') }}",,
+            url: '{{ route("temp-images.create") }}',
             maxFiles: 10,
             paramName: 'image',
             addRemoveLinks: true,
@@ -309,7 +309,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }, success: function(file, response){
-                //$("#image_id").val(response.image_id);
+                $("#image_id").val(response.image_id);
                 //console.log(response.ImagePath)
 
                 var html = `<div class="col-md-3" id="image-row-${response.image_id}"><div class="card">

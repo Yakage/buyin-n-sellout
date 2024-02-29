@@ -181,7 +181,7 @@
 				<div class="footer-card">
 					<h3>My Account</h3>
 					<ul>
-						@if (staticPages()->isNotEmpty)
+						@if (staticPages()->isNotEmpty())
 							@foreach (staticPages() as $page)
 							<li><a href="{{route('front.page',$page->slug)}}" title="{{$page->name}}">{{$page->name}}</a></li>
 							@endforeach
