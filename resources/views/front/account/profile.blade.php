@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="d-flex">
-                                    <button class="btn btn-dark">Update</button>
+                                    <button type="submit" class="btn btn-dark">Update</button>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                 </div>
 
                                 <div class="d-flex">
-                                    <button class="btn btn-dark">Update</button>
+                                    <button type="submit" class="btn btn-dark">Update</button>
                                 </div>
                             </div>
                         </div>
