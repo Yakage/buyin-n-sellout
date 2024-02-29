@@ -49,7 +49,7 @@
 <header class="bg-dark">
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
-			<a href="index.php" class="text-decoration-none mobile-logo">
+			<a href="{{ route("front.home") }}" class="text-decoration-none mobile-logo">
 				<span class="h2 text-uppercase text-primary bg-dark">Online</span>
 				<span class="h2 text-uppercase text-white px-2">SHOP</span>
 			</a>
@@ -116,34 +116,18 @@
 							<li><a class="dropdown-item" href="#">Fans</a></li>
 							<li><a class="dropdown-item" href="#">Air Coolers</a></li>
 						</ul>
-					</li>
+					</li>!-->
+
+
       			</ul>      			
-      		</div>  !-->
+      		</div> 
 			<div class="right-nav py-0">
-				<a href="cart.php" class="ml-3 d-flex pt-2">
+				<a href="{{ route("front.cart") }}" class="ml-3 d-flex pt-2">
 					<i class="fas fa-shopping-cart text-primary"></i>					
 				</a>
 			</div> 		
       	</nav>
   	</div>
-
-<body data-instant-intensity="mousedown">
-
-<div class="bg-light top-header">        
-	<div class="container">
-		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
-			<div class="col-lg-4 logo">
-				<a href="index.php" class="text-decoration-none">
-					<span class="h1 text-uppercase text-primary bg-dark px-2">Online</span>
-					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SHOP</span>
-				</a>
-			</div>
-			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
-				<a href="account.php" class="nav-link text-dark">My Account</a>
-			</div>		
-		</div>
-	</div>
-</div>
 </header>
 <main>
     @yield('content')
