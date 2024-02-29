@@ -135,8 +135,6 @@
 			</div> 		
       	</nav>
   	</div>
-<<<<<<< HEAD
-=======
 
 <body data-instant-intensity="mousedown">
 
@@ -159,7 +157,6 @@
 		</div>
 	</div>
 </div>
->>>>>>> c817fae6f26b5991774316f1e45a89d1bd812b27
 </header>
 <main>
     @yield('content')
@@ -284,7 +281,7 @@ function addToCart(id) {
 
 function addToWishList(id) {
 	$.ajax({
-		url: '{{ route("front.addToWishlist") }}',
+		url: '{{ route("front.addToWishList") }}',
 		type: 'post',
 		data: {id:id},
 		dataType: 'json',

@@ -30,7 +30,7 @@
                                     <option value="">Select a country</option>
                                 @if ($country->isNotEmpty())
                                     @foreach ($countries as $country)
-                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                     <option value="rest_of_world">Rest of the world</option>
                                 @endif
@@ -68,14 +68,14 @@
                             @if ($shippingCharges->isNotEmpty())
                             @foreach ($shippingCharges as $shippingCharge)
                             <tr>
-                                <td>{{ $shippingCharge-> id }}</td>
+                                <td>{{ $shippingCharge->id }}</td>
                                 <td>
-                                    {{ ($shippingCharge-> country_id == 'rest_of_world') ? 'Rest of the World' : $shippingCharge->name}}
+                                    {{ ($shippingCharge->country_id == 'rest_of_world') ? 'Rest of the World' : $shippingCharge->name}}
                                 </td>
-                                <td>P{{ $shippingCharge-> amount }}</td>
+                                <td>P{{ $shippingCharge->amount }}</td>
                                 <td>
-                                    <a href="{{ route('shipping.edit' , $shippingCharge-> id)}}" class ="btn btn-primary">Edit</a>
-                                    <a href="javascript:void(0);" onclick="deleteRecord({{$shippingCharge-> id}});" class ="btn btn-danger">Delete</a>
+                                    <a href="{{ route('shipping.edit' , $shippingCharge->id) }}" class ="btn btn-primary">Edit</a>
+                                    <a href="javascript:void(0);" onclick="deleteRecord( {{ $shippingCharge->id }} );" class ="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

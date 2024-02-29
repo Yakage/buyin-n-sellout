@@ -16,7 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class CartController extends Controller
+class CartController extends Controller 
 {
     public function addToCart(Request $request) {
 

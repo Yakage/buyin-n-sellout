@@ -66,7 +66,7 @@ $("#changePasswordForm").submit(function(event){
     $("button[type=submit]").prop('disabled', true);
 
     $.ajax({
-        url: '{{ route("admin.showChangePassword") }}',
+        url: '{{ route("admin.processChangePassword") }}',
         type: 'post',
         data: element.serializeArray(),
         dataType: 'json',
@@ -80,6 +80,7 @@ $("#changePasswordForm").submit(function(event){
 
             } else {
                 var errors = response['errors'];
+
                 if(errors['old_password']) {
                     $("#old_password").addClass('is-invalid')
                     .siblings('p')old_password
