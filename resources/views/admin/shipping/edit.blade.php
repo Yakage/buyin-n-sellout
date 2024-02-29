@@ -75,8 +75,8 @@
                                 </td>
                                 <td>P{{ $shipping-> amount }}</td>
                                 <td>
-                                    <a href="#" class ="btn btn-primary">Edit</a>
-                                    <a href="#" class ="btn btn-danger">Delete</a>
+                                    <a href="{{route ('shipping.edit')}}" class ="btn btn-primary">Edit</a>
+                                    <a href="{{route ('shipping.delete')}}" class ="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

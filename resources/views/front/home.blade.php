@@ -64,7 +64,7 @@
                                 @if($category->sub_category->isNotEmpty())
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         @foreach($category->sub_category as $subCategory)
-                                            <li><a class="dropdown-item nav-link" href="#">{{ $subCategory->name }}</a></li>
+                                            <li><a class="dropdown-item nav-link" href="{{route('sub-categories.index')}}">{{ $subCategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -72,7 +72,7 @@
                         @endforeach
                     @endif
 			<div class="right-nav py-0">
-				<a href="cart.php" class="ml-3 d-flex pt-2">
+				<a href="{{route('front.cart')}}" class="ml-3 d-flex pt-2">
 					<i class="fas fa-shopping-cart text-primary"></i>					
 				</a>
 			</div> 		
@@ -89,7 +89,7 @@
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
-				<a href="account.php" class="nav-link text-dark">My Account</a>
+				<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
 				{{-- <form action="">					
 					<div class="input-group">
 						<input type="text" placeholder="Search For Products" class="form-control" aria-label="Amount (to the nearest dollar)">
@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                    <a class="h6 link" href="{{route('products.index')}}">{{ $product->title }}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>{{ $product->price }}</strong></span>
                                         @if ($product->compare_price > 0)
@@ -321,7 +321,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="">{{ $product->title }}</a>
+                                    <a class="h6 link" href="{{route('products.index')}}">{{ $product->title }}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>{{ $product->price }}</strong></span>
                                         @if ($product->compare_price > 0)
