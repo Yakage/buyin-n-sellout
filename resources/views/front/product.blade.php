@@ -24,7 +24,7 @@
                         @if ($product->product_images)
                             @foreach ($product->product_images as $key => $productImage)
                             <div class="carousel-item {{ ($key == 0) ? 'active' : ''}}">
-                                <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage)->image)}}" alt="Image">
+                                <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage->image) }}" alt="Image">
                             </div>
                             @endforeach
                         @endif
@@ -262,7 +262,7 @@
                                 </a> --}}
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a href="{{route('front.cart')}}" class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
+                                    <a href="{{ route('front.cart') }}" class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
