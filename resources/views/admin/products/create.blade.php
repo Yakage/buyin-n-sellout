@@ -208,7 +208,7 @@
 
 @section('customJs')
     <script type="text/javascript">
-        $('.related-product').select({
+        $('#related-products').select({
             ajax: {
                 url: '{{ route("products.getProducts") }}',
                 dataType: 'json',
