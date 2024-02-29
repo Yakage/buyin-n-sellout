@@ -248,16 +248,16 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a href="{{route('front.cart')}}" class="btn btn-dark" href="#" onclick="addToCart({{ $product->id }});">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                                <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                </a>
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);">
-                                                Out of Stock
-                                            </a>
-                                                @endif
-                                            @else
-                                            <a href="{{route('front.cart')}}"class="btn btn-dark" href="#" onclick="addToCart({{ $product->id }});">
+                                                <a class="btn btn-dark" href="javascript:void(0);">
+                                                    Out of Stock
+                                                </a>
+                                            @endif
+                                        @else
+                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
@@ -300,7 +300,7 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
+                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')

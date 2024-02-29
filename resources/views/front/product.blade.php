@@ -87,7 +87,7 @@
 
                         @if($product->track_qty == 'Yes')
                         @if($product->qty > 0)
-                        <a class="btn btn-dark" href="#" onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                         @else
@@ -96,7 +96,7 @@
                         </a>
                             @endif
                         @else
-                        <a class="btn btn-dark" href="$" onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                     @endif          
@@ -262,7 +262,7 @@
                                 </a> --}}
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a href="{{ route('front.cart') }}" class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
+                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
@@ -303,7 +303,7 @@
         dataType: 'json',
         success: function(response){
             if (response.status == true) {
-                window.location.href="{{ route('front.cart')}}";
+                window.location.href="{{ route('front.cart') }}";
             }else {
                 alert(response.message);
             }
@@ -349,7 +349,7 @@
                             $(".product-rating-error").html('');
                         }  
                     } else{
-                        window.location.href = "{{ route('front.product',$product->slug) }}" 
+                        window.location.href = "{{ route('front.product',$product->slug) }}";
                     }
                 }
             });
