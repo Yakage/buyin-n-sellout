@@ -22,7 +22,7 @@ class ApiProductImageController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        $imagePath = public_path('/uploads/product/small/' . $productImage->image);
+        $imagePath = public_path().'/uploads/product/small/'.$productImage->image;
 
         // Check if the image file exists
         if (File::exists($imagePath)) {
