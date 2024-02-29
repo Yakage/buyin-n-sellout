@@ -43,7 +43,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/', [ApiFrontController::class,'index']);
 Route::get('/shop{categorySlug?}/{subCategorySlug?}', [ApiShopController::class, 'index']);
-Route::get('/product//{slug}', [ApiShopController::class,'product']);
+Route::get('/product/{slug}', [ApiShopController::class,'product']);
 Route::get('/cart', [ApiCartController::class, 'cart']);
 Route::post('/add-to-cart', [ApiCartController::class, 'addToCart']);
 Route::post('/update-cart', [ApiCartController::class, 'updateCart']);
