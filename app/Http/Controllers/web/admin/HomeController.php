@@ -57,7 +57,7 @@ class HomeController extends Controller
         foreach ($tempImages as $tempImage) {
 
             $path = public_path('/temp/'.$tempImage->name);
-            $thumbPath = public_path('/temp/thumb/'.$tempImages->name);
+            $thumbPath = public_path('/temp/thumb/'.$tempImage->name);
 
             //delete main image
             if (File::exists($path)){

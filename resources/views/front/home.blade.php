@@ -244,27 +244,24 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <form action="{{ route('front.addToWishList') }}" method="POST">
-                                        <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
-                                        <div class="product-action">
-                                            @if($product->track_qty == 'Yes')
-                                                @if($product->qty > 0)
-                                                    <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
-                                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                    </a>
-                                                @else
-                                                    <a class="btn btn-dark" href="javascript:void(0);">
-                                                        Out of Stock
-                                                    </a>
-                                                @endif
-                                            @else
+                                    <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                                    <div class="product-action">
+                                        @if($product->track_qty == 'Yes')
+                                            @if($product->qty > 0)
                                                 <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                                 </a>
+                                            @else
+                                                <a class="btn btn-dark" href="javascript:void(0);">
+                                                    Out of Stock
+                                                </a>
                                             @endif
-                                        </div>
-                                    </form>
-                                    
+                                        @else
+                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                                            </a>
+                                        @endif
+                                    </div>                                    
                                 </div>
                                 <div class="card-body text-center mt-3">
                                     <a class="h6 link" href="{{route('products.index')}}">{{ $product->title }}</a>

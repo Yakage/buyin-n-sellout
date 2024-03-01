@@ -44,7 +44,7 @@ class ProductImageController extends Controller
         return response()->json([
             'status' => true,
             'image_id' => $productImage->id,
-            'ImagePath' => asset('/uploads/product/small/'.$productImage->image),
+            'ImagePath' => asset('uploads/product/small/'.$productImage->image),
             'message' => 'Image saved successfully'
         ]);
     }
@@ -60,8 +60,8 @@ class ProductImageController extends Controller
         }
         //delete img from folder
 
-        File::delete(public_path('/uploads/product/large/'.$productImage->image));
-        File::delete(public_path('/uploads/product/small/'.$productImage->image));
+        File::delete(public_path('uploads/product/large/'.$productImage->image));
+        File::delete(public_path('uploads/product/small/'.$productImage->image));
         $productImage->delete();
 
         return response()->json([
