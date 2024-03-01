@@ -24,7 +24,7 @@
                         @if ($product->product_images)
                             @foreach ($product->product_images as $key => $productImage)
                             <div class="carousel-item {{ ($key == 0) ? 'active' : ''}}">
-                                <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage->image) }}" alt="Image">
+                                <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage)->image)}}" alt="Image">
                             </div>
                             @endforeach
                         @endif
@@ -157,7 +157,7 @@
                                     <p></p>
                                     </div>
                                     <div>
-                                        <button type="submit" class="btn btn-dark">Submit</button>
+                                        <button class="btn btn-dark">Submit</button>
                                     </div>
                                 </form>   
                                     
@@ -262,7 +262,7 @@
                                 </a> --}}
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
+                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }})">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
@@ -294,16 +294,17 @@
 
 @section('customJs')
     <script type="text/javascript">
-        function addToCart(id){
+        $("#productRatingForm").submit(function(event){
+            event.preventDefault();
 
     $.ajax({
-        url: '{{ route("front.addToCart) }}',
+        url: '{{ route("front.saveRating",$product->id) }}',
         type: 'post',
-        data: {id:id},
+        data: $(this).serializeArray(),
         dataType: 'json',
         success: function(response){
             if (response.status == true) {
-                window.location.href="{{ route('front.cart') }}";
+                window.location.href="{{ route('front.cart')}}";
             }else {
                 alert(response.message);
             }
@@ -349,7 +350,7 @@
                             $(".product-rating-error").html('');
                         }  
                     } else{
-                        window.location.href = "{{ route('front.product',$product->slug) }}";
+                        window.location.href = "{{ route('front.product',$product->slug) }}" 
                     }
                 }
             });
