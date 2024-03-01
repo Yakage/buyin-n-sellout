@@ -59,7 +59,7 @@ Route::post('/add-to-wishlist', [FrontController::class, 'addToWishList'])->name
 Route::get('/page/{slug}', [FrontController::class, 'page'])->name('front.page');
 Route::post('/send-contact-email', [FrontController::class, 'sendContactEmail'])->name('front.sendContactEmail');
 Route::get('/about-us', function(){
-    return view('aboutus');
+    return view('front.aboutus');
 });
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('front.pageforgotPassword');
