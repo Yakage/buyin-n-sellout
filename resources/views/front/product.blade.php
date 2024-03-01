@@ -248,7 +248,7 @@
 
                             <a href="" class="product-img">
                             @if (!empty($productImage->image))
-                                <img class="card-img-top" src="{{ secure_asset('uploads/product/small/'.$productImage->image) }}"/>
+                                <img class="card-img-top" src="{{ asset('/uploads/product/small/'.$productImage->image) }}"/>
                             @else
                                 <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                             @endif
