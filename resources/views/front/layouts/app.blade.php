@@ -174,7 +174,7 @@
 				<div class="footer-card">
 					<h3>Important Links</h3>
 					<ul>
-						<li><a href="about-us.php" title="About">About</a></li>
+						<li><a href="{{ route('front.aboutus') }}" title="About">About</a></li>
 						<li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>						
 					</ul>
 				</div>
@@ -183,11 +183,14 @@
 				<div class="footer-card">
 					<h3>My Account</h3>
 					<ul>
-						@if (staticPages()->isNotEmpty())
+						{{-- @if (staticPages()->isNotEmpty())
 							@foreach (staticPages() as $page)
 							<li><a href="{{route('front.page',$page->slug)}}" title="{{$page->name}}">{{$page->name}}</a></li>
 							@endforeach
-						@endif
+						@endif --}}
+						<li><a href="{{ route('account.login') }}" title="Sell">Login</a></li>
+						<li><a href="{{ route('account.register') }}" title="Advertise">Register</a></li>
+						<li><a href="#" title="Contact Us">My Orders</a></li>						
 						{{--<li><a href="#" title="Sell">Login</a></li>
 						<li><a href="#" title="Advertise">Register</a></li>
 						<li><a href="#" title="Contact Us">My Orders</a></li>--}}						

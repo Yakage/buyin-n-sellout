@@ -61,6 +61,9 @@ Route::post('/send-contact-email', [FrontController::class, 'sendContactEmail'])
 Route::get('/about-us', function(){
     return view('front.aboutus');
 });
+Route::get('/contact-us', function(){
+    return view('front.contactus');
+});
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('front.pageforgotPassword');
 Route::post('/process-forgot-password', [AuthController::class, 'processForgotPassword'])->name('front.processForgotPassword');
