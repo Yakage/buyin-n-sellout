@@ -59,7 +59,7 @@
                         @foreach(getCategories() as $category)
                             <li class="nav-item dropdown">
                                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $category->name}}
+                                    {{ $category->name }}
                                 </button>
                                 @if($category->sub_category->isNotEmpty())
                                     <ul class="dropdown-menu dropdown-menu-dark">
@@ -72,7 +72,7 @@
                         @endforeach
                     @endif
 			<div class="right-nav py-0">
-				<a href="{{route('front.cart')}}" class="ml-3 d-flex pt-2">
+				<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
 					<i class="fas fa-shopping-cart text-primary"></i>					
 				</a>
 			</div> 		
@@ -83,7 +83,7 @@
 	<div class="container">
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-4 logo">
-				<a href="index.php" class="text-decoration-none">
+				<a href="{{ route('front.home')}}" class="text-decoration-none">
 					<span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn</span>
 					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
 				</a>
@@ -107,7 +107,8 @@
     <section class="section-1">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="false">
             <div class="carousel-inner">
-                <div class="carousel-item active">
+
+                {{-- <div class="carousel-item active">
                     <!-- <img src="images/carousel-1.jpg" class="d-block w-100" alt=""> -->
                     <picture>
                         <source media="(max-width: 799px)" srcset="{{ asset('front-assets/images/carousel-1-m.jpg')}}" />
@@ -121,7 +122,8 @@
                             <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a>
                         </div>
                     </div>
-                </div>
+                </div>   --}}
+
                 <div class="carousel-item">
                     
                     <picture>
@@ -305,7 +307,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }})">
+                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                             @else
@@ -314,7 +316,7 @@
                                             </a>
                                                 @endif
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }})">
+                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
@@ -354,8 +356,8 @@
 				<div class="footer-card">
 					<h3>Important Links</h3>
 					<ul>
-						<li><a href="about-us.php" title="About">About</a></li>
-						<li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>						
+						<li><a href="{{ route('front.aboutus') }}" title="About">About</a></li>
+						<li><a href="{{ route('front.contactus') }}" title="Contact Us">Contact Us</a></li>						
 						{{-- <li><a href="#" title="Privacy">Privacy</a></li>
 						<li><a href="#" title="Privacy">Terms & Conditions</a></li>
 						<li><a href="#" title="Privacy">Refund Policy</a></li> --}}

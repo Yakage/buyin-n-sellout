@@ -69,11 +69,11 @@
                             @if ($shippingCharges->isNotEmpty())
                             @foreach ($shippingCharges as $shippingCharge)
                             <tr>
-                                <td>{{ $shipping-> id }}</td>
+                                <td>{{ $shipping->id }}</td>
                                 <td>
-                                    {{ ($shipping-> country_id == 'rest_of_world') ? 'Rest of the World' : $shippingCharge->name}}
+                                    {{ ($shipping->country_id == 'rest_of_world') ? 'Rest of the World' : $shippingCharge->name}}
                                 </td>
-                                <td>P{{ $shipping-> amount }}</td>
+                                <td>P{{ $shipping->amount }}</td>
                                 <td>
                                     <a href="{{route ('shipping.edit')}}" class ="btn btn-primary">Edit</a>
                                     <a href="{{route ('shipping.delete')}}" class ="btn btn-danger">Delete</a>

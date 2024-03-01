@@ -44,8 +44,7 @@
                                     <div class="mb-3">
                                         <select name="country" id="country" class="form-control">
                                             <option value="">Select a Country</option>
-                                            <option value="1">India</option>
-                                            <option value="2">UK</option>
+                                            <option value="1">Philippines</option>
                                         </select>
                                     </div>            
                                 </div>
@@ -99,7 +98,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="sub-title">
-                        <h2>Order Summery</h3>
+                        <h2>Order Summary</h3>
                     </div>                    
                     <div class="card cart-summery">
                         <div class="card-body">
@@ -114,19 +113,19 @@
 
                             <div class="d-flex justify-content-between summery-end">
                                 <div class="h6"><strong>Subtotal</strong></div>
-                                <div class="h6"><strong>${{ Cart::subtotal()}}</strong></div>
+                                <div class="h6"><strong>PHP {{ Cart::subtotal()}}</strong></div>
                             </div>
                             <div class="d-flex justify-content-between summery-end">
                                 <div class="h6"><strong>Discount</strong></div>
-                                <div class="h6"><strong id="discount_value">${{ $discount}}</strong></div>
+                                <div class="h6"><strong id="discount_value">PHP {{ $discount}}</strong></div>
                             </div>
                             <div class="d-flex justify-content-between mt-2">
                                 <div class="h6"><strong>Shipping</strong></div>
-                                <div class="h6"><strong id="shippingAmount">${{ number_format($totalShippingCharge,2)}}</strong></div>
+                                <div class="h6"><strong id="shippingAmount">PHP {{ number_format($totalShippingCharge,2)}}</strong></div>
                             </div>
                             <div class="d-flex justify-content-between mt-2 summery-end">
                                 <div class="h5"><strong>Total</strong></div>
-                                <div class="h5"><strong id="grandTotal">${{number_format($grandTotal,2)}}</strong></div>
+                                <div class="h5"><strong id="grandTotal">PHP {{number_format($grandTotal,2)}}</strong></div>
                             </div>                            
                         </div>
                     </div>   

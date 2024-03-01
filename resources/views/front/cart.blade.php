@@ -16,7 +16,7 @@
 <section class=" section-9 pt-4">
     <div class="container">
         <div class="row">
-            @if(Session::has('sucess'))
+            @if(Session::has('success'))
             <div class="col-md-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {!! Session::get('success') !!}
@@ -49,44 +49,44 @@
                         </thead>
                         <tbody>
                             
-                            @if(!empty($cartContent))
-                            @foreach ( $cartContent as $item)
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-start">
+                            @if(!empty($cartController))
+                                @foreach ( $cartController as $item)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-start">
 
-                                @if (!empty($item->options->productImage->image))
-                                    <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
-                                @else
-                                    <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
-                                @endif
-                                        <h2>{{ $item->name}}</h2>
-                                    </div>
-                                </td>
-                                <td>${{$item->price}}</td>
-                                <td>
-                                    <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" data-id="{{$item->rowId}}">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
+                                    @if (!empty($item->options->productImage->image))
+                                        <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
+                                    @else
+                                        <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                    @endif
+                                            <h2>{{ $item->name}}</h2>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{$item->rowId}}">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
+                                    </td>
+                                    <td>PHP {{$item->price}}</td>
+                                    <td>
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" data-id="{{$item->rowId}}">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{$item->rowId}}">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                PHP{{ $item->price*$item->qty}}
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' );"><i class="fa fa-times"></i></button>
-                                </td>
-                            </tr>
-                            @endforeach
+                                    </td>
+                                    <td>
+                                    PHP {{ $item->price*$item->qty}}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' );"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                                @endforeach
                             @endif
                                                        
                         </tbody>
@@ -101,18 +101,18 @@
                         </div> 
                         <div class="d-flex justify-content-between pb-2">
                             <div>Subtotal</div>
-                            <div>PHP{{Cart::subtotal()}}</div>
+                            <div>PHP {{Cart::subtotal()}}</div>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <div>Shipping</div>
-                            <div>PHP</div>
+                            <div>PHP </div>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <div>Total</div>
-                            <div>PHP{{Cart::subtotal()}}</div>
+                            <div>PHP {{Cart::subtotal()}}</div>
                         </div>
                         <div class="pt-5">
-                            <a href="{{route('front.checkout')}}" class="btn-dark btn btn-block w-100">Proceed to Checkout</a>
+                            <a href="{{ route('front.checkout') }}" class="btn-dark btn btn-block w-100">Proceed to Checkout</a>
                         </div>
                     </div>
                 </div>     
@@ -159,7 +159,7 @@
 
   function updateCart(rowId,qty) {
     $.ajax({
-        url: '{{route("front.updateCart") }}',
+        url: '{{ route("front.updateCart") }}',
         type: 'post',
         data: {rowId:rowId, qty:qty},
         dataType: 'json',

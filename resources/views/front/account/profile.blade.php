@@ -31,7 +31,7 @@
                             <div class="row">
                                 <div class="mb-3">               
                                     <label for="name">Name</label>
-                                    <input  value="{{$user->name}}"   type="text" name="name" id="name" placeholder="Enter Your Name" class="form-control">
+                                    <input  value="{{$user->name}}" type="text" name="name" id="name" placeholder="Enter Your Name" class="form-control">
                                     <p></p>
                                 </div>
                                 <div class="mb-3">            
@@ -80,7 +80,7 @@
                                     <input value="{{(!empty($address)) ? $address->mobile:''}}" type="text" name="mobile" id="mobile" placeholder="Enter Your Mobile No." class="form-control">
                                     <p></p>
                                 </div>
-                                <div class=" mb-3">                                    
+                                {{-- <div class=" mb-3">                                    
                                     <label for="phone">Country</label>
                                     <select name="country_id" id="country_id" class="form-control"></select>
                                         <option value="">Select a Country</option>
@@ -91,7 +91,7 @@
                                             
                                         @endif
                                     <p></p>
-                                </div>
+                                </div> --}}
 
                                 <div class="mb-3">                                    
                                     <label for="phone">Address</label>
@@ -297,17 +297,17 @@
                         .removeClass('invalid-feedback');
                     }
 
-                    if(errors.country_id) {
-                        $("#country_id").addClass('is-invalid')
-                        .siblings('p')
-                        .html(errors.country_id)
-                        .addClass('invalid-feedback');
-                    } else {
-                        $("#country_id").removeClass('is-invalid')
-                        .siblings('p')
-                        .html('')
-                        .removeClass('invalid-feedback');
-                    }
+                    // if(errors.country_id) {
+                    //     $("#country_id").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .html(errors.country_id)
+                    //     .addClass('invalid-feedback');
+                    // } else {
+                    //     $("#country_id").removeClass('is-invalid')
+                    //     .siblings('p')
+                    //     .html('')
+                    //     .removeClass('invalid-feedback');
+                    // }
 
                     if(errors.address) {
                         $("#address").addClass('is-invalid')

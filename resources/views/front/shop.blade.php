@@ -5,7 +5,7 @@
     <div class="container">
         <div class="light-font">
             <ol class="breadcrumb primary-color mb-0">
-                <li class="breadcrumb-item"><a class="white-text" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.home') }}">Home</a></li>
                 <li class="breadcrumb-item active">Shop</li>
             </ol>
         </div>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="sub-title mt-5">
+                    {{-- <div class="sub-title mt-5">
                         <h2>Price</h3>
                     </div>
                     
@@ -80,7 +80,7 @@
                         <div class="card-body">
                         <input type="text" class="js-range-slider" name="my_range" value="" />
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-md-9">
                     <div class="row pb-3">
@@ -113,7 +113,7 @@
                                     </a>
                                     
                                     
-                                    <a  onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
+                                    <a  onclick="addToWishlist({{$product->id}});" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
@@ -132,6 +132,7 @@
                                             </a>
                                         @endif
                                     </div>
+
                                 </div>                        
                                 <div class="card-body text-center mt-3">
                                     <a class="h6 link" href="{{route ('products.getProducts')}}">{{$product->title}}</a>
@@ -160,20 +161,37 @@
 @section('customJs')
 <script>
 
-        rangeSlider = $(".js-range-slider").ionRangeSlider({
-        type: "double",
-        min: 0,
-        max: 1000,
-        from: 0,
-        step: 10,
-        to: 500,
-        skin: "round",
-        max_postfix: "+",
-        prefix: "$",
-        onFinish: function() {
-            apply_Filters()
-        }
-    });
+function addToCart(id) {
+	$.ajax({
+		url: '{{ route("front.addToCart") }}',
+		type: 'post',
+		data: {id:id},
+		dataType: 'json',
+		success: function(response) {
+			if(response.status == true) {
+				window.location.href="{{ route('front.cart') }}";
+			} else {
+				alert(response.message);
+
+			}
+		}
+	})
+}
+
+    //     rangeSlider = $(".js-range-slider").ionRangeSlider({
+    //     type: "double",
+    //     min: 0,
+    //     max: 1000,
+    //     from: 0,
+    //     step: 10,
+    //     to: 500,
+    //     skin: "round",
+    //     max_postfix: "+",
+    //     prefix: "$",
+    //     onFinish: function() {
+    //         apply_Filters()
+    //     }
+    // });
 
     //saving instance to var
     var slider = $(".js-range-slider").data("ionRangeSlider");

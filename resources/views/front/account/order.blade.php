@@ -54,7 +54,7 @@
                                                     @endif
                                                     
                                                 </td>
-                                                <td>${{number_format($order->grand_total,2)}}</td>
+                                                <td>PHP {{number_format($order->grand_total,2)}}</td>
                                             </tr>          
                                             @endforeach
                                         @else

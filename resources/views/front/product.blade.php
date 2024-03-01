@@ -128,38 +128,38 @@
                                 <div class="row">
 
                                     <form action="" name="productRatingForm" id="productRatingForm" method="post">
-                                    <h3 class="h4 pb-3">Write a Review</h3>
-                                    <div class="form-group col-md-6 mb-3">
-                                        <label for="name">Name</label>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-                                    <p></p>
-                                    </div>
-                                    <div class="form-group col-md-6 mb-3">
-                                        <label for="email">Email</label>
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                    <p></p>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="rating">Rating</label>
-                                        <br>
-                                        <div class="rating" style="width: 10rem">
-                                            <input id="rating-5" type="radio" name="rating" value="5"/><label for="rating-5"><i class="fas fa-3x fa-star"></i></label>
-                                            <input id="rating-4" type="radio" name="rating" value="4"  /><label for="rating-4"><i class="fas fa-3x fa-star"></i></label>
-                                            <input id="rating-3" type="radio" name="rating" value="3"/><label for="rating-3"><i class="fas fa-3x fa-star"></i></label>
-                                            <input id="rating-2" type="radio" name="rating" value="2"/><label for="rating-2"><i class="fas fa-3x fa-star"></i></label>
-                                            <input id="rating-1" type="radio" name="rating" value="1"/><label for="rating-1"><i class="fas fa-3x fa-star"></i></label>
+                                        <h3 class="h4 pb-3">Write a Review</h3>
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                                        <p></p>
                                         </div>
-                                        <p class="product-rating-error text-danger"></p>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="">How was your overall experience?</label>
-                                        <textarea name="comment"  id="review" class="form-control" cols="30" rows="10" placeholder="How was your overall experience?"></textarea>
-                                    <p></p>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-dark">Submit</button>
-                                    </div>
-                                </form>   
+                                        <div class="form-group col-md-6 mb-3">
+                                            <label for="email">Email</label>
+                                            <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                        <p></p>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="rating">Rating</label>
+                                            <br>
+                                            <div class="rating" style="width: 10rem">
+                                                <input id="rating-5" type="radio" name="rating" value="5"/><label for="rating-5"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-4" type="radio" name="rating" value="4"  /><label for="rating-4"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-3" type="radio" name="rating" value="3"/><label for="rating-3"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-2" type="radio" name="rating" value="2"/><label for="rating-2"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-1" type="radio" name="rating" value="1"/><label for="rating-1"><i class="fas fa-3x fa-star"></i></label>
+                                            </div>
+                                            <p class="product-rating-error text-danger"></p>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="">How was your overall experience?</label>
+                                            <textarea name="comment"  id="review" class="form-control" cols="30" rows="10" placeholder="How was your overall experience?"></textarea>
+                                        <p></p>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-dark">Submit</button>
+                                        </div>
+                                    </form>   
                                     
                                 </div>
                             </div>
@@ -248,7 +248,7 @@
 
                             <a href="" class="product-img">
                             @if (!empty($productImage->image))
-                                <img class="card-img-top" src="{{ asset('/uploads/product/small/'.$productImage->image) }}"/>
+                                <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                             @else
                                 <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                             @endif
@@ -262,7 +262,7 @@
                                 </a> --}}
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }})">
+                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
