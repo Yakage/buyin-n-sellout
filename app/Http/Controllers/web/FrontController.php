@@ -118,4 +118,12 @@ class FrontController extends Controller
        }
 
     }
+
+    public function viewAboutUs(){
+        return view('front.aboutus');
+    }
+
+    public function viewContactUs() {
+        return view('front.contactus');
+    }
 }
