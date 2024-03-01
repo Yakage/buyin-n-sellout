@@ -24,7 +24,7 @@
                         @if ($product->product_images)
                             @foreach ($product->product_images as $key => $productImage)
                             <div class="carousel-item {{ ($key == 0) ? 'active' : ''}}">
-                                <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage)->image)) }}" alt="Image">
+                                <img class="w-100 h-100" src="{{ asset('uploads/product/large'.$productImage->image) }}" alt="Image">
                             </div>
                             @endforeach
                         @endif
