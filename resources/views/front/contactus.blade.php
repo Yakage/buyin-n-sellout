@@ -26,11 +26,11 @@
             <div class="col-md-6 mt-3 pe-lg-5">
                 <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content.</p>
                 <address>
-                Cecilia Chapman <br>
-                711-2880 Nulla St.<br> 
-                Mankato Mississippi 96522<br>
-                <a href="tel:+xxxxxxxx">(XXX) 555-2368</a><br>
-                <a href="mailto:jim@rock.com">jim@rock.com</a>
+                BuyIn & SellOut <br>
+                Arellano Street<br> 
+                Dagupan City, Pangasinan<br>
+                <a href="tel:+xxxxxxxx">09 999 9999</a><br>
+                <a href="#">buyinsellout@rock.com</a>
                 </address>                    
             </div>
 
