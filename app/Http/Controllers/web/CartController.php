@@ -20,6 +20,8 @@ class CartController extends Controller
 {
     public function addToCart(Request $request) {
 
+        //Cart::add('293ad', 'Product 1',1,9.99);
+
         $product = Product::with('product_images')->find($request->id);
 
         if($product == null) {
@@ -59,8 +61,7 @@ class CartController extends Controller
             }
 
         } else { 
-            //Cart is empty
-            
+            //Cart is empty            
             Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
             $status = true;
             $message = '<strong>'.$product->title.'</strong> added to cart successfully';
