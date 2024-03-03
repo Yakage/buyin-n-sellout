@@ -79,7 +79,7 @@
                                             $product->product_rating_count. 'Review'}} )</small>
                         </div>
                         @if ($product->compare_price > 0)
-                        <h2 class="price text-secondary"><del>${{ $product->compare_price }}</del></h2>
+                        <h2 class="price text-secondary"><del>PHP {{ $product->compare_price }}</del></h2>
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
@@ -87,16 +87,16 @@
 
                         @if($product->track_qty == 'Yes')
                         @if($product->qty > 0)
-                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0" onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                         @else
-                        <a class="btn btn-dark" href="javascript:void(0);">
+                        <a class="btn btn-dark" href="javascript:void(0)">
                             Out of Stock
                         </a>
                             @endif
                         @else
-                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                     @endif          
@@ -254,7 +254,7 @@
                             @endif
                             </a>
 
-                            <a class="whishlist" href="222"><i class="far fa-heart"></i></a>                            
+                            <a class="whishlist" href="javascript:void(0)"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
                                {{--<a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
@@ -262,11 +262,11 @@
                                 </a> --}}
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
+                                    <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
-                                    <a class="btn btn-dark" href="javascript:void(0);">
+                                    <a class="btn btn-dark" href="javascript:void(0)">
                                         Out of Stock
                                     </a>
                                         @endif

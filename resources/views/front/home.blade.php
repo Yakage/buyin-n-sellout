@@ -129,7 +129,7 @@
                     <picture>
                         <source media="(max-width: 799px)" srcset="{{ asset('front-assets/images/upang-group-students-shs.jpg')}}" />
                         <source media="(min-width: 800px)" srcset="{{ asset('front-assets/images/upang-group-students-shs.jpg')}}" />
-                        <img src="{{ asset('front-assets/images/upang-group-students-shs.jpg')}}" alt="" />
+                        <img src="{{ asset('front-assets/images/upang-group-students-sh.jpg')}}" alt="" />
                     </picture>
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3">
@@ -239,7 +239,7 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="{{ route("front.product", $product->slug) }}" class="product-img">
+                                    <a href="{{ route('front.product', $product->slug) }}" class="product-img">
                                         @if (!empty($productImage->image))
                                             <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
@@ -250,7 +250,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                                <a href="javascript:void(0)" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                                 </a>
                                             @else
@@ -259,7 +259,7 @@
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                            <a href="javascript:void(0)" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
@@ -295,28 +295,28 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="{{ route("front.product", $product->slug) }}" class="product-img">
+                                    <a href="{{ route('front.product', $product->slug) }}" class="product-img">
                                         @if (!empty($productImage->image))
                                             <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
+                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0)"><i class="far fa-heart"></i></a>  
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $product->id }})">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);">
+                                            <a class="btn btn-dark" href="javascript:void(0)">
                                                 Out of Stock
                                             </a>
                                                 @endif
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $product->id }})">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
