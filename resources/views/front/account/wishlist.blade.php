@@ -75,7 +75,7 @@
 <script>
     function removeProduct(id){
         $.ajax({
-		url: '{{ route("account.removeProductFromWishlist") }}',
+		url: '{{ route("account.removeProductFromWishList") }}',
 		type: 'post',
 		data: {id:id},
 		dataType: 'json',
