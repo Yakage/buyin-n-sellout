@@ -241,10 +241,21 @@
                             <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
-                               <a class="btn btn-dark" href="{{ route('front.cart' ,$product->id) }}"  onclick="addToCart({{ $product->id }});">
-                                    <i class="fa fa-shopping-cart"></i> Add To Cart
-                                </a>
-                                @endif                     
+                                @if($product->track_qty == 'Yes')
+                                    @if($product->qty > 0)
+                                        <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                            <i class="fa fa-shopping-cart"></i> Add To Cart
+                                        </a>
+                                    @else
+                                        <a class="btn btn-dark" href="javascript:void(0);">
+                                            Out of Stock
+                                        </a>
+                                    @endif
+                                @else
+                                    <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                        <i class="fa fa-shopping-cart"></i> Add To Cart
+                                    </a>
+                                @endif
                             </div>
                         </div>                        
                         <div class="card-body text-center mt-3">
@@ -269,48 +280,51 @@
     <script type="text/javascript">
         var errors = response.errors;
 
-                if(response.status == false) {
-                        if(errors.name) {
-                        $("#name").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.name);
-                    } else {
-                        $("#name").removeClass('is-invalid')
-                            .siblings("p")
-                            .addClass('invalid-feedback')
-                            .html(''); 
-                    }  
-                    if(errors.email) {
-                        $("#email").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.email);
-                    } else {
-                        $("#email").removeClass('is-invalid')
-                            .siblings("p")
-                            .addClass('invalid-feedback')
-                            .html(''); 
-                    }
-                    if(errors.comment) {
-                        $("#comment").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.comment);
-                    } else {
-                        $("#comment").removeClass('is-invalid')
-                            .siblings("p")
-                            .addClass('invalid-feedback')
-                            .html(''); 
-                    }
-                    if(errors.rating) {
-                        $(".product-rating-error").html(errors.rating);
-                    } else {
-                        $(".product-rating-error").html('');
-                    }  
-                } else{
-                    window.location.href = "{{ route('front.product',$product->slug) }}" 
-                }
+        if(response.status == false) {
+                if(errors.name) {
+                $("#name").addClass('is-invalid')
+                .siblings("p")
+                .addClass('invalid-feedback')
+                .html(errors.name);
+            } else {
+                $("#name").removeClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(''); 
+            }  
+            if(errors.email) {
+                $("#email").addClass('is-invalid')
+                .siblings("p")
+                .addClass('invalid-feedback')
+                .html(errors.email);
+            } else {
+                $("#email").removeClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(''); 
+            }
+            if(errors.comment) {
+                $("#comment").addClass('is-invalid')
+                .siblings("p")
+                .addClass('invalid-feedback')
+                .html(errors.comment);
+            } else {
+                $("#comment").removeClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(''); 
+            }
+            if(errors.rating) {
+                $(".product-rating-error").html(errors.rating);
+            } else {
+                $(".product-rating-error").html('');
+            }  
+        } else{
+            window.location.href = "{{ route('front.product',$product->slug) }}" 
+        }
+
+
+
             
     </script>
 @endsection 

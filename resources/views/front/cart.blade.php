@@ -5,8 +5,8 @@
     <div class="container">
         <div class="light-font">
             <ol class="breadcrumb primary-color mb-0">
-                <li class="breadcrumb-item"><a class="white-text" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="white-text" href="#">Shop</a></li>
+                <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a class="white-text" href="{{ route('front.shop') }}">Shop</a></li>
                 <li class="breadcrumb-item">Cart</li>
             </ol>
         </div>
@@ -35,8 +35,7 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         @if (!empty($item->options->productImage->image))
-                                            <img src="{{ asset('uploads/product/small/'.
-                                            $item->options->productImage->image) }}"/>
+                                            <img src="{{ asset('uploads/product/small/'. $item->options->productImage->image) }}"/>
                                         @else
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
@@ -60,7 +59,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    PHP{{$item->price*$item->qty}}
+                                    PHP {{$item->price*$item->qty}}
                                 </td>
                                 <td>
                                     <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
@@ -80,7 +79,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between pb-2">
                             <div>Subtotal</div>
-                            <div>PHP{{Cart::subtotal()}}</div>
+                            <div>PHP {{Cart::subtotal()}}</div>
                         </div>
                         <div class="d-flex justify-content-between pb-2">
                             <div>Shipping</div>
@@ -88,10 +87,10 @@
                         </div>
                         <div class="d-flex justify-content-between summery-end">
                             <div>Total</div>
-                            <div>PHP{{Cart::subtotal()}}</div>
+                            <div>PHP {{Cart::subtotal()}}</div>
                         </div>
                         <div class="pt-5">
-                            <a href="{{ route('front.checkout') }}"class="btn-dark btn btn-block w-100">Proceed to Checkout</a>
+                            <a href=" {{ route('front.checkout') }} "class="btn-dark btn btn-block w-100">Proceed to Checkout</a>
                         </div>
                     </div>
                 </div>     
