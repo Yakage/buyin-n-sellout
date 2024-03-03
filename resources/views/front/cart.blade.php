@@ -56,12 +56,13 @@
                                         <div class="d-flex align-items-start">
 
                                     @if (!empty($item->options->productImage->image))
-                                        <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
+                                    <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
                                     @else
-                                        <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                    <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                     @endif
-                                            <h2>{{ $item->name}}</h2>
-                                        </div>
+
+                                        <h2>{{ $item->name}}</h2>
+                                    </div>
                                     </td>
                                     <td>PHP {{$item->price}}</td>
                                     <td>

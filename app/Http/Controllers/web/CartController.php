@@ -64,7 +64,7 @@ class CartController extends Controller
             //Cart is empty            
             Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
             $status = true;
-            $message = '<strong>'.$product->title.'</strong> added to cart successfully';
+            $message = $product->title.'added in cart';
             session()->flash('success', $message);
         }
 
