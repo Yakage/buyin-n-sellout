@@ -50,10 +50,14 @@ class CartController extends Controller
 
                 $status = true;
                 $message = $product->title.' added in cart';
+                return redirect()->route('front.home');
 
             } else {
                 $status = false;
                 $message = $product->title.' already added in cart';
+                return redirect()->route('front.cart');
+
+
             }
 
         } else {
@@ -61,6 +65,7 @@ class CartController extends Controller
             ($product->product_images))? $product->product_images->first() : '']);
             $status =true;
             $message = $product->title.' added in cart';
+
         }
 
         return response()->json([
