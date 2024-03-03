@@ -6,8 +6,10 @@
 	<title>BuyIn & SellOut</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
+
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="pinterest" content="nopin" />
+
 	<meta property="og:locale" content="en_AU" />
 	<meta property="og:type" content="website" />
     <meta property="fb:admins" content="" />
@@ -42,9 +44,9 @@
     
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
-			<a href="index.php" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
-				<span class="h2 text-uppercase text-white px-2">& SellOut</span>
+			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
+				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->

@@ -16,6 +16,26 @@
     <section class=" section-9 pt-4">
         <div class="container">
             <div class="row">
+
+                @if (Session::has('success'))
+                    <div class="col-md-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {!! Success::get('success') !!} 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
+
+                @if (Session::has('error'))
+                    <div class="col-md-12">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ Success::get('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
+
+                @if(Cart::count() > 0)
                 <div class="col-md-8">
                     <div class="table-responsive">
                         <table class="table" id="cart">
@@ -29,7 +49,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($cartContent))
                                 @foreach ($cartContent as $item)
                                 <tr>
                                     <td>
@@ -46,16 +65,18 @@
                                     <td>
                                         <div class="input-group quantity mx-auto" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1">
+                                                <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" data-id="{{ $item->rowId }}" >
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
+
                                             <div class="input-group-btn">
-                                                <button type="submit" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
+                                                    <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{ $item->rowId }}">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
                                             </div>
+
                                         </div>
                                     </td>
                                     <td>
@@ -66,7 +87,6 @@
                                     </td>
                                 </tr>      
                                 @endforeach
-                                @endif           
                             </tbody>
                         </table>
                     </div>
@@ -99,6 +119,13 @@
                         <button class="btn btn-dark" type="button" id="button-addon2">Apply Coupon</button>--}}
                     </div> 
                 </div>
+                @else
+                <div class="col-md-12">
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <h4> You cart is empty!</h4>
+                    </div>
+                </div>
+                @endif           
             </div>
         </div>
     </section>

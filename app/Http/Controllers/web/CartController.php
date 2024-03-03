@@ -217,7 +217,7 @@ class CartController extends Controller
             'country' => 'required',
             'address' => 'required|min:30',
             'city' => 'required',
-            'state' => 'required',
+            'barangay' => 'required',
             'zip' => 'required',
             'mobile' => 'required'
         ]);
@@ -246,7 +246,7 @@ class CartController extends Controller
                 'address' => $request->address,
                 'apartment' => $request->apartment,
                 'city' => $request->city,
-                'state' => $request->state,
+                'barangay' => $request->barangay,
                 'zip' => $request->zip,
             ]
         );
@@ -311,7 +311,7 @@ class CartController extends Controller
             $order->mobile = $request->mobile;
             $order->address = $request->address;
             $order->apartment = $request->apartment;
-            $order->state = $request->state;
+            $order->barangay = $request->barangay;
             $order->city = $request->city;
             $order->zip = $request->zip;
             $order->notes = $request->notes;
