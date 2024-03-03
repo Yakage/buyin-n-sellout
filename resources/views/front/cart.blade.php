@@ -164,6 +164,7 @@
             data: {rowId:rowId, qty:qty},
             dataType: 'json',
             success: function(response){
+                console.log(response);
                 window.location.href = '{{ route("front.cart" )}}';
             }
         });
@@ -178,6 +179,7 @@
                 data: {rowId:rowId},
                 dataType: 'json',
                 success: function(response){
+                    console.log(response);
                     window.location.href = '{{ route("front.cart" )}}';
                 }
             });
