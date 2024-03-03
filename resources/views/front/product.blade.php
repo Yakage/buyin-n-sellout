@@ -83,11 +83,11 @@
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        <a href="javascript:void(0);"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
+                        {{-- <a href="javascript:void(0);"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a> --}}
 
                         @if($product->track_qty == 'Yes')
                         @if($product->qty > 0)
-                        <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="cart({{ $product->id }});">
+                        <a class="btn btn-dark" href="#"  onclick="addToCartart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                         @else
@@ -96,7 +96,7 @@
                         </a>
                             @endif
                         @else
-                        <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="cart({{ $product->id }});">
+                        <a class="btn btn-dark" href="#"  onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                     @endif          
@@ -132,12 +132,12 @@
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-                                        <p></p>
+                                            <p></p>
                                         </div>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-                                        <p></p>
+                                            <p></p>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="rating">Rating</label>
@@ -154,7 +154,7 @@
                                         <div class="form-group mb-3">
                                             <label for="">How was your overall experience?</label>
                                             <textarea name="comment"  id="review" class="form-control" cols="30" rows="10" placeholder="How was your overall experience?"></textarea>
-                                        <p></p>
+                                            <p></p>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-dark">Submit</button>
@@ -262,7 +262,7 @@
                                 </a>
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $relProduct->id }});">
+                                    <a class="btn btn-dark" href="#"  onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
