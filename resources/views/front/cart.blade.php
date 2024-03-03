@@ -141,7 +141,7 @@
 
                     var rowId = $(this).data('id');
                     var newQty = qtyElement.val();
-                    updateCart(rowId,newQty)
+                    updateCart(rowId,newQty);
                 }            
             });
 
@@ -153,7 +153,7 @@
 
                     var rowId = $(this).data('id');
                     var newQty = qtyElement.val();
-                    updateCart(rowId,qty)
+                    updateCart(rowId,newQty);
             }        
     });
 
