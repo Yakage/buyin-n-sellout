@@ -43,8 +43,8 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="index.php" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
-				<span class="h2 text-uppercase text-white px-2">SellOut</span>
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
+				<span class="h2 text-uppercase text-white px-2">& SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
@@ -239,7 +239,7 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="{{ route("front.product", $product->slug) }}" class="product-img">
+                                    <a href="{{ route('front.product', $product->slug) }}" class="product-img">
                                         @if (!empty($productImage->image))
                                             <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
@@ -307,7 +307,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                             @else
