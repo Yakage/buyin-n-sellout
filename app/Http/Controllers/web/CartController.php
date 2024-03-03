@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class CartController extends Controller
 {
     public function addToCart(Request $request){
-        $product = Product::with('product_images')->find($request->id);
+        $product = Product::with('product_images')->find($request->product_id);
         
         if ( $product==null) {
             return response()->json([
