@@ -83,7 +83,7 @@
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        <a href="{{ route('front.cart' ,$product->id) }}"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
+                        <a href="{{ route('front.addToCart' ,$product->id) }}"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
 
                     </div>
                 </div>
@@ -241,7 +241,7 @@
                             <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
-                               <a class="btn btn-dark" href="{{ route('front.cart' ,$product->id) }}"  onclick="addToCart({{ $product->id }});">
+                               <a class="btn btn-dark" href="{{ route('front.addToCart' ,$product->id) }}"  onclick="addToCart({{ $product->id }});">
                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                 </a>
                                 @endif                     
