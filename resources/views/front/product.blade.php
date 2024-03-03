@@ -79,24 +79,24 @@
                                             $product->product_rating_count. 'Review'}} )</small>
                         </div>
                         @if ($product->compare_price > 0)
-                        <h2 class="price text-secondary"><del>${{ $product->compare_price }}</del></h2>
+                        <h2 class="price text-secondary"><del>PHP {{ $product->compare_price }}</del></h2>
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        {{--<a href="javascript:void(0);"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>--}}
+                        <a href="javascript:void(0);"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
 
                         @if($product->track_qty == 'Yes')
                         @if($product->qty > 0)
-                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0" onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                         @else
-                        <a class="btn btn-dark" href="javascript:void(0);">
+                        <a class="btn btn-dark" href="javascript:void(0)">
                             Out of Stock
                         </a>
                             @endif
                         @else
-                        <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                     @endif          
@@ -254,19 +254,19 @@
                             @endif
                             </a>
 
-                            <a class="whishlist" href="222"><i class="far fa-heart"></i></a>                            
+                            <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
-                               {{--<a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                               <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                     <i class="fa fa-shopping-cart"></i> Add To Cart
-                                </a> --}}
+                                </a>
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $relProduct->id }});">
+                                    <a class="btn btn-dark" href="javascript:void(0)" onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
-                                    <a class="btn btn-dark" href="javascript:void(0);">
+                                    <a class="btn btn-dark" href="javascript:void(0)">
                                         Out of Stock
                                     </a>
                                         @endif
@@ -294,64 +294,50 @@
 
 @section('customJs')
     <script type="text/javascript">
-        function addToCart(id) {
-    $.ajax({
-        url: '{{ route("front.addToCart") }}',
-        type: 'post',
-        data: {id:id},
-        dataType: 'json',
-        success: function(response){
-            if (response.status == true) {
-                window.location.href="{{ route('front.cart')}}";
-            }else {
-                alert(response.message);
-            }
-            var errors = response.errors;
+        var errors = response.errors;
 
-                    if(response.status == false) {
-                            if(errors.name) {
-                            $("#name").addClass('is-invalid')
+                if(response.status == false) {
+                        if(errors.name) {
+                        $("#name").addClass('is-invalid')
+                        .siblings("p")
+                        .addClass('invalid-feedback')
+                        .html(errors.name);
+                    } else {
+                        $("#name").removeClass('is-invalid')
                             .siblings("p")
                             .addClass('invalid-feedback')
-                            .html(errors.name);
-                        } else {
-                            $("#name").removeClass('is-invalid')
-                                .siblings("p")
-                                .addClass('invalid-feedback')
-                                .html(''); 
-                        }  
-                        if(errors.email) {
-                            $("#email").addClass('is-invalid')
+                            .html(''); 
+                    }  
+                    if(errors.email) {
+                        $("#email").addClass('is-invalid')
+                        .siblings("p")
+                        .addClass('invalid-feedback')
+                        .html(errors.email);
+                    } else {
+                        $("#email").removeClass('is-invalid')
                             .siblings("p")
                             .addClass('invalid-feedback')
-                            .html(errors.email);
-                        } else {
-                            $("#email").removeClass('is-invalid')
-                                .siblings("p")
-                                .addClass('invalid-feedback')
-                                .html(''); 
-                        }
-                        if(errors.comment) {
-                            $("#comment").addClass('is-invalid')
-                            .siblings("p")
-                            .addClass('invalid-feedback')
-                            .html(errors.comment);
-                        } else {
-                            $("#comment").removeClass('is-invalid')
-                                .siblings("p")
-                                .addClass('invalid-feedback')
-                                .html(''); 
-                        }
-                        if(errors.rating) {
-                            $(".product-rating-error").html(errors.rating);
-                        } else {
-                            $(".product-rating-error").html('');
-                        }  
-                    } else{
-                        window.location.href = "{{ route('front.product',$product->slug) }}" 
+                            .html(''); 
                     }
+                    if(errors.comment) {
+                        $("#comment").addClass('is-invalid')
+                        .siblings("p")
+                        .addClass('invalid-feedback')
+                        .html(errors.comment);
+                    } else {
+                        $("#comment").removeClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(''); 
+                    }
+                    if(errors.rating) {
+                        $(".product-rating-error").html(errors.rating);
+                    } else {
+                        $(".product-rating-error").html('');
+                    }  
+                } else{
+                    window.location.href = "{{ route('front.product',$product->slug) }}" 
                 }
-            });
-        };
+            
     </script>
 @endsection 

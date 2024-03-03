@@ -273,7 +273,7 @@ function addToCart(id) {
 
 			}
 		}
-	})
+	});
 }
 
 function addToWishList(id) {

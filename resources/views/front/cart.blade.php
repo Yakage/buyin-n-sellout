@@ -49,19 +49,20 @@
                         </thead>
                         <tbody>
                             
-                            @if(!empty($cartController))
-                                @foreach ( $cartController as $item)
+                            @if(!empty($cartContent))
+                                @foreach ( $cartContent as $item)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-start">
 
                                     @if (!empty($item->options->productImage->image))
-                                        <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
+                                    <img src="{{ asset('uploads/product/small/'.$item->options->productImage->image) }}"/>
                                     @else
-                                        <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
+                                    <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                     @endif
-                                            <h2>{{ $item->name}}</h2>
-                                        </div>
+
+                                        <h2>{{ $item->name}}</h2>
+                                    </div>
                                     </td>
                                     <td>PHP {{$item->price}}</td>
                                     <td>
@@ -83,7 +84,7 @@
                                     PHP {{ $item->price*$item->qty}}
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' );"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' )"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
