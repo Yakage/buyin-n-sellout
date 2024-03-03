@@ -15,7 +15,7 @@ class ProductImageController extends Controller
     public function update(Request $request) {
 
         $image = $request->image;
-        $ext = $image->getClientOriginalExtension();
+        $extension = $image->getClientOriginalExtension();
         $sourcePath = $image->getPathName();
 
         $productImage = new ProductImage();
@@ -23,7 +23,7 @@ class ProductImageController extends Controller
         $productImage->image = 'NULL';
         $productImage->save();
 
-        $imageName = $request->product_id.'-'.$productImage->id.'-'.time().'.'.$ext;
+        $imageName = $request->product_id.'-'.$productImage->id.'-'.time().'.'.$extension;
         $productImage->image = $imageName;
         $productImage->save();
 
@@ -44,7 +44,7 @@ class ProductImageController extends Controller
         return response()->json([
             'status' => true,
             'image_id' => $productImage->id,
-            'ImagePath' => asset('uploads/product/small/'.$productImage->image),
+            'ImagePath' => asset('uploads/product/small/'.$imageName),
             'message' => 'Image saved successfully'
         ]);
     }

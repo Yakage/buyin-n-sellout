@@ -17,8 +17,8 @@
 	<meta property="og:title" content="" />
 	<meta property="og:description" content="" />
 	<meta property="og:url" content="" />
-	<meta property="og:image" content="" />
-	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image" content="image/jpeg" />
+	<meta property="og:image:type" content="" />
 	<meta property="og:image:width" content="" />
 	<meta property="og:image:height" content="" />
 	<meta property="og:image:alt" content="" />
@@ -51,7 +51,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="index.php" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -11,53 +11,53 @@ class TempImagesController extends Controller
 {
     public function create(Request $request) {
 
-        if ($request->image) {
-            $image = $request->image;
-            $extension = $image->getClientOriginalExtension();
-            $newFileName = time().'.'.$extension;
-
-            $tempImage = new TempImage();
-            $tempImage->name = $newFileName;
-            $tempImage->save();
-
-            $image->move(public_path('uploads/temp/'),$newFileName);
-
-            return response()->json([
-                'status' => true,
-                'name' => $newFileName,
-                'id' => $tempImage->id,
-                //'image_id' => $tempImage->id,
-                // 'ImagePath' => asset('/temp/thumb/'.$newFileName),
-                'message' => 'Image uploaded successfully'
-            ]);
-        }
-
-        // $image = $request->image;
-
-        // if(!empty($image)) {
-        //     $ext = $image->getClientOriginalExtension();
-        //     $newName = time().'.'.$ext;
+        // if ($request->image) {
+        //     $image = $request->image;
+        //     $extension = $image->getClientOriginalExtension();
+        //     $newFileName = time().'.'.$extension;
 
         //     $tempImage = new TempImage();
-        //     $tempImage->name = $newName;
+        //     $tempImage->name = $newFileName;
         //     $tempImage->save();
 
-        //     $image->move(public_path().'/temp', $newName);
-
-        //     //generate thumbnail
-        //     $sourcePath = public_path().'/temp/'.$newName;
-        //     $destPath = public_path().'/temp/thumb/'.$newName;
-        //     $image = Image::make($sourcePath);
-        //     $image->fit(300,275);
-        //     $image->save($destPath);
-
+        //     $image->move(public_path('uploads/temp/'),$newFileName);
 
         //     return response()->json([
         //         'status' => true,
-        //         'image_id' => $tempImage->id,
-        //         'ImagePath' => asset('/temp/thumb/'.$newName),
+        //         'name' => $newFileName,
+        //         'id' => $tempImage->id,
+        //         //'image_id' => $tempImage->id,
+        //         // 'ImagePath' => asset('/temp/thumb/'.$newFileName),
         //         'message' => 'Image uploaded successfully'
         //     ]);
         // }
+
+        $image = $request->image;
+
+        if(!empty($image)) {
+            $extension = $image->getClientOriginalExtension();
+            $newName = time().'.'.$extension;
+
+            $tempImage = new TempImage();
+            $tempImage->name = $newName;
+            $tempImage->save();
+
+            $image->move(public_path().'/temp', $newName);
+
+            //generate thumbnail
+            $sourcePath = public_path().'/temp/'.$newName;
+            $destPath = public_path().'/temp/thumb/'.$newName;
+            $image = Image::make($sourcePath);
+            $image->fit(300,275);
+            $image->save($destPath);
+
+
+            return response()->json([
+                'status' => true,
+                'image_id' => $tempImage->id,
+                'ImagePath' => asset('/temp/thumb/'.$newName),
+                'message' => 'Image uploaded successfully'
+            ]);
+        }
     }
 }
