@@ -118,7 +118,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <button class="btn btn-dark" href="{{ route('front.cart') }}" onclick="addToCart({{ $product->id }});">
+                                            <button class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></button> Add To Cart
                                             </a>
                                             @else
@@ -127,7 +127,7 @@
                                             </button>
                                                 @endif
                                             @else
-                                            <button class="btn btn-dark" href="{{ route('front.cart') }}" onclick="addToCart({{ $product->id }});">
+                                            <button class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </button>
                                         @endif
@@ -135,7 +135,7 @@
 
                                 </div>                        
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="{{route ('products.getProducts')}}">{{$product->title}}</a>
+                                    <a class="h6 link" href="javascript:void(0);">{{$product->title}}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>{{$product->price}}</strong></span>
                                         @if($product->compare_price > 0)

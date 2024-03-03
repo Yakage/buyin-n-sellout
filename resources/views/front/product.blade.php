@@ -87,7 +87,7 @@
 
                         @if($product->track_qty == 'Yes')
                         @if($product->qty > 0)
-                        <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                         @else
@@ -96,7 +96,7 @@
                         </a>
                             @endif
                         @else
-                        <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $product->id }});">
+                        <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
                             <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
                         </a>
                     @endif          
@@ -257,12 +257,12 @@
                             <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
-                               <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $product->id }});">
+                               <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                 </a>
                                 @if($relProduct->track_qty == 'Yes')
                                     @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $relProduct->id }});">
+                                    <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $relProduct->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                     @else
