@@ -103,4 +103,58 @@
         </div>
     </div>
 </section>
+@section ('customJs')
+<script>
+    $('.add').click(function(){
+            var qtyElement = $(this).parent().prev(); // Qty Input
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue < 10) {
+                qtyElement.val(qtyValue+1);
+
+                var id = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId,newQty)
+            }            
+        });
+
+        $('.sub').click(function(){
+            var qtyElement = $(this).parent().next(); 
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue > 1) {
+                qtyElement.val(qtyValue-1);
+
+                var id = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId,qty)
+        }        
+  });
+
+  function updateCart(rowId,qty) {
+    $.ajax({
+        url: '{{ route("front.updateCart") }}',
+        type: 'post',
+        data: {rowId:rowId, qty:qty},
+        dataType: 'json',
+        success: function(response){
+            window.location.href = '{{ route("front.cart" )}}';
+        }
+    });
+  }
+
+
+  function deleteItem(rowId) {
+    if(confirm("Are you sure you want to delete?")){
+        $.ajax({
+            url: '{{route("front.deleteItem.cart") }}',
+            type: 'post',
+            data: {rowId:rowId},
+            dataType: 'json',
+            success: function(response){
+                window.location.href = '{{ route("front.cart" )}}';
+            }
+        });
+     }
+  }
+
+</script>
 @endsection
