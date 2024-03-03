@@ -139,7 +139,7 @@
                 if (qtyValue < 10) {
                     qtyElement.val(qtyValue+1);
 
-                    var id = $(this).data('id');
+                    var rowId = $(this).data('id');
                     var newQty = qtyElement.val();
                     updateCart(rowId,newQty)
                 }            
@@ -151,7 +151,7 @@
                 if (qtyValue > 1) {
                     qtyElement.val(qtyValue-1);
 
-                    var id = $(this).data('id');
+                    var rowId = $(this).data('id');
                     var newQty = qtyElement.val();
                     updateCart(rowId,qty)
             }        
