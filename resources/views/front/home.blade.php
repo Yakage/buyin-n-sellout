@@ -295,14 +295,14 @@
                         <div class="col-md-3">
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="{{ route("front.product", $product->slug) }}" class="product-img">
+                                    <a href="{{ route('front.product', $product->slug) }}" class="product-img">
                                         @if (!empty($productImage->image))
                                             <img class="card-img-top" src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
                                         @else
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
+                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>  
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
