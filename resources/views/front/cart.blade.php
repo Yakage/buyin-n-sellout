@@ -58,7 +58,7 @@
                                             @else
                                                 <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                             @endif
-                                            <h2>{{$item->title}}</h2>
+                                            <h2>{{$item->name}}</h2>
                                         </div>
                                     </td>
                                     <td>PHP{{$item->price}}</td>
