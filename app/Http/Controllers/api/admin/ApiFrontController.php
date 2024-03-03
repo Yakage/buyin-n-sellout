@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\admin;
 
+use ApiResponseTrait;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactEmail;
 use App\Models\Page;
@@ -15,38 +16,26 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiFrontController extends Controller
 {
-    public function index()
-    {
-        $featuredProducts = Product::where('is_featured', 'Yes')
-            ->orderBy('id', 'DESC')
-            ->take(8)
-            ->where('status', 1)
-            ->get();
 
-        $latestProducts = Product::orderBy('id', 'DESC')
-            ->where('status', 1)
-            ->take(8)
-            ->get();
+    public function index(Request $request) {
+        $products = Product::where('is_featured', 'Yes')->orderBy('id', 'DESC')->where('status', 1)->get();
+        $data['featuredProducts'] = $products;
 
-        return response()->json([
-            'featuredProducts' => $featuredProducts,
-            'latestProducts' => $latestProducts
-        ]);
+        $latestProducts = Product::orderBy('id', 'DESC')->where('status', 1)->take(8)->get();
+        $data['latestProducts'] = $latestProducts;
+
+        return $this->successResponse($data);
     }
 
-    public function addToWishList(Request $request)
-    {
+    public function addToWishList(Request $request) {
         if (Auth::check() == false) {
-            return response()->json(['status' => false]);
+            return $this->errorResponse('User not authenticated', 401);
         }
 
-        $product = Product::find($request->id);
+        $product = Product::where('id', $request->id)->first();
 
         if ($product == null) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Product not found.'
-            ]);
+            return $this->errorResponse('Product not found', 404);
         }
 
         Wishlist::updateOrCreate(
@@ -60,35 +49,32 @@ class ApiFrontController extends Controller
             ]
         );
 
-        return response()->json([
+        return $this->successResponse([
             'status' => true,
-            'message' => '"' . $product->title . '" added to your wishlist.'
+            'message' => 'Product added to wishlist',
         ]);
     }
 
-    public function page($slug)
-    {
+    public function page($slug) {
         $page = Page::where('slug', $slug)->first();
+
         if ($page == null) {
-            return response()->json(['error' => 'Page not found.'], 404);
+            return $this->notFoundResponse();
         }
-        return response()->json(['page' => $page]);
+
+        return $this->successResponse(['page' => $page]);
     }
 
-    public function sendContactEmail(Request $request)
-    {
+    public function sendContactEmail(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'required|min:10',
-            'message' => 'required'
+            'name'=> 'required',
+            'email'=> 'required|email',
+            'subject' => 'required|min:10'
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+            return $this->errorResponse($validator->errors(), 422);
         }
-
-        // Send email here
 
         $mailData = [
             'name' => $request->name,
@@ -98,10 +84,22 @@ class ApiFrontController extends Controller
             'mail_subject' => 'You have received a contact email',
         ];
 
-        $admin = User::find(1); // Assuming the admin user's ID is 1
+        $admin = User::where('id', 1)->first();
 
         Mail::to($admin->email)->send(new ContactEmail($mailData));
+        session()->flash('success', 'Thanks for contacting us, we will get back to you soon.');
 
-        return response()->json(['status' => true, 'message' => 'Thanks for contacting us, we will get back to you soon.']);
+        return $this->successResponse(['status' => true]);
+    }
+
+    public function viewAboutUs(){
+        // This method is not suitable for an API, consider returning data directly.
+        return $this->errorResponse('Method not allowed', 405);
+    }
+
+    public function viewContactUs() {
+        // This method is not suitable for an API, consider returning data directly.
+        return $this->errorResponse('Method not allowed', 405);
     }
 }
+

@@ -28,25 +28,23 @@ class FrontController extends Controller
     public function addToWishList(Request $request) {
 
         if (Auth::check() == false) {
- 
             session(['url.intended' => url()->previous()]);
             return response()->json([
                 'status' => false
             ]);
         }
-            //$wishlist = new Wishlist;
-            //$wishlist->user_id = Auth::user()->id;
-            //$wishlist->product_id = $request->id;
-            //$wishlist->save();
-            //$product = Product::where('id', $request->id)->first();
-
+    
+        // Uncomment the following lines to fetch the product
+        $product = Product::where('id', $request->id)->first();
+    
+        // Check if the product exists
         if ($product == null) {
             return response()->json([
                 'status' => true,
                 'message'=> '<div class="alert alert-danger">Product not found.</div>'
             ]);
         }
-
+    
         Wishlist::updateOrCreate(
             [
                 'user_id' => Auth::user()->id,
@@ -57,6 +55,7 @@ class FrontController extends Controller
                 'product_id' => $request->id,
             ]
         );
+    
         return response()->json([
             'status' => true,
             'message'=> '<div class="alert alert-success"><strong>"'.$product->title.'"</strong> added in your wishlist</div>'

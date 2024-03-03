@@ -75,7 +75,7 @@
             <div class="col-md-4">            
                 <div class="card cart-summery">
                     <div class="sub-title">
-                        <h2 class="bg-white">Cart Summery</h3>
+                        <h2 class="bg-white">Cart Summary</h3>
                     </div> 
                     <div class="card-body">
                         <div class="d-flex justify-content-between pb-2">
