@@ -196,7 +196,7 @@
             </div>
         </div>
     </section> --}}
-    {{-- <section class="section-3">
+    <section class="section-3">
         <div class="container">
             <div class="section-title">
                 <h2>Categories</h2>
@@ -209,7 +209,7 @@
                                         @if ($category->image != "")
                                             <img src="{{ asset('uploads/category/thumb/' . $category->image) }}" alt="" class="img-fluid">
                                         @endif
-                                        <!--<img src="{{ asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">!-->
+                                            <img src="{{ asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">
                                     </div>
                                     <div class="right">
                                         <div class="cat-data">
@@ -224,7 +224,7 @@
                 @endif
             </div>
         </div>
-    </section> --}}
+    </section>
     <section class="section-4 pt-5">
         <div class="container">
             <div class="section-title">
