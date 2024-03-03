@@ -15,7 +15,7 @@
 <section class=" section-10">
     <div class="container">
         <div class="login-form">    
-            <form action="" method="post" name="registrationForm" id="registrationForm">
+            <form action="{{ route('account.processRegister') }}" method="post" name="registrationForm" id="registrationForm">
                 @csrf
                 <h4 class="modal-title">Register Now</h4>
                 <div class="form-group">
@@ -51,7 +51,7 @@
 
 @section('customJs')
     <script type="text/javascript">
-    $("$registrationForm").submit(function(event) {
+    $("#registrationForm").submit(function(event) {
         event.preventDefault();
 
         $("button[type='submit']").prop('disabled',true);
