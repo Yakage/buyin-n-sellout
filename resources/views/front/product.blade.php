@@ -83,23 +83,7 @@
                         @endif
                         <h2 class="price ">${{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        {{-- <a href="javascript:void(0);"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a> --}}
-
-                        @if($product->track_qty == 'Yes')
-                        @if($product->qty > 0)
-                        <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
-                            <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
-                        </a>
-                        @else
-                        <a class="btn btn-dark" href="javascript:void(0)">
-                            Out of Stock
-                        </a>
-                            @endif
-                        @else
-                        <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
-                            <i class="fa fa-shopping-cart"></i> &nbsp;Add To Cart
-                        </a>
-                    @endif          
+                        <a href="javascript:void(0);"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
 
                     </div>
                 </div>
@@ -260,17 +244,6 @@
                                <a class="btn btn-dark" href="javascript:void(0);"  onclick="addToCart({{ $product->id }});">
                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                 </a>
-                                @if($relProduct->track_qty == 'Yes')
-                                    @if($relProduct->qty > 0)
-                                    <a class="btn btn-dark" href="#"  onclick="addToCart({{ $relProduct->id }});">
-                                        <i class="fa fa-shopping-cart"></i> Add To Cart
-                                    </a>
-                                    @else
-                                    <a class="btn btn-dark" href="javascript:void(0)">
-                                        Out of Stock
-                                    </a>
-                                        @endif
-                                    @else
                                 @endif                     
                             </div>
                         </div>                        
