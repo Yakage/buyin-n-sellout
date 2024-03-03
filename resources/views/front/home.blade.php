@@ -207,9 +207,9 @@
                                 <div class="cat-card">
                                     <div class="left">
                                         @if ($category->image != "")
-                                            <img src="{{ asset('uploads/category/thumb/' . $category->image) }}" alt="" class="img-fluid">
+                                            <img src="{{ asset('uploads/category/thumb/'.$category->image) }}" alt="" class="img-fluid">
                                         @endif
-                                            <img src="{{ asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">
+                                            <img src="{{ asset('front-assets/images/upang-logo.png') }}" alt="" class="img-fluid">
                                     </div>
                                     <div class="right">
                                         <div class="cat-data">
