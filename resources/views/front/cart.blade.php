@@ -134,28 +134,28 @@
 @section ('customJs')
     <script>
         $('.add').click(function(){
-                var qtyElement = $(this).parent().prev(); // Qty Input
-                var qtyValue = parseInt(qtyElement.val());
-                if (qtyValue < 10) {
-                    qtyElement.val(qtyValue+1);
+            var qtyElement = $(this).parent().prev(); // Qty Input
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue < 10) {
+                qtyElement.val(qtyValue+1);
 
-                    var rowId = $(this).data('id');
-                    var newQty = qtyElement.val();
-                    updateCart(rowId,newQty);
-                }            
-            });
+                var rowId = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId,newQty);
+            }            
+        });
 
-            $('.sub').click(function(){
-                var qtyElement = $(this).parent().next(); 
-                var qtyValue = parseInt(qtyElement.val());
-                if (qtyValue > 1) {
-                    qtyElement.val(qtyValue-1);
+        $('.sub').click(function(){
+            var qtyElement = $(this).parent().next(); 
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue > 1) {
+                qtyElement.val(qtyValue-1);
 
-                    var rowId = $(this).data('id');
-                    var newQty = qtyElement.val();
-                    updateCart(rowId,newQty);
+                var rowId = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId,newQty);
             }        
-    });
+        });
 
     function updateCart(rowId,qty) {
         $.ajax({
@@ -163,8 +163,10 @@
             type: 'post',
             data: {rowId:rowId, qty:qty},
             dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response){
-                console.log(response);
                 window.location.href = '{{ route("front.cart" )}}';
             }
         });
@@ -178,8 +180,10 @@
                 type: 'post',
                 data: {rowId:rowId},
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function(response){
-                    console.log(response);
                     window.location.href = '{{ route("front.cart" )}}';
                 }
             });
