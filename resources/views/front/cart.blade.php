@@ -52,7 +52,7 @@
                                             </div>
                                             <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1">
+                                                <button type="submit" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </div>
