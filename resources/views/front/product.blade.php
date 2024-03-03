@@ -83,7 +83,9 @@
                         @endif
                         <h2 class="price ">PHP {{ $product->price }}</h2>
                         {!! $product->short_description !!}   
-                        <a href="{{ route('front.addToCart' ,$product->id) }}" onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
+                        <form action="{{ route('front.addToCart') }}" method="POST">
+                            <button type="submit" onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</button>
+                        </form>
 
                     </div>
                 </div>
