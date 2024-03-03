@@ -250,7 +250,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <a href="{{ route('front.addToCart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                                <a href="{{ route('front.cart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
                                                 </a>
                                             @else
@@ -259,7 +259,7 @@
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="{{ route('front.addToCart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                            <a href="{{ route('front.cart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
@@ -307,7 +307,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="{{ route('front.addToCart' ,$product->id) }}" onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="{{ route('front.cart' ,$product->id) }}" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                             @else
@@ -316,7 +316,7 @@
                                             </a>
                                                 @endif
                                             @else
-                                            <a class="btn btn-dark" href="{{ route('front.addToCart' ,$product->id) }}" onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="{{ route('front.cart' ,$product->id) }}" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
