@@ -84,7 +84,7 @@
                                     PHP {{ $item->price*$item->qty}}
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' )"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteItem( '{{ $item->rowId}}' );"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
