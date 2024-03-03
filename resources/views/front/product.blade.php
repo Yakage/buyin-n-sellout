@@ -85,7 +85,8 @@
                         {!! $product->short_description !!}   
                         <form action="{{ route('front.addToCart') }}" method="POST">
                             @csrf
-                            <button type="submit" onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</button>
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                         </form>
 
                     </div>
