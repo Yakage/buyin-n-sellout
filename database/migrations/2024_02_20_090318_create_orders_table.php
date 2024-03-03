@@ -30,7 +30,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('apartment')->nullable();
             $table->string('city');
-            $table->string('state');
+            $table->string('barangay');
             $table->string('zip');
             $table->text('notes')->nullable();
 
