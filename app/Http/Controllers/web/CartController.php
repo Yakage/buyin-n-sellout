@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 class CartController extends Controller
 {
     public function addToCart(Request $request){
-        $product = Product::with('product_images')->find($request->id);
+        $product = Product::find($request->id); //with('product_images')->
         
         if ( $product==null) {
             return response()->json([
@@ -45,8 +45,7 @@ class CartController extends Controller
             }
 
             if($productAlreadyExist == false){
-                Cart::add($product->id, $product->title, 1,$product->price, ['productImage' => (!empty
-                ($product->product_images))? $product->product_images->first() : '']);
+                Cart::add($product->id, $product->title, 1,$product->price ? $product->product_images->first() : ''); //, ['productImage' => (!empty ($product->product_images))
 
                 $status =true;
                 $message = $product->title.' added in cart';
@@ -57,8 +56,7 @@ class CartController extends Controller
             }
 
         } else {
-            Cart::add($product->id, $product->title, 1,$product->price, ['productImage' => (!empty
-            ($product->product_images))? $product->product_images->first() : '']);
+            Cart::add($product->id, $product->title, 1,$product->price ? $product->product_images->first() : '');  //['productImage' => (!empty ($product->product_images))
             $status =true;
             $message = $product->title.' added in cart';
         }
