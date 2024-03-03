@@ -258,7 +258,7 @@
                                         </a>
                                     @endif
                                 @else
-                                    <a href="{{ route('front.addToCart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                    <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
                                         <i class="fa fa-shopping-cart"></i> Add To Cart
                                     </a>
                                 @endif

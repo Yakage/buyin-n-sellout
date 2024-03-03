@@ -18,13 +18,21 @@ class ProductImageController extends Controller
         $extension = $image->getClientOriginalExtension();
         $sourcePath = $image->getPathName();
 
+        // $productImage = new ProductImage();
+        // $productImage->product_id = $request->product_id;
+        // $productImage->image = 'NULL';
+        // $productImage->save();
+
+        // $imageName = $request->product_id.'-'.$productImage->id.'-'.time().'.'.$extension;
+        // $productImage->image = $imageName;
+        // $productImage->save();
+
         $productImage = new ProductImage();
         $productImage->product_id = $request->product_id;
-        $productImage->image = 'NULL';
-        $productImage->save();
 
         $imageName = $request->product_id.'-'.$productImage->id.'-'.time().'.'.$extension;
         $productImage->image = $imageName;
+
         $productImage->save();
 
         //large img

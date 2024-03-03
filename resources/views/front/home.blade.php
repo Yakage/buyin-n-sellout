@@ -119,7 +119,7 @@
                         <div class="p-3">
                             <h1 class="display-4 text-white mb-3">Student Needs</h1>
                             {{-- <p class="mx-md-5 px-5">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
-                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a>
+                            {{-- <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a> --}}
                         </div>
                     </div>
                 </div>  
@@ -135,7 +135,7 @@
                         <div class="p-3">
                             <h1 class="display-4 text-white mb-3">Student Must-Haves</h1>
                             {{-- <p class="mx-md-5 px-5">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
-                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a>
+                            {{-- <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a> --}}
                         </div>
                     </div>
                 </div>
@@ -246,20 +246,22 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+                                    {{-- <a class="whishlist" href="222"><i class="far fa-heart"></i></a> --}}
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <a href="{{ route('front.addToCart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
-                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                </a>
+                                                <form action="{{ route('front.addToCart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
+                                                </form>
                                             @else
                                                 <a class="btn btn-dark" href="javascript:void(0);">
                                                     Out of Stock
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="{{ route('front.addToCart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
@@ -302,23 +304,27 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>  
+                                    {{-- <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>   --}}
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="{{ route('front.addToCart' ,$product->id) }}" onclick="addToCart({{ $product->id }});">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                                <form action="{{ route('front.addToCart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
+                                                </form>
                                             @else
                                             <a class="btn btn-dark" href="javascript:void(0);">
                                                 Out of Stock
                                             </a>
                                                 @endif
                                             @else
-                                            <a class="btn btn-dark" href="{{ route('front.addToCart' ,$product->id) }}" onclick="addToCart({{ $product->id }});">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                                <form action="{{ route('front.addToCart') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
+                                                </form>
                                         @endif
                                     </div>
                                 </div>
