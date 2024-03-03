@@ -98,11 +98,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="sub-title">
-                        <h2>Order Summary</h3>
+                        <h2>Order Summary</h2>
                     </div>                    
                     <div class="card cart-summery">
                         <div class="card-body">
-                            @foreach (Cart::content()as $item)
+                            @foreach (Cart::content() as $item)
                             <div class="d-flex justify-content-between pb-2">
                                 <div class="h6">{{$item->name}} x {{$item->qty}}</div>
                                 <div class="h6">${{$item->price*$item->qty}}</div>
@@ -130,19 +130,19 @@
                         </div>
                     </div>   
 
-                    <div class="input-group apply-coupan mt-4">
+                    {{-- <div class="input-group apply-coupan mt-4">
                         <input type="text" placeholder="Coupon Code" class="form-control" name="discount_code" id="discount_code">
                         <button class="btn btn-dark" type="button" id="apply-discount">Apply Coupon</button>
-                    </div> 
+                    </div>  --}}
 
-                    <div id="discount-response-wrapper">
+                    {{-- <div id="discount-response-wrapper">
                         @if (Session::has('code'))
                         <div class=" mt-4" id="discount-response">
                             <strong>{{Session::get('code')->code}}</strong>
                             <a class="btn btn-sm btn-danger" id="remove-discount"><i class="fa fa-times"></i></a>
                         </div>
                         @endif
-                    </div>
+                    </div> --}}
                     
                     <div class="card payment-form ">                        
                         <h3 class="card-title h5 mb-3">Payment Details</h3>
@@ -211,7 +211,7 @@
 
             $("#country").change(function(){
                 $.ajax({
-                    url: '{{route ("front.getOrderSummery")}}',
+                    url: '{{route ("front.getOrderSummary")}}',
                     type: post,
                     data: {country_id: $(this).val ()},
                     dataType: 'json',
@@ -227,8 +227,8 @@
 
             $("#apply-discount").click(function(){
                 $.ajax({
-                    url: '{{route ("front.getOrderSummery")}}',
-                    type: post,
+                    url: '{{route ("front.getOrderSummary")}}',
+                    type: 'post',
                     data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
                     dataType: 'json',
                     success: function(response){

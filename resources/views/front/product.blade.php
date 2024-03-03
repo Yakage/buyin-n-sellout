@@ -247,9 +247,11 @@
                             <div class="product-action">
                                 @if($product->track_qty == 'Yes')
                                     @if($product->qty > 0)
-                                        <a href="{{ route('front.addToCart' ,$product->id) }}" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
-                                            <i class="fa fa-shopping-cart"></i> Add To Cart
-                                        </a>
+                                        <form action="{{ route('front.addToCart') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
+                                        </form>
                                     @else
                                         <a class="btn btn-dark" href="javascript:void(0);">
                                             Out of Stock

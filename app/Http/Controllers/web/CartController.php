@@ -48,11 +48,11 @@ class CartController extends Controller
                 Cart::add($product->id, $product->title, 1,$product->price, ['productImage' => (!empty
                 ($product->product_images))? $product->product_images->first() : '']);
 
-                $status =true;
+                $status = true;
                 $message = $product->title.' added in cart';
 
             } else {
-                $status =false;
+                $status = false;
                 $message = $product->title.' already added in cart';
             }
 
