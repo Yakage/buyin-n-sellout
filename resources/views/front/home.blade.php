@@ -17,7 +17,7 @@
 	<meta property="og:description" content="" />
 	<meta property="og:url" content="" />
 	<meta property="og:image" content="" />
-	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:type" content="" />
 	<meta property="og:image:width" content="" />
 	<meta property="og:image:height" content="" />
 	<meta property="og:image:alt" content="" />
