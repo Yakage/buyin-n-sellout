@@ -118,7 +118,7 @@
                         @foreach (Cart::content() as $item)
                         <div class="d-flex justify-content-between pb-2">
                             <div class="h6">{{$item->name}} x {{$item->qty}}</div>
-                            <div class="h6">${{$item->price*$item->qty}}</div>
+                            <div class="h6">PHP {{$item->price*$item->qty}}</div>
                         </div>
                         @endforeach
 
@@ -187,6 +187,7 @@
                         </div>
                     </div>    
                     <div class="pt-4">
+                        {{-- <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button> --}}
                         <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button>
                     </div>                    
                 </div>
@@ -325,7 +326,7 @@
                     }else{
                         window.location.href ="{{url('/thanks/')}}" +response.orderId;
                     }
-                }
+                });
             });
         //});
 
