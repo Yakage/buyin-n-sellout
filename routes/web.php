@@ -99,15 +99,15 @@ Route::group(['prefix' => 'account'],function() {
 
 Route::group(['prefix' => 'admin'],function() { 
 
-    //Route::group(['middleware' => 'admin.guest'],function() {
+    Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/login', [AdminLoginController::class, 'login'])->name('admin.login.auth');
         Route::get('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
  
-    //});
+    });
 
-    // Route::group(['middleware' => 'admin.auth'],function() {
+    Route::group(['middleware' => 'admin.auth'],function() {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
         Route::get('/logout', [HomeController::class, 'logout'])->name('admin.logout');
 
@@ -215,7 +215,7 @@ Route::group(['prefix' => 'admin'],function() {
                 'slug' => $slug
             ]);
         })->name('getSlug');
-    //});
+    });
 
 
 });

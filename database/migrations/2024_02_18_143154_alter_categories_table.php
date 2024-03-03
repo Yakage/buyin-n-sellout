@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories',function(Blueprint $table){
-            $table->enum('showHome',['Yes','No'])->after('status')->default('No');
+            $table->enum('showHome',['Yes','No'])->after('status')->default('Yes');
         });
     }
     /**

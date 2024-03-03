@@ -26,7 +26,7 @@
                                     <div class="accordion-item">
                                         @if($category->sub_category->isNotEmpty())
                                             <h2 class="accordion-header" id="headingOne">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{ $key }}" aria-expanded="false" aria-controls="collapseOne-{{ $key }}">
+                                                <button class="accordion-button collapsed" type="submit" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{ $key }}" aria-expanded="false" aria-controls="collapseOne-{{ $key }}">
                                                     {{ $category->name }}
                                                 </button>
                                             </h2>
@@ -113,23 +113,23 @@
                                     </a>
                                     
                                     
-                                    <a  onclick="addToWishlist({{$product->id}});" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></a>  
+                                    <button onclick="addToWishlist({{$product->id}});" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></button>  
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="{{ route('front.addToCart') }}" onclick="cart({{ $product->id }});">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
+                                            <button class="btn btn-dark" href="{{ route('front.addToCart') }}" onclick="addToCart({{ $product->id }});">
+                                                <i class="fa fa-shopping-cart"></button> Add To Cart
                                             </a>
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);">
+                                            <button class="btn btn-dark" href="javascript:void(0);">
                                                 Out of Stock
-                                            </a>
+                                            </button>
                                                 @endif
                                             @else
-                                            <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="cart({{ $product->id }});">
+                                            <button class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                            </button>
                                         @endif
                                     </div>
 

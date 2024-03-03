@@ -43,7 +43,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="index.php" class="text-decoration-none mobile-logo">
-				<span class="h2 text-uppercase text-primary bg-dark">BuyIn</span>
+				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -196,7 +196,7 @@
             </div>
         </div>
     </section> --}}
-    {{-- <section class="section-3">
+    <section class="section-3">
         <div class="container">
             <div class="section-title">
                 <h2>Categories</h2>
@@ -207,9 +207,9 @@
                                 <div class="cat-card">
                                     <div class="left">
                                         @if ($category->image != "")
-                                            <img src="{{ asset('uploads/category/thumb/' . $category->image) }}" alt="" class="img-fluid">
+                                            <img src="{{ asset('uploads/category/thumb/'.$category->image) }}" alt="" class="img-fluid">
                                         @endif
-                                        <!--<img src="{{ asset('front-assets/images/cat-1.jpg') }}" alt="" class="img-fluid">!-->
+                                            <img src="{{ asset('front-assets/images/upang-logo.png') }}" alt="" class="img-fluid">
                                     </div>
                                     <div class="right">
                                         <div class="cat-data">
@@ -224,7 +224,7 @@
                 @endif
             </div>
         </div>
-    </section> --}}
+    </section>
     <section class="section-4 pt-5">
         <div class="container">
             <div class="section-title">
