@@ -1,87 +1,70 @@
-cart controller
-
 <?php
 
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Country;
-use App\Models\CustomerAddress;
-use App\Models\DiscountCoupon;
-use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Product;
-use App\Models\ShippingCharge;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
-class CartController extends Controller 
+class CartController extends Controller
 {
-    public function addToCart(Request $request) {
-
-        //Cart::add('293ad', 'Product 1',1,9.99);
-
+    public function addToCart(Request $request){
         $product = Product::with('product_images')->find($request->id);
-
-        if($product == null) {
+        
+        if ( $product==null) {
             return response()->json([
                 'status' => false,
-                'message' => 'Product not found.'
+                'message' => 'Product not found'
             ]);
         }
 
-        if (Cart::count() > 0) {
-            // products found in cart
-            // check if product has already added in the cart
-            // return as message that product added in ur cart
-            // if product not found in the cart, then add product in cart
+        if(Cart::count()>0) {
+            //echo "Product already in cart";
+            //Products found in cart
+            //Check if this product already in the cart
+            //Return a message that product already added in your cart
+            //If product not found in the cart, then add product in cart
 
             $cartContent = Cart::content();
             $productAlreadyExist = false;
 
-            foreach ($cartContent as $item) {
-                if ($item->id == $product->id)  {
+            foreach ($cartContent as $item){
+                if($item->id == $product->id){
                     $productAlreadyExist = true;
                 }
             }
 
-            if($productAlreadyExist == false) {
-                Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty
-                ($product->product_images)) ? $product->product_images->first() : '']);
+            if($productAlreadyExist == false){
+                Cart::add($product->id, $product->title, 1,$product->price, ['productImage' => (!empty
+                ($product->product_images))? $product->product_images->first() : '']);
 
-                $status = true;
-                $message = '<strong>'.$product->title.'</strong> added to cart successfully';
-                session()->flash('success', $message);
-
+                $status =true;
+                $message = $product->title.' added in cart';
 
             } else {
-                $status = false;
-                $message = $product->title.'Already added to cart';
+                $status =false;
+                $message = $product->title.' already added in cart';
             }
 
-        } else { 
-            //Cart is empty            
-            Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
-            $status = true;
-            $message = $product->title.'added in cart';
-            session()->flash('success', $message);
+        } else {
+            Cart::add($product->id, $product->title, 1,$product->price, ['productImage' => (!empty
+            ($product->product_images))? $product->product_images->first() : '']);
+            $status =true;
+            $message = $product->title.' added in cart';
         }
 
         return response()->json([
-            'status' => $status,
-            'message' => $message
+            'status' =>  $status,
+            'message' =>  $message
         ]);
     }
 
-    public function cart() {
+    public function cart(){
         $cartContent = Cart::content();
         $data['cartContent'] = $cartContent;
-        return view('front.cart', $data);
+        return view('front.cart',$data);
     }
-
     public function updateCart(Request $request) {
         $rowId = $request->rowId;
         $qty = $request->qty;
@@ -532,3 +515,4 @@ class CartController extends Controller
 
     }
 }
+
