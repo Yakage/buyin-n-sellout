@@ -307,7 +307,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                             @else
@@ -316,7 +316,7 @@
                                             </a>
                                                 @endif
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                            <a class="btn btn-dark" href="{{route('front.cart')}}"  onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
