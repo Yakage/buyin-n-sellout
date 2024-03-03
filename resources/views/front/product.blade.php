@@ -81,7 +81,7 @@
                         @if ($product->compare_price > 0)
                         <h2 class="price text-secondary"><del>PHP {{ $product->compare_price }}</del></h2>
                         @endif
-                        <h2 class="price ">${{ $product->price }}</h2>
+                        <h2 class="price ">PHP {{ $product->price }}</h2>
                         {!! $product->short_description !!}   
                         <a href="{{ route('front.addToCart' ,$product->id) }}"onclick="addToCart({{ $product->id }});" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> &nbsp;ADD TO CART</a>
 
@@ -238,7 +238,7 @@
                             @endif
                             </a>
 
-                            <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                            
+                            {{-- <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                             --}}
 
                             <div class="product-action">
                                 @if($product->track_qty == 'Yes')
