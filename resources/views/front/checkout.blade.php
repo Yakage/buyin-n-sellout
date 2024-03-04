@@ -128,10 +128,10 @@
                             <div class="h6"><strong>Subtotal</strong></div>
                             <div class="h6"><strong>PHP {{ Cart::subtotal()}}</strong></div>
                         </div>
-                        <div class="d-flex justify-content-between summery-end">
+                        {{-- <div class="d-flex justify-content-between summery-end">
                             <div class="h6"><strong>Discount</strong></div>
                             <div class="h6"><strong id="discount_value">PHP {{ $discount}}</strong></div>
-                        </div>
+                        </div> --}}
                         <div class="d-flex justify-content-between mt-2">
                             <div class="h6"><strong>Shipping</strong></div>
                             <div class="h6"><strong id="shippingAmount">PHP {{ number_format($totalShippingCharge,2)}}</strong></div>
