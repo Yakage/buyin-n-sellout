@@ -47,7 +47,7 @@ Route::get('/product/{slug}', [ApiShopController::class,'product']);
 Route::get('/cart', [ApiCartController::class, 'cart']);
 Route::post('/add-to-cart', [ApiCartController::class, 'addToCart']);
 Route::post('/update-cart', [ApiCartController::class, 'updateCart']);
-Route::post('/delete-item', [ApiCartController::class, 'deleteItem']);
+Route::delete('/delete-item', [ApiCartController::class, 'deleteItem']);
 Route::get('/checkout', [ApiCartController::class, 'checkout']);
 Route::get('/process-checkout', [ApiCartController::class, 'processCheckout']);
 Route::get('/thanks/{orderId}', [ApiCartController::class, 'thankyou']);

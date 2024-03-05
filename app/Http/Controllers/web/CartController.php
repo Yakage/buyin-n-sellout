@@ -89,7 +89,7 @@ class CartController extends Controller
     //         return redirect()->route('front.cart');
     //     }
     // }
-        $product = Product::with('product_images')->find($request->product_id);
+        $product = Product::with('product_images')->find($request->id);
         
         if ( $product==null) {
             return response()->json([
