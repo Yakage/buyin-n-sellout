@@ -36,6 +36,13 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet"><!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
+
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
@@ -179,21 +186,24 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{ $product->id }})" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                    <a onclick="addToWishlist({{ $product->id }});" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <form action="{{ route('front.addToCart') }}" method="POST">
+                                                <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                                    <i class="fa fa-shopping-cart"></i> Add To Cart
+                                                </a>
+                                                {{-- <form action="{{ route('front.addToCart') }}" method="POST">
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
-                                                </form>
+                                                </form> --}}
                                             @else
                                                 <a class="btn btn-dark" href="javascript:void(0);">
                                                     Out of Stock
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }})">
+                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                                             </a>
                                         @endif
@@ -241,20 +251,14 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
-                                                </form>
+                                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
                                             @else
                                             <a class="btn btn-dark" href="javascript:void(0);">
                                                 Out of Stock
                                             </a>
                                                 @endif
                                             @else
-                                                <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
-                                                </form>
+                                                <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
                                         @endif
                                     </div>
                                 </div>
@@ -342,6 +346,8 @@
             navbar.classList.remove("sticky");
         }
     }
+
+    
 </script>
 </body>
 </html>

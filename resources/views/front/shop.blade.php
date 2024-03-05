@@ -113,25 +113,21 @@
                                     </a>
                                     
                                     
-                                    <button onclick="addToWishlist({{$product->id}});" class="whishlist" href="javascript(0);"><i class="far fa-heart"></i></button>  
+                                    <button onclick="addToWishlist({{$product->id}});" class="wishlist" href="javascript(0);"><i class="far fa-heart"></i></button>  
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    @csrf
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
-                                                </form>
+                                                    <a class="btn btn-dark" href="javascript:(0);"  onclick="addToCat({{$product->id}});"><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
                                             @else
-                                                <button class="btn btn-dark" href="javascript:void(0);">
+                                                <a class="btn btn-dark" href="javascript:void(0);">
                                                     Out of Stock
-                                                </button>
+                                                </a>
                                                 @endif
                                             @else
-                                                <button class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                </button>
+                                                </a>
                                         @endif
                                     </div>
 
@@ -176,7 +172,7 @@ function addToCart(id) {
 
 			}
 		}
-	})
+	});
 }
 
     //     rangeSlider = $(".js-range-slider").ionRangeSlider({
