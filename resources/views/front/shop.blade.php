@@ -164,7 +164,7 @@
 
 function addToCart(id) {
 	$.ajax({
-		url: '{{ route("front.addToCart") }}',
+		url: "{{route('front.addToCart')}}",
 		type: 'post',
 		data: {id:id},
 		dataType: 'json',
