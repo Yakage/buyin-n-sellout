@@ -19,5 +19,6 @@ class VerifyCsrfToken extends Middleware
         '/account/login',
         '/account/register',
         '/account/process-register',
+        '/process-checkout',
     ];
 }
