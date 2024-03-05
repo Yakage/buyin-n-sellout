@@ -26,26 +26,26 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
-                                        <p></p>
+                                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" required>
+                                        {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
-                                        <p></p>
+                                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" required>
+                                        {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email">
-                                        <p></p>
+                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
+                                        {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control"></textarea>
-                                        <p></p>
+                                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control" required></textarea>
+                                        {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -55,26 +55,26 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <input type="text" name="city" id="city" class="form-control" placeholder="City">
+                                        <input type="text" name="city" id="city" class="form-control" placeholder="City" required>
+                                        {{-- <p></p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <input type="text" name="barangay" id="barangay" class="form-control" placeholder="Barangay" required>
                                         <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <input type="text" name="barangay" id="barangay" class="form-control" placeholder="Barangay">
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip">
-                                        <p></p>
+                                        <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip" required>
+                                        {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile No.">
-                                        <p></p>
+                                        <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile No." required>
+                                        {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
