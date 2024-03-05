@@ -169,7 +169,7 @@ class CartController extends Controller
 
         if ($product->track_qty == 'Yes') {
 
-            if($qty<=$product->$qty) {
+            if($qty<=$product->qty) {
                 Cart::update($rowId, $qty);
                 $message = 'Cart updated successfully';
                 $status = true;
