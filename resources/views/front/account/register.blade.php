@@ -50,7 +50,7 @@
 @endsection
 
 @section('customJs')
-    <script type="text/javascript">
+    <script>
         $("#registrationForm").submit(function(event) {
             event.preventDefault();
 
