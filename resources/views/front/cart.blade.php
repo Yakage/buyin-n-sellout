@@ -20,7 +20,7 @@
                 @if (Session::has('success'))
                     <div class="col-md-12">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {!! Success::get('success') !!} 
+                            {{ !!Session::get('success')!!}} 
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <tbody>
                                 @foreach ($cartContent as $item)
                                 <tr>
-                                    <td>
+                                    <td class="text-start">
                                         <div class="d-flex align-items-center">
                                             @if (!empty($item->options->productImage->image))
                                                 <img src="{{ asset('uploads/product/small/'. $item->options->productImage->image) }}"/>
@@ -83,7 +83,7 @@
                                         PHP {{$item->price*$item->qty}}
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteItem('{{$item->rowId}}');"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>      
                                 @endforeach
@@ -119,10 +119,13 @@
                         <button class="btn btn-dark" type="button" id="button-addon2">Apply Coupon</button>--}}
                     </div> 
                 </div>
+
                 @else
                 <div class="col-md-12">
+                    <div class="card">
                     <div class="card-body d-flex justify-content-center align-items-center">
                         <h4> You cart is empty!</h4>
+                    </div>
                     </div>
                 </div>
                 @endif           
@@ -167,7 +170,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response){
-                window.location.href = '{{ route("front.cart" )}}';
+                    window.location.href = '{{ route("front.cart" )}}';
             }
         });
     }
