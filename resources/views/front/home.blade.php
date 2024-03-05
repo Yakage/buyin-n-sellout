@@ -28,6 +28,8 @@
 	<meta name="twitter:image:alt" content="" />
 	<meta name="twitter:card" content="summary_large_image" />
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
