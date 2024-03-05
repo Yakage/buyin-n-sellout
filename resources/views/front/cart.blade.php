@@ -139,7 +139,7 @@
 
 @section ('customJs')
     <script>
-    // $(document).ready(function() {
+    $(document).ready(function() {
     //     $('.add').click(function() {
     //         updateQuantity(this, 1);
     //     });
