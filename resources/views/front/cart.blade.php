@@ -225,7 +225,7 @@
             $.ajax({
                 url: "{{ route('front.updateCart') }}",
                 type: 'post',
-                data: { rowId: rowId, qty: qty },
+                data: { rowId: rowId, newqty: newqty },
                 dataType: 'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -358,29 +358,17 @@
             success: function(response) {
                 if(response.status == true) {
                     window.location.href="{{ route('front.cart') }}";
-
-                    updateCart(rowId, newQty)
                 } else {
                     alert(response.message);
 
                 }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert('An error occurred. Please try again.');
             }
         });
     }
-    function updateCart(rowId, newQty) {
-            $.ajax({
-                url: "{{ route('front.updateCart') }}",
-                type: 'post',
-                data: { rowId: rowId, qty: qty },
-                dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    window.location.href = "{{ route('front.cart') }}";
-                }
-            });
-        }
 </script>
 </body>
 </html>
