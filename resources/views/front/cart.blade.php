@@ -223,6 +223,7 @@
         });
 
         function updateCart(rowId, newQty) {
+            $("input[type=text]").prop('disabled', true);
             $.ajax({
                 url: "{{ route('front.updateCart') }}",
                 type: 'post',
