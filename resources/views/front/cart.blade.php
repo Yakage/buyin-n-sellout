@@ -201,7 +201,7 @@
 
                 var rowId = $(this).data('id');
                 var newQty = qtyElement.val();
-                updateCart(rowId, newQty);
+                updateCart(rowId, qty);
 
                 window.location.href = "{{ route('front.cart') }}";
             }
@@ -215,17 +215,17 @@
 
                 var rowId = $(this).data('id');
                 var newQty = qtyElement.val();
-                updateCart(rowId, newQty);
+                updateCart(rowId, qty);
 
                 window.location.href = "{{ route('front.cart') }}";
             }
         });
 
-        function updateCart(rowId, newQty) {
+        function updateCart(rowId, qty) {
             $.ajax({
                 url: "{{ route('front.updateCart') }}",
                 type: 'post',
-                data: { rowId: rowId, newqty: newqty },
+                data: { rowId: rowId, qty: qty },
                 dataType: 'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -240,7 +240,7 @@
             if (confirm("Are you sure you want to delete?")) {
                 $.ajax({
                     url: "{{ route('front.deleteItem.cart') }}",
-                    type: 'post',
+                    type: 'delete',
                     data: { rowId: rowId },
                     dataType: 'json',
                     headers: {
