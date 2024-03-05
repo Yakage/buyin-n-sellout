@@ -65,14 +65,14 @@
                                     <td>
                                         <div class="input-group quantity mx-auto" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" data-id="{{ $item->rowId }}" >
+                                                <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" onclick="sub('{{$item->rowId}}');"  data-id="{{ $item->rowId }}" >
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
 
                                             <div class="input-group-btn">
-                                                    <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{ $item->rowId }}">
+                                                    <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add"  onclick="add('{{$item->rowId}}');" data-id="{{ $item->rowId }}">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                             </div>
@@ -136,59 +136,65 @@
 
 @section ('customJs')
     <script>
-        $('.add').click(function(){
-            var qtyElement = $(this).parent().prev(); // Qty Input
-            var qtyValue = parseInt(qtyElement.val());
-            if (qtyValue < 10) {
-                qtyElement.val(qtyValue+1);
+        $(document).ready(function()){
+            $('.add').click(function(){
+                var qtyElement = $(this).parent().prev(); // Qty Input
+                var qtyValue = parseInt(qtyElement.val());
+                if (qtyValue < 10) {
+                    qtyElement.val(qtyValue+1);
 
-                var rowId = $(this).data('id');
-                var newQty = qtyElement.val();
-                updateCart(rowId,newQty);
-            }            
-        });
+                    var rowId = $(this).data('id');
+                    var newQty = qtyElement.val();
+                    updateCart(rowId,newQty);
 
-        $('.sub').click(function(){
-            var qtyElement = $(this).parent().next(); 
-            var qtyValue = parseInt(qtyElement.val());
-            if (qtyValue > 1) {
-                qtyElement.val(qtyValue-1);
-
-                var rowId = $(this).data('id');
-                var newQty = qtyElement.val();
-                updateCart(rowId,newQty);
-            }        
-        });
-
-    function updateCart(rowId,qty) {
-        $.ajax({
-            url: "{{route('front.updateCart')}}",
-            type: 'post',
-            data: {rowId:rowId, qty:qty},
-            dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response){
                     window.location.href = "{{route('front.cart')}}";
-            }
-        });
-    }
+                }            
+            });
 
+            $('.sub').click(function(){
+                var qtyElement = $(this).parent().next(); 
+                var qtyValue = parseInt(qtyElement.val());
+                if (qtyValue > 1) {
+                    qtyElement.val(qtyValue-1);
 
-    function deleteItem(rowId) {
-        if(confirm("Are you sure you want to delete?")){
+                    var rowId = $(this).data('id');
+                    var newQty = qtyElement.val();
+                    updateCart(rowId,newQty);
+
+                    window.location.href = "{{route('front.cart')}}";
+                }        
+            });
+
+        function updateCart(rowId,qty) {
             $.ajax({
-                url: "{{route('front.deleteItem.cart')}}",
+                url: "{{route('front.updateCart')}}",
                 type: 'post',
-                data: {rowId:rowId},
+                data: {rowId:rowId, qty:qty},
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function(response){
-                    window.location.href ="{{route('front.cart')}}";
+                        window.location.href = "{{route('front.cart')}}";
                 }
             });
         }
-    }
+
+
+        function deleteItem(rowId) {
+            if(confirm("Are you sure you want to delete?")){
+                $.ajax({
+                    url: "{{route('front.deleteItem.cart')}}",
+                    type: 'post',
+                    data: {rowId:rowId},
+                    dataType: 'json',
+                    success: function(response){
+                        window.location.href ="{{route('front.cart')}}";
+                    }
+                });
+            }
+        }
+}
 
     </script>
 @endsection
