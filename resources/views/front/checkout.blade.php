@@ -176,7 +176,7 @@
                 dataType: 'json',
                 success: function(response){
                     var errors = response.errors;
-                    // $('button[type="submit"]').prop('disabled',false);
+                    $('button[type="submit"]').prop('disabled',false);
 
                     if (errors.first_name) {
                         $("#first_name").addClass('is-invalid')
