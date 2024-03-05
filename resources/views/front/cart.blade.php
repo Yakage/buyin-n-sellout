@@ -65,16 +65,16 @@
                                     <td>
                                         <div class="input-group quantity mx-auto" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" data-id="{{ $item->rowId }}" > 
-                                                    {{-- onclick="sub({{$item->rowId}});" --}}
+                                                <button type="button" class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" onclick="sub({{$item->rowId}});" data-id="{{ $item->rowId }}" > 
+                                                    {{--  --}}
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
 
                                             <div class="input-group-btn">
-                                                    <button type="button" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{ $item->rowId }}">
-                                                        {{-- onclick="add({{$item->rowId}});" --}}
+                                                    <button type="button" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" onclick="add({{$item->rowId}});" data-id="{{ $item->rowId }}">
+                                                        {{--  --}}
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                             </div>
@@ -85,7 +85,7 @@
                                         PHP {{$item->price*$item->qty}}
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem( {{$item->rowId}} );"><i class="fa fa-times"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem( {{$item->rowId}} );" data-id="{{ $item->rowId }}"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>      
                                 @endforeach
