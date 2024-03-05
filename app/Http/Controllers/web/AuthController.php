@@ -33,12 +33,12 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:5'
+            'password' => 'required|min:5|confirmed'
         ]);
 
         if($validator->passes()) {
 
-            $user = new User;
+            $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
@@ -48,6 +48,7 @@ class AuthController extends Controller
             session()->flash('success', 'You have been registered successfully.');
             return response()->json([
                 'status' => true,
+                'message' => "Registration successful."
             ]);
 
         } else {

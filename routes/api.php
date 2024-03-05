@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //API routes
-
+//for buyer side
 Route::get('/', [ApiFrontController::class,'index']);
 Route::get('/shop{categorySlug?}/{subCategorySlug?}', [ApiShopController::class, 'index']);
 Route::get('/product/{slug}', [ApiShopController::class,'product']);
@@ -95,15 +95,15 @@ Route::group(['prefix' => 'account'],function() {
 
 Route::group(['prefix' => 'admin'],function() { 
 
-    //Route::group(['middleware' => 'admin.guest'],function() {
+    Route::group(['middleware' => 'admin.guest'],function() {
 
         Route::get('/login', [ApiAdminLoginController::class, 'index']);
         Route::post('/login', [ApiAdminLoginController::class, 'login']);
         Route::get('/logout', [ApiAdminLoginController::class, 'logout']);
         
-    //});
+    });
 
-    //Route::group(['middleware' => 'admin.auth'],function() {
+    Route::group(['middleware' => 'admin.auth'],function() {
         Route::get('/dashboard', [ApiHomeController::class, 'index']);
         Route::get('/logout', [ApiHomeController::class, 'logout']);
 
@@ -212,7 +212,7 @@ Route::group(['prefix' => 'admin'],function() {
                 'slug' => $slug
             ]);
         });
-    //});
+    });
 
 
 });

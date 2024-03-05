@@ -15,34 +15,34 @@
 <section class=" section-10">
     <div class="container">
         <div class="login-form">    
-            <form action="account.processRegister" method="post" name="registrationForm" id="registrationForm">
-                @csrf
                 <h4 class="modal-title">Register Now</h4>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name" id="name" name="name">
-                    <p></p>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Email" id="email" name="email">
-                    <p></p>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone">
-                    <p></p>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" id="password" name="password">
-                    <p></p>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation">
-                    <p></p>
-                </div>
-                {{-- <div class="form-group small">
-                    <a href="#" class="forgot-link">Forgot Password?</a>
-                </div>  --}}
-                <button type="submit" class="btn btn-dark btn-block btn-lg" value="Register">Register</button>
-            </form>			
+                <form action="" name="registrationForm" id="registrationForm" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name" id="name" name="name">
+                        <p></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email" id="email" name="email">
+                        <p></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone">
+                        <p></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                        <p></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation">
+                        <p></p>
+                    </div>
+                    {{-- <div class="form-group small">
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>  --}}
+                    <button type="submit" class="btn btn-dark btn-block btn-lg" value="Register">Register</button>
+                </form>			
             <div class="text-center small">Already have an account? <a href="{{ route('account.login') }}">Login Now</a></div>
         </div>
     </div>
