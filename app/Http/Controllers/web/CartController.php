@@ -26,6 +26,7 @@ class CartController extends Controller
                 'status' => false,
                 'message' => 'Product not found'
             ]);
+
         }
 
         if(Cart::count()>0) {
@@ -49,7 +50,7 @@ class CartController extends Controller
                 ($product->product_images))? $product->product_images->first() : '']);
 
                 $status = true;
-                $message = '<strong>' .$product->title.'</strong> added in your cart successfully';
+                $message = `'<strong>'.$product->title.'</strong> added in your cart successfully'`;
 
                 session()->flash('success' ,$message);
                 return redirect()->route('front.home');
@@ -58,9 +59,9 @@ class CartController extends Controller
                 $status = false;
                 $message = $product->title.' already added in cart';
                 return redirect()->route('front.cart');
-
-
             }
+
+            
 
         } else {
             Cart::add($product->id, $product->title, 1,$product->price, ['productImage' => (!empty
@@ -68,13 +69,17 @@ class CartController extends Controller
             $status =true;
             $message ='<strong>' .$product->title.'</strong> added in your cart successfully';
             session()->flash('success' ,$message);
+            
 
         }
 
         return response()->json([
             'status' =>  $status,
-            'message' =>  $message
+            'message' =>  $message,
+            'redirect' => route('front.cart')
         ]);
+
+        
     }
 
     public function cart(){

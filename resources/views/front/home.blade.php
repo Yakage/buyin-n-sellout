@@ -184,7 +184,6 @@
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
                                                 <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    @csrf
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                                                 </form>
@@ -243,7 +242,6 @@
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
                                                 <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    @csrf
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                                                 </form>
@@ -254,7 +252,6 @@
                                                 @endif
                                             @else
                                                 <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    @csrf
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                                                 </form>
