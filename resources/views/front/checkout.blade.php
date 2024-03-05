@@ -153,189 +153,189 @@
 @endsection
 
 @section('customJs')
-    <script>
-        $("#payment_method_one").click(function(){
-            if($(this).is("checked")==true) {
-                $("#card-payment-form").addClass('d-none');
+<script>
+    $("#payment_method_one").click(function(){
+        if($(this).is("checked") == true) {
+            $("#card-payment-form").addClass('d-none');
+        }
+    });
+    
+    $("#payment_method_two").click(function(){
+        if($(this).is("checked") == true) {
+            $("#card-payment-form").removeClass('d-none');
+        }
+    });
+    $("#orderForm").submit(function(event){
+        event.preventDefault();
+        $('button[type="submit"]').prop('disabled',true);
+
+        $.ajax({
+            url: '{{ route("front.processCheckout") }}',
+            type: 'post',
+            data: $(this).serializeArray(),
+            dataType: 'json',
+            success: function(response){
+                var errors = response.errors;
+                $('button[type="submit"]').prop('disabled',false);
+
+                if (errors.first_name) {
+                    $("#first_name").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.first_name);
+                } else {
+                    $("#first_name").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+
+                if (errors.last_name) {
+                    $("#last_name").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.last_name);
+                } else {
+                    $("#last_name").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+
+                if (errors.email) {
+                    $("#email").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.email);
+                } else {
+                    $("#email").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+
+                if (errors.address) {
+                    $("#address").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.first_name);
+                } else {
+                    $("#address").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+
+                if (errors.barangay) {
+                    $("#barangay").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.barangay);
+                } else {
+                    $("#barangay").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                } 
+
+                if (errors.city) {
+                    $("#city").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.city);
+                } else {
+                    $("#city").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+
+                if (errors.zip) {
+                    $("#zip").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.zip);
+                } else {
+                    $("#zip").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+
+                if (errors.mobile) {
+                    $("#mobile").addClass('is-invalid')
+                    .siblings("p")
+                    .addClass('invalid-feedback')
+                    .html(errors.mobile);
+                } else {
+                    $("#mobile").removeClass('is-invalid')
+                    .siblings("p")
+                    .removeClass('invalid-feedback')
+                    .html('');
+                }
+                // if(response.status == false) {
+                }else{
+                    window.location.href ="{{url('/thanks/')}}" +response.orderId;
+                }
+            });
+        });
+    //});
+
+    $("#country").change(function(){
+        $.ajax({
+            url: '{{route ("front.getOrderSummary")}}',
+            type: 'get',
+            data: {country_id: $(this).val ()},
+            dataType: 'json',
+            success: function(response){
+                if(response.status == true){
+                    $(#shippingAmount).html('PHP'+response.shippingAmount);
+                    $(#grandTotal).html('PHP' + response.grandTotal);
+
+                }
             }
         });
+    });
+
+    $("#apply-discount").click(function(){
+        $.ajax({
+            url: '{{route ("front.getOrderSummary")}}',
+            type: 'post',
+            data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
+            dataType: 'json',
+            success: function(response){
+                if (response.status == true) {
+                    $("#shippingAmount").html('PHP'+response.shippingCharge);
+                    $("#grandTotal").html('PHP'+response.grandTotal);
+                    $("#discount_value").html('PHP'+response.discount);
+                    $("#discount-response-wrapper").html(response.discountString)
+                }  else {
+                    $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
+
+                }
+            }
+        });
+    });
+
+    $('body').on('click',"#remove-discount", function(){
+        $.ajax({
+            url: '{{route ("front.removeCoupon")}}',
+            type: post,
+            data: {country_id: $("#country").val()},
+            dataType: 'json',
+            success: function(response){
+                if (response.status == true) {
+                    $("#shippingAmount").html('PHP'+response.shippingCharge);
+                    $("#grandTotal").html('PHP'+response.grandTotal);
+                    $("#discount_value").html('PHP'+response.discount);
+                    $("discount-response").html('');
+                    $("discount_code").val('');
+                } 
+            }
+        });
+    });
+    //$("#remove-discount").click(function(){
         
-        $("#payment_method_two").click(function(){
-            if($(this).is("checked")==true) {
-                $("#card-payment-form").removeClass('d-none');
-            }
-        });
-        $("#orderForm").submit(function(event){
-            event.preventDefault();
-            $('button[type="submit"]').prop('disabled',true);
-
-            $.ajax({
-                url: '{{route("front.processCheckout")}}',
-                type: 'post',
-                data: $(this).serializeArray(),
-                dataType: 'json',
-                success: function(response){
-                    var errors = response.errors;
-                    $('button[type="submit"]').prop('disabled',false);
-
-                    if (errors.first_name) {
-                        $("#first_name").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.first_name);
-                    } else {
-                        $("#first_name").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-
-                    if (errors.last_name) {
-                        $("#last_name").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.last_name);
-                    } else {
-                        $("#last_name").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-
-                    if (errors.email) {
-                        $("#email").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.email);
-                    } else {
-                        $("#email").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-
-                    if (errors.address) {
-                        $("#address").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.first_name);
-                    } else {
-                        $("#address").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-
-                    if (errors.barangay) {
-                        $("#barangay").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.barangay);
-                    } else {
-                        $("#barangay").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    } 
-
-                    if (errors.city) {
-                        $("#city").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.city);
-                    } else {
-                        $("#city").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-
-                    if (errors.zip) {
-                        $("#zip").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.zip);
-                    } else {
-                        $("#zip").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-
-                    if (errors.mobile) {
-                        $("#mobile").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.mobile);
-                    } else {
-                        $("#mobile").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
-                    }
-                    // if(response.status == false) {
-                    }else{
-                        window.location.href ="{{url('/thanks/')}}" +response.orderId;
-                    }
-                });
-            });
-        //});
-
-        $("#country").change(function(){
-            $.ajax({
-                url: '{{route ("front.getOrderSummary")}}',
-                type: post,
-                data: {country_id: $(this).val ()},
-                dataType: 'json',
-                success: function(response){
-                    if(response.status == true){
-                        $(#shippingAmount).html('$'+response.shippingAmount);
-                        $(#grandTotal).html('$' + response.grandTotal);
-
-                    }
-                }
-            });
-        });
-
-        $("#apply-discount").click(function(){
-            $.ajax({
-                url: '{{route ("front.getOrderSummary")}}',
-                type: 'post',
-                data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
-                dataType: 'json',
-                success: function(response){
-                    if (response.status == true) {
-                        $("#shippingAmount").html('$'+response.shippingCharge);
-                        $("#grandTotal").html('$'+response.grandTotal);
-                        $("#discount_value").html('$'+response.discount);
-                        $("#discount-response-wrapper").html(response.discountString)
-                    }  else {
-                        $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
-
-                    }
-                }
-            });
-        });
-
-        $('body').on('click',"#remove-discount", function(){
-            $.ajax({
-                url: '{{route ("front.removeCoupon")}}',
-                type: post,
-                data: {country_id: $("#country").val()},
-                dataType: 'json',
-                success: function(response){
-                    if (response.status == true) {
-                        $("#shippingAmount").html('$'+response.shippingCharge);
-                        $("#grandTotal").html('$'+response.grandTotal);
-                        $("#discount_value").html('$'+response.discount);
-                        $("discount-response").html('');
-                        $("discount_code").val('');
-                    } 
-                }
-            });
-        });
-        //$("#remove-discount").click(function(){
-            
-        //});
-    </script>
+    //});
+</script>
 @endsection

@@ -172,7 +172,7 @@
                 data: {rowId:rowId, qty:qty},
                 dataType: 'json',
                 success: function(response){
-                        window.location.href = "{{route('front.cart')}}";
+                    window.location.href = "{{route('front.cart')}}";
                 }
             });
         }
