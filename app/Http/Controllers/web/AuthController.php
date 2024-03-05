@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         if($validator->passes()) {
 
-            $user = new User();
+            $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
@@ -49,7 +49,7 @@ class AuthController extends Controller
             session()->flash('success', 'You have been registered successfully.');
             return response()->json([
                 'status' => true,
-                'message' => "Registration successful.",
+                'message' => 'Registration successful. Redirecting to login page',
                 'redirect' => route('account.login')
 
             ]);
@@ -58,9 +58,9 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors(),
-                'redirect' => route('account.register'),
+                'message' => 'Unauthorized'
 
-            ]);
+            ], 401);
         }
     }
 

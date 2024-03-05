@@ -20,31 +20,39 @@ use Illuminate\Support\Str;
 
 class ApiAuthController extends Controller
 {
-    public function register(Request $request)
+    // public function register(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'name' => 'required|min:3',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required|min:5|confirmed',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'status' => false,
+    //             'errors' => $validator->errors(),
+    //         ], 422);
+    //     }
+
+    //     $user = new User;
+    //     $user->name = $request->name;
+    //     $user->email = $request->email;
+    //     $user->phone = $request->phone;
+    //     $user->password = Hash::make($request->password);
+    //     $user->save();
+
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => 'You have been registered successfully.',
+    //     ]);
+    // }
+
+    public function register()
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:5|confirmed',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->password = Hash::make($request->password);
-        $user->save();
-
         return response()->json([
             'status' => true,
-            'message' => 'You have been registered successfully.',
+            'message' => 'Welcome to the registration endpoint!'
         ]);
     }
 
@@ -160,10 +168,11 @@ class ApiAuthController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5|confirmed',
+            'password_confirmation' => 'required|string|same:password'
         ]);
 
         if ($validator->passes()) {
-            $user = new User();
+            $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
@@ -172,13 +181,15 @@ class ApiAuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Registration successful.',
+                'message' => 'Registration successful. Redirecting to login page',
+                'redirect' => route('account.login')
             ]);
         } else {
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors(),
-            ], 422);
+                'message' => 'Unauthorized'
+            ], 401);
         }
     }
 
