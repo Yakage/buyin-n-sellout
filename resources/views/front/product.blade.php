@@ -244,7 +244,7 @@
                             @endif
                             </a>
 
-                            <a class="whishlist" href="222" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>                            
+                            <a class="whishlist" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>                            
 
                             <div class="product-action">
                                 @if($product->track_qty == 'Yes')
