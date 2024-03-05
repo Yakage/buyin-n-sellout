@@ -7,7 +7,7 @@ use App\Mail\ContactEmail;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\User;
-use App\Models\WishList;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
