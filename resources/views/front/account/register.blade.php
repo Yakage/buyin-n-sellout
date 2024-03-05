@@ -15,7 +15,7 @@
 <section class=" section-10">
     <div class="container">
         <div class="login-form">
-                @include('account.message')
+                @include('front.account.common.message')
                 <h4 class="modal-title">Register Now</h4>
                 <form action="{{ route('account.processRegister') }}" name="registrationForm" id="registrationForm" method="post">
                     @csrf
