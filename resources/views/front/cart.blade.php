@@ -193,7 +193,8 @@
     //         }
     //     }
     // });
-        $('.add').click(function() {
+        // $('.add').click(function() {
+        $('.add').on('mousedown', function() {
             var qtyElement = $(this).parent().prev(); // Qty Input
             var qtyValue = parseInt(qtyElement.val());
             if (qtyValue < 10) {
@@ -207,7 +208,8 @@
             }
         });
 
-        $('.sub').click(function() {
+        //$('.sub').click(function() {
+        $('.sub').on('mousedown', function() {
             var qtyElement = $(this).parent().next();
             var qtyValue = parseInt(qtyElement.val());
             if (qtyValue > 1) {
