@@ -168,7 +168,6 @@
     });
     $("#orderForm").submit(function(event){
         event.preventDefault();
-        var element = $(this);
         $("button[type=submit]").prop('disabled', true);
 
         $.ajax({
