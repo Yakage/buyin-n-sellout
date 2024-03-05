@@ -156,35 +156,30 @@ class ApiAuthController extends Controller
 
     public function processRegister(Request $request)
     {
-        // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5|confirmed',
         ]);
 
-        // Check if validation fails
-        if ($validator->fails()) {
+        if ($validator->passes()) {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Registration successful.',
+            ]);
+        } else {
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors(),
             ], 422);
         }
-
-        // Create a new user
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone; // Assuming phone is also sent in the request
-        $user->password = Hash::make($request->password);
-        $user->save();
-
-        // Return success response
-        return response()->json([
-            'status' => true,
-            'message' => 'User registered successfully',
-            'user' => $user,
-        ], 201); // 201 Created status code
     }
 
     public function authenticate(Request $request) {
