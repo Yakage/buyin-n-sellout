@@ -171,9 +171,6 @@
                 type: 'post',
                 data: {rowId:rowId, qty:qty},
                 dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
                 success: function(response){
                         window.location.href = "{{route('front.cart')}}";
                 }
