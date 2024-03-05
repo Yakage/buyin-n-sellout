@@ -193,54 +193,33 @@
     //         }
     //     }
     // });
-    $(document).ready(function() {
         $('.add').click(function() {
-            updateQuantity(this, 1);
+            var qtyElement = $(this).parent().prev(); // Qty Input
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue < 10) {
+                qtyElement.val(qtyValue + 1);
+
+                var rowId = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId, newQty);
+
+                window.location.href = "{{ route('front.cart') }}";
+            }
         });
 
         $('.sub').click(function() {
-            updateQuantity(this, -1);
-        });
-
-        function updateQuantity(element, change) {
-            var qtyElement = $(element).parent().find('.qty-input'); // Get the correct qty input
+            var qtyElement = $(this).parent().next();
             var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue > 1) {
+                qtyElement.val(qtyValue - 1);
 
-            if ((change === 1 && qtyValue < 10) || (change === -1 && qtyValue > 1)) {
-                qtyElement.val(qtyValue + change);
-
-                var rowId = $(element).data('id');
+                var rowId = $(this).data('id');
                 var newQty = qtyElement.val();
                 updateCart(rowId, newQty);
+
+                window.location.href = "{{ route('front.cart') }}";
             }
-        }
-        // $('.add').click(function() {
-        //     var qtyElement = $(this).parent().prev(); // Qty Input
-        //     var qtyValue = parseInt(qtyElement.val());
-        //     if (qtyValue < 10) {
-        //         qtyElement.val(qtyValue + 1);
-
-        //         var rowId = $(this).data('id');
-        //         var newQty = qtyElement.val();
-        //         updateCart(rowId, newQty);
-
-        //         window.location.href = "{{ route('front.cart') }}";
-        //     }
-        // });
-
-        // $('.sub').click(function() {
-        //     var qtyElement = $(this).parent().next();
-        //     var qtyValue = parseInt(qtyElement.val());
-        //     if (qtyValue > 1) {
-        //         qtyElement.val(qtyValue - 1);
-
-        //         var rowId = $(this).data('id');
-        //         var newQty = qtyElement.val();
-        //         updateCart(rowId, newQty);
-
-        //         window.location.href = "{{ route('front.cart') }}";
-        //     }
-        // });
+        });
 
         function updateCart(rowId, newQty) {
             $("input[type=text]").prop('disabled', true);
