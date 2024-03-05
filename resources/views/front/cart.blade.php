@@ -222,7 +222,6 @@
         });
 
         function updateCart(rowId, newQty) {
-            $("input[type=text]").prop('disabled', true);
             $.ajax({
                 url: "{{ route('front.updateCart') }}",
                 type: 'post',
@@ -232,11 +231,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    $("input[type=text]").prop('disabled', false);
                     window.location.href = "{{ route('front.cart') }}";
-                },
-                error: function() {
-                    $("input[type=text]").prop('disabled', false);
                 }
             });
         }
