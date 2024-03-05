@@ -350,7 +350,7 @@
 </script> --}}
 
 <script>
-    function addToCart($product->id) {
+    function addToCart(id) {
         $.ajax({
             url: '{{ route("front.addToCart") }}',
             type: 'post',
