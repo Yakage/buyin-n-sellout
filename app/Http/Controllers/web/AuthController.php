@@ -33,12 +33,13 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:5|confirmed'
+            'password' => 'required|min:5|confirmed',
+            'password_confirmation' => 'required|string|same:password'
         ]);
 
         if($validator->passes()) {
 
-            $user = new User();
+            $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
@@ -48,7 +49,7 @@ class AuthController extends Controller
             session()->flash('success', 'You have been registered successfully.');
             return response()->json([
                 'status' => true,
-                'message' => "Registration successful.",
+                'message' => 'Registration successful. Redirecting to login page',
                 'redirect' => route('account.login')
 
             ]);
@@ -57,9 +58,9 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors(),
-                'redirect' => route('account.register'),
+                'message' => 'Unauthorized'
 
-            ]);
+            ], 401);
         }
     }
 
@@ -147,7 +148,7 @@ class AuthController extends Controller
             'country_id' => 'required',
             'address' => 'required|min:30',
             'city' => 'required',
-            'state' => 'required',
+            'barangay' => 'required',
             'zip' => 'required',
             'mobile' => 'required'
         ]);
@@ -170,7 +171,7 @@ class AuthController extends Controller
                     'address' => $request->address,
                     'apartment' => $request->apartment,
                     'city' => $request->city,
-                    'state' => $request->state,
+                    'barangay' => $request->barangay,
                     'zip' => $request->zip,
                 ]
             );

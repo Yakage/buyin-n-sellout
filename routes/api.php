@@ -72,7 +72,7 @@ Route::group(['prefix' => 'account'],function() {
         Route::post('/login', [ApiAuthController::class, 'authenticate']);
         
         Route::get('/register', [ApiAuthController::class, 'register']);
-        Route::post('/process-register', [ApiAuthController::class, 'processRegister']);
+        Route::post('/register', [ApiAuthController::class, 'processRegister']);
 
     });
 
