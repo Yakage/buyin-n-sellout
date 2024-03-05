@@ -14,9 +14,10 @@
 
 <section class=" section-10">
     <div class="container">
-        <div class="login-form">    
+        <div class="login-form">
+                @include('account.message')
                 <h4 class="modal-title">Register Now</h4>
-                <form action="" name="registrationForm" id="registrationForm" method="POST">
+                <form action="{{ route('account.processRegister') }}" name="registrationForm" id="registrationForm" method="post">
                     @csrf
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Name" id="name" name="name">
@@ -49,7 +50,7 @@
 </section>
 @endsection
 
-@section('customJs')
+{{-- @section('customJs')
     <script>
         // $("#registrationForm").submit(function(event) {
         //     event.preventDefault();
@@ -186,4 +187,4 @@
             $(elementId).removeClass('is-invalid');
         }
     </script>
-@endsection
+@endsection --}}

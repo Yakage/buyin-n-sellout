@@ -188,8 +188,7 @@ class ApiAuthController extends Controller
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors(),
-                'message' => 'Unauthorized'
-            ], 401);
+            ]);
         }
     }
 
