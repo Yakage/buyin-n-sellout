@@ -194,9 +194,7 @@
                                                     <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                                                 </form> --}}
                                             @else
-                                                <a class="btn btn-dark" href="javascript:void(0);">
-                                                    Out of Stock
-                                                </a>
+                                            <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
@@ -249,9 +247,7 @@
                                             @if($product->qty > 0)
                                                 <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                             @else
-                                            <a class="btn btn-dark" href="javascript:void(0);">
-                                                Out of Stock
-                                            </a>
+                                            <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
@@ -354,17 +350,21 @@
         $.ajax({
             url: '{{ route("front.addToCart") }}',
             type: 'post',
-            data: {id: id,
-                '_token': '{{ csrf_token() }}'
-            },
+            data: {id: id},
             dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response) {
-                if(response.status == true) {
-                    window.location.href="{{ route('front.cart') }}";
+                if (response.status == true) {
+                    window.location.href = "{{ route('front.cart') }}";
                 } else {
                     alert(response.message);
-
                 }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert('An error occurred. Please try again.');
             }
         });
     }
