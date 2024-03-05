@@ -182,7 +182,7 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{ $product->id }});" class="whishlist"><i class="far fa-heart"></i></a>
+                                    <button type="button" onclick="addToWishlist({{ $product->id }});" class="wishlist"><i class="far fa-heart"></i></button>
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
@@ -240,7 +240,7 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <button type="button" onclick="addToWishlist({{$product->id}})" class="whishlist"><i class="far fa-heart"></i></button>
+                                    <button type="button" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></button>
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
@@ -368,6 +368,29 @@
                 alert('An error occurred. Please try again.');
             }
         });
+    }
+
+    function addToWishList(id) {
+        $.ajax({
+            url: "{{route('front.addToWishList')}}",
+            type: 'post',
+            data: {id:id},
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if(response.status == true) {
+
+                    $("#wishlistModal" .modal-body).html(response.message);
+                    $("#wishlistModal").modal('show');
+    
+                } else {
+                    window.location.href="{{ route('account.login') }}";
+                    //alert(response.message);
+                }
+            }
+        })
     }
 </script>
 </body>

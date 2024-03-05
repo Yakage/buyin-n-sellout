@@ -244,7 +244,7 @@
                             @endif
                             </a>
 
-                            {{-- <a class="wishlist" href="222"><i class="far fa-heart"></i></a>                             --}}
+                            <button type="button" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></button>                            
 
                             <div class="product-action">
                                 @if($product->track_qty == 'Yes')
@@ -284,6 +284,54 @@
 
 @section('customJs')
     <script type="text/javascript">
+
+        function addToCart(id) {
+            $.ajax({
+                url: '{{ route("front.addToCart") }}',
+                type: 'post',
+                data: {id: id},
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if(response.status == true) {
+                        window.location.href="{{ route('front.cart') }}";
+                    } else {
+                        alert(response.message);
+
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        }
+
+        function addToWishList(id) {
+            $.ajax({
+                url: "{{route('front.addToWishList')}}",
+                type: 'post',
+                data: {id:id},
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if(response.status == true) {
+
+                        $("#wishlistModal" .modal-body).html(response.message);
+                        $("#wishlistModal").modal('show');
+        
+                    } else {
+                        window.location.href="{{ route('account.login') }}";
+                        //alert(response.message);
+                    }
+                }
+            })
+        }
+
         var errors = response.errors;
 
         if(response.status == false) {
