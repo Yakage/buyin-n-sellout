@@ -385,7 +385,7 @@
             success: function(response) {
                 if(response.status == true) {
 
-                    $("#wishlistModal" .modal-body).html(response.message);
+                    $("#wishlistModal .modal-body").html(response.message);
                     $("#wishlistModal").modal('show');
     
                 } else {

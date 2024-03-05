@@ -168,7 +168,8 @@
     });
     $("#orderForm").submit(function(event){
         event.preventDefault();
-        $('button[type="submit"]').prop('disabled',true);
+        var element = $(this);
+        $("button[type=submit]").prop('disabled', true);
 
         $.ajax({
             url: '{{ route("front.processCheckout") }}',
