@@ -24,11 +24,12 @@ class AdminLoginController extends Controller
                 $admin = auth()->guard('admin')->user();
     
                 if ($admin->role == 2) {
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Login successful',
-                        'redirect' => route('admin.dashboard'),
-                    ]);
+                    return redirect()->route('admin.dahsboard');
+                    // return response()->json([
+                    //     'status' => true,
+                    //     'message' => 'Login successful',
+                    //     'redirect' => route('admin.dashboard'),
+                    // ]);
                 } else {
                     auth()->guard('admin')->logout();
                     return response()->json([

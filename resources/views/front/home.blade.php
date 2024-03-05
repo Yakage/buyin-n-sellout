@@ -180,13 +180,13 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{ $product->id }});" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                    <a onclick="addToWishlist({{ $product->id }});" class="whishlist"><i class="far fa-heart"></i></a>
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                                <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                </a>
+                                                </button>
                                                 {{-- <form action="{{ route('front.addToCart') }}" method="POST">
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
@@ -197,9 +197,9 @@
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
+                                            <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
                                                 <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </a>
+                                            </button>
                                         @endif
                                     </div>                                    
                                 </div>
@@ -240,19 +240,19 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <a onclick="addToWishlist({{$product->id}})" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>
+                                    <button type="button" onclick="addToWishlist({{$product->id}})" class="whishlist"><i class="far fa-heart"></i></button>
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                    <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
+                                                <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                             @else
                                             <a class="btn btn-dark" href="javascript:void(0);">
                                                 Out of Stock
                                             </a>
-                                                @endif
-                                            @else
-                                                <a href="javascript:void(0);" class="btn btn-dark" onclick="addToCart({{ $product->id }});><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
+                                            @endif
+                                        @else
+                                            <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                         @endif
                                     </div>
                                 </div>
@@ -322,7 +322,8 @@
 		</div>
 	</div>
 </footer>
-<script src="{{ secure_asset('front-assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="{{ secure_asset('front-assets/js/jquery-3.6.0.min.js')}}"></script> --}}
 <script src="{{ secure_asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
 <script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
@@ -341,9 +342,28 @@
         }
     }
 </script>
-<script>
+{{-- <script>
     document.documentElement.classList.remove('no-js');
     document.documentElement.classList.add('js');
+</script> --}}
+
+<script>
+    function addToCart(id) {
+        $.ajax({
+            url: "{{route('front.addToCart')}}",
+            type: 'post',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response) {
+                if(response.status == true) {
+                    window.location.href="{{ route('front.cart') }}";
+                } else {
+                    alert(response.message);
+
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

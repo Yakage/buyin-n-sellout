@@ -118,16 +118,16 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                    <a class="btn btn-dark" href="javascript:(0);"  onclick="addToCat({{$product->id}});"><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
+                                                    <button type="button" class="btn btn-dark"  onclick="addToCart({{$product->id}});"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
                                             @else
                                                 <a class="btn btn-dark" href="javascript:void(0);">
                                                     Out of Stock
                                                 </a>
                                                 @endif
                                             @else
-                                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }});">
+                                                <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
                                                     <i class="fa fa-shopping-cart"></i> Add To Cart
-                                                </a>
+                                                </button>
                                         @endif
                                     </div>
 
@@ -171,7 +171,7 @@ function addToCart(id) {
 				alert(response.message);
 
 			}
-		}
+        }
 	});
 }
 

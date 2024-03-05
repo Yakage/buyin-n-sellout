@@ -65,14 +65,16 @@
                                     <td>
                                         <div class="input-group quantity mx-auto" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" onclick="sub({{$item->rowId}});"  data-id="{{ $item->rowId }}" >
+                                                <button type="button" class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" data-id="{{ $item->rowId }}" > 
+                                                    {{-- onclick="sub({{$item->rowId}});" --}}
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
 
                                             <div class="input-group-btn">
-                                                    <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" onclick="add({{$item->rowId}});" data-id="{{ $item->rowId }}">
+                                                    <button type="button" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{ $item->rowId }}">
+                                                        {{-- onclick="add({{$item->rowId}});" --}}
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                             </div>
@@ -83,7 +85,7 @@
                                         PHP {{$item->price*$item->qty}}
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-danger" onclick="deleteItem('{{$item->rowId}}');"><i class="fa fa-times"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem( {{$item->rowId}} );"><i class="fa fa-times"></i></button>
                                     </td>
                                 </tr>      
                                 @endforeach
@@ -136,61 +138,114 @@
 
 @section ('customJs')
     <script>
-        $(document).ready(function() {
-    $('.add').click(function() {
-        var qtyElement = $(this).parent().prev(); // Qty Input
-        var qtyValue = parseInt(qtyElement.val());
-        if (qtyValue < 10) {
-            qtyElement.val(qtyValue + 1);
+    // $(document).ready(function() {
+    //     $('.add').click(function() {
+    //         updateQuantity(this, 1);
+    //     });
 
-            var rowId = $(this).data('id');
-            var newQty = qtyElement.val();
-            updateCart(rowId, newQty);
+    //     $('.sub').click(function() {
+    //         updateQuantity(this, -1);
+    //     });
 
-            window.location.href = "{{ route('front.cart') }}";
-        }
-    });
+    //     function updateQuantity(element, change) {
+    //         var qtyElement = $(element).parent().prev(); // Qty Input
+    //         var qtyValue = parseInt(qtyElement.val());
+            
+    //         if ((change === 1 && qtyValue < 10) || (change === -1 && qtyValue > 1)) {
+    //             qtyElement.val(qtyValue + change);
 
-    $('.sub').click(function() {
-        var qtyElement = $(this).parent().next();
-        var qtyValue = parseInt(qtyElement.val());
-        if (qtyValue > 1) {
-            qtyElement.val(qtyValue - 1);
+    //             var rowId = $(element).data('id');
+    //             var newQty = qtyElement.val();
+    //             updateCart(rowId, newQty);
+    //         }
+    //     }
 
-            var rowId = $(this).data('id');
-            var newQty = qtyElement.val();
-            updateCart(rowId, newQty);
+    //     function updateCart(rowId, qty) {
+    //         $.ajax({
+    //             url: "{{ route('front.updateCart') }}",
+    //             type: 'post',
+    //             data: { rowId: rowId, qty: qty },
+    //             dataType: 'json',
+    //             success: function(response) {
+    //                 // Handle success (if needed)
+    //             }
+    //         });
+    //     }
 
-            window.location.href = "{{ route('front.cart') }}";
-        }
-    });
+    //     $('.delete').click(function() {
+    //         var rowId = $(this).data('id');
+    //         deleteItem(rowId);
+    //     });
 
-    function updateCart(rowId, qty) {
-        $.ajax({
-            url: "{{ route('front.updateCart') }}",
-            type: 'post',
-            data: { rowId: rowId, qty: qty },
-            dataType: 'json',
-            success: function(response) {
+    //     function deleteItem(rowId) {
+    //         // You might want to use a custom confirmation dialog here
+    //         if (confirm("Are you sure you want to delete?")) {
+    //             $.ajax({
+    //                 url: "{{ route('front.deleteItem.cart') }}",
+    //                 type: 'post',
+    //                 data: { rowId: rowId },
+    //                 dataType: 'json',
+    //                 success: function(response) {
+    //                     // Handle success (if needed)
+    //                 }
+    //             });
+    //         }
+    //     }
+    // });
+    $(document).ready(function() {
+        $('.add').click(function() {
+            var qtyElement = $(this).parent().prev(); // Qty Input
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue < 10) {
+                qtyElement.val(qtyValue + 1);
+
+                var rowId = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId, newQty);
+
                 window.location.href = "{{ route('front.cart') }}";
             }
         });
-    }
 
-    function deleteItem(rowId) {
-        if (confirm("Are you sure you want to delete?")) {
+        $('.sub').click(function() {
+            var qtyElement = $(this).parent().next();
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue > 1) {
+                qtyElement.val(qtyValue - 1);
+
+                var rowId = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId, newQty);
+
+                window.location.href = "{{ route('front.cart') }}";
+            }
+        });
+
+        function updateCart(rowId, newQty) {
             $.ajax({
-                url: "{{ route('front.deleteItem.cart') }}",
+                url: "{{ route('front.updateCart') }}",
                 type: 'post',
-                data: { rowId: rowId },
+                data: { rowId: rowId, qty: qty },
                 dataType: 'json',
                 success: function(response) {
                     window.location.href = "{{ route('front.cart') }}";
                 }
             });
         }
-    }
-});
 
+        function deleteItem(rowId) {
+            if (confirm("Are you sure you want to delete?")) {
+                $.ajax({
+                    url: "{{ route('front.deleteItem.cart') }}",
+                    type: 'delete',
+                    data: { rowId: rowId },
+                    dataType: 'json',
+                    success: function(response) {
+                        window.location.href = "{{ route('front.cart') }}";
+                    }
+                });
+            }
+        }
+    });
 </script>
 @endsection

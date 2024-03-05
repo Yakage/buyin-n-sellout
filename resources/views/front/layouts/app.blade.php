@@ -231,6 +231,7 @@
 	</div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ secure_asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
 <script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
 <script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
