@@ -90,6 +90,14 @@
                             $("#password").siblings("p").removeClass('invalid-feedback').html('');
                             $("#password").removeClass('is-invalid');
                         }
+
+                        if(errors.password_confirmation) {
+                            $("#password_confirmation").siblings("p").addClass('invalid-feedback').html(errors.password_confirmation);
+                            $("#password_confirmation").addClass('is-invalid');
+                        } else {
+                            $("#password_confirmation").siblings("p").removeClass('invalid-feedback').html('');
+                            $("#password_confirmation").removeClass('is-invalid');
+                        }
                     } else {
                         $("#name").siblings("p").removeClass('invalid-feedback').html('');
                         $("#name").removeClass('is-invalid');
@@ -99,6 +107,9 @@
 
                         $("#password").siblings("p").removeClass('invalid-feedback').html('');
                         $("#password").removeClass('is-invalid');
+
+                        $("#password_confirmation").siblings("p").removeClass('invalid-feedback').html('');
+                        $("#password_confirmation").removeClass('is-invalid');
 
                         window.location.href="{{ route('account.login') }}";
                     }
