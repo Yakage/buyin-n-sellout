@@ -182,7 +182,9 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    <button type="button" onclick="addToWishlist({{ $product->id }});" class="wishlist"><i class="far fa-heart"></i></button>
+
+                                        <button type="button" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></button>
+
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
@@ -240,6 +242,7 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
+                                    
                                     <button type="button" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></button>
 
                                     <div class="product-action">
