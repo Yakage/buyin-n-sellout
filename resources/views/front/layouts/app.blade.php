@@ -263,7 +263,7 @@ $.ajaxSetup({
 
 function addToCart(id) {
 	$.ajax({
-		url: '{{ route("front.addToCart") }}',
+		url: "{{route('front.addToCart')}}",
 		type: 'post',
 		data: {id:id},
 		dataType: 'json',
@@ -280,7 +280,7 @@ function addToCart(id) {
 
 function addToWishList(id) {
 	$.ajax({
-		url: '{{ route("front.addToWishList") }}',
+		url: "{{route('front.addToWishList')}}",
 		type: 'post',
 		data: {id:id},
 		dataType: 'json',

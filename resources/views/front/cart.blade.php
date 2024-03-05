@@ -162,7 +162,7 @@
 
     function updateCart(rowId,qty) {
         $.ajax({
-            url: '{{ route("front.updateCart") }}',
+            url: "{{route('front.updateCart')}}",
             type: 'post',
             data: {rowId:rowId, qty:qty},
             dataType: 'json',
@@ -170,7 +170,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response){
-                    window.location.href = '{{ route("front.cart" )}}';
+                    window.location.href = "{{route('front.cart')}}";
             }
         });
     }
@@ -179,7 +179,7 @@
     function deleteItem(rowId) {
         if(confirm("Are you sure you want to delete?")){
             $.ajax({
-                url: '{{route("front.deleteItem.cart") }}',
+                url: "{{route('front.deleteItem.cart')}}",
                 type: 'post',
                 data: {rowId:rowId},
                 dataType: 'json',
@@ -187,7 +187,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response){
-                    window.location.href = '{{ route("front.cart" )}}';
+                    window.location.href ="{{route('front.cart')}}";
                 }
             });
         }
