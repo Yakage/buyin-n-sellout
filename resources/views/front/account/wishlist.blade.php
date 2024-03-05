@@ -34,7 +34,7 @@
                                     @php
                                        $productImage = getProductImage($wishlist->product_id);
                                     @endphp
-                                    <a class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{route("front.product",$wishlist->product->slug)}}" style="width: 10rem;">
+                                    <a class="d-block flex-shrink-0 mx-auto me-sm-4" href="{{route('front.product',$wishlist->product->slug)}}" style="width: 10rem;">
 
                                     @if (!empty($productImage))
                                     <img src="{{ asset('uploads/product/small/'.$productImage->image) }}"/>
@@ -44,7 +44,7 @@
                                     </a>
 
                                     <div class="pt-2">
-                                        <h3 class="product-title fs-base mb-2"><a href="{{route("front.product",$wishlist->product->slug)}}">{{$wishlist->product->title}}</a></h3>                                        
+                                        <h3 class="product-title fs-base mb-2"><a href="{{route('front.product',$wishlist->product->slug)}}">{{$wishlist->product->title}}</a></h3>                                        
                                         <div class="fs-lg text-accent pt-2">
                                             <span class="h5"><strong>{{$wishlist->product->price}}</strong></span>
                                             @if($wishlist->product->compare_price > 0)
