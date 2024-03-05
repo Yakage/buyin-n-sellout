@@ -15,7 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="" name="orderForm" id="orderForm" method="POST">
+        <form action="" name="orderForm" id="orderForm" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-8">
@@ -117,7 +117,7 @@
                                             <label for="payment_1" class="form-check-label">COD</label>
                                         </div>
 
-                                        <div class="form-check">
+                                        {{-- <div class="form-check">
                                             <input type="radio" name="payment_method_two" value="cod" id="payment_method_two">
                                             <label for="payment_2" class="form-check-label">Stripe</label>
                                         </div>
@@ -137,7 +137,7 @@
                                                     <input type="text" name="expiry_date" id="expiry_date" placeholder="123" class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="pt-4">
                                             <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button>
                                         </div>
@@ -175,6 +175,9 @@
             type: 'post',
             data: $(this).serializeArray(),
             dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response){
                 var errors = response.errors;
                 $('button[type="submit"]').prop('disabled',false);
