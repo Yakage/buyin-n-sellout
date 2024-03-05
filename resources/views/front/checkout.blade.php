@@ -15,8 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="" name="orderForm" id="orderForm" method="post">
-            @csrf
+        <form action="{{ route('front.processCheckout') }}" method="post">
             <div class="row">
                 <div class="col-md-8">
                     <div class="sub-title">
@@ -175,9 +174,6 @@
             type: 'post',
             data: $(this).serializeArray(),
             dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
             success: function(response){
                 var errors = response.errors;
                 $('button[type="submit"]').prop('disabled',false);
@@ -280,6 +276,8 @@
                 // if(response.status == false) {
                 }else{
                     window.location.href ="{{url('/thanks/')}}" +response.orderId;
+                }, error: function(jqXHR, exception) {
+                    console.log("Something went wrong.")
                 }
             });
         });
