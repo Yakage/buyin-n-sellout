@@ -183,7 +183,7 @@
                                         @endif
                                     </a>
 
-                                        <button type="button" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></button>
+                                        <a onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
@@ -242,8 +242,8 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    
-                                    <button type="button" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></button>
+
+                                    <a onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
