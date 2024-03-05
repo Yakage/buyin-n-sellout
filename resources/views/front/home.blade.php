@@ -6,10 +6,8 @@
 	<title>BuyIn & SellOut</title>
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
-
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="pinterest" content="nopin" />
-
 	<meta property="og:locale" content="en_AU" />
 	<meta property="og:type" content="website" />
     <meta property="fb:admins" content="" />
@@ -29,19 +27,15 @@
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:image:alt" content="" />
 	<meta name="twitter:card" content="summary_large_image" />
-	
 
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
-
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-	<!-- Fav Icon -->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet"><!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
-    
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
@@ -49,14 +43,10 @@
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
 				  <i class="navbar-toggler-icon fas fa-bars"></i>
     		</button>
     		<div class="collapse navbar-collapse" id="navbarSupportedContent">
       			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        			<!-- <li class="nav-item">
-          				<a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
-        			</li> -->
                     @if(getCategories()->isNotEmpty())
                         @foreach(getCategories() as $category)
                             <li class="nav-item dropdown">
@@ -92,14 +82,6 @@
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
 				<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
-				{{-- <form action="">					
-					<div class="input-group">
-						<input type="text" placeholder="Search For Products" class="form-control" aria-label="Amount (to the nearest dollar)">
-						<span class="input-group-text">
-							<i class="fa fa-search"></i>
-					  	</span>
-					</div>
-				</form> --}}
 			</div>		
 		</div>
 	</div>
@@ -111,7 +93,6 @@
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
-                    <!-- <img src="images/carousel-1.jpg" class="d-block w-100" alt=""> -->
                     <picture>
                         <source media="(max-width: 799px)" srcset="{{ asset('front-assets/images/upang-students.jpg')}}" />
                         <source media="(min-width: 800px)" srcset="{{ asset('front-assets/images/upang-students.jpg')}}" />
@@ -120,8 +101,6 @@
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3">
                             <h1 class="display-4 text-white mb-3">Student Needs</h1>
-                            {{-- <p class="mx-md-5 px-5">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
-                            {{-- <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a> --}}
                         </div>
                     </div>
                 </div>  
@@ -136,27 +115,9 @@
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3">
                             <h1 class="display-4 text-white mb-3">Student Must-Haves</h1>
-                            {{-- <p class="mx-md-5 px-5">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
-                            {{-- <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a> --}}
                         </div>
                     </div>
                 </div>
-                {{-- <div class="carousel-item">
-                    <!-- <img src="images/carousel-3.jpg" class="d-block w-100" alt=""> -->
-                    
-                    <picture>
-                        <source media="(max-width: 799px)" srcset="{{ asset('front-assets/images/carousel-3-m.jpg')}}" />
-                        <source media="(min-width: 800px)" srcset="{{ asset('front-assets/images/carousel-3.jpg')}}" />
-                        <img src="{{ asset('front-assets/images/carousel-3.jpg')}}" alt="" />
-                    </picture>
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3">
-                            // <h1 class="display-4 text-white mb-3">Shop Online at Flat 70% off on Branded Clothes</h1>
-                            <p class="mx-md-5 px-5">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
-                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Shop Now</a>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -168,36 +129,6 @@
             </button>
         </div>
     </section>
-    {{-- <section class="section-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="box shadow-lg">
-                        <div class="fa icon fa-check text-primary m-0 mr-3"></div>
-                        <h2 class="font-weight-semi-bold m-0">Quality Product</h5>
-                    </div>                    
-                </div>
-                <div class="col-lg-3 ">
-                    <div class="box shadow-lg">
-                        <div class="fa icon fa-shipping-fast text-primary m-0 mr-3"></div>
-                        <h2 class="font-weight-semi-bold m-0">Free Shipping</h2>
-                    </div>                    
-                </div>
-                <div class="col-lg-3">
-                    <div class="box shadow-lg">
-                        <div class="fa icon fa-exchange-alt text-primary m-0 mr-3"></div>
-                        <h2 class="font-weight-semi-bold m-0">14-Day Return</h2>
-                    </div>                    
-                </div>
-                <div class="col-lg-3 ">
-                    <div class="box shadow-lg">
-                        <div class="fa icon fa-phone-volume text-primary m-0 mr-3"></div>
-                        <h2 class="font-weight-semi-bold m-0">24/7 Support</h5>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-    </section> --}}
     <section class="section-3">
         <div class="container">
             <div class="section-title">
@@ -248,7 +179,7 @@
                                             <img src="{{ asset('admin_assets/img/default-150x150.png') }}"/>
                                         @endif
                                     </a>
-                                    {{-- <a class="whishlist" href="222"><i class="far fa-heart"></i></a> --}}
+                                    <a onclick="addToWishlist({{ $product->id }})" class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
