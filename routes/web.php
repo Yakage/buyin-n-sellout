@@ -74,7 +74,7 @@ Route::group(['prefix' => 'account'],function() {
         Route::get('/login', [AuthController::class, 'login'])->name('account.login');
         Route::post('/login', [AuthController::class, 'authenticate'])->name('account.authenticate');
         
-        Route::match(['get', 'post'], '/register', [AuthController::class, 'register'])->name('account.register');
+        Route::get('/register', [AuthController::class, 'register'])->name('account.register');
         Route::post('/process-register', [AuthController::class, 'processRegister'])->name('account.processRegister');
 
     });
