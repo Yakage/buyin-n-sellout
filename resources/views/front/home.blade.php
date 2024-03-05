@@ -183,7 +183,7 @@
                                         @endif
                                     </a>
 
-                                        <a onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>
+                                        <a class="whishlist" href="222" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
@@ -243,7 +243,7 @@
                                         @endif
                                     </a>
 
-                                    <a onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>
+                                    <a class="whishlist" href="222" onclick="addToWishList({{$product->id}})"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
@@ -385,7 +385,7 @@
             success: function(response) {
                 if(response.status == true) {
 
-                    $("#wishlistModal" .modal-body).html(response.message);
+                    $("#wishlistModal .modal-body").html(response.message);
                     $("#wishlistModal").modal('show');
     
                 } else {
