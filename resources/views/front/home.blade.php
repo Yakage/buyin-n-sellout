@@ -37,12 +37,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet"><!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
 
-
-    <script>
-        document.documentElement.classList.remove('no-js');
-        document.documentElement.classList.add('js');
-    </script>
-
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
@@ -346,8 +340,10 @@
             navbar.classList.remove("sticky");
         }
     }
-
-    
+</script>
+<script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
 </script>
 </body>
 </html>
