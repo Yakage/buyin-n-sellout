@@ -33,7 +33,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:5|confirmed'
+            'password' => 'required|min:5|confirmed',
+            'password_confirmation' => 'required|string|same:password'
         ]);
 
         if($validator->passes()) {
@@ -147,7 +148,7 @@ class AuthController extends Controller
             'country_id' => 'required',
             'address' => 'required|min:30',
             'city' => 'required',
-            'state' => 'required',
+            'barangay' => 'required',
             'zip' => 'required',
             'mobile' => 'required'
         ]);
@@ -170,7 +171,7 @@ class AuthController extends Controller
                     'address' => $request->address,
                     'apartment' => $request->apartment,
                     'city' => $request->city,
-                    'state' => $request->state,
+                    'barangay' => $request->barangay,
                     'zip' => $request->zip,
                 ]
             );
