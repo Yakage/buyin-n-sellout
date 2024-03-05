@@ -240,7 +240,7 @@
             if (confirm("Are you sure you want to delete?")) {
                 $.ajax({
                     url: "{{ route('front.deleteItem.cart') }}",
-                    type: 'delete',
+                    type: 'post',
                     data: { rowId: rowId },
                     dataType: 'json',
                     headers: {
