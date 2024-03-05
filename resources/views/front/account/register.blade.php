@@ -51,10 +51,80 @@
 
 @section('customJs')
     <script>
+        // $("#registrationForm").submit(function(event) {
+        //     event.preventDefault();
+
+        //     $("button[type='submit']").prop('disabled',true);
+
+        //     $.ajax({
+        //         url: '{{ route("account.processRegister") }}',
+        //         type: 'post',
+        //         data: $(this).serializeArray(),
+        //         dataType: 'json',
+        //         success: function(response) {
+        //             $("button[type='submit']").prop('disabled', false);
+
+        //             var errors = response.errors;
+
+        //             if (response.status == false) {
+        //                 if(errors.name) {
+        //                     $("#name").siblings("p").addClass('invalid-feedback').html(errors.name);
+        //                     $("#name").addClass('is-invalid');
+        //                 } else {
+        //                     $("#name").siblings("p").removeClass('invalid-feedback').html('');
+        //                     $("#name").removeClass('is-invalid');
+        //                 }
+
+        //                 if(errors.email) {
+        //                     $("#email").siblings("p").addClass('invalid-feedback').html(errors.email);
+        //                     $("#email").addClass('is-invalid');
+        //                 } else {
+        //                     $("#email").siblings("p").removeClass('invalid-feedback').html('');
+        //                     $("#email").removeClass('is-invalid');
+        //                 }
+
+        //                 if(errors.password) {
+        //                     $("#password").siblings("p").addClass('invalid-feedback').html(errors.password);
+        //                     $("#password").addClass('is-invalid');
+        //                 } else {
+        //                     $("#password").siblings("p").removeClass('invalid-feedback').html('');
+        //                     $("#password").removeClass('is-invalid');
+        //                 }
+
+        //                 if(errors.password_confirmation) {
+        //                     $("#password_confirmation").siblings("p").addClass('invalid-feedback').html(errors.password_confirmation);
+        //                     $("#password_confirmation").addClass('is-invalid');
+        //                 } else {
+        //                     $("#password_confirmation").siblings("p").removeClass('invalid-feedback').html('');
+        //                     $("#password_confirmation").removeClass('is-invalid');
+        //                 }
+        //             } else {
+        //                 $("#name").siblings("p").removeClass('invalid-feedback').html('');
+        //                 $("#name").removeClass('is-invalid');
+
+        //                 $("#email").siblings("p").removeClass('invalid-feedback').html('');
+        //                 $("#email").removeClass('is-invalid');
+
+        //                 $("#password").siblings("p").removeClass('invalid-feedback').html('');
+        //                 $("#password").removeClass('is-invalid');
+
+        //                 $("#password_confirmation").siblings("p").removeClass('invalid-feedback').html('');
+        //                 $("#password_confirmation").removeClass('is-invalid');
+
+        //                 window.location.href="{{ route('account.login') }}";
+        //             }
+                    
+        //         },
+        //         error: function(jQXHR, exception) {
+        //             console.log("Something went wrong.");
+        //         }
+        //     })
+        // });
+
         $("#registrationForm").submit(function(event) {
             event.preventDefault();
 
-            $("button[type='submit']").prop('disabled',true);
+            $("button[type='submit']").prop('disabled', true);
 
             $.ajax({
                 url: '{{ route("account.processRegister") }}',
@@ -68,57 +138,52 @@
 
                     if (response.status == false) {
                         if(errors.name) {
-                            $("#name").siblings("p").addClass('invalid-feedback').html(errors.name);
-                            $("#name").addClass('is-invalid');
+                            handleValidationError("#name", errors.name);
                         } else {
-                            $("#name").siblings("p").removeClass('invalid-feedback').html('');
-                            $("#name").removeClass('is-invalid');
+                            handleValidationSuccess("#name");
                         }
 
                         if(errors.email) {
-                            $("#email").siblings("p").addClass('invalid-feedback').html(errors.email);
-                            $("#email").addClass('is-invalid');
+                            handleValidationError("#email", errors.email);
                         } else {
-                            $("#email").siblings("p").removeClass('invalid-feedback').html('');
-                            $("#email").removeClass('is-invalid');
+                            handleValidationSuccess("#email");
                         }
 
                         if(errors.password) {
-                            $("#password").siblings("p").addClass('invalid-feedback').html(errors.password);
-                            $("#password").addClass('is-invalid');
+                            handleValidationError("#password", errors.password);
                         } else {
-                            $("#password").siblings("p").removeClass('invalid-feedback').html('');
-                            $("#password").removeClass('is-invalid');
+                            handleValidationSuccess("#password");
                         }
 
                         if(errors.password_confirmation) {
-                            $("#password_confirmation").siblings("p").addClass('invalid-feedback').html(errors.password_confirmation);
-                            $("#password_confirmation").addClass('is-invalid');
+                            handleValidationError("#password_confirmation", errors.password_confirmation);
                         } else {
-                            $("#password_confirmation").siblings("p").removeClass('invalid-feedback').html('');
-                            $("#password_confirmation").removeClass('is-invalid');
+                            handleValidationSuccess("#password_confirmation");
                         }
                     } else {
-                        $("#name").siblings("p").removeClass('invalid-feedback').html('');
-                        $("#name").removeClass('is-invalid');
-
-                        $("#email").siblings("p").removeClass('invalid-feedback').html('');
-                        $("#email").removeClass('is-invalid');
-
-                        $("#password").siblings("p").removeClass('invalid-feedback').html('');
-                        $("#password").removeClass('is-invalid');
-
-                        $("#password_confirmation").siblings("p").removeClass('invalid-feedback').html('');
-                        $("#password_confirmation").removeClass('is-invalid');
+                        // Handle success scenario
+                        handleValidationSuccess("#name");
+                        handleValidationSuccess("#email");
+                        handleValidationSuccess("#password");
+                        handleValidationSuccess("#password_confirmation");
 
                         window.location.href="{{ route('account.login') }}";
                     }
-                    
                 },
                 error: function(jQXHR, exception) {
                     console.log("Something went wrong.");
                 }
-            })
+            });
         });
+
+        function handleValidationError(elementId, errorMessage) {
+            $(elementId).siblings("p").addClass('invalid-feedback').html(errorMessage);
+            $(elementId).addClass('is-invalid');
+        }
+
+        function handleValidationSuccess(elementId) {
+            $(elementId).siblings("p").removeClass('invalid-feedback').html('');
+            $(elementId).removeClass('is-invalid');
+        }
     </script>
 @endsection
