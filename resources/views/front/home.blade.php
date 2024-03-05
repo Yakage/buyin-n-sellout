@@ -350,15 +350,14 @@
 </script> --}}
 
 <script>
-    function addToCart(id) {
+    function addToCart($product->id) {
         $.ajax({
-            url: "{{route('front.addToCart')}}",
+            url: '{{ route("front.addToCart") }}',
             type: 'post',
-            data: {id:id},
-            dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            data: {id: id,
+                '_token': '{{ csrf_token() }}'
             },
+            dataType: 'json',
             success: function(response) {
                 if(response.status == true) {
                     window.location.href="{{ route('front.cart') }}";
