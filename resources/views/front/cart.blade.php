@@ -61,20 +61,20 @@
                                             <h2>{{$item->name}}</h2>
                                         </div>
                                     </td>
-                                    <td>PHP{{$item->price}}</td>
+                                    <td>PHP {{$item->price}}</td>
                                     <td>
                                         <div class="input-group quantity mx-auto" style="width: 100px;">
                                             <div class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" onclick="sub({{$item->rowId}});" data-id="{{ $item->rowId }}" > 
-                                                    {{--  --}}
+                                                <button type="button" class="btn btn-sm btn-dark btn-minus p-2 pt-1 pb-1 sub" onclick="sub({{$item->rowId}});"  > 
+                                                    {{-- data-id="{{ $item->rowId }}" --}}
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
                                             <input type="text" class="form-control form-control-sm  border-0 text-center" value="{{$item->qty}}">
 
                                             <div class="input-group-btn">
-                                                    <button type="button" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" onclick="add({{$item->rowId}});" data-id="{{ $item->rowId }}">
-                                                        {{--  --}}
+                                                    <button type="button" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" onclick="add({{$item->rowId}});" >
+                                                        {{-- data-id="{{ $item->rowId }}" --}}
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                             </div>
@@ -85,7 +85,8 @@
                                         PHP {{$item->price*$item->qty}}
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem( {{$item->rowId}} );" data-id="{{ $item->rowId }}"><i class="fa fa-times"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger delete" onclick="deleteItem( {{$item->rowId}} );" ><i class="fa fa-times"></i></button>
+                                        {{-- data-id="{{ $item->rowId }}" --}}
                                     </td>
                                 </tr>      
                                 @endforeach
@@ -201,7 +202,7 @@
 
                 var rowId = $(this).data('id');
                 var newQty = qtyElement.val();
-                updateCart(rowId, qty);
+                updateCart(rowId, newQty);
 
                 window.location.href = "{{ route('front.cart') }}";
             }
@@ -215,17 +216,17 @@
 
                 var rowId = $(this).data('id');
                 var newQty = qtyElement.val();
-                updateCart(rowId, qty);
+                updateCart(rowId, newQty);
 
                 window.location.href = "{{ route('front.cart') }}";
             }
         });
 
-        function updateCart(rowId, qty) {
+        function updateCart(rowId, newQty) {
             $.ajax({
                 url: "{{ route('front.updateCart') }}",
                 type: 'post',
-                data: { rowId: rowId, qty: qty },
+                data: { rowId: rowId, qty: newQty },
                 dataType: 'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -235,6 +236,10 @@
                 }
             });
         }
+        $('.delete').click(function() {
+            var rowId = $(this).data('id');
+            deleteItem(rowId);
+        });
 
         function deleteItem(rowId) {
             if (confirm("Are you sure you want to delete?")) {
