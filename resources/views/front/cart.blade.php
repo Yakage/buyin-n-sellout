@@ -70,7 +70,7 @@
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </div>
-                                            <input type="text" class="form-control form-control-sm border-0 text-center qty-input" value="{{$item->qty}}">
+                                            <input type="text" class="form-control form-control-sm border-0 text-center qty-input" value="{{$item->qty}}" readonly> 
 
                                             <div class="input-group-btn">
                                                     <button type="button" class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add" data-id="{{ $item->rowId }}" >
