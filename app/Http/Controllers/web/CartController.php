@@ -50,8 +50,9 @@ class CartController extends Controller
 
                 $status = true;
                 $message = '<strong>' .$product->title.'</strong> added in your cart successfully';
-                return redirect()->route('front.home');
+
                 session()->flash('success' ,$message);
+                return redirect()->route('front.home');
 
             } else {
                 $status = false;
