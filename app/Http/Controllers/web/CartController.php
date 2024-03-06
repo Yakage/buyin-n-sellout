@@ -323,7 +323,7 @@ class CartController extends Controller
                 'address' => $request->address,
                 'apartment' => $request->apartment,
                 'city' => $request->city,
-                'barangay' => $request->barangay,
+                'barangay' => $request->has('barangay') ? $request->barangay : '',
                 'zip' => $request->zip,
             ]
         );
@@ -392,7 +392,7 @@ class CartController extends Controller
             $order->city = $request->city;
             $order->zip = $request->zip;
             $order->notes = $request->notes;
-            $order->country_id = $request->country;
+            //$order->country_id = $request->country;
             $order->save();
 
 
