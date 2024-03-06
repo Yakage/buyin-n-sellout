@@ -152,7 +152,7 @@
 </section>
 @endsection
 
-@section('customJs')
+{{-- @section('customJs')
 <script>
     // $("#payment_method_one").click(function(){
     //     if($(this).is(":checked") == true) {
@@ -341,4 +341,4 @@
         
     //});
 </script>
-@endsection
+@endsection --}}

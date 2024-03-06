@@ -292,6 +292,7 @@ class CartController extends Controller
             'email' => 'required|email',
             //'country' => 'required',
             'address' => 'required|min:15',
+            'apartment' => 'nullable', 
             'city' => 'required',
             'barangay' => 'required',
             'zip' => 'required',
