@@ -47,12 +47,13 @@ class AuthController extends Controller
             $user->save(); 
 
             session()->flash('success', 'You have been registered successfully.');
-            return response()->json([
-                'status' => true,
-                'message' => 'Registration successful. Redirecting to login page',
-                'redirect' => route('account.login')
+            return redirect()->route('account.login');
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'Registration successful. Redirecting to login page',
+            //     'redirect' => route('account.login')
 
-            ]);
+            // ]);
 
         } else {
             return response()->json([
