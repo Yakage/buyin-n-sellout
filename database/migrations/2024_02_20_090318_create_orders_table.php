@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('mobile');
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            //$table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->text('address');
             $table->string('apartment')->nullable();
             $table->string('city');

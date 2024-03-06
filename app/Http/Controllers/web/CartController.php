@@ -588,13 +588,11 @@ class CartController extends Controller
             if ($subTotal < $code->min_amount) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Your min amount must be $' .$code->min_amount.'.',
+                    'message' => 'Your min amount must be PHP' .$code->min_amount.'.',
                 ]);
             }
 
         }
-
-
         session()->put('code', $code); 
 
         return $this->getOrderSummary($request);

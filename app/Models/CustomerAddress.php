@@ -15,10 +15,10 @@ class CustomerAddress extends Model
         'last_name',
         'email',
         'mobile',
-        'country_id',
+        //'country_id',
         'address',
         'apartment',
-        'state',
+        'barangay',
         'city',
         'zip'
     
