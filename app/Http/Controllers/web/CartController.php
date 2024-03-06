@@ -275,7 +275,7 @@ class CartController extends Controller
         }
 
         return view('front.checkout', [
-            //'countries' => $countries,
+            'countries' => $countries,
             'customerAddress' => $customerAddress,
             'totalShippingCharge' => $totalShippingCharge,
             'discount' => $discount,
