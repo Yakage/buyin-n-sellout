@@ -290,13 +290,13 @@ class CartController extends Controller
             'first_name' => 'required|min:5',
             'last_name' => 'required',
             'email' => 'required|email',
+            'mobile' => 'required',
             //'country' => 'required',
             'address' => 'required|min:15',
             'apartment' => 'nullable', 
             'city' => 'required',
             'barangay' => 'required',
             'zip' => 'required',
-            'mobile' => 'required'
         ]);
 
         if ($validator->fails()) {
