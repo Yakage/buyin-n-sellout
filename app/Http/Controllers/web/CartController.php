@@ -430,6 +430,7 @@ class CartController extends Controller
                 'message' => 'Order saved successfully',
                 'order' => $order->id,
                 'status' => true,
+                'redirect' => route('front.thankyou')
             ]);
         } else {
             //
