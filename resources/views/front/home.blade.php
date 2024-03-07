@@ -189,7 +189,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <button type="button" class="btn btn-dark add"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                            <button type="button" class="btn btn-dark add" data-id="{{ $item->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                             {{-- onclick="addToCart({{ $product->id }});" --}}
                                                 {{-- <form action="{{ route('front.addToCart') }}" method="POST">
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -248,13 +248,13 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <button type="button" class="btn btn-dark add"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                                <button type="button" class="btn btn-dark add" data-id="{{ $item->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                                 {{-- onclick="addToCart({{ $product->id }});" --}}
                                             @else
                                             <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
-                                            <button type="button" class="btn btn-dark add" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                            <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                         @endif
                                     </div>
                                 </div>
@@ -350,7 +350,7 @@
 </script> --}}
 
 <script>
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
         function addToCart(id) {
             $.ajax({
@@ -431,7 +431,7 @@
                 }
             })
         }
-    });
+    // });
 </script>
 </body>
 </html>
