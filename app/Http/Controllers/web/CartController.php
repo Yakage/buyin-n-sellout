@@ -255,8 +255,8 @@ class CartController extends Controller
 
         //calculate shipping fee
         if($customerAddress != '') {
-            $userCountry = $customerAddress->country_id;
-            $shippingInfo = ShippingCharge::where('country_id', $userCountry)->first();
+            // $userCountry = $customerAddress->country_id;
+            // $shippingInfo = ShippingCharge::where('country_id', $userCountry)->first();
     
             $totalQty = 0;
             $totalShippingCharge = 0;
@@ -265,8 +265,10 @@ class CartController extends Controller
                 $totalQty += $item->qty;
             }
     
-            $totalShippingCharge = $totalQty * $shippingInfo->amount;
-            $grandTotal = ($subTotal-$discount) + $totalShippingCharge;
+            // $totalShippingCharge = $totalQty * $shippingInfo->amount;
+            $totalShippingCharge = $totalQty + 50;
+            // $grandTotal = ($subTotal-$discount) + $totalShippingCharge;
+            $grandTotal = $subTotal + $totalShippingCharge;
         } else {
             $grandTotal = ($subTotal-$discount);
             $totalShippingCharge = 0;
@@ -275,7 +277,7 @@ class CartController extends Controller
         }
 
         return view('front.checkout', [
-            'countries' => $countries,
+            // 'countries' => $countries,
             'customerAddress' => $customerAddress,
             'totalShippingCharge' => $totalShippingCharge,
             'discount' => $discount,
