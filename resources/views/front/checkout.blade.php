@@ -15,7 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="" id="orderForm" name="orderForm" method="get">
+        <form action="" id="orderForm" name="orderForm" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-8">
@@ -173,7 +173,7 @@
 
         $.ajax({
             url: '{{ route("front.processCheckout") }}',
-            type: 'get',
+            type: 'post',
             data: $(this).serializeArray(),
             dataType: 'json',
             success: function(response){
