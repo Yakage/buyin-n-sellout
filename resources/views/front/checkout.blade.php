@@ -168,126 +168,127 @@
     });
 
     $("#orderForm").submit(function(event){
-    event.preventDefault();
-    $("button[type=submit]").prop('disabled', true);
+        event.preventDefault();
+        $("button[type=submit]").prop('disabled', true);
 
-    $.ajax({
-        url: '{{ route("front.processCheckout") }}',
-        type: 'post',
-        data: $(this).serializeArray(),
-        dataType: 'json',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response){
-            var errors = response.errors;
-            $('button[type="submit"]').prop('disabled',false);
+        $.ajax({
+            url: '{{ route("front.processCheckout") }}',
+            type: 'post',
+            data: $(this).serializeArray(),
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response){
+                var errors = response.errors;
+                $('button[type="submit"]').prop('disabled',false);
 
-            if(response.status == false) {
+                if(response.status == false) {
                     if (errors.first_name) {
-                    $("#first_name").addClass('is-invalid')
-                    .siblings("p")
-                    .addClass('invalid-feedback')
-                    .html(errors.first_name);
+                        $("#first_name").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.first_name);
                     } else {
                         $("#first_name").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
 
                     if (errors.last_name) {
                         $("#last_name").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.last_name);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.last_name);
                     } else {
                         $("#last_name").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
 
                     if (errors.email) {
                         $("#email").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.email);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.email);
                     } else {
                         $("#email").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
 
                     if (errors.address) {
                         $("#address").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.first_name);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.first_name);
                     } else {
                         $("#address").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
 
                     if (errors.barangay) {
                         $("#barangay").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.barangay);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.barangay);
                     } else {
                         $("#barangay").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     } 
 
                     if (errors.city) {
                         $("#city").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.city);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.city);
                     } else {
                         $("#city").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
 
                     if (errors.zip) {
                         $("#zip").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.zip);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.zip);
                     } else {
                         $("#zip").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
 
                     if (errors.mobile) {
                         $("#mobile").addClass('is-invalid')
-                        .siblings("p")
-                        .addClass('invalid-feedback')
-                        .html(errors.mobile);
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.mobile);
                     } else {
                         $("#mobile").removeClass('is-invalid')
-                        .siblings("p")
-                        .removeClass('invalid-feedback')
-                        .html('');
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
                     }
-                }else{
+                } else {
                     window.location.href ="{{ url('/thanks/') }}/" + response.orderId;
                 } 
-            }, error: function(jqXHR, exception) {
+            }, 
+            error: function(jqXHR, exception) {
                 console.log("Something went wrong.")
             }
         });
     });
-    
+
     $("#country").change(function(){
         $.ajax({
             url: '{{route ("front.getOrderSummary")}}',
