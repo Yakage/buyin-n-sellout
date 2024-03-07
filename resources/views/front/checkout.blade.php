@@ -280,7 +280,8 @@
                             .html('');
                     }
                 } else {
-                    window.location.href ="{{ url('/thanks/') }}/"+response.orderId;
+                    console.log(response); // Log the response to the console
+                    window.location ="{{ url('/thanks/') }}/"+response.orderId;
                 } 
             }, 
             error: function(jqXHR, exception) {
