@@ -173,7 +173,7 @@
 
         $.ajax({
             url: '{{ route("front.processCheckout") }}',
-            type: 'post',
+            type: 'get',
             data: $(this).serializeArray(),
             dataType: 'json',
             success: function(response){
