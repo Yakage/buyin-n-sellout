@@ -15,7 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="" method="post" name="orderForm" id="orderForm">
+        <form action="" id="orderForm" name="orderForm"method="post">
             @csrf
             <div class="row">
                 <div class="col-md-8">
@@ -28,25 +28,25 @@
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" value="{{ (!empty($customerAddress)) ? $customerAddress->first_name : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" value="{{ (!empty($customerAddress)) ? $customerAddress->last_name : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="{{ (!empty($customerAddress)) ? $customerAddress->email : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control" value="{{ (!empty($customerAddress)) ? $customerAddress->address : ''}}"></textarea>
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -57,25 +57,25 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <input type="text" name="city" id="city" class="form-control" placeholder="City" value="{{ (!empty($customerAddress)) ? $customerAddress->city : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <input type="text" name="barangay" id="barangay" class="form-control" placeholder="Barangay" value="{{ (!empty($customerAddress)) ? $customerAddress->barangay : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip" value="{{ (!empty($customerAddress)) ? $customerAddress->zip : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile No." value="{{ (!empty($customerAddress)) ? $customerAddress->mobile : ''}}">
-                                        {{-- <p></p> --}}
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -277,7 +277,7 @@
                             .html('');
                         }
                     }else{
-                        window.location.href ="{{url('/thanks/')}}/" +response.orderId;
+                        window.location.href ="{{ route('front.thankyou') }}" + response.orderId;
                     } 
                 }, error: function(jqXHR, exception) {
                     console.log("Something went wrong.")
