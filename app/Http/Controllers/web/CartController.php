@@ -214,7 +214,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function checkout($id) {
+    public function checkout() {
         $discount = 0;
 
         //-- if cart empty, redirect to cart page
