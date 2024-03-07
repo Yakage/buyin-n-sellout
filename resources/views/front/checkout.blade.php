@@ -176,6 +176,9 @@
             type: 'post',
             data: $(this).serializeArray(),
             dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response){
                 var errors = response.errors;
                 $('button[type="submit"]').prop('disabled',false);
