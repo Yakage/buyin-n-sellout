@@ -380,7 +380,7 @@ class CartController extends Controller
             $order->payment_status = 'not paid';
             $order->status = 'pending';
             // $order->user_id = $user->id;
-            $order->user_id = $request->user()->id;
+            $order->user_id = $request->user_id;
             $order->first_name = $request->first_name;
             $order->last_name = $request->last_name;
             $order->email = $request->email;
