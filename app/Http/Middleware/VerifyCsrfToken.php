@@ -20,6 +20,7 @@ class VerifyCsrfToken extends Middleware
         '/account/register',
         '/checkout',
         '/process-checkout',
-        '/cart'
+        '/cart',
+        '/add-to-wishlist',
     ];
 }
