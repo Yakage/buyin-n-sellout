@@ -44,6 +44,12 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
 
+	<!-- Include Dropzone CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" integrity="sha512-nwG+XC6Wfp8/V7srr1icq0U0TnGhtjl9QDQV4+mnqioSau7t+dbG0el/f6dMviTZdm8gpMPFaKc8jHGZlMtzGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Include Dropzone JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-Z0FNcsLbfSAhmmX3l4y+8V3V7zckKdqeU1QqUJgMj/JLUWZ5rFRe+CFCGBvRtOmCnn+TtnmMxAqTni7BvPOYvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
 

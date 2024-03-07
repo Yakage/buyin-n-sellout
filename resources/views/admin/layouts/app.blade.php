@@ -21,6 +21,12 @@
 
 		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/css/custom.css') }}">
 
+		<!-- Include Dropzone CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" integrity="sha512-nwG+XC6Wfp8/V7srr1icq0U0TnGhtjl9QDQV4+mnqioSau7t+dbG0el/f6dMviTZdm8gpMPFaKc8jHGZlMtzGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Include jQuery -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<!-- Include Dropzone JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-Z0FNcsLbfSAhmmX3l4y+8V3V7zckKdqeU1QqUJgMj/JLUWZ5rFRe+CFCGBvRtOmCnn+TtnmMxAqTni7BvPOYvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		
 		
 		<meta name="csrf-token" content="{{ csrf_token() }}">
