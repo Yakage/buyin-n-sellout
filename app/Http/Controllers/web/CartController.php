@@ -214,7 +214,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function checkout(Request $request) {
+    public function checkout($id) {
         $discount = 0;
 
         //-- if cart empty, redirect to cart page
@@ -236,7 +236,7 @@ class CartController extends Controller
 
         session()->forget('url.intended');
 
-        $countries = Country::orderBy('name', 'ASC')->get();
+        // $countries = Country::orderBy('name', 'ASC')->get();
 
         $subTotal = Cart::subtotal(2,'.','');
 
@@ -370,8 +370,6 @@ class CartController extends Controller
                 $grandTotal = ($subTotal - $discount) + $shipping;
             }
 
-            
-
             $order = new Order();
             $order->subtotal = $subTotal;
             $order->shipping = $shipping;
@@ -430,6 +428,7 @@ class CartController extends Controller
                 'message' => 'Order saved successfully',
                 'order' => $order->id,
                 'status' => true,
+                'redirect' => url('/thanks/') . '/' . $order->id
             ]);
         } else {
             //
