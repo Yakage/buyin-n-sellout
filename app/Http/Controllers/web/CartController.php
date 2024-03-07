@@ -393,7 +393,7 @@ class CartController extends Controller
             $order->barangay = $request->barangay;
             $order->city = $request->city;
             $order->zip = $request->zip;
-            $order->notes = $request->notes;
+            $order->notes = $request->order_notes;
             //$order->country_id = $request->country;
             $order->save();
 

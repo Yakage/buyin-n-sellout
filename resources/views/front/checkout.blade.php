@@ -15,7 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="{{ route('front.processCheckout') }}" method="post">
+        <form action="" method="post" name="orderForm" id="orderForm">
             <div class="row">
                 <div class="col-md-8">
                     <div class="sub-title">
@@ -26,54 +26,54 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" required>
+                                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" value="{{ (!empty($customerAddress)) ? $customerAddress->first_name : ''}}">
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" required>
+                                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" value="{{ (!empty($customerAddress)) ? $customerAddress->last_name : ''}}">
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
+                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="{{ (!empty($customerAddress)) ? $customerAddress->email : ''}}">
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control" required></textarea>
+                                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control" value="{{ (!empty($customerAddress)) ? $customerAddress->address : ''}}"></textarea>
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="appartment" id="appartment" class="form-control" placeholder="Apartment, suite, unit, etc. (optional)">
+                                        <input type="text" name="apartment" id="apartment" class="form-control" placeholder="Apartment, suite, unit, etc. (optional)" value="{{ (!empty($customerAddress)) ? $customerAddress->apartment : ''}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <input type="text" name="city" id="city" class="form-control" placeholder="City" required>
-                                        {{-- <p></p> --}}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <input type="text" name="barangay" id="barangay" class="form-control" placeholder="Barangay" required>
+                                        <input type="text" name="city" id="city" class="form-control" placeholder="City" value="{{ (!empty($customerAddress)) ? $customerAddress->city : ''}}">
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip" required>
+                                        <input type="text" name="barangay" id="barangay" class="form-control" placeholder="Barangay" value="{{ (!empty($customerAddress)) ? $customerAddress->barangay : ''}}">
+                                        {{-- <p></p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip" value="{{ (!empty($customerAddress)) ? $customerAddress->zip : ''}}">
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile No." required>
+                                        <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile No." value="{{ (!empty($customerAddress)) ? $customerAddress->mobile : ''}}">
                                         {{-- <p></p> --}}
                                     </div>
                                 </div>
@@ -152,193 +152,194 @@
 </section>
 @endsection
 
-{{-- @section('customJs')
+@section('customJs')
 <script>
-    // $("#payment_method_one").click(function(){
-    //     if($(this).is(":checked") == true) {
-    //         $("#card-payment-form").addClass('d-none');
-    //     }
-    // });
+    $("#payment_method_one").click(function(){
+        if($(this).is(":checked") == true) {
+            $("#card-payment-form").addClass('d-none');
+        }
+    });
     
-    // $("#payment_method_two").click(function(){
-    //     if($(this).is(":checked") == true) {
-    //         $("#card-payment-form").removeClass('d-none');
-    //     }
-    // });
+    $("#payment_method_two").click(function(){
+        if($(this).is(":checked") == true) {
+            $("#card-payment-form").removeClass('d-none');
+        }
+    });
 
-    // $("#orderForm").submit(function(event){
-    //     event.preventDefault();
-    //     $("button[type=submit]").prop('disabled', true);
+    $("#orderForm").submit(function(event){
+        event.preventDefault();
+        $("button[type=submit]").prop('disabled', true);
 
-    //     $.ajax({
-    //         url: '{{ route("front.processCheckout") }}',
-    //         type: 'post',
-    //         data: $(this).serializeArray(),
-    //         dataType: 'json',
-    //         success: function(response){
-    //             var errors = response.errors;
-    //             $('button[type="submit"]').prop('disabled',false);
+        $.ajax({
+            url: '{{ route("front.processCheckout") }}',
+            type: 'post',
+            data: $(this).serializeArray(),
+            dataType: 'json',
+            success: function(response){
+                var errors = response.errors;
+                $('button[type="submit"]').prop('disabled',false);
 
-    //             if (errors.first_name) {
-    //                 $("#first_name").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.first_name);
-    //             } else {
-    //                 $("#first_name").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
+                if(response.status == false) {
+                        if (errors.first_name) {
+                        $("#first_name").addClass('is-invalid')
+                        .siblings("p")
+                        .addClass('invalid-feedback')
+                        .html(errors.first_name);
+                        } else {
+                            $("#first_name").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
 
-    //             if (errors.last_name) {
-    //                 $("#last_name").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.last_name);
-    //             } else {
-    //                 $("#last_name").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
+                        if (errors.last_name) {
+                            $("#last_name").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.last_name);
+                        } else {
+                            $("#last_name").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
 
-    //             if (errors.email) {
-    //                 $("#email").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.email);
-    //             } else {
-    //                 $("#email").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
+                        if (errors.email) {
+                            $("#email").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.email);
+                        } else {
+                            $("#email").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
 
-    //             if (errors.address) {
-    //                 $("#address").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.first_name);
-    //             } else {
-    //                 $("#address").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
+                        if (errors.address) {
+                            $("#address").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.first_name);
+                        } else {
+                            $("#address").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
 
-    //             if (errors.barangay) {
-    //                 $("#barangay").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.barangay);
-    //             } else {
-    //                 $("#barangay").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             } 
+                        if (errors.barangay) {
+                            $("#barangay").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.barangay);
+                        } else {
+                            $("#barangay").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        } 
 
-    //             if (errors.city) {
-    //                 $("#city").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.city);
-    //             } else {
-    //                 $("#city").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
+                        if (errors.city) {
+                            $("#city").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.city);
+                        } else {
+                            $("#city").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
 
-    //             if (errors.zip) {
-    //                 $("#zip").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.zip);
-    //             } else {
-    //                 $("#zip").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
+                        if (errors.zip) {
+                            $("#zip").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.zip);
+                        } else {
+                            $("#zip").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
 
-    //             if (errors.mobile) {
-    //                 $("#mobile").addClass('is-invalid')
-    //                 .siblings("p")
-    //                 .addClass('invalid-feedback')
-    //                 .html(errors.mobile);
-    //             } else {
-    //                 $("#mobile").removeClass('is-invalid')
-    //                 .siblings("p")
-    //                 .removeClass('invalid-feedback')
-    //                 .html('');
-    //             }
-    //             // if(response.status == false) {
-    //             }else{
-    //                 window.location.href ="{{url('/thanks/')}}" +response.orderId;
-    //             }, error: function(jqXHR, exception) {
-    //                 console.log("Something went wrong.")
-    //             }
-    //         });
-    //     });
-    // //});
-
-    // $("#country").change(function(){
-    //     $.ajax({
-    //         url: '{{route ("front.getOrderSummary")}}',
-    //         type: 'get',
-    //         data: {country_id: $(this).val ()},
-    //         dataType: 'json',
-    //         success: function(response){
-    //             if(response.status == true){
-    //                 $(#shippingAmount).html('PHP'+response.shippingAmount);
-    //                 $(#grandTotal).html('PHP' + response.grandTotal);
-
-    //             }
-    //         }
-    //     });
-    // });
-
-    // $("#apply-discount").click(function(){
-    //     $.ajax({
-    //         url: '{{route ("front.getOrderSummary")}}',
-    //         type: 'post',
-    //         data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
-    //         dataType: 'json',
-    //         success: function(response){
-    //             if (response.status == true) {
-    //                 $("#shippingAmount").html('PHP'+response.shippingCharge);
-    //                 $("#grandTotal").html('PHP'+response.grandTotal);
-    //                 $("#discount_value").html('PHP'+response.discount);
-    //                 $("#discount-response-wrapper").html(response.discountString)
-    //             }  else {
-    //                 $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
-
-    //             }
-    //         }
-    //     });
-    // });
-
-    // $('body').on('click',"#remove-discount", function(){
-    //     $.ajax({
-    //         url: '{{route ("front.removeCoupon")}}',
-    //         type: post,
-    //         data: {country_id: $("#country").val()},
-    //         dataType: 'json',
-    //         success: function(response){
-    //             if (response.status == true) {
-    //                 $("#shippingAmount").html('PHP'+response.shippingCharge);
-    //                 $("#grandTotal").html('PHP'+response.grandTotal);
-    //                 $("#discount_value").html('PHP'+response.discount);
-    //                 $("discount-response").html('');
-    //                 $("discount_code").val('');
-    //             } 
-    //         }
-    //     });
-    // });
-    //$("#remove-discount").click(function(){
-        
+                        if (errors.mobile) {
+                            $("#mobile").addClass('is-invalid')
+                            .siblings("p")
+                            .addClass('invalid-feedback')
+                            .html(errors.mobile);
+                        } else {
+                            $("#mobile").removeClass('is-invalid')
+                            .siblings("p")
+                            .removeClass('invalid-feedback')
+                            .html('');
+                        }
+                    }else{
+                        window.location.href ="{{url('/thanks/')}}/" +response.orderId;
+                    } 
+                }, error: function(jqXHR, exception) {
+                    console.log("Something went wrong.")
+                }
+            });
+        });
     //});
+
+    $("#country").change(function(){
+        $.ajax({
+            url: '{{route ("front.getOrderSummary")}}',
+            type: 'get',
+            data: {country_id: $(this).val ()},
+            dataType: 'json',
+            success: function(response){
+                if(response.status == true){
+                    $(#shippingAmount).html('PHP'+response.shippingAmount);
+                    $(#grandTotal).html('PHP' + response.grandTotal);
+
+                }
+            }
+        });
+    });
+
+    $("#apply-discount").click(function(){
+        $.ajax({
+            url: '{{route ("front.getOrderSummary")}}',
+            type: 'post',
+            data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
+            dataType: 'json',
+            success: function(response){
+                if (response.status == true) {
+                    $("#shippingAmount").html('PHP'+response.shippingCharge);
+                    $("#grandTotal").html('PHP'+response.grandTotal);
+                    $("#discount_value").html('PHP'+response.discount);
+                    $("#discount-response-wrapper").html(response.discountString)
+                }  else {
+                    $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
+
+                }
+            }
+        });
+    });
+
+    $('body').on('click',"#remove-discount", function(){
+        $.ajax({
+            url: '{{route ("front.removeCoupon")}}',
+            type: post,
+            data: {country_id: $("#country").val()},
+            dataType: 'json',
+            success: function(response){
+                if (response.status == true) {
+                    $("#shippingAmount").html('PHP'+response.shippingCharge);
+                    $("#grandTotal").html('PHP'+response.grandTotal);
+                    $("#discount_value").html('PHP'+response.discount);
+                    $("discount-response").html('');
+                    $("discount_code").val('');
+                } 
+            }
+        });
+    });
+    $("#remove-discount").click(function(){
+        
+    });
 </script>
-@endsection --}}
+@endsection 
