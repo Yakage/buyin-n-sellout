@@ -169,7 +169,8 @@
 
     $("#orderForm").submit(function(event){
         event.preventDefault();
-        $("button[type=submit]").prop('disabled', true);
+
+        $('button[type="submit"]').prop('disabled', true);
 
         $.ajax({
             url: '{{ route("front.processCheckout") }}',
@@ -280,7 +281,7 @@
                             .html('');
                     }
                 } else {
-                    window.location.href ="{{ url('/thanks/') }}/" + response.$orderId;
+                    window.location.href="{{ url('/thanks/') }}/"+response.orderId;
                 } 
             }, 
             error: function(jqXHR, exception) {
