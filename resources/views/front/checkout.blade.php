@@ -161,11 +161,11 @@
         }
     });
     
-    $("#payment_method_two").click(function(){
-        if($(this).is(":checked") == true) {
-            $("#card-payment-form").removeClass('d-none');
-        }
-    });
+    // $("#payment_method_two").click(function(){
+    //     if($(this).is(":checked") == true) {
+    //         $("#card-payment-form").removeClass('d-none');
+    //     }
+    // });
 
     $("#orderForm").submit(function(event){
         event.preventDefault();
@@ -224,7 +224,7 @@
                         $("#address").addClass('is-invalid')
                             .siblings("p")
                             .addClass('invalid-feedback')
-                            .html(errors.first_name);
+                            .html(errors.address);
                     } else {
                         $("#address").removeClass('is-invalid')
                             .siblings("p")
@@ -289,61 +289,61 @@
         });
     });
 
-    $("#country").change(function(){
-        $.ajax({
-            url: '{{route ("front.getOrderSummary")}}',
-            type: 'get',
-            data: {country_id: $(this).val ()},
-            dataType: 'json',
-            success: function(response){
-                if(response.status == true){
-                    $(#shippingAmount).html('PHP'+response.shippingAmount);
-                    $(#grandTotal).html('PHP' + response.grandTotal);
+    // $("#country").change(function(){
+    //     $.ajax({
+    //         url: '{{route ("front.getOrderSummary")}}',
+    //         type: 'get',
+    //         data: {country_id: $(this).val ()},
+    //         dataType: 'json',
+    //         success: function(response){
+    //             if(response.status == true){
+    //                 $(#shippingAmount).html('PHP'+response.shippingAmount);
+    //                 $(#grandTotal).html('PHP' + response.grandTotal);
 
-                }
-            }
-        });
-    });
+    //             }
+    //         }
+    //     });
+    // });
 
-    $("#apply-discount").click(function(){
-        $.ajax({
-            url: '{{route ("front.getOrderSummary")}}',
-            type: 'get',
-            data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
-            dataType: 'json',
-            success: function(response){
-                if (response.status == true) {
-                    $("#shippingAmount").html('PHP'+response.shippingCharge);
-                    $("#grandTotal").html('PHP'+response.grandTotal);
-                    $("#discount_value").html('PHP'+response.discount);
-                    $("#discount-response-wrapper").html(response.discountString)
-                }  else {
-                    $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
+    // $("#apply-discount").click(function(){
+    //     $.ajax({
+    //         url: '{{route ("front.getOrderSummary")}}',
+    //         type: 'get',
+    //         data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
+    //         dataType: 'json',
+    //         success: function(response){
+    //             if (response.status == true) {
+    //                 $("#shippingAmount").html('PHP'+response.shippingCharge);
+    //                 $("#grandTotal").html('PHP'+response.grandTotal);
+    //                 $("#discount_value").html('PHP'+response.discount);
+    //                 $("#discount-response-wrapper").html(response.discountString)
+    //             }  else {
+    //                 $("#discount-response-wrapper").html("<span class='text-danger'>"+response.message+"</span>")
 
-                }
-            }
-        });
-    });
+    //             }
+    //         }
+    //     });
+    // });
 
-    $('body').on('click',"#remove-discount", function(){
-        $.ajax({
-            url: '{{route ("front.removeCoupon")}}',
-            type: 'post',
-            data: {country_id: $("#country").val()},
-            dataType: 'json',
-            success: function(response){
-                if (response.status == true) {
-                    $("#shippingAmount").html('PHP'+response.shippingCharge);
-                    $("#grandTotal").html('PHP'+response.grandTotal);
-                    $("#discount_value").html('PHP'+response.discount);
-                    $("discount-response").html('');
-                    $("discount_code").val('');
-                } 
-            }
-        });
-    });
-    $("#remove-discount").click(function(){
+    // $('body').on('click',"#remove-discount", function(){
+    //     $.ajax({
+    //         url: '{{route ("front.removeCoupon")}}',
+    //         type: 'post',
+    //         data: {country_id: $("#country").val()},
+    //         dataType: 'json',
+    //         success: function(response){
+    //             if (response.status == true) {
+    //                 $("#shippingAmount").html('PHP'+response.shippingCharge);
+    //                 $("#grandTotal").html('PHP'+response.grandTotal);
+    //                 $("#discount_value").html('PHP'+response.discount);
+    //                 $("discount-response").html('');
+    //                 $("discount_code").val('');
+    //             } 
+    //         }
+    //     });
+    // });
+    // $("#remove-discount").click(function(){
         
-    });
+    // });
 </script>
 @endsection 
