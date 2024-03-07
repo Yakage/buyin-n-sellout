@@ -305,7 +305,7 @@ class CartController extends Controller
                 'status' => false,
                 'errors' => $validator->errors()
             ]);
-        }
+        } 
 
         //step 2 save user address
 
@@ -354,21 +354,21 @@ class CartController extends Controller
 
 
             //calculate shipping
-            $shippingInfo = ShippingCharge::where('country_id', $request->country)->first();
-            $totalQty = 0;
-            foreach (Cart::content() as $item) {
-                $totalQty += $item->qty;
-            }
+            // $shippingInfo = ShippingCharge::where('country_id', $request->country)->first();
+            // $totalQty = 0;
+            // foreach (Cart::content() as $item) {
+            //     $totalQty += $item->qty;
+            // }
 
-            if($shippingInfo != null) {
-                $shipping = $totalQty * $shippingInfo->amount;
-                $grandTotal = ($subTotal - $discount) + $shipping;
+            // if($shippingInfo != null) {
+            //     $shipping = $totalQty * $shippingInfo->amount;
+            //     $grandTotal = ($subTotal - $discount) + $shipping;
 
-            } else {
-                $shippingInfo = ShippingCharge::where('country_id', $request->rest_of_world)->first();
-                $shipping = $totalQty * $shippingInfo->amount;
-                $grandTotal = ($subTotal - $discount) + $shipping;
-            }
+            // } else {
+            //     $shippingInfo = ShippingCharge::where('country_id', $request->rest_of_world)->first();
+            //     $shipping = $totalQty * $shippingInfo->amount;
+            //     $grandTotal = ($subTotal - $discount) + $shipping;
+            // }
 
             $order = new Order();
             $order->subtotal = $subTotal;
@@ -428,7 +428,7 @@ class CartController extends Controller
                 'message' => 'Order saved successfully',
                 'order' => $order->id,
                 'status' => true,
-                'redirect' => url('/thanks/') . '/' . $order->id
+                // 'redirect' => url('/thanks/') . '/' . $order->id
             ]);
         } else {
             //
