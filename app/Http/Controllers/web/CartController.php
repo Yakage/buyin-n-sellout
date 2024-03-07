@@ -234,39 +234,39 @@ class CartController extends Controller
 
         $customerAddress = CustomerAddress::where('user_id',$user = Auth::user()->id)->first();
 
-
-
         session()->forget('url.intended');
 
-        $countries = Country::orderBy('name', 'ASC')->get();
+        // $countries = Country::orderBy('name', 'ASC')->get();
 
         $subTotal = Cart::subtotal(2,'.','');
 
         //apply discount here
-        if(session()->has('code')) {
+        // if(session()->has('code')) {
 
-            $code = session()->get('code');
-            if($code->type == 'percent') {
-                $discount = ($code->discount_amount / 100) * $subTotal;
-            } else {
-                $discount = $code->discount_amount;
-            }
-        }
+        //     $code = session()->get('code');
+        //     if($code->type == 'percent') {
+        //         $discount = ($code->discount_amount / 100) * $subTotal;
+        //     } else {
+        //         $discount = $code->discount_amount;
+        //     }
+        // }
 
         //calculate shipping fee
         if($customerAddress != '') {
-            $userCountry = $customerAddress->country_id;
-            $shippingInfo = ShippingCharge::where('country_id', $userCountry)->first();
+            // $userCountry = $customerAddress->country_id;
+            // $shippingInfo = ShippingCharge::where('country_id', $userCountry)->first();
     
             $totalQty = 0;
-            $totalShippingCharge = 0;
+            // $totalShippingCharge = 0;
             $grandTotal = 0;
             foreach (Cart::content() as $item) {
                 $totalQty += $item->qty;
             }
     
-            $totalShippingCharge = $totalQty * $shippingInfo->amount;
-            $grandTotal = ($subTotal-$discount) + $totalShippingCharge;
+            // $totalShippingCharge = $totalQty * $shippingInfo->amount;
+            $totalShippingCharge = 50;
+            // $grandTotal = ($subTotal-$discount) + $totalShippingCharge;
+            $grandTotal = $subTotal + $totalShippingCharge;
         } else {
             $grandTotal = ($subTotal-$discount);
             $totalShippingCharge = 0;
@@ -275,10 +275,10 @@ class CartController extends Controller
         }
 
         return view('front.checkout', [
-            'countries' => $countries,
+            // 'countries' => $countries,
             'customerAddress' => $customerAddress,
             'totalShippingCharge' => $totalShippingCharge,
-            'discount' => $discount,
+            //'discount' => $discount,
             'grandTotal' => $grandTotal
         ]);
     }
@@ -370,8 +370,6 @@ class CartController extends Controller
                 $grandTotal = ($subTotal - $discount) + $shipping;
             }
 
-            
-
             $order = new Order();
             $order->subtotal = $subTotal;
             $order->shipping = $shipping;
@@ -391,7 +389,7 @@ class CartController extends Controller
             $order->barangay = $request->barangay;
             $order->city = $request->city;
             $order->zip = $request->zip;
-            $order->notes = $request->notes;
+            $order->notes = $request->order_notes;
             //$order->country_id = $request->country;
             $order->save();
 
@@ -430,17 +428,16 @@ class CartController extends Controller
                 'message' => 'Order saved successfully',
                 'order' => $order->id,
                 'status' => true,
-                'redirect' => route('front.thankyou')
+                'redirect' => url('/thanks/') . '/' . $order->id
             ]);
         } else {
             //
         }
-
     }
 
     public function thankyou($id) {
 
-        return view('front.thanks', [
+        return view('front.thankyou', [
             'id' => $id
         ]);
 

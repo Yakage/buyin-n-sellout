@@ -133,7 +133,7 @@
             </button>
         </div>
     </section>
-    <section class="section-3">
+    {{-- <section class="section-3">
         <div class="container">
             <div class="section-title">
                 <h2>Categories</h2>
@@ -161,7 +161,7 @@
                 @endif
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="section-4 pt-5">
         <div class="container">
             <div class="section-title">
@@ -368,8 +368,9 @@
                 }
             },
             error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('An error occurred. Please try again.');
+                // console.error(xhr.responseText);
+                // alert('An error occurred. Please try again.');
+                window.location.href="{{ route('account.login') }}";
             }
         });
     }
