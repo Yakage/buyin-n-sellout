@@ -296,11 +296,16 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    if(response.status == true) {
-                        window.location.href="{{ route('front.cart') }}";
+                    if (response.status == true) {
+                        if (response.isAlreadyInCart) {
+                            // If product is already in the cart, update the quantity
+                            updateCart(id, response.newQty, false);
+                        } else {
+                            // If it's a new product, redirect to the cart
+                            window.location.href = "{{ route('front.cart') }}";
+                        }
                     } else {
                         alert(response.message);
-
                     }
                 },
                 error: function(xhr, status, error) {
