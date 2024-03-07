@@ -15,7 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="" id="orderForm" name="orderForm"method="post">
+        <form action="" id="orderForm" name="orderForm" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-8">
@@ -277,7 +277,7 @@
                             .html('');
                         }
                     }else{
-                        window.location.href ="{{ route('front.thankyou') }}" + response.orderId;
+                        window.location.href ="{{ url('/thanks/') }}/" + response.orderId;
                     } 
                 }, error: function(jqXHR, exception) {
                     console.log("Something went wrong.")
@@ -305,7 +305,7 @@
     $("#apply-discount").click(function(){
         $.ajax({
             url: '{{route ("front.getOrderSummary")}}',
-            type: 'post',
+            type: 'get',
             data: {country_id: $("#discount_code").val (), country_id: $("#country").val()},
             dataType: 'json',
             success: function(response){
