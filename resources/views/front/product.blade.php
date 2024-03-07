@@ -304,10 +304,9 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    // console.error(xhr.responseText);
+                    console.error(xhr.responseText);
                     // alert('An error occurred. Please try again. add to cart');
-                    updateCart(id, response.newQty, false);
-
+                    alert('Product already added to cart.');
                 }
             });
         }

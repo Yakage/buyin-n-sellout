@@ -189,14 +189,9 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <button type="button" class="btn btn-dark" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
-                                            {{-- onclick="addToCart({{ $product->id }});" --}}
-                                                {{-- <form action="{{ route('front.addToCart') }}" method="POST">
-                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                    <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
-                                                </form> --}}
+                                                <button type="button" class="btn btn-dark" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                             @else
-                                            <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
+                                                <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
@@ -362,22 +357,18 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    if (response.status == true) {
-                        if (response.isAlreadyInCart) {
-                            // If product is already in the cart, update the quantity
-                            updateCart(id, response.newQty, false);
-                        } else {
-                            // If it's a new product, redirect to the cart
-                            window.location.href = "{{ route('front.cart') }}";
-                        }
+                    if(response.status == true) {
+                        window.location.href="{{ route('front.cart') }}";
                     } else {
                         alert(response.message);
+
                     }
                 },
                 error: function(xhr, status, error) {
-                    // console.error(xhr.responseText);
+                    console.error(xhr.responseText);
                     // alert('An error occurred. Please try again.');
-                    window.location.href="{{ route('account.login') }}";
+                    alert('Product already added to cart.');
+
                 }
             });
         }
