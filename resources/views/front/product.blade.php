@@ -304,9 +304,29 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        }
 
-                    // console.error(xhr.responseText);
-                    // alert('An error occurred. Please try again.');
+        function updateCart(rowId, newQty, redirectToCart) {
+            $.ajax({
+                url: "{{ route('front.updateCart') }}",
+                type: 'post',
+                data: { rowId: rowId, qty: newQty },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (redirectToCart) {
+                        window.location.href = "{{ route('front.cart') }}";
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('An error occurred. Please try again.');
                 }
             });
         }
