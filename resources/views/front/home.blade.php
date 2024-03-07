@@ -361,13 +361,16 @@
                         window.location.href="{{ route('front.cart') }}";
                     } else {
                         alert(response.message);
+                        window.location.href="{{ route('front.cart') }}";
+
 
                     }
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
                     // alert('An error occurred. Please try again.');
-                    alert('Product already added to cart.');
+                    window.location.href="{{ route('front.cart') }}";
+
 
                 }
             });

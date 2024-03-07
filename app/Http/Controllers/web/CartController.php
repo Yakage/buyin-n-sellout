@@ -399,7 +399,7 @@ class CartController extends Controller
             foreach (Cart::content() as $item) {
                 $orderItem = new OrderItem;
                 $orderItem->product_id = $item->id;
-                $orderItem->order_id = $order->name;
+                $orderItem->order_id = $order->id;
                 $orderItem->name = $item->name;
                 $orderItem->qty = $item->qty;
                 $orderItem->price = $item->price;
@@ -424,13 +424,12 @@ class CartController extends Controller
             Cart::destroy();
 
             session()->forget('code');
-            return redirect('/thanks/' . $order->id)->with('success', 'You have successfully placed your order.');
-            // return response()->json([
-            //     'message' => 'Order saved successfully',
-            //     'order' => $order->id,
-            //     'status' => true,
-            //     'redirect' => url('/thanks/') . '/' . $order->id
-            // ]);
+            // return redirect('/thanks/' . $order->id)->with('success', 'You have successfully placed your order.');
+            return response()->json([
+                'message' => 'Order saved successfully',
+                'order' => $order->id,
+                'status' => true,
+            ]);
         } else {
             //
         }
