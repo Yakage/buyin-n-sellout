@@ -42,6 +42,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
+                <img src="/public/front-assets/images/Logo-bs.png">
 				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
