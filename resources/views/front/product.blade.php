@@ -254,14 +254,14 @@
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                             <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                                         </form> --}}
-                                        <button type="button" class="btn btn-dark add"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                        <button type="button" class="btn btn-dark add" data-id="{{ $product->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                                 {{-- onclick="addToCart({{ $product->id }});" --}}
                                     @else
                                         <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                     @endif
                                 @else
-                                <button type="button" class="btn btn-dark add" data-id="{{ $item->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
-                                {{-- onclick="addToCart({{ $product->id }});" --}}
+                                <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                {{--  --}}
                                 @endif
                             </div>
                         </div>                        
