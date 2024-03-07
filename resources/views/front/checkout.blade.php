@@ -325,7 +325,7 @@
     $('body').on('click',"#remove-discount", function(){
         $.ajax({
             url: '{{route ("front.removeCoupon")}}',
-            type: post,
+            type: 'post',
             data: {country_id: $("#country").val()},
             dataType: 'json',
             success: function(response){

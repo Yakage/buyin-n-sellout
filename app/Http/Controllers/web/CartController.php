@@ -214,7 +214,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function checkout() {
+    public function checkout(Request $request) {
         $discount = 0;
 
         //-- if cart empty, redirect to cart page
@@ -233,8 +233,6 @@ class CartController extends Controller
         }
 
         $customerAddress = CustomerAddress::where('user_id',$user = Auth::user()->id)->first();
-
-
 
         session()->forget('url.intended');
 
