@@ -15,7 +15,8 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="{{ route('front.processCheckout') }}" method="post" name="orderForm" id="orderForm">
+        <form action="" method="post" name="orderForm" id="orderForm">
+            @csrf
             <div class="row">
                 <div class="col-md-8">
                     <div class="sub-title">
