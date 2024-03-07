@@ -106,7 +106,7 @@
                             </div>
                             <div class="d-flex justify-content-between pb-2">
                                 <div>Shipping</div>
-                                <div>PHP 0</div>
+                                <div>PHP 50</div>
                             </div>
                             <div class="d-flex justify-content-between summery-end">
                                 <div>Total</div>
