@@ -246,7 +246,7 @@
                                                 <button type="button" class="btn btn-dark" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                                 {{-- onclick="addToCart({{ $product->id }});" --}}
                                             @else
-                                            <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
+                                                <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>

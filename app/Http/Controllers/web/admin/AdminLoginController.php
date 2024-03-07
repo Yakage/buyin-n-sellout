@@ -24,7 +24,7 @@ class AdminLoginController extends Controller
                 $admin = auth()->guard('admin')->user();
     
                 if ($admin->role == 2) {
-                    return redirect()->route('admin.dahsboard');
+                    return redirect()->route('admin.dashboard');
                     // return response()->json([
                     //     'status' => true,
                     //     'message' => 'Login successful',
