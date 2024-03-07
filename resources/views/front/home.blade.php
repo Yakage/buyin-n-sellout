@@ -200,9 +200,8 @@
                                             <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
-                                            <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});">
-                                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                                            </button>
+                                        <button type="button" class="btn btn-dark add" data-id="{{ $item->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                        {{-- onclick="addToCart({{ $product->id }});" --}}
                                         @endif
                                     </div>                                    
                                 </div>
@@ -254,7 +253,8 @@
                                             <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                             @endif
                                         @else
-                                            <button type="button" class="btn btn-dark" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                            <button type="button" class="btn btn-dark add" data-id="{{ $item->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                            {{-- onclick="addToCart({{ $product->id }});" --}}
                                         @endif
                                     </div>
                                 </div>
@@ -350,53 +350,88 @@
 </script> --}}
 
 <script>
-    function addToCart(id) {
-        $.ajax({
-            url: '{{ route("front.addToCart") }}',
-            type: 'post',
-            data: {id: id},
-            dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if(response.status == true) {
-                    window.location.href="{{ route('front.cart') }}";
-                } else {
-                    alert(response.message);
+    $(document).ready(function() {
 
+        function addToCart(id) {
+            $.ajax({
+                url: '{{ route("front.addToCart") }}',
+                type: 'post',
+                data: {id: id},
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if(response.status == true) {
+                        window.location.href="{{ route('front.cart') }}";
+                    } else {
+                        alert(response.message);
+
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // console.error(xhr.responseText);
+                    // alert('An error occurred. Please try again.');
+                    window.location.href="{{ route('account.login') }}";
                 }
-            },
-            error: function(xhr, status, error) {
-                // console.error(xhr.responseText);
-                // alert('An error occurred. Please try again.');
-                window.location.href="{{ route('account.login') }}";
+            });
+        }
+
+        $('.add').click(function() {
+            var qtyElement = $(this).parent().prev(); // Qty Input
+            var qtyValue = parseInt(qtyElement.val());
+            if (qtyValue < 10) {
+                qtyElement.val(qtyValue + 1);
+
+                var rowId = $(this).data('id');
+                var newQty = qtyElement.val();
+                updateCart(rowId, newQty);
+
+                window.location.href = "{{ route('front.cart') }}";
             }
         });
-    }
 
-    function addToWishList(id) {
-        $.ajax({
-            url: "{{route('front.addToWishList')}}",
-            type: 'post',
-            data: {id:id},
-            dataType: 'json',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if(response.status == true) {
-
-                    $("#wishlistModal .modal-body").html(response.message);
-                    $("#wishlistModal").modal('show');
-    
-                } else {
-                    window.location.href="{{ route('account.login') }}";
-                    //alert(response.message);
+        function updateCart(rowId, newQty, redirectToCart) {
+            $.ajax({
+                url: "{{ route('front.updateCart') }}",
+                type: 'post',
+                data: { rowId: rowId, qty: newQty },
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (redirectToCart) {
+                        window.location.href = "{{ route('front.cart') }}";
+                    }
                 }
-            }
-        })
-    }
+            });
+        }
+
+
+        function addToWishList(id) {
+            $.ajax({
+                url: "{{route('front.addToWishList')}}",
+                type: 'post',
+                data: {id:id},
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if(response.status == true) {
+
+                        $("#wishlistModal .modal-body").html(response.message);
+                        $("#wishlistModal").modal('show');
+        
+                    } else {
+                        window.location.href="{{ route('account.login') }}";
+                        //alert(response.message);
+                    }
+                }
+            })
+        }
+    });
 </script>
 </body>
 </html>
