@@ -367,8 +367,9 @@
                 }
             },
             error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-                alert('An error occurred. Please try again.');
+                // console.error(xhr.responseText);
+                // alert('An error occurred. Please try again.');
+                window.location.href="{{ route('account.login') }}";
             }
         });
     }

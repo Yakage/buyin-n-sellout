@@ -274,7 +274,7 @@ class CartController extends Controller
 
         }
 
-        return view('front.thankyou', [
+        return view('front.checkout', [
             // 'countries' => $countries,
             'customerAddress' => $customerAddress,
             'totalShippingCharge' => $totalShippingCharge,
@@ -438,7 +438,7 @@ class CartController extends Controller
 
     public function thankyou($id) {
 
-        return view('front.thanks', [
+        return view('front.thankyou', [
             'id' => $id
         ]);
 
