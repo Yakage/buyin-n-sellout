@@ -305,7 +305,7 @@
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert('An error occurred. Please try again.');
+                    alert('An error occurred. Please try again. add to cart');
                 }
             });
         }
@@ -326,7 +326,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert('An error occurred. Please try again.');
+                    alert('An error occurred. Please try again. update cart');
                 }
             });
         }
