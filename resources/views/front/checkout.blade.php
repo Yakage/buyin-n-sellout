@@ -15,7 +15,7 @@
 
 <section class="section-9 pt-4">
     <div class="container">
-        <form action="" id="orderForm" name="orderForm" method="post">
+        <form action="" id="orderForm" name="orderForm" method="get">
             @csrf
             <div class="row">
                 <div class="col-md-8">
