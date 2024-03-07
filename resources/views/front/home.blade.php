@@ -189,7 +189,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                            <button type="button" class="btn btn-dark add" data-id="{{ $product->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                            <button type="button" class="btn btn-dark" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                             {{-- onclick="addToCart({{ $product->id }});" --}}
                                                 {{-- <form action="{{ route('front.addToCart') }}" method="POST">
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -248,7 +248,7 @@
                                     <div class="product-action">
                                         @if($product->track_qty == 'Yes')
                                             @if($product->qty > 0)
-                                                <button type="button" class="btn btn-dark add" data-id="{{ $product->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                                <button type="button" class="btn btn-dark" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
                                                 {{-- onclick="addToCart({{ $product->id }});" --}}
                                             @else
                                             <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
@@ -362,11 +362,16 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    if(response.status == true) {
-                        window.location.href="{{ route('front.cart') }}";
+                    if (response.status == true) {
+                        if (response.isAlreadyInCart) {
+                            // If product is already in the cart, update the quantity
+                            updateCart(id, response.newQty, false);
+                        } else {
+                            // If it's a new product, redirect to the cart
+                            window.location.href = "{{ route('front.cart') }}";
+                        }
                     } else {
                         alert(response.message);
-
                     }
                 },
                 error: function(xhr, status, error) {
@@ -376,38 +381,6 @@
                 }
             });
         }
-
-        $('.add').click(function() {
-            var qtyElement = $(this).parent().prev(); // Qty Input
-            var qtyValue = parseInt(qtyElement.val());
-            if (qtyValue < 10) {
-                qtyElement.val(qtyValue + 1);
-
-                var rowId = $(this).data('id');
-                var newQty = qtyElement.val();
-                updateCart(rowId, newQty);
-
-                window.location.href = "{{ route('front.cart') }}";
-            }
-        });
-
-        function updateCart(rowId, newQty, redirectToCart) {
-            $.ajax({
-                url: "{{ route('front.updateCart') }}",
-                type: 'post',
-                data: { rowId: rowId, qty: newQty },
-                dataType: 'json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    if (redirectToCart) {
-                        window.location.href = "{{ route('front.cart') }}";
-                    }
-                }
-            });
-        }
-
 
         function addToWishList(id) {
             $.ajax({

@@ -254,8 +254,8 @@
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                             <button type="submit" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
                                         </form> --}}
-                                        <button type="button" class="btn btn-dark add" data-id="{{ $product->rowId }}"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
-                                                {{-- onclick="addToCart({{ $product->id }});" --}}
+                                        <button type="button" class="btn btn-dark add" onclick="addToCart({{ $product->id }});"><i class="fas fa-shopping-cart"></i>Add To Cart</button>
+                                                {{--  --}}
                                     @else
                                         <button type="button" class="btn btn-dark" disabled><i class="fas fa-shopping-cart"></i> Out of Stock</button>
                                     @endif
@@ -304,8 +304,9 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                    alert('An error occurred. Please try again.');
+
+                    // console.error(xhr.responseText);
+                    // alert('An error occurred. Please try again.');
                 }
             });
         }
