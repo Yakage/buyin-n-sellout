@@ -340,17 +340,17 @@ class CartController extends Controller
             $grandTotal = $subTotal + $shipping;
 
             //apply discount here
-            if(session()->has('code')) {
-                $code = session()->get('code');
-                if($code->type == 'percent') {
-                    $discount = ($code->discount_amount / 100) * $subTotal;
-                } else {
-                    $discount = $code->discount_amount;
-                }
+            // if(session()->has('code')) {
+            //     $code = session()->get('code');
+            //     if($code->type == 'percent') {
+            //         $discount = ($code->discount_amount / 100) * $subTotal;
+            //     } else {
+            //         $discount = $code->discount_amount;
+            //     }
 
-                $discountCodeId = $code->id;
-                $promoCode = $code->code;
-            }
+            //     $discountCodeId = $code->id;
+            //     $promoCode = $code->code;
+            // }
 
 
             //calculate shipping
@@ -424,12 +424,13 @@ class CartController extends Controller
             Cart::destroy();
 
             session()->forget('code');
-            return response()->json([
-                'message' => 'Order saved successfully',
-                'order' => $order->id,
-                'status' => true,
-                // 'redirect' => url('/thanks/') . '/' . $order->id
-            ]);
+            return redirect('/thanks/' . $order->id)->with('success', 'You have successfully placed your order.');
+            // return response()->json([
+            //     'message' => 'Order saved successfully',
+            //     'order' => $order->id,
+            //     'status' => true,
+            //     'redirect' => url('/thanks/') . '/' . $order->id
+            // ]);
         } else {
             //
         }
