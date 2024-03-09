@@ -62,7 +62,20 @@
             <div class="col-lg-4 col-6">							
                 <div class="small-box card">
                     <div class="inner">
-                        <h3>PHP{{ number_format($totalRevenue,2) }}</h3>
+                        <h3>PHP {{ number_format($currentSale,2) }}</h3>
+                        <p>Current Sale</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    {{-- <a href="javascript:void(0);" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-6">							
+                <div class="small-box card">
+                    <div class="inner">
+                        <h3>PHP {{ number_format($totalRevenue,2) }}</h3>
                         <p>Total Sale</p>
                     </div>
                     <div class="icon">
@@ -76,7 +89,7 @@
             <div class="col-lg-4 col-6">							
                 <div class="small-box card">
                     <div class="inner">
-                        <h3>PHP{{ number_format( $revenueThisMonth,2) }}</h3>
+                        <h3>PHP {{ number_format( $revenueThisMonth,2) }}</h3>
                         <p>Revenue this month</p>
                     </div>
                     <div class="icon">
@@ -89,7 +102,7 @@
             <div class="col-lg-4 col-6">							
                 <div class="small-box card">
                     <div class="inner">
-                        <h3>PHP{{ number_format( $revenueLastMonth,2) }}</h3>
+                        <h3>PHP {{ number_format( $revenueLastMonth,2) }}</h3>
                         <p>Revenue last month ({{ $lastMonthName }})</p>
                     </div>
                     <div class="icon">
@@ -102,7 +115,7 @@
             <div class="col-lg-4 col-6">							
                 <div class="small-box card">
                     <div class="inner">
-                        <h3>PHP{{ number_format( $revenueLastThirtyDays,2) }}</h3>
+                        <h3>PHP {{ number_format( $revenueLastThirtyDays,2) }}</h3>
                         <p>Revenue last 30 days</p>
                     </div>
                     <div class="icon">
@@ -111,6 +124,21 @@
                     {{-- <a href="javascript:void(0);" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                 </div>
             </div>
+
+            <div class="col-lg-4 col-6">							
+                <div class="small-box card">
+                    <div class="inner">
+                        <h3>PHP {{ number_format( $revenueLastYear,2) }}</h3>
+                        <p>Revenue last year ({{ $lastYearName }})</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    {{-- <a href="javascript:void(0);" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                </div>
+            </div>
+
+            
 
             {{-- <div class="col-lg-4 col-6">							
                 <div class="small-box card">

@@ -30,9 +30,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick-theme.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/style.css')}}" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,9 +42,10 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
-                <img src="/public/front-assets/images/Logo-bs.png">
-				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
-				<span class="h2 text-uppercase text-white px-2">SellOut</span>
+                <img src="{{ asset('front-assets/images/Logo-bs.png')}}" class="logo-sizing-mobile">
+				{{-- <span class="h2 text-uppercase text-primary bg-dark">BuyIn &#38;</span> --}}
+				{{-- <span class="h2 text-uppercase text-primary bg-dark">&#38;</span>  --}}
+				{{-- <span class="h2 text-uppercase text-white px-2">SellOut</span> --}}
 			</a>
 			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				  <i class="navbar-toggler-icon fas fa-bars"></i>
@@ -78,9 +79,10 @@
 <div class="bg-light top-header">        
 	<div class="container">
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
-			<div class="col-lg-4 logo">
+			<div class="col-lg-5 logo">
 				<a href="{{ route('front.home')}}" class="text-decoration-none">
-					<span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn</span>
+                    {{-- <img src="{{ asset('front-assets/images/Logo-bs.png')}}" class="logo-sizing"> --}}
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn &</span>
 					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
 				</a>
 			</div>
@@ -320,12 +322,12 @@
 	</div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{{-- <script src="{{ secure_asset('front-assets/js/jquery-3.6.0.min.js')}}"></script> --}}
-<script src="{{ secure_asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
-<script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
+<script src="{{ asset('front-assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
+<script src="{{ asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/slick.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/custom.js')}}"></script>
 
 <script>
     window.onscroll = function() {myFunction()};
@@ -339,10 +341,6 @@
         }
     }
 </script>
-{{-- <script>
-    document.documentElement.classList.remove('no-js');
-    document.documentElement.classList.add('js');
-</script> --}}
 
 <script>
     // $(document).ready(function() {

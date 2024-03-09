@@ -30,15 +30,23 @@ class OrderController extends Controller
 
     public function detail($orderId) {
 
-        $order = Order :: select('orders.*','countries.name as countryName')
-                    ->where('orders.id',$orderId)
-                    ->leftJoin('countries','countries.id','orders.country_id')
-                    ->first();
+        // $order = Order :: select('orders.*','countries.name as countryName')
+        //             ->where('orders.id',$orderId)
+        //             ->leftJoin('countries','countries.id','orders.country_id')
+        //             ->first();
 
-        $orderItems = OrderItem::where('order_id',$orderId)->get();
+        // $orderItems = OrderItem::where('order_id',$orderId)->get();
 
-        return view('admin.order.detail',[
-            'order'=> $order,
+        // return view('admin.order.detail',[
+        //     'order'=> $order,
+        //     'orderItems' => $orderItems
+        // ]);
+
+        $order = Order::find($orderId);
+        $orderItems = OrderItem::where('order_id', $orderId)->get();
+
+        return view('admin.order.detail', [
+            'order' => $order,
             'orderItems' => $orderItems
         ]);
     }

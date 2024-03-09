@@ -7,19 +7,19 @@
 		<!-- Google Font: Source Sans Pro -->
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 		<!-- Font Awesome -->
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/plugins/fontawesome-free/css/all.min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/plugins/fontawesome-free/css/all.min.css') }}">
 		<!-- Theme style -->
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/css/adminlte.min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/adminlte.min.css') }}">
 
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/plugins/dropzone/min/dropzone.min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/plugins/dropzone/min/dropzone.min.css') }}">
 
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/plugins/summernote/summernote.min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/plugins/summernote/summernote.min.css') }}">
 
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/plugins/select2/css/select2.min.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/plugins/select2/css/select2.min.css') }}">
 
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/css/datetimepicker.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/datetimepicker.css') }}">
 
-		<link rel="stylesheet" type="text/css" href="{{ secure_asset('admin_assets/css/custom.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/custom.css') }}">
 
 		<!-- Include Dropzone CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css" integrity="sha512-nwG+XC6Wfp8/V7srr1icq0U0TnGhtjl9QDQV4+mnqioSau7t+dbG0el/f6dMviTZdm8gpMPFaKc8jHGZlMtzGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -98,25 +98,25 @@
 		</div>
 		<!-- ./wrapper -->
 		<!-- jQuery -->
-		<script src="{{ secure_asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
 		<!-- Bootstrap 4 -->
-		<script src="{{ secure_asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 		<!-- AdminLTE App -->
-		<script src="{{ secure_asset('admin_assets/js/adminlte.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/js/adminlte.min.js') }}"></script>
 
-		<script src="{{ secure_asset('admin_assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
         
-		<script src="{{ secure_asset('admin_assets/plugins/summernote/summernote.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/plugins/summernote/summernote.min.js') }}"></script>
 
-		<script src="{{ secure_asset('admin_assets/plugins/select2/js/select2.min.js') }}"></script>
+		<script src="{{ asset('admin_assets/plugins/select2/js/select2.min.js') }}"></script>
 
-		<script src="{{ secure_asset('admin_assets/js/datetimepicker.js') }}"></script>
+		<script src="{{ asset('admin_assets/js/datetimepicker.js') }}"></script>
 
 		{{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
 
 
 		<!-- AdminLTE for demo purposes -->
-		<script src="{{ secure_asset('admin_assets/js/demo.js') }}"></script>
+		<script src="{{ asset('admin_assets/js/demo.js') }}"></script>
 
 		<script type="text/javascript">
 			$.ajaxSetup({

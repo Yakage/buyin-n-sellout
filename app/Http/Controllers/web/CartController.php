@@ -309,6 +309,8 @@ class CartController extends Controller
 
         //step 2 save user address
 
+        // $customerAddress = CustomerAddress::find($user->id);
+
         $user = Auth::user();
 
         CustomerAddress::updateOrCreate(
@@ -323,18 +325,18 @@ class CartController extends Controller
                 'address' => $request->address,
                 'apartment' => $request->apartment,
                 'city' => $request->city,
-                'barangay' => $request->has('barangay') ? $request->barangay : '',
+                'barangay' => $request->barangay, //has('barangay') ? $request->barangay : ''
                 'zip' => $request->zip,
             ]
         );
 
         //step 3 store data in orders table
         
-        if($request->payment_method == 'cod') {
+        if ($request->payment_method == 'cod') {
 
             $discountCodeId = NULL;
             $promoCode   = '';
-            $shipping = 0;
+            $shipping = 50;
             $discount = 0;
             $subTotal = Cart::subtotal(2,'.','');
             $grandTotal = $subTotal + $shipping;
@@ -374,13 +376,11 @@ class CartController extends Controller
             $order->subtotal = $subTotal;
             $order->shipping = $shipping;
             $order->grand_total = $grandTotal;
-
             // $order->discount = $discount;
             // $order->coupon_code_id = $discountCodeId;
             // $order->coupon_code = $promoCode;
             $order->payment_status = 'not paid';
             $order->status = 'pending';
-
             $order->user_id = $user->id;
             $order->first_name = $request->first_name;
             $order->last_name = $request->last_name;
@@ -394,7 +394,6 @@ class CartController extends Controller
             $order->notes = $request->order_notes;
             //$order->country_id = $request->country;
             $order->save();
-
 
             // step 4 - store order items in order items table
 
@@ -429,7 +428,7 @@ class CartController extends Controller
             // return redirect('/thanks/' . $order->id)->with('success', 'You have successfully placed your order.');
             return response()->json([
                 'message' => 'Order saved successfully',
-                'order' => $order->id,
+                'orderId' => $order->id,
                 'status' => true,
             ]);
         } else {
@@ -439,7 +438,7 @@ class CartController extends Controller
 
     public function thankyou($id) {
 
-        return view('front.thankyou', [
+        return view('front.thanks', [
             'id' => $id
         ]);
 
@@ -468,53 +467,55 @@ class CartController extends Controller
 
         
 
-        if($request->country_id > 0) {
+        // if($request->country_id > 0) {
 
-            $shippingInfo = Shippingcharge::where('country_id', $request->country_id)->first();
+            // $shippingInfo = ShippingCharge::where('country_id', $request->country_id)->first();
 
-            $totalQty = 0;
-            foreach (Cart::content() as $item) {
-                $totalQty += $item->qty;
-            }
+            // $totalQty = 0;
+            // foreach (Cart::content() as $item) {
+            //     $totalQty += $item->qty;
+            // }
 
-            if($shippingInfo != null) {
+            // if($shippingInfo != null) {
 
-                $shippingCharge = $totalQty * $shippingInfo->amount;
-                $grandTotal = ($subTotal - $discount) + $shippingCharge;
+            //     $shippingCharge = $totalQty * $shippingInfo->amount;
+            //     $grandTotal = ($subTotal - $discount) + $shippingCharge;
+
+            //     return response()->json([
+            //         'status' => true,
+            //         'grandTotal' => number_format($grandTotal,2),
+            //         'discount' => number_format($discount,2),
+            //         'discountString' => $discountString,
+            //         'shippingCharge' => number_format($shippingCharge,2),
+            //     ]);
+            // } else {
+                // $shippingInfo = ShippingCharge::where('country_id', $request->rest_of_world)->first();
+
+                $shippingCharge = 50; //$totalQty * $shippingInfo->amount;
+                // $grandTotal = ($subTotal - $discount) + $shippingCharge;
+                $grandTotal = $subTotal + $shippingCharge;
 
                 return response()->json([
                     'status' => true,
                     'grandTotal' => number_format($grandTotal,2),
-                    'discount' => number_format($discount,2),
-                    'discountString' => $discountString,
-                    'shippingCharge' => number_format($shippingCharge,2),
-                ]);
-            } else {
-                $shippingInfo = ShippingCharge::where('country_id', $request->rest_of_world)->first();
-
-                $shippingCharge = $totalQty * $shippingInfo->amount;
-                $grandTotal = ($subTotal - $discount) + $shippingCharge;
-
-                return response()->json([
-                    'status' => true,
-                    'grandTotal' => number_format($grandTotal,2),
-                    'discount' => number_format($discount,2),
-                    'discountString' => $discountString,
+                    // 'discount' => number_format($discount,2),
+                    // 'discountString' => $discountString,
                     'shippingCharge' => number_format($shippingCharge,2),
                 ]);
 
-            }
-        } else {
+            // }
+            
+        // } else {
 
-            return response()->json([
-                'status' => true,
-                'grandTotal' => number_format(($subTotal - $discount),2),
-                'discount' => number_format($discount,2),
-                'discountString' => $discountString,
-                'shippingCharge' => number_format(0,2),
-            ]);
+        //     return response()->json([
+        //         'status' => true,
+        //         'grandTotal' => number_format(($subTotal - $discount),2),
+        //         //'discount' => number_format($discount,2),
+        //         //'discountString' => $discountString,
+        //         'shippingCharge' => number_format(0,2),
+        //     ]);
 
-        }
+        // }
     }
 
     public function applyDiscount(Request $request) {

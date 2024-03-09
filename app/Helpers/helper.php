@@ -33,7 +33,7 @@ function orderEmail($orderId, $userType="customer") {
     $mailData = [
         'subject' => $subject,
         'order' => $order,
-        'userType'=>$userType
+        'userType'=>$userType,
     ];
 
     Mail::to($email)->send(new OrderEmail($mailData));
@@ -47,4 +47,3 @@ function staticPages() {
     $pages = Page::orderBy('name','ASC')->get();
     return $pages;
 }
-?>

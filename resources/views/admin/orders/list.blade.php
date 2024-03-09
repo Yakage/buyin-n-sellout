@@ -42,7 +42,7 @@
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th width="60">Order #/th>
+                            <th width="60">Order</th>
                             <th>Customer</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -71,7 +71,7 @@
                                         <span class="badge bg-danger">Cancelled</span>
                                     @endif
                                 </td>   
-                                <td>${{ number_format($order->grand_total,2) }}</td>
+                                <td>PHP {{ number_format($order->grand_total,2) }}</td>
                                 <td>
                                     {{ \Carbon\Carbon::parse($order->created_at)->format('d M, Y')}}
                                 </td>

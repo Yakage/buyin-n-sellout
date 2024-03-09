@@ -20,7 +20,7 @@
     <address>
         <strong>{{$mailData['order']->first_name.''.$mailData['order']->last_name}}</strong><br>
         {{$mailData['order']->address}}<br>
-        {{$mailData['order']->city}},  {{$mailData['order']->zip}}  {{getCountryInfo($mailData['order'])->country_id->name}}<br>
+        {{-- {{$mailData['order']->city}},  {{$mailData['order']->zip}}  {{getCountryInfo($mailData['order'])->country_id->name}}<br> --}}
         Phone: {{$mailData['order']->mobile}}<br>
         Email:  {{$mailData['order']->email}}
     </address>

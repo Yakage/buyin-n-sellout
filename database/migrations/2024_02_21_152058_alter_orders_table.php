@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function(Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             $table->timestamp('shipped_date')->nullable()->after('status');
         });
     }

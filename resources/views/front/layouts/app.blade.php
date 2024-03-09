@@ -33,10 +33,10 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 
-	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/slick-theme.css')}}" />
 	{{-- <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/ion.rangeSlider.min.css')}}" /> --}}
-	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/style.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('front-assets/css/style.css')}}" />
 
 	{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css"> --}}
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -53,7 +53,6 @@
 	<!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
 
-	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <header class="bg-dark">
 	<div class="container">
@@ -237,14 +236,14 @@
 	</div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ secure_asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
-<script src="{{ secure_asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/slick.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>
-<script src="{{ secure_asset('front-assets/js/custom.js')}}"></script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script> --}}
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script src="{{ asset('front-assets/js/bootstrap.bundle.5.1.3.min.js')}}"></script> 
+<script src="{{ asset('front-assets/js/instantpages.5.1.0.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/lazyload.17.6.0.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/slick.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/ion.rangeSlider.min.js')}}"></script>
+<script src="{{ asset('front-assets/js/custom.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
 
 

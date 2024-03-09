@@ -16,7 +16,6 @@
 <section class="section-9 pt-4">
     <div class="container">
         <form action="" id="orderForm" name="orderForm" method="post">
-            @csrf
             <div class="row">
                 <div class="col-md-8">
                     <div class="sub-title">
@@ -45,7 +44,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control" value="{{ (!empty($customerAddress)) ? $customerAddress->address : ''}}"></textarea>
+                                        <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" class="form-control">{{ (!empty($customerAddress)) ? $customerAddress->address : ''}}</textarea>
                                         <p></p>
                                     </div>
                                 </div>
@@ -113,7 +112,7 @@
                                     <div class="card payment-form ">
                                         <h3 class="card-title h5 mb-3">Payment Method</h3>
                                         <div class="form-check">
-                                            <input checked type="radio" name="payment_method_one" value="cod" id="payment_method_one">
+                                            <input checked type="radio" name="payment_method" value="cod" id="payment_method_one">
                                             <label for="payment_1" class="form-check-label">COD</label>
                                         </div>
 
@@ -161,11 +160,11 @@
         }
     });
     
-    // $("#payment_method_two").click(function(){
-    //     if($(this).is(":checked") == true) {
-    //         $("#card-payment-form").removeClass('d-none');
-    //     }
-    // });
+    $("#payment_method_two").click(function(){
+        if($(this).is(":checked") == true) {
+            $("#card-payment-form").removeClass('d-none');
+        }
+    });
 
     $("#orderForm").submit(function(event){
         event.preventDefault();
@@ -281,7 +280,8 @@
                             .html('');
                     }
                 } else {
-                    window.location.href="{{ url('/thanks/') }}/"+response.orderId;
+                    console.log(response);
+                    window.location.href="{{ url('/thanks/') }}/" + response.orderId;
                 } 
             }, 
             error: function(jqXHR, exception) {

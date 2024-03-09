@@ -15,7 +15,7 @@ class CustomerAddress extends Model
         'last_name',
         'email',
         'mobile',
-        'country_id',
+        // 'country_id',
         'address',
         'apartment',
         'barangay',
@@ -23,4 +23,9 @@ class CustomerAddress extends Model
         'zip'
     
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

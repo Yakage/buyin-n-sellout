@@ -21,6 +21,15 @@ class HomeController extends Controller
         $totalCustomers = User::where('role',1)->count();
 
         $totalRevenue = Order::where('status','!=','cancelled')->sum('grand_total');
+
+        //current sale
+        $currentDate = Carbon::now()->format('Y-m-d');
+
+        $currentSale = Order::where('status', '!=', 'cancelled')
+            ->whereDate('created_at', '<=', $currentDate)
+            ->whereDate('created_at', '>=', $currentDate)
+            ->sum('grand_total');
+
         //this month revenue
         $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
         $currentDate = Carbon::now()->format('Y-m-d');
@@ -47,6 +56,23 @@ class HomeController extends Controller
         $revenueLastThirtyDays = Order::where('status','!=','cancelled')
         ->whereDate('created_at','>=',$lastThirtyDayStartDate)
         ->whereDate('created_at','<=',$currentDate)
+        ->sum('grand_total');
+
+        //last year sale
+        // $lastYearStartDate = Carbon::now()->subDays(365)->format('Y-m-d');
+
+        // $revenueLastYear = Order::where('status','!=','cancelled')
+        // ->whereDate('created_at','>=',$lastYearStartDate)
+        // ->whereDate('created_at','<=',$currentDate)
+        // ->sum('grand_total');
+
+        $lastYearStartDate = Carbon::now()->subYear()->startOfYear()->format('Y-m-d');
+        $lastYearEndDate = Carbon::now()->subYear()->endOfYear()->format('Y-m-d');
+        $lastYearName = Carbon::now()->subYear()->startOfYear()->format('Y');
+
+        $revenueLastYear = Order::where('status','!=','cancelled')
+        ->whereDate('created_at','>=',$lastYearStartDate)
+        ->whereDate('created_at','<=',$lastYearEndDate)
         ->sum('grand_total');
 
         //Delete temp images here
@@ -80,7 +106,10 @@ class HomeController extends Controller
             'revenueThisMonth' => $revenueThisMonth,
             'revenueLastMonth' => $revenueLastMonth,
             'revenueLastThirtyDays' => $revenueLastThirtyDays,
+            'revenueLastYear' => $revenueLastYear,
             'lastMonthName' =>  $lastMonthName,
+            'lastYearName' =>  $lastYearName,
+            'currentSale' =>  $currentSale,
 
         ]);
         //$admin = Auth::guard('admin')->user();
