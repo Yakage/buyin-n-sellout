@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en_AU"/>
 <head>
-<header class="bg-dark">
+<header style="background-color: #3d4d28;">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>BuyIn & SellOut</title>
 	<meta name="description" content="" />
@@ -42,7 +42,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
-                <img src="{{ asset('front-assets/images/Logo-bs.png')}}" class="logo-sizing-mobile">
+                {{--<img src="{{ asset('front-assets/images/Logo-bs.png')}}" class="logo-sizing-mobile">--}}
 				{{-- <span class="h2 text-uppercase text-primary bg-dark">BuyIn &#38;</span> --}}
 				{{-- <span class="h2 text-uppercase text-primary bg-dark">&#38;</span>  --}}
 				{{-- <span class="h2 text-uppercase text-white px-2">SellOut</span> --}}
@@ -81,9 +81,8 @@
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-5 logo">
 				<a href="{{ route('front.home')}}" class="text-decoration-none">
-                    {{-- <img src="{{ asset('front-assets/images/Logo-bs.png')}}" class="logo-sizing"> --}}
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">BuyIn &</span>
-					<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SellOut</span>
+                     <img src="{{ asset('front-assets/images/primarylogo.png')}}" class="logo-sizing">
+                    
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
@@ -273,7 +272,7 @@
     </section>
 </main>
 </head>
-<footer class="bg-dark mt-5">
+<footer style="background-color: #3d4d28;">
 	<div class="container pb-5 pt-3">
 		<div class="row">
 			<div class="col-md-4">

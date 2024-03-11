@@ -124,7 +124,7 @@
 .rating label:hover ~ label,
 .rating input:checked + label,
 .rating input:checked + label ~ label{
-    color: #ffc107;
+    color: #3d4d28;
     font-size: 8px;
 }
 
@@ -145,7 +145,7 @@
 }
 
 .front-stars {
-    color: #ffbc0b;
+    color: #3d4d28;
     overflow: hidden;
     position: absolute;
     top: 0;
