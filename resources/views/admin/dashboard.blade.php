@@ -63,7 +63,7 @@
                 <div class="small-box card">
                     <div class="inner">
                         <h3>PHP {{ number_format($currentSale,2) }}</h3>
-                        <p>Current Sale</p>
+                        <p>Current Sale </p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -90,7 +90,7 @@
                 <div class="small-box card">
                     <div class="inner">
                         <h3>PHP {{ number_format( $revenueThisMonth,2) }}</h3>
-                        <p>Revenue this month</p>
+                        <p>Sales this month</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -103,7 +103,7 @@
                 <div class="small-box card">
                     <div class="inner">
                         <h3>PHP {{ number_format( $revenueLastMonth,2) }}</h3>
-                        <p>Revenue last month ({{ $lastMonthName }})</p>
+                        <p>Sales last month ({{ $lastMonthName }})</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -116,7 +116,7 @@
                 <div class="small-box card">
                     <div class="inner">
                         <h3>PHP {{ number_format( $revenueLastThirtyDays,2) }}</h3>
-                        <p>Revenue last 30 days</p>
+                        <p>Sales last 30 days</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -129,7 +129,7 @@
                 <div class="small-box card">
                     <div class="inner">
                         <h3>PHP {{ number_format( $revenueLastYear,2) }}</h3>
-                        <p>Revenue last year ({{ $lastYearName }})</p>
+                        <p>Sales last year ({{ $lastYearName }})</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>

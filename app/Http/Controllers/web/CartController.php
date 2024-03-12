@@ -15,80 +15,13 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class CartController extends Controller
 {
     public function addToCart(Request $request){
-    //     $product = Product::with('product_images')->find($request->product_id);
 
-    // if ($product == null) {
-    //     if ($request->ajax()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => 'Product not found',
-    //             'redirect' => route('front.cart')
-    //         ]);
-    //     } else {
-    //         return redirect()->route('front.cart')->with('error', 'Product not found');
-    //     }
-    // }
-
-    // if (Cart::count() > 0) {
-    //     $cartContent = Cart::content();
-    //     $productAlreadyExist = false;
-
-    //     foreach ($cartContent as $item) {
-    //         if ($item->id == $product->id) {
-    //             $productAlreadyExist = true;
-    //         }
-    //     }
-
-    //     if ($productAlreadyExist == false) {
-    //         Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
-
-    //         $status = true;
-    //         $message = '<strong>' . $product->title . '</strong> added in your cart successfully';
-
-    //         if ($request->ajax()) {
-    //             return response()->json([
-    //                 'status' => $status,
-    //                 'message' => $message,
-    //                 'redirect' => route('front.home')
-    //             ]);
-    //         } else {
-    //             session()->flash('success', $message);
-    //             return redirect()->route('front.home');
-    //         }
-    //     } else {
-    //         $status = false;
-    //         $message = $product->title . ' already added in cart';
-
-    //         if ($request->ajax()) {
-    //             return response()->json([
-    //                 'status' => $status,
-    //                 'message' => $message,
-    //                 'redirect' => route('front.cart')
-    //             ]);
-    //         } else {
-    //             return redirect()->route('front.cart')->with('error', $message);
-    //         }
-    //     }
-    // } else {
-    //     Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '']);
-    //     $status = true;
-    //     $message = '<strong>' . $product->title . '</strong> added in your cart successfully';
-
-    //     if ($request->ajax()) {
-    //         return response()->json([
-    //             'status' => $status,
-    //             'message' => $message,
-    //             'redirect' => route('front.cart')
-    //         ]);
-    //     } else {
-    //         session()->flash('success', $message);
-    //         return redirect()->route('front.cart');
-    //     }
-    // }
         $product = Product::with('product_images')->find($request->id);
         
         if ( $product==null) {
@@ -215,6 +148,7 @@ class CartController extends Controller
     }
 
     public function checkout() {
+
         $discount = 0;
 
         //-- if cart empty, redirect to cart page
@@ -268,8 +202,8 @@ class CartController extends Controller
             // $grandTotal = ($subTotal-$discount) + $totalShippingCharge;
             $grandTotal = $subTotal + $totalShippingCharge;
         } else {
-            $grandTotal = ($subTotal-$discount);
-            $totalShippingCharge = 0;
+            $totalShippingCharge = 50;
+            $grandTotal = ($subTotal-$totalShippingCharge);
 
 
         }
@@ -334,51 +268,14 @@ class CartController extends Controller
         
         if ($request->payment_method == 'cod') {
 
-            $discountCodeId = NULL;
-            $promoCode   = '';
             $shipping = 50;
-            $discount = 0;
             $subTotal = Cart::subtotal(2,'.','');
             $grandTotal = $subTotal + $shipping;
-
-            //apply discount here
-            // if(session()->has('code')) {
-            //     $code = session()->get('code');
-            //     if($code->type == 'percent') {
-            //         $discount = ($code->discount_amount / 100) * $subTotal;
-            //     } else {
-            //         $discount = $code->discount_amount;
-            //     }
-
-            //     $discountCodeId = $code->id;
-            //     $promoCode = $code->code;
-            // }
-
-
-            //calculate shipping
-            // $shippingInfo = ShippingCharge::where('country_id', $request->country)->first();
-            // $totalQty = 0;
-            // foreach (Cart::content() as $item) {
-            //     $totalQty += $item->qty;
-            // }
-
-            // if($shippingInfo != null) {
-            //     $shipping = $totalQty * $shippingInfo->amount;
-            //     $grandTotal = ($subTotal - $discount) + $shipping;
-
-            // } else {
-            //     $shippingInfo = ShippingCharge::where('country_id', $request->rest_of_world)->first();
-            //     $shipping = $totalQty * $shippingInfo->amount;
-            //     $grandTotal = ($subTotal - $discount) + $shipping;
-            // }
 
             $order = new Order;
             $order->subtotal = $subTotal;
             $order->shipping = $shipping;
             $order->grand_total = $grandTotal;
-            // $order->discount = $discount;
-            // $order->coupon_code_id = $discountCodeId;
-            // $order->coupon_code = $promoCode;
             $order->payment_status = 'not paid';
             $order->status = 'pending';
             $order->user_id = $user->id;
@@ -392,7 +289,6 @@ class CartController extends Controller
             $order->city = $request->city;
             $order->zip = $request->zip;
             $order->notes = $request->order_notes;
-            //$order->country_id = $request->country;
             $order->save();
 
             // step 4 - store order items in order items table
@@ -432,7 +328,156 @@ class CartController extends Controller
                 'status' => true,
             ]);
         } else {
-            //
+
+            // Stripe::setApiKey(config('stripe.sk'));
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            $shipping = 50;
+            $subTotal = Cart::subtotal(2,'.','');
+            $grandTotal = $subTotal + $shipping;
+
+            $cartContent = Cart::content();
+
+            $productItems = [];
+      
+            foreach ($cartContent as $item) {
+     
+                $product_name = $item->name;
+                $total = $grandTotal;
+                // $grandTotal = $subTotal + $shipping;
+                $quantity = $item->qty;
+                $two0 = "00";
+                $unit_amount = "$total$two0";
+     
+                $productItems[] = [
+                    'price_data' => [
+                        'product_data' => [
+                            'name' => $product_name,
+                        ],
+                        'currency'     => 'php',
+                        'unit_amount'  => $unit_amount,
+                    ],
+                    'quantity' => $quantity
+                ];
+            }
+            
+
+            $order = new Order;
+            $order->subtotal = $subTotal;
+            $order->shipping = $shipping;
+            $order->grand_total = $grandTotal;
+            $order->payment_status = 'not paid';
+            $order->status = 'pending';
+            $order->user_id = $user->id;
+            $order->first_name = $request->first_name;
+            $order->last_name = $request->last_name;
+            $order->email = $request->email;
+            $order->mobile = $request->mobile;
+            $order->address = $request->address;
+            $order->apartment = $request->apartment;
+            $order->barangay = $request->barangay;
+            $order->city = $request->city;
+            $order->zip = $request->zip;
+            $order->notes = $request->order_notes;
+            $order->save();
+
+            // step 4 - store order items in order items table
+
+            foreach (Cart::content() as $item) {
+                $orderItem = new OrderItem;
+                $orderItem->product_id = $item->id;
+                $orderItem->order_id = $order->id;
+                $orderItem->name = $item->name;
+                $orderItem->qty = $item->qty;
+                $orderItem->price = $item->price;
+                $orderItem->total = $item->price*$item->qty;
+                $orderItem->save();
+
+                //Update Product Stock
+                $productData = Product::find($item->id);
+                if($productData->track_qty =='Yes'){
+                    $currentQty = $productData->qty;
+                    $updatedQty = $currentQty-$item->qty;
+                    $productData->qty = $updatedQty;
+                    $productData->save();
+                }
+
+                orderEmail($order->id,'customer');
+
+                session()->flash('success', 'You have successfully placed your order.');
+
+                Cart::destroy();
+
+                session()->forget('code');
+                // return redirect('/thanks/' . $order->id)->with('success', 'You have successfully placed your order.');
+                return response()->json([
+                    'message' => 'Order saved successfully',
+                    'orderId' => $order->id,
+                    'status' => true,
+                ]);
+            }
+     
+            $checkoutSession = \Stripe\Checkout\Session::create([
+                'line_items'            => $productItems,
+                'mode'                  => 'payment',
+                'allow_promotion_codes' => true,
+                'metadata'              => [
+                    'user_id' => $user->id,
+                    'order_id'  => $order->id,  // Pass order ID as metadata
+                ],  
+                'customer_email' => $user->email,
+                // 'success_url' => 'https://livelab.dev/stripe/success',  // Redirect to your live lab success page
+                'success_url' => route('front.thankyou', ['orderId' => $order->id]),
+                // 'cancel_url'  => route('cancel'),
+            ]);
+         
+            return redirect()->away($checkoutSession->url);
+
+
+        //     $order = new Order;
+
+        //     try {
+        //         $charge = Charge::create([
+        //             'amount' => Cart::subtotal(2, '.', '') + 500, // adjust this amount based on your requirements
+        //             'currency' => 'php', // adjust the currency code
+        //             'description' => 'Payment for Order #' . $order->id,
+        //             'source' => $request->stripe_token, // obtained from the client-side Stripe.js
+        //         ]);
+
+        //         // If the charge is successful, process the order
+        //         if ($charge->status == 'succeeded') {
+        //             $order = new Order;
+        //             $order->subtotal = Cart::subtotal(2, '.', '');
+        //             $order->shipping = 50; // You may need to adjust this based on your requirements
+        //             $order->grand_total = $order->subtotal + $order->shipping;
+        //             $order->payment_status = 'not paid';
+        //             $order->status = 'pending';
+        //             $order->user_id = $user->id;
+        //             $order->first_name = $request->first_name;
+        //             $order->last_name = $request->last_name;
+        //             $order->email = $request->email;
+        //             $order->mobile = $request->mobile;
+        //             $order->address = $request->address;
+        //             $order->apartment = $request->apartment;
+        //             $order->barangay = $request->barangay;
+        //             $order->city = $request->city;
+        //             $order->zip = $request->zip;
+        //             $order->notes = $request->order_notes;
+        //             $order->save();
+
+        //             return response()->json([
+        //                 'message' => 'Order saved successfully',
+        //                 'orderId' => $order->id,
+        //                 'status' => true,
+        //             ]);
+        //         }
+        //     } catch (\Exception $e) {
+        //         return response()->json([
+        //             'message' => 'Stripe payment failed',
+        //             'status' => false,
+        //             'error' => $e->getMessage(),
+        //         ]);
+        //     }
         }
     }
 

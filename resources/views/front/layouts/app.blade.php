@@ -53,6 +53,12 @@
 	<!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
 
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+	<script src="https://js.stripe.com/v3/"></script>
+
+
+
 </head>
 <header class="bg-dark">
 	<div class="container">
