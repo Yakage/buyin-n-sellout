@@ -9,55 +9,95 @@ use Intervention\Image\Facades\Image;
 
 class TempImagesController extends Controller
 {
-    public function create(Request $request) {
 
-        // if ($request->image) {
-        //     $image = $request->image;
-        //     $ext = $image->getClientOriginalExtension();
-        //     $newFileName = time().'.'.$ext;
+    public function create(Request $request)
+    {
+        // Check if image is present in the request
+        if ($request->hasFile('image')) {
+            // Get the uploaded image
+            $image = $request->file('image');
 
-        //     $tempImage = new TempImage;
-        //     $tempImage->name = $newFileName;
-        //     $tempImage->save();
+            // Generate unique filename
+            $newFileName = time() . '.' . $image->getClientOriginalExtension();
 
-        //     $image->move(public_path('/uploads/temp/'),$newFileName);
+            // Save the original image
+            $image->move(public_path('temp'), $newFileName);
 
-        //     return response()->json([
-        //         'status' => true,
-        //         'name' => $newFileName,
-        //         'id' => $tempImage->id,
-        //         //'image_id' => $tempImage->id,
-        //         // 'ImagePath' => asset('/temp/thumb/'.$newFileName),
-        //         'message' => 'Image uploaded successfully'
-        //     ]);
-        // }
+            // Generate thumbnail
+            $thumbnail = Image::make(public_path('temp') . '/' . $newFileName);
+            $thumbnail->fit(300, 275);
+            $thumbnail->save(public_path('temp/thumb') . '/' . $newFileName);
 
-        $image = $request->image;
-
-        if(!empty($image)) {
-            $ext = $image->getClientOriginalExtension();
-            $newName = time().'.'.$ext;
-
+            // Create a new TempImage record
             $tempImage = new TempImage();
-            $tempImage->name = $newName;
+            $tempImage->name = $newFileName;
             $tempImage->save();
 
-            $image->move(public_path().'/temp', $newName);
-
-            //generate thumbnail
-            $sourcePath = public_path().'/temp/'.$newName;
-            $destPath = public_path().'/temp/thumb/'.$newName;
-            $image = Image::make($sourcePath);
-            $image->fit(300,275);
-            $image->save($destPath);
-
-
+            // Return JSON response
             return response()->json([
                 'status' => true,
                 'image_id' => $tempImage->id,
-                'ImagePath' => asset('/temp/thumb/'.$newName),
+                'ImagePath' => asset('temp/thumb/' . $newFileName),
                 'message' => 'Image uploaded successfully'
             ]);
         }
+
+        // Return error response if no image is present in the request
+        return response()->json([
+            'status' => false,
+            'message' => 'No image uploaded'
+        ]);
     }
+
+    // public function create(Request $request) {
+
+    //     // if ($request->image) {
+    //     //     $image = $request->image;
+    //     //     $ext = $image->getClientOriginalExtension();
+    //     //     $newFileName = time().'.'.$ext;
+
+    //     //     $tempImage = new TempImage;
+    //     //     $tempImage->name = $newFileName;
+    //     //     $tempImage->save();
+
+    //     //     $image->move(public_path('/uploads/temp/'),$newFileName);
+
+    //     //     return response()->json([
+    //     //         'status' => true,
+    //     //         'name' => $newFileName,
+    //     //         'id' => $tempImage->id,
+    //     //         //'image_id' => $tempImage->id,
+    //     //         // 'ImagePath' => asset('/temp/thumb/'.$newFileName),
+    //     //         'message' => 'Image uploaded successfully'
+    //     //     ]);
+    //     // }
+
+    //     $image = $request->image;
+
+    //     if(!empty($image)) {
+    //         $ext = $image->getClientOriginalExtension();
+    //         $newName = time().'.'.$ext;
+
+    //         $tempImage = new TempImage();
+    //         $tempImage->name = $newName;
+    //         $tempImage->save();
+
+    //         $image->move(public_path().'/temp', $newName);
+
+    //         //generate thumbnail
+    //         $sourcePath = public_path().'/temp/'.$newName;
+    //         $destPath = public_path().'/temp/thumb/'.$newName;
+    //         $image = Image::make($sourcePath);
+    //         $image->fit(300,275);
+    //         $image->save($destPath);
+
+
+    //         return response()->json([
+    //             'status' => true,
+    //             'image_id' => $tempImage->id,
+    //             'ImagePath' => asset('/temp/thumb/'.$newName),
+    //             'message' => 'Image uploaded successfully'
+    //         ]);
+    //     }
+    // }
 }
