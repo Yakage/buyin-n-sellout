@@ -45,19 +45,19 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('orders');
+        Schema::dropIfExists('orders');
 
         // DB::statement('SET FOREIGN_KEY_CHECKS=0');
         // Schema::dropIfExists('orders');
         // DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        // Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
-        // Drop the orders table
-        Schema::dropIfExists('orders');
+        // // Drop the orders table
+        // Schema::dropIfExists('orders');
 
-        // Re-enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        // // Re-enable foreign key checks
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 };
