@@ -117,8 +117,9 @@
                             <div class="col-md-8">
                                 <div class="row">
 
-                                    <form action="{{ route('front.saveRating') }}" name="productRatingForm" id="productRatingForm" method="post">
                                         <h3 class="h4 pb-3">Write a Review</h3>
+                                        <form action="{{ route('front.saveRating') }}" name="productRatingForm" id="productRatingForm" method="post">
+                                            @csrf
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" name="name" id="name" placeholder="Name">
