@@ -47,8 +47,17 @@ return new class extends Migration
     {
         // Schema::dropIfExists('orders');
 
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        // Schema::dropIfExists('orders');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        // Drop the orders table
         Schema::dropIfExists('orders');
+
+        // Re-enable foreign key checks
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 };
