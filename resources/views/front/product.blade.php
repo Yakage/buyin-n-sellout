@@ -117,7 +117,7 @@
                             <div class="col-md-8">
                                 <div class="row">
 
-                                    <form action="" name="productRatingForm" id="productRatingForm" method="post">
+                                    <form action="{{ route('front.saveRating') }}" name="productRatingForm" id="productRatingForm" method="post">
                                         <h3 class="h4 pb-3">Write a Review</h3>
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="name">Name</label>
