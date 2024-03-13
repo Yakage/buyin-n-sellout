@@ -56,13 +56,13 @@ return [
     |
     */
 
-    // 'url' => env('APP_URL', 'https://buyin-n-sellout-dd59ae5ce084.herokuapp.com'),
+    'url' => env('APP_URL', 'https://buyin-n-sellout-dd59ae5ce084.herokuapp.com'),
 
-    // 'asset_url' => env('ASSET_URL', 'https://buyin-n-sellout-dd59ae5ce084.herokuapp.com'),
+    'asset_url' => env('ASSET_URL', 'https://buyin-n-sellout-dd59ae5ce084.herokuapp.com'),
 
-    'url' => env('APP_URL', 'http://localhost'),
+    // 'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL'),
+    // 'asset_url' => env('ASSET_URL'),
 
 
     /*
