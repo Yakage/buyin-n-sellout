@@ -41,22 +41,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //API routes
 //for buyer side
+Route::get('/home', [ApiFrontController::class,'index']);
 Route::get('/', [ApiFrontController::class,'index']);
-Route::get('/shop{categorySlug?}/{subCategorySlug?}', [ApiShopController::class, 'index']);
+Route::get('/shop', [ApiShopController::class, 'index']);
 Route::get('/product/{slug}', [ApiShopController::class,'product']);
 Route::get('/cart', [ApiCartController::class, 'cart']);
 Route::post('/add-to-cart', [ApiCartController::class, 'addToCart']);
 Route::post('/update-cart', [ApiCartController::class, 'updateCart']);
 Route::delete('/delete-item', [ApiCartController::class, 'deleteItem']);
 Route::get('/checkout', [ApiCartController::class, 'checkout']);
-Route::get('/process-checkout', [ApiCartController::class, 'processCheckout']);
+Route::post('/process-checkout', [ApiCartController::class, 'processCheckout']);
 Route::get('/thanks/{orderId}', [ApiCartController::class, 'thankyou']);
-Route::post('/get-order-summary', [ApiCartController::class, 'getOrderSummary']);
+Route::get('/get-order-summary', [ApiCartController::class, 'getOrderSummary']);
 Route::post('/apply-discount', [ApiCartController::class, 'applyDiscount']);
 Route::post('/remove-discount', [ApiCartController::class, 'removeCoupon']);
 Route::post('/add-to-wishlist', [ApiFrontController::class, 'addToWishList']);
 Route::get('/page/{slug}', [ApiFrontController::class, 'page']);
 Route::post('/send-contact-email', [ApiFrontController::class, 'sendContactEmail']);
+Route::get('/about-us', [ApiFrontController::class, 'viewAboutUs']);
+Route::get('/contact-us', [ApiFrontController::class, 'viewContactUs']);
+Route::post('/contact', [ApiFrontController::class, 'processContactUs']);
 
 Route::get('/forgot-password', [ApiAuthController::class, 'forgotPassword']);
 Route::post('/process-forgot-password', [ApiAuthController::class, 'processForgotPassword']);
