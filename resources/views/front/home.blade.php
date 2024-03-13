@@ -68,11 +68,11 @@
                             </li>
                         @endforeach
                     @endif
-			<div class="right-nav py-0">
-				<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
-					<i class="fas fa-shopping-cart text-primary"></i>					
-				</a>
-			</div> 		
+                <div class="right-nav py-0">
+                    <a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
+                        <i class="fas fa-shopping-cart text-primary"></i>					
+                    </a>
+                </div> 		
       	</nav>
   	</div>
       <body data-instant-intensity="mousedown">
@@ -278,9 +278,9 @@
 			<div class="col-md-4">
 				<div class="footer-card">
 					<h3>Get In Touch</h3>
-					<p>BuyIn SellOut <br>
+					<p>BuyIn & SellOut <br>
 					Arellano Street, Dagupan City, Pangasinan <br>
-					buyinsellout@example.com <br>
+					buyinsellout24@gmail.com <br>
 					099 9999 9999</p>
 				</div>
 			</div>

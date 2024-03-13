@@ -144,8 +144,7 @@ class AuthController extends Controller
             'first_name' => 'required|min:5',
             'last_name' => 'required',
             'email' => 'required|email',
-            //'country_id' => 'required',
-            'address' => 'required|min:30',
+            'address' => 'required|min:5',
             'city' => 'required',
             'barangay' => 'required',
             'zip' => 'required',
@@ -178,7 +177,7 @@ class AuthController extends Controller
              
             return response()->json([
                 'status' => true,
-                'message' => 'Profile Updated Successfully'
+                'message' => 'Address Updated Successfully'
             ]);
 
         }else {
@@ -259,9 +258,12 @@ class AuthController extends Controller
 
         if($validator->passes()) {
 
-            $user = User::select('id','password')->where('id', Auth::user()->id)->first();
+            // $user = User::select('id','password')->where('id', Auth::user()->id)->first();
 
-            if (Hash::check($request->old_password,$user->password)) {
+            $user = User::findOrFail(Auth::user()->id);
+
+
+            if (!Hash::check($request->old_password,$user->password)) {
                
                 session()->flash('error','Your Old Password is Incorrect, please try again.');
 
@@ -270,15 +272,18 @@ class AuthController extends Controller
                 ]);
             }
 
-            User::where('id', $user->id)->update([
+            $user->update([
                 'password' => Hash::make($request->new_password)
             ]);
 
-            session()->flash('success','You have successfully changed your password.');
+            // User::where('id', $user->id)->update([
+            //     'password' => Hash::make($request->new_password)
+            // ]);
 
-                return response()->json([
-                    'status' => true,
-                ]);
+            session()->flash('success','You have successfully changed your password.');
+            return response()->json([
+                'status' => true,
+            ]);
 
         }else {
             return response()->json([

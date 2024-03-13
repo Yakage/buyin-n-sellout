@@ -125,12 +125,12 @@
                                         <div class="card-body p-0 d-none mt-3" id="card-payment-form">
                                             <div class="mb-3">
                                                 <label for="card_number" class="mb-2">Card Number</label>
-                                                <input type="text" name="card_number" id="card_number" placeholder="Valid Card Number" class="form-control">
+                                                <input type="tel" name="card_number" id="card_number" placeholder="Valid Card Number" class="form-control" maxlength="19">
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label for="expiry_date" class="mb-2">Expiry Date</label>
-                                                    <input type="text" name="expiry_date" id="expiry_date" placeholder="MM/YYYY" class="form-control">
+                                                    <input type="month" name="expiry_date" id="expiry_date" placeholder="MM/YYYY" class="form-control" min="2024-03" max="2035-12">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="cvv_code" class="mb-2">CVV Code</label>
@@ -138,7 +138,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="pt-4">
                                             <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button>
                                         </div>

@@ -42,6 +42,7 @@ use Illuminate\Support\Str;
 //    orderEmail(13);
 //});
 
+Route::get('/home', [FrontController::class,'index']) ->name('front.home');
 Route::get('/', [FrontController::class,'index']) ->name('front.home');
 Route::get('/shop', [ShopController::class, 'index'])->name('front.shop');
 Route::get('/product/{slug}', [ShopController::class,'product'])->name('front.product');
@@ -60,6 +61,8 @@ Route::get('/page/{slug}', [FrontController::class, 'page'])->name('front.page')
 Route::post('/send-contact-email', [FrontController::class, 'sendContactEmail'])->name('front.sendContactEmail');
 Route::get('/about-us', [FrontController::class, 'viewAboutUs'])->name('front.aboutus');
 Route::get('/contact-us', [FrontController::class, 'viewContactUs'])->name('front.contactus');
+Route::post('/contact', [FrontController::class, 'processContactUs'])->name('front.processContactUs');
+
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('front.pageforgotPassword');
 Route::post('/process-forgot-password', [AuthController::class, 'processForgotPassword'])->name('front.processForgotPassword');

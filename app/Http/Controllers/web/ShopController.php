@@ -13,49 +13,47 @@ use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
 {
-    public function index(Request $request, $categorySlug = null, $subCategorySlug = null) {
-
+    public function index(Request $request, $categorySlug = null, $subCategorySlug = null)
+    {
         $categorySelected = '';
         $subCategorySelected = '';
-        $brandsArray = [ ];
+        $brandsArray = [];
 
         $categories = Category::orderBy('name', 'ASC')->with('sub_category')->where('status', 1)->get();
         $brands = Brand::orderBy('name', 'ASC')->where('status', 1)->get();
-        $products = Product::orderBy('id','DESC')->where('status', 1)->get();
 
-        //filter
+        // Initialize products query
+        $productsQuery = Product::orderBy('id', 'DESC')->where('status', 1);
 
-        if(!empty($categorySlug)){
+        // Filter by category
+        if (!empty($categorySlug)) {
             $category = Category::where('slug', $categorySlug)->first();
-            $products = $products->where('category_id', $category->id);
+            $productsQuery->where('category_id', $category->id);
             $categorySelected = $category->id;
         }
 
-        if(!empty($subCategorySlug)){
+        // Filter by subcategory
+        if (!empty($subCategorySlug)) {
             $subCategory = SubCategory::where('slug', $subCategorySlug)->first();
-            $products = $products->where('sub_category_id', $subCategory->id);
+            $productsQuery->where('sub_category_id', $subCategory->id);
             $subCategorySelected = $subCategory->id;
-
         }
 
-        if(!empty($request->get('brand'))) {
+        // Filter by brand
+        if (!empty($request->get('brand'))) {
             $brandsArray = explode(',', $request->get('brand'));
-            $products = $products->whereIn('brand_id', $brandsArray);
+            $productsQuery->whereIn('brand_id', $brandsArray);
         }
 
-        if($request->get('price_max') != '' && $request->get('price_min') != '') {
-            if($request->get('price_max') == 1000) {
-                $products = $products->whereBetween('price',[intval($request->get('price_min')),1000000]);
-
-            } else {
-                $products = $products->whereBetween('price',[intval($request->get('price_min')),intval($request->get('price_max'))]);
-
-            }
-
+        // Filter by price range
+        if ($request->has('price_min') && $request->has('price_max')) {
+            $minPrice = intval($request->get('price_min'));
+            $maxPrice = ($request->get('price_max') == 1000) ? 1000000 : intval($request->get('price_max'));
+            $productsQuery->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
-
-        
+        // Paginate products
+        $products = $productsQuery->paginate(12); // Adjust the number of items per page as needed
 
         $data['categories'] = $categories;
         $data['brands'] = $brands;
@@ -69,6 +67,62 @@ class ShopController extends Controller
 
         return view('front.shop', $data);
     }
+    // public function index(Request $request, $categorySlug = null, $subCategorySlug = null) {
+
+    //     $categorySelected = '';
+    //     $subCategorySelected = '';
+    //     $brandsArray = [ ];
+
+    //     $categories = Category::orderBy('name', 'ASC')->with('sub_category')->where('status', 1)->get();
+    //     $brands = Brand::orderBy('name', 'ASC')->where('status', 1)->get();
+    //     $products = Product::orderBy('id','DESC')->where('status', 1)->get();
+
+    //     //filter
+
+    //     if(!empty($categorySlug)){
+    //         $category = Category::where('slug', $categorySlug)->first();
+    //         $products = $products->where('category_id', $category->id);
+    //         $categorySelected = $category->id;
+    //     }
+
+    //     if(!empty($subCategorySlug)){
+    //         $subCategory = SubCategory::where('slug', $subCategorySlug)->first();
+    //         $products = $products->where('sub_category_id', $subCategory->id);
+    //         $subCategorySelected = $subCategory->id;
+
+    //     }
+
+    //     if(!empty($request->get('brand'))) {
+    //         $brandsArray = explode(',', $request->get('brand'));
+    //         $products = $products->whereIn('brand_id', $brandsArray);
+    //     }
+
+    //     if($request->get('price_max') != '' && $request->get('price_min') != '') {
+    //         if($request->get('price_max') == 1000) {
+    //             $products = $products->whereBetween('price',[intval($request->get('price_min')),1000000]);
+
+    //         } else {
+    //             $products = $products->whereBetween('price',[intval($request->get('price_min')),intval($request->get('price_max'))]);
+
+    //         }
+
+    //     }
+
+
+        
+
+    //     $data['categories'] = $categories;
+    //     $data['brands'] = $brands;
+    //     $data['products'] = $products;
+    //     $data['categorySelected'] = $categorySelected;
+    //     $data['subCategorySelected'] = $subCategorySelected;
+    //     $data['brandsArray'] = $brandsArray;
+    //     $data['priceMax'] = (intval($request->get('price_max')) == 0) ? 1000 : $request->get('price_max');
+    //     $data['priceMin'] = intval($request->get('price_min'));
+    //     $data['sort'] = $request->get('sort');
+
+    //     return view('front.shop', $data);
+    // }
 
 
     public function product($slug) {
@@ -125,9 +179,7 @@ class ShopController extends Controller
                 'status' => true,
             ]);
         }
-
-
-
+        
         $productRating = new ProductRating;
         $productRating->product_id = $id;
         $productRating->username = $request->name;

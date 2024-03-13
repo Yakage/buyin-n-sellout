@@ -26,7 +26,7 @@
                     <div class="card-header">
                         <h2 class="h5 mb-0 pt-2 pb-2">Personal Information</h2>
                     </div>
-                    <form action="" name="profileForm" id="profileForm"></form>
+                    <form action="" name="profileForm" id="profileForm" method="POST">
                         <div class="card-body p-4">
                             <div class="row">
                                 <div class="mb-3">               
@@ -57,7 +57,7 @@
                     <div class="card-header">
                         <h2 class="h5 mb-0 pt-2 pb-2">Address</h2>
                     </div>
-                    <form action="" name="addressForm" id="addressForm"></form>
+                    <form action="" name="addressForm" id="addressForm" method="POST">
                         <div class="card-body p-4">
                             <div class="row">
                                 <div class="col-md-6 mb-3">               
@@ -94,10 +94,11 @@
                                 </div> --}}
 
                                 <div class="mb-3">                                    
-                                    <label for="phone">Address</label>
-                                    <textarea name="address" id="adddress" cols="30" rows="5" class="form-control" value="{{(!empty($address)) ? $address->address :''}}"></textarea>
+                                    <label for="address">Address</label>
+                                    <textarea name="address" id="address" cols="30" rows="5" class="form-control">{{ !empty($address) ? $address->address : '' }}</textarea>
                                     <p></p>
                                 </div>
+                                
 
                                 <div class="mb-3 col-md-6">                                    
                                     <label for="phone">Apartment</label>
@@ -124,7 +125,7 @@
                                 </div>
 
                                 <div class="d-flex">
-                                    <button type="submit" class="btn btn-dark">Update</button>
+                                    <button type="submit" name="submit" type="submit" class="btn btn-dark">Update</button>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +139,7 @@
 
 @section('customJs')
 
-<script>
+<script type="text/javascript">
     $("#profileForm").submit(function(event){
         event.preventDefault();
 
@@ -148,28 +149,26 @@
             data: $(this).serializeArray(),
             dataType: 'json',
             success: function(response){
+                $('submit').prop('disabled',false);
                 if(response.status == true){
-
                     window.location.href='{{route("account.profile")}}';
 
-                    $("#profileForm #name").addClass('is-invalid')
-                        .siblings('p')
-                        .html('')
-                        .addClass('invalid-feedback');
+                    // $("#profileForm #name").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .html('')
+                    //     .addClass('invalid-feedback');
 
                     
-                    $("#profileForm #phone").addClass('is-invalid')
-                    .siblings('p')
-                    .html('')
-                    .addClass('invalid-feedback');
+                    // $("#profileForm #phone").addClass('is-invalid')
+                    // .siblings('p')
+                    // .html('')
+                    // .addClass('invalid-feedback');
 
                         
-                    $("#profileForm #email").addClass('is-invalid')
-                        .siblings('p')
-                        .html('')
-                        .addClass('invalid-feedback');
-
-                    window.location.href='{{route("account.profile")}}';
+                    // $("#profileForm #email").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .html('')
+                    //     .addClass('invalid-feedback');
 
                 } else {
                     var errors = response.errors;
@@ -218,34 +217,37 @@
     $("#addressForm").submit(function(event){
         event.preventDefault();
 
+        $('submit').prop('disabled',true);
+
         $.ajax({
             url: '{{route("account.updateAddress")}}',
             type: 'post',
             data: $(this).serializeArray(),
             dataType: 'json',
             success: function(response){
+                $('submit').prop('disabled',false);
                 if(response.status == true){
 
                     window.location.href='{{route("account.profile")}}';
 
-                    $("#name").addClass('is-invalid')
-                        .siblings('p')
-                        .html('')
-                        .addClass('invalid-feedback');
+                    // $("#name").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .html('')
+                    //     .addClass('invalid-feedback');
 
                     
-                    $("#phone").addClass('is-invalid')
-                    .siblings('p')
-                    .html('')
-                    .addClass('invalid-feedback');
+                    // $("#phone").addClass('is-invalid')
+                    // .siblings('p')
+                    // .html('')
+                    // .addClass('invalid-feedback');
 
                         
-                    $("#email").addClass('is-invalid')
-                        .siblings('p')
-                        .html('')
-                        .addClass('invalid-feedback');
+                    // $("#email").addClass('is-invalid')
+                    //     .siblings('p')
+                    //     .html('')
+                    //     .addClass('invalid-feedback');
 
-                    window.location.href='{{route("account.profile")}}';
+                    // window.location.href='{{route("account.profile")}}';
 
                 } else {
                     var errors = response.errors;

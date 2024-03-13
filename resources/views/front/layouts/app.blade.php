@@ -175,9 +175,9 @@
 			<div class="col-md-4">
 				<div class="footer-card">
 					<h3>Get In Touch</h3>
-					<p>BuyIn SellOut <br>
+					<p>BuyIn & SellOut <br>
 					Arellano Street, Dagupan City, Pangasinan <br>
-					buyinsellout@example.com <br>
+					buyinsellout24@gmail.com <br>
 					099 999 9999</p>
 				</div>
 			</div>

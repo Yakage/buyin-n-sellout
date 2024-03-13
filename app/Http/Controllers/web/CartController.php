@@ -225,7 +225,6 @@ class CartController extends Controller
             'last_name' => 'required',
             'email' => 'required|email',
             'mobile' => 'required',
-            //'country' => 'required',
             'address' => 'required|min:15',
             'apartment' => 'nullable', 
             'city' => 'required',
@@ -327,8 +326,8 @@ class CartController extends Controller
                 'orderId' => $order->id,
                 'status' => true,
             ]);
-        } else {
-
+        } else{
+        
             // Stripe::setApiKey(config('stripe.sk'));
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -344,7 +343,6 @@ class CartController extends Controller
      
                 $product_name = $item->name;
                 $total = $grandTotal;
-                // $grandTotal = $subTotal + $shipping;
                 $quantity = $item->qty;
                 $two0 = "00";
                 $unit_amount = "$total$two0";
@@ -432,52 +430,6 @@ class CartController extends Controller
             ]);
          
             return redirect()->away($checkoutSession->url);
-
-
-        //     $order = new Order;
-
-        //     try {
-        //         $charge = Charge::create([
-        //             'amount' => Cart::subtotal(2, '.', '') + 500, // adjust this amount based on your requirements
-        //             'currency' => 'php', // adjust the currency code
-        //             'description' => 'Payment for Order #' . $order->id,
-        //             'source' => $request->stripe_token, // obtained from the client-side Stripe.js
-        //         ]);
-
-        //         // If the charge is successful, process the order
-        //         if ($charge->status == 'succeeded') {
-        //             $order = new Order;
-        //             $order->subtotal = Cart::subtotal(2, '.', '');
-        //             $order->shipping = 50; // You may need to adjust this based on your requirements
-        //             $order->grand_total = $order->subtotal + $order->shipping;
-        //             $order->payment_status = 'not paid';
-        //             $order->status = 'pending';
-        //             $order->user_id = $user->id;
-        //             $order->first_name = $request->first_name;
-        //             $order->last_name = $request->last_name;
-        //             $order->email = $request->email;
-        //             $order->mobile = $request->mobile;
-        //             $order->address = $request->address;
-        //             $order->apartment = $request->apartment;
-        //             $order->barangay = $request->barangay;
-        //             $order->city = $request->city;
-        //             $order->zip = $request->zip;
-        //             $order->notes = $request->order_notes;
-        //             $order->save();
-
-        //             return response()->json([
-        //                 'message' => 'Order saved successfully',
-        //                 'orderId' => $order->id,
-        //                 'status' => true,
-        //             ]);
-        //         }
-        //     } catch (\Exception $e) {
-        //         return response()->json([
-        //             'message' => 'Stripe payment failed',
-        //             'status' => false,
-        //             'error' => $e->getMessage(),
-        //         ]);
-        //     }
         }
     }
 

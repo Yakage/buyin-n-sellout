@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ContactEmail;
+use App\Mail\ContactFormMail;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\User;
@@ -119,5 +120,21 @@ class FrontController extends Controller
 
     public function viewContactUs() {
         return view('front.contactus');
+    }
+
+    public function processContactUs(Request $request) {
+        // Validate form data
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        // Send email
+        Mail::to($request->email)->send(new ContactFormMail($request));
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 }
