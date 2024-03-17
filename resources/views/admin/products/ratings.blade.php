@@ -52,7 +52,7 @@
                             @if ($ratings->isNotEmpty())
                                 @foreach ($ratings as $rating)
                                 <tr>
-                                    <td>{{$ratings->id }}</td>
+                                    <td>{{$rating->id }}</td>
                                     <td>{{ $rating->productTitle }}</a></td>
                                     <td>{{ $rating->rating }}</td>
                                     <td>{{ $rating->comment }}</td>
