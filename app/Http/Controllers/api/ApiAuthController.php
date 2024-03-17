@@ -33,10 +33,11 @@ class ApiAuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return response()->json([
-                'status' => true,
-                'message' => 'Login successful.',
-            ]);
+            $tokenResult = $user->createToken('Personal Access Token');
+            $accessToken = $tokenResult->plainTextToken;
+            $user->update(['rememberToken' => $accessToken]);
+            $user = $request->user();
+            return response()->json(['message' => 'User Login Successful', 'accessToken' => $accessToken], 200  );
         } else {
             return response()->json([
                 'status' => false,
