@@ -83,7 +83,7 @@ Route::group(['prefix' => 'account'],function() {
     });
 
     Route::group(['middleware' => 'auth'],function() {
-        Route::get('/profile', [ApiAuthController::class, 'profile']);
+        Route::get('/profile', [ApiAuthController::class, 'profile'])->withoutMiddleware('auth:sanctum');
         Route::post('/update-profile', [ApiAuthController::class, 'updateProfile']);
         Route::post('/update-address', [ApiAuthController::class, 'updateAddress']);
         Route::get('/change-password', [ApiAuthController::class, 'showchangePasswordForm']);

@@ -171,12 +171,8 @@ class ApiAuthController extends Controller
         ]);
 
         if($validator->passes()) {
-            if (Auth::attempt($validator)) {
-                $tokenResult = $user->createToken('Personal Access Token');
-                $accessToken = $tokenResult->plainTextToken;
-                $user->update(['api_token' => $accessToken]);
-                $user = $request->user();
-                return response()->json(['message' => 'User Login Successful', 'accessToken' => $accessToken], 200  );
+            if(Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+                return response()->json(['status' => true, 'message' => 'User authenticated successfully.']);
             } else {
                 return response()->json(['status' => false, 'message' => 'Either email/password is incorrect.'], 401);
             }
