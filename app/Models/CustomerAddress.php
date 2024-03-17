@@ -9,20 +9,22 @@ class CustomerAddress extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'first_name',
-        'last_name',
-        'email',
-        'mobile',
-        // 'country_id',
-        'address',
-        'apartment',
-        'city',
-        'barangay',
-        'zip'
+    protected $table = 'customer_addresses';
+
+    // protected $fillable = [
+    //     'user_id',
+    //     'first_name',
+    //     'last_name',
+    //     'email',
+    //     'mobile',
+    //     // 'country_id',
+    //     'address',
+    //     'apartment',
+    //     'city',
+    //     'barangay',
+    //     'zip'
     
-    ];
+    // ];
 
     public function user()
     {
