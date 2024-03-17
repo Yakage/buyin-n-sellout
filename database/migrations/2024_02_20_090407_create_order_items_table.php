@@ -31,8 +31,8 @@ return new class extends Migration
     {
         Schema::dropIfExists('order_items');
 
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        // Schema::dropIfExists('orders_items');
-        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Schema::dropIfExists('orders_items');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 };
