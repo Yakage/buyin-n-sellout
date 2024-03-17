@@ -171,7 +171,7 @@ class ApiAuthController extends Controller
         ]);
 
         if($validator->passes()) {
-            if (Auth::attempt($credentials)) {
+            if (Auth::attempt($validator)) {
                 $tokenResult = $user->createToken('Personal Access Token');
                 $accessToken = $tokenResult->plainTextToken;
                 $user->update(['api_token' => $accessToken]);
