@@ -33,6 +33,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 
+	<link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
 	{{-- <link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/ion.rangeSlider.min.css')}}" /> --}}
