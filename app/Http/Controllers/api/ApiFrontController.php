@@ -39,6 +39,31 @@ class ApiFrontController extends Controller
         return response()->json($responseData);
     }
 
+    public function featuredProducts(Request $request) {
+        // Fetch featured products
+        $featuredProducts = Product::where('is_featured', 'Yes')
+                                    ->orderBy('id', 'DESC')
+                                    ->where('status', 1)
+                                    ->get();
+
+
+        // Return data in JSON format
+        return response()->json($featuredProducts);
+    }
+
+    public function latestProducts(Request $request) {
+
+        // Fetch latest products
+        $latestProducts = Product::orderBy('id', 'DESC')
+                                 ->where('status', 1)
+                                 ->take(8)
+                                 ->get();
+
+
+        // Return data in JSON format
+        return response()->json($latestProducts);
+    }
+
     public function addToWishList(Request $request) {
         // Check if user is authenticated
         if (!Auth::check()) {
