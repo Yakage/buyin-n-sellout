@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_items');
+        // Schema::dropIfExists('order_items');
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::dropIfExists('orders_items');
