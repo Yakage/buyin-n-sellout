@@ -13,12 +13,12 @@ class TempImagesController extends Controller
 
     public function create(Request $request)
     {
-        // $directory = public_path('temp/thumb');
+        $directory = public_path('temp/thumb');
 
-        // // Check if the directory exists, if not, create it
-        // if (!File::isDirectory($directory)) {
-        //     File::makeDirectory($directory, 0755, true, true);
-        // }
+        // Check if the directory exists, if not, create it
+        if (!File::isDirectory($directory)) {
+            File::makeDirectory($directory, 0755, true, true);
+        }
         // Check if image is present in the request
         if ($request->hasFile('image')) {
             // Get the uploaded image
@@ -28,12 +28,12 @@ class TempImagesController extends Controller
             $newFileName = time() . '.' . $image->getClientOriginalExtension();
 
             // Save the original image
-            $image->move(public_path('/temp'), $newFileName);
+            $image->move(public_path('temp'), $newFileName);
 
             // Generate thumbnail
-            $thumbnail = Image::make(public_path('/temp') . '/' . $newFileName);
+            $thumbnail = Image::make(public_path('temp') . '/' . $newFileName);
             $thumbnail->fit(300, 275);
-            $thumbnail->save(public_path('/temp/thumb') . '/' . $newFileName);
+            $thumbnail->save(public_path('temp/thumb') . '/' . $newFileName);
 
             // Create a new TempImage record
             $tempImage = new TempImage();
@@ -44,7 +44,7 @@ class TempImagesController extends Controller
             return response()->json([
                 'status' => true,
                 'image_id' => $tempImage->id,
-                'ImagePath' => asset('/temp/thumb/' . $newFileName),
+                'ImagePath' => asset('temp/thumb/' . $newFileName),
                 'message' => 'Image uploaded successfully'
             ]);
         }
