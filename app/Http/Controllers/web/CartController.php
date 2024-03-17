@@ -328,8 +328,8 @@ class CartController extends Controller
             ]);
         } else{
         
-            // Stripe::setApiKey(config('stripe.sk'));
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe::setApiKey(config('stripe.sk'));
+            //Stripe::setApiKey(env('STRIPE_SECRET'));
 
             $shipping = 50;
             $subTotal = Cart::subtotal(2,'.','');

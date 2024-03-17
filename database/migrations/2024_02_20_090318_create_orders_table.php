@@ -34,8 +34,6 @@ return new class extends Migration
             $table->string('barangay');
             $table->string('zip');
             $table->text('notes')->nullable();
-
-
             $table->timestamps();
         });
     }
