@@ -30,7 +30,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ secure_asset('favicon.png') }}" type="image/x-icon">
 
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
@@ -118,7 +118,7 @@
                     </picture>
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3">
-                            <h1 class="display-4 text-white mb-3">Student Trnds</h1>
+                            <h1 class="display-4 text-white mb-3">Student Trends</h1>
                         </div>
                     </div>
                 </div>  
