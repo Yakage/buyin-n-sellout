@@ -30,7 +30,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
 
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
@@ -51,8 +51,8 @@
 			</a>
 			{{-- <button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				  <i class="navbar-toggler-icon fas fa-bars"></i>
-    		</button> --}}
-    		{{-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    		</button>
+    		<div class="collapse navbar-collapse" id="navbarSupportedContent">
       			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @if(getCategories()->isNotEmpty())
                         @foreach(getCategories() as $category)
@@ -63,7 +63,7 @@
                                 @if($category->sub_category->isNotEmpty())
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         @foreach($category->sub_category as $subCategory)
-                                            <li><a class="dropdown-item nav-link" href="{{ route('sub-categories.index', $subCategory->id) }}">{{ $subCategory->name }}</a></li>
+                                            <li><a class="dropdown-item nav-link" href="{{ route('sub-categories.index', $category->id) }}">{{ $subCategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif
@@ -118,7 +118,7 @@
                     </picture>
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3">
-                            <h1 class="display-4 text-white mb-3">Student Needs</h1>
+                            <h1 class="display-4 text-white mb-3">Student Trnds</h1>
                         </div>
                     </div>
                 </div>  
