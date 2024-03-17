@@ -166,7 +166,7 @@ class CartController extends Controller
             return redirect()->route('account.login');
         }
 
-    $customerAddress = CustomerAddress::where('user_id', auth()->id())->first();
+        $customerAddress = CustomerAddress::where('user_id',$user = Auth::user()->id)->first();
 
         session()->forget('url.intended');
 
