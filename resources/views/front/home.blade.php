@@ -30,7 +30,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="{{ secure_asset('front-assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick.css')}}" />
 	<link rel="stylesheet" type="text/css" href="{{ secure_asset('front-assets/css/slick-theme.css')}}" />
@@ -41,7 +41,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&family=Raleway:ital,wght@0,400;0,600;0,800;1,200&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet"><!-- Fav Icon -->
 	<link rel="shortcut icon" type="image/x-icon" href="#" />
 
-	<div class="container">
+	{{-- <div class="container"> --}}
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
                 {{--<img src="{{ asset('front-assets/images/Logo-bs.png')}}" class="logo-sizing-mobile">--}}
@@ -49,10 +49,10 @@
 				{{-- <span class="h2 text-uppercase text-primary bg-dark">&#38;</span>  --}}
 				{{-- <span class="h2 text-uppercase text-white px-2">SellOut</span> --}}
 			</a>
-			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			{{-- <button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				  <i class="navbar-toggler-icon fas fa-bars"></i>
-    		</button>
-    		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    		</button> --}}
+    		{{-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
       			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @if(getCategories()->isNotEmpty())
                         @foreach(getCategories() as $category)
@@ -63,33 +63,44 @@
                                 @if($category->sub_category->isNotEmpty())
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         @foreach($category->sub_category as $subCategory)
-                                            <li><a class="dropdown-item nav-link" href="{{ route('sub-categories.index') }}">{{ $subCategory->name }}</a></li>
+                                            <li><a class="dropdown-item nav-link" href="{{ route('sub-categories.index', $subCategory->id) }}">{{ $subCategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 @endif
                             </li>
                         @endforeach
                     @endif
-                <div class="right-nav py-0">
+                </ul>
+            </div> --}}
+                {{-- <div class="right-nav py-0">
                     <a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
                         <i class="fas fa-shopping-cart text-primary"></i>					
                     </a>
-                </div> 		
+                </div> 		 --}}
       	</nav>
-  	</div>
+  	{{-- </div> --}}
       <body data-instant-intensity="mousedown">
 <div class="bg-light top-header">        
 	<div class="container">
 		<div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
 			<div class="col-lg-5 logo">
 				<a href="{{ route('front.home')}}" class="text-decoration-none">
-                     <img src="{{ asset('front-assets/images/primarylogo.png')}}" class="logo-sizing">
-                    
+                     <img src="{{ asset('front-assets/images/primarylogo.png')}}" class="logo-sizing">            
 				</a>
 			</div>
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
-				<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
-			</div>		
+				@if (Auth::check())
+					<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
+					<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-0">
+						<i class="fas fa-shopping-cart text-primary"></i>					
+					</a>
+				@else
+					<a href="{{route('account.login')}}" class="nav-link text-dark">Login/Register</a>
+					<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-0">
+						<i class="fas fa-shopping-cart text-primary"></i>					
+					</a>
+				@endif
+			</div>			
 		</div>
 	</div>
 </div>
@@ -204,7 +215,7 @@
                                     </div>                                    
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="{{route('products.index')}}">{{ $product->title }}</a>
+                                    <a class="h6 link" href="{{ route('front.product', $product->slug) }}">{{ $product->title }}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>{{ $product->price }}</strong></span>
                                         @if ($product->compare_price > 0)

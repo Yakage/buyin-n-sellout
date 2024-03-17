@@ -61,14 +61,14 @@
 
 
 </head>
-<header class="bg-dark">
+<header style="background-color: #3d4d28;"> <!--class="bg-dark"-->
 	<div class="container">
 		<nav class="navbar navbar-expand-xl" id="navbar">
 			<a href="{{route('front.home')}}" class="text-decoration-none mobile-logo">
 				<span class="h2 text-uppercase text-primary bg-dark">BuyIn &</span>
 				<span class="h2 text-uppercase text-white px-2">SellOut</span>
 			</a>
-			<button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			{{-- <button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<!-- <span class="navbar-toggler-icon icon-menu"></span> -->
 				  <i class="navbar-toggler-icon fas fa-bars"></i>
     		</button>
@@ -93,6 +93,8 @@
 							</li>
 						@endforeach
 					@endif
+				</ul>
+			</div> --}}
 					<!--<li class="nav-item dropdown">
 						<button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 							Men's Fashion
@@ -136,11 +138,11 @@
 
       			</ul>      			
       		</div> 
-			<div class="right-nav py-0">
+			{{-- <div class="right-nav py-0">
 				<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
 					<i class="fas fa-shopping-cart text-primary"></i>					
 				</a>
-			</div> 		
+			</div> 		 --}}
       	</nav>
   	</div>
 
@@ -157,8 +159,14 @@
 			<div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
 				@if (Auth::check())
 					<a href="{{route('account.profile')}}" class="nav-link text-dark">My Account</a>
+					<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-0">
+						<i class="fas fa-shopping-cart text-primary"></i>					
+					</a>
 				@else
 					<a href="{{route('account.login')}}" class="nav-link text-dark">Login/Register</a>
+					<a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-0">
+						<i class="fas fa-shopping-cart text-primary"></i>					
+					</a>
 				@endif
 			</div>		
 		</div>
