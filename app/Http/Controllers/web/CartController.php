@@ -258,7 +258,7 @@ class CartController extends Controller
                 'address' => $request->address,
                 'apartment' => $request->apartment,
                 'city' => $request->city,
-                'barangay' => $request->has('barangay') ? $request->barangay : '',
+                'barangay' => $request->barangay, //has('barangay') ? $request->barangay: '',
                 'zip' => $request->zip,
             ]
         );

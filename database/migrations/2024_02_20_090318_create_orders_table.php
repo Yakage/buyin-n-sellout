@@ -31,7 +31,7 @@ return new class extends Migration
             $table->text('address');
             $table->string('apartment')->nullable();
             $table->string('city');
-            $table->string('barangay')->nullable();
+            $table->string('barangay');
             $table->string('zip');
             $table->text('notes')->nullable();
             $table->timestamps();
@@ -43,10 +43,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
-
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
         // Schema::dropIfExists('orders');
-        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Schema::dropIfExists('orders');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 };

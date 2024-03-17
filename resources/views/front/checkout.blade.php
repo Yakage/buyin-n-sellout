@@ -117,7 +117,7 @@
                                             <label for="payment_method_one" class="form-check-label">COD</label>
                                         </div>
                                     
-                                        <div class="form-check">
+                                        {{-- <div class="form-check">
                                             <input type="radio" name="payment_method" value="stripe" id="payment_method_two">
                                             <label for="payment_method_two" class="form-check-label">Stripe</label>
                                         </div>
@@ -137,7 +137,7 @@
                                                     <input type="text" name="cvv_code" id="cvv_code" placeholder="123" class="form-control">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="pt-4">
                                             <button type="submit" class="btn-dark btn btn-block w-100">Pay Now</button>

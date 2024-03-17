@@ -118,7 +118,7 @@
                                 <div class="row">
 
                                         <h3 class="h4 pb-3">Write a Review</h3>
-                                        <form action="{{ route('front.saveRating') }}" name="productRatingForm" id="productRatingForm" method="post">
+                                        <form action="" name="productRatingForm" id="productRatingForm" method="post">
                                             @csrf
                                         <div class="form-group col-md-6 mb-3">
                                             <label for="name">Name</label>
@@ -134,11 +134,12 @@
                                             <label for="rating">Rating</label>
                                             <br>
                                             <div class="rating" style="width: 10rem">
-                                                <input id="rating-5" type="radio" name="rating" value="5"/><label for="rating-5"><i class="fas fa-3x fa-star"></i></label>
-                                                <input id="rating-4" type="radio" name="rating" value="4"  /><label for="rating-4"><i class="fas fa-3x fa-star"></i></label>
-                                                <input id="rating-3" type="radio" name="rating" value="3"/><label for="rating-3"><i class="fas fa-3x fa-star"></i></label>
-                                                <input id="rating-2" type="radio" name="rating" value="2"/><label for="rating-2"><i class="fas fa-3x fa-star"></i></label>
                                                 <input id="rating-1" type="radio" name="rating" value="1"/><label for="rating-1"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-2" type="radio" name="rating" value="2"/><label for="rating-2"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-3" type="radio" name="rating" value="3"/><label for="rating-3"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-4" type="radio" name="rating" value="4"  /><label for="rating-4"><i class="fas fa-3x fa-star"></i></label>
+                                                <input id="rating-5" type="radio" name="rating" value="5"/><label for="rating-5"><i class="fas fa-3x fa-star"></i></label>
+                                                
                                             </div>
                                             <p class="product-rating-error text-danger"></p>
                                         </div>
@@ -355,6 +356,31 @@
                 }
             })
         }
+
+        $('#productRatingForm').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: '{{ route("front.saveRating", $product->id) }}',
+            type: 'POST',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response.status == false) {
+                    // Handle validation errors
+                    $.each(response.errors, function(key, value) {
+                        $('#' + key).addClass('is-invalid').siblings('p').text(value);
+                    });
+                } else {
+                    // Redirect after successful submission
+                    window.location.href = "{{ route('front.product', $product->slug) }}";
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+                alert('An error occurred while submitting the form.');
+            }
+        });
+    });
 
         var errors = response.errors;
 

@@ -161,7 +161,7 @@ class ShopController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required|min:5',
             'email' => 'required|email',
-            'comment' => 'required|min:10',
+            'comment' => 'required|min:4',
             'rating' => 'required'
         ]);
 
