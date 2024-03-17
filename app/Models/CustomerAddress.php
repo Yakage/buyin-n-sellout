@@ -18,8 +18,8 @@ class CustomerAddress extends Model
         // 'country_id',
         'address',
         'apartment',
-        'barangay',
         'city',
+        'barangay',
         'zip'
     
     ];
