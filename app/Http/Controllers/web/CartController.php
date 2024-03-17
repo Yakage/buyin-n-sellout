@@ -284,8 +284,8 @@ class CartController extends Controller
             $order->mobile = $request->mobile;
             $order->address = $request->address;
             $order->apartment = $request->apartment;
-            $order->barangay = $request->barangay;
             $order->city = $request->city;
+            $order->barangay = $request->barangay;
             $order->zip = $request->zip;
             $order->notes = $request->order_notes;
             $order->save();
@@ -373,8 +373,8 @@ class CartController extends Controller
             $order->mobile = $request->mobile;
             $order->address = $request->address;
             $order->apartment = $request->apartment;
-            $order->barangay = $request->barangay;
             $order->city = $request->city;
+            $order->barangay = $request->barangay;
             $order->zip = $request->zip;
             $order->notes = $request->order_notes;
             $order->save();
