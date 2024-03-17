@@ -41,6 +41,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //API routes
 //for buyer side
+Route::get('/latestProducts', [ApiFrontController::class,'latestProducts']);
+Route::get('/featuredProducts', [ApiFrontController::class,'featuredProducts']);
 Route::get('/home', [ApiFrontController::class,'index']);
 Route::get('/', [ApiFrontController::class,'index']);
 Route::get('/shop', [ApiShopController::class, 'index']);
